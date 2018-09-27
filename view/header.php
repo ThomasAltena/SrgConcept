@@ -2,6 +2,8 @@
 session_start();
 header("Cache-Control:no-cache");
 
+require('../model/ClientManager.php');
+require('../model/ClientClass.php');
 require('../model/UserManager.php');
 require('../model/UserClass.php');
  ?>
