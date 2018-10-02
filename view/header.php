@@ -44,6 +44,7 @@ require('../model/UserClass.php');
 		  if($_SESSION['Role_user'] == 1){             //Si c'est un admin on ajoute les menus  
 		
 				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='UserView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Gestion des utilisateurs</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='UserView.php'>Liste</a><a class='dropdown-item' href='AddUserView.php'>Création</a></div></div></li>");
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='ClientView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Gestion des clients</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='ClientView.php'>Liste</a><a class='dropdown-item' href='AddClientView.php'>Création</a></div></div></li>");
 				echo("<li class='nav-item'><a class='nav-link' href='#'>Matières</a></li>");
 				echo("<li class='nav-item'><a class='nav-link' href='#'>Pièces</a></li>");
 			}else{ //C'est pas des admin afficher

@@ -28,7 +28,7 @@ class Client
 
             // Setter
             $method = 'Set'.ucfirst($key);
-            $method = substr($method, 0, -5);
+            $method = substr($method, 0, -7);
 
             // Si le setter correspondant existe.
             if (method_exists($this, $method))
@@ -64,6 +64,6 @@ class Client
     public function SetProspect($prospect){$this -> _Prospect = $prospect;}
     public function SetTel($tel){$this -> _Tel = $tel;}
     public function SetVille($ville){$this -> _Ville = $ville;}
-    public function SetIdUser($iduser){$this -> _IdUser = $id;}
+    public function SetIdUser($iduser){$this -> _IdUser = $iduser;}
 
 }

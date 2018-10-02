@@ -1,7 +1,5 @@
 <?php
 include ("header.php");
-
-$id = $_SESSION['Id_user']
 ?>
 <body>
 <div class="container">
@@ -69,7 +67,8 @@ $id = $_SESSION['Id_user']
     $ville = $_POST['Ville_client'];
     $codepostal = $_POST['CodePostal_client'];
     $mail = $_POST['Mail_client'];
-    $tel = $_POST['Tel_client'];   
+    $tel = $_POST['Tel_client'];
+    $idUser = $_SESSION['Id_user'];
 
     /* Construct */
     $client = new Client([
@@ -82,7 +81,7 @@ $id = $_SESSION['Id_user']
     "CodePostal_client" => $codepostal ,
     "Mail_client" => $mail , 
     "Tel_client" => $tel ,
-    "Id_User" => $id ,
+    "IdUser_client" => $idUser,
     ]);
 
     /* BDD*/

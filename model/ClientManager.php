@@ -19,9 +19,10 @@ class ClientManager
 	{
 
 		$q = $this->_Db->prepare('INSERT INTO clients(Id_client, Adresse_client, Cp_client, DateCrea_client, Mail_client, Nom_client, Prenom_client, Prospect_client, Tel_client, Ville_client, Id_user) VALUES(:id, :adresse, :codepostal, :datecreation, :mail, :nom, :prenom, :prospect, :tel, :ville, :iduser)');
+
+		//Récupération de la date du jour
 		$todaysDate = date("Y-m-d");
-		$test = 2;
-		var_dump($todaysDate);
+		//Assignation des valeur
 		$q->bindValue(':id', $client->GetId());
 		$q->bindValue(':adresse', $client->GetAdresse());
 		$q->bindValue(':codepostal', $client->GetCodePostal());
@@ -32,7 +33,7 @@ class ClientManager
 		$q->bindValue(':prospect', $client->GetProspect());
 		$q->bindValue(':tel', $client->GetTel());
 		$q->bindValue(':ville', $client->GetVille());
-		$q->bindValue(':iduser', $test);
+		$q->bindValue(':iduser', $client->GetIdUser());
 
 		//Execution de la requete
 		$q->execute();
@@ -68,7 +69,7 @@ class ClientManager
 	}
 
 	/** Retourne UN client **/
-	public function GetClient($nom)
+/*	public function GetClient($nom)
 	{
 
 		//Preparation
@@ -83,13 +84,28 @@ class ClientManager
         }
 
         return $client;
-    }
+    }*/
 
     /** Retourne tous les clients **/
-    public function GetClients()
+    public function GetClientsAdmin()
+    {
+    	$clientsAmin = [];
+    	$q = $this->_Db->query('SELECT * FROM clients ORDER BY DateCrea_client ');
+
+    	while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $clientsAdmin[] = new Client($donnees);
+        }
+
+        return $clientsAdmin;
+    }
+
+   public function GetClients($iduser)
     {
     	$clients = [];
-    	$q = $this->_Db->query('SELECT * FROM client');
+    	$q = $this->_Db->prepare('SELECT * FROM clients WHERE Id_user = :iduser');
+    	$q->bindValue(':iduser', $iduser);
+    	$q->execute();
 
     	while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
