@@ -78,7 +78,6 @@ echo("
 
 $clientsAdmin = $ManagerClient->GetClientsAdmin();
 foreach ($clientsAdmin as $clientAdmin){
-	//var_dump($clientAdmin->GetDateCreation());
     echo("<tr>");
     echo("<td>" .$clientAdmin->GetNom() . "</td>");
     echo("<td>" .$clientAdmin->GetPrenom(). "</td>");

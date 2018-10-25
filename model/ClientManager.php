@@ -53,7 +53,7 @@ class ClientManager
 		//Assignation de valeur
 		$q->bindValue(':id', $client->GetId());
 		$q->bindValue(':adresse', $client->GetAdresse());
-		$q->bindValue(':co:depostal', $client->GetCodePostal());
+		$q->bindValue(':codepostal', $client->GetCodePostal());
 		$q->bindValue(':datecreation', $client->GetDateCreation());
 		$q->bindValue(':mail', $client->GetMail());
 		$q->bindValue(':nom', $client->GetNom());
@@ -89,8 +89,8 @@ class ClientManager
     /** Retourne tous les clients **/
     public function GetClientsAdmin()
     {
-    	$clientsAmin = [];
-    	$q = $this->_Db->query('SELECT * FROM clients ORDER BY DateCrea_client ');
+    	$clientsAdmin = [];
+    	$q = $this->_Db->query('SELECT * FROM clients ORDER BY DateCrea_client');
 
     	while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
