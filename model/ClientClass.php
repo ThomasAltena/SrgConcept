@@ -57,7 +57,7 @@ class Client
     public function SetId($id){$this -> _Id = (int) $id;}
     public function SetAdresse($adresse){$this -> _Adresse = $adresse;}
     public function SetCp($codepostal){$this -> _CodePostal = $codepostal;}
-    public function SetDateCreation($datecreation){$this -> _DateCreation = $datecreation;}
+    public function SetDateCrea($datecreation){$this -> _DateCreation = $datecreation;}
     public function SetMail($mail){$this -> _Mail = $mail;}
     public function SetNom($nom){$this -> _Nom = $nom;}
     public function SetPrenom($prenom){$this -> _Prenom = $prenom;}

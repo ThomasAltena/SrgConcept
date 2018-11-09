@@ -32,8 +32,9 @@ echo("
     </tr>
   </thead>
   <tbody>");
-$iduser = $_SESSION['Id_user'];
+
 $clients = $ManagerClient->GetClients($iduser);
+
 foreach ($clients as $client){
     echo("<tr>");
     echo("<td>" .$client->GetNom(). "</td>");
@@ -78,8 +79,9 @@ echo("
 
 $clientsAdmin = $ManagerClient->GetClientsAdmin();
 foreach ($clientsAdmin as $clientAdmin){
+	//var_dump($clientAdmin->GetDateCreation());
     echo("<tr>");
-    echo("<td>" .$clientAdmin->GetNom() . "</td>");
+    echo("<td>" .$clientAdmin->GetNom(). "</td>");
     echo("<td>" .$clientAdmin->GetPrenom(). "</td>");
     echo("<td>" .$clientAdmin->GetAdresse(). "</td>");
     echo("<td>" .$clientAdmin->GetCodePostal(). "</td>");
@@ -101,3 +103,26 @@ echo ("</tbody>
 
 }
 ?>
+
+<script>
+
+function supp(id)
+{
+  if(window.confirm('Etes vous sur ?')){
+  document.location.href="DeleteClientView.php?id="+id}else{return false;}
+}
+
+function edit(id)
+{
+  document.location.href="EditClientView.php?id="+id
+}
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>

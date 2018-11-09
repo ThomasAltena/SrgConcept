@@ -6,6 +6,7 @@ class Piece
 	private $_IdImage;
 	private $_Libelle;
     private $_Code;
+    private $_Chemin;
 
 	//constructeur
     public function __construct(array $donnees)

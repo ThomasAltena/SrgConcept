@@ -41,7 +41,7 @@ class ClientManager
 	/** Suppression d'un utilisateur **/
 	public function DeleteClient($id)
 	{
-		$this->_Db->exec('DELETE FROM clients WHERE Id_client = '.id);
+		$this->_Db->exec('DELETE FROM clients WHERE Id_client = '.$id);
 	}
 
 	/** Mise a jour d'un client **/
@@ -90,7 +90,7 @@ class ClientManager
     public function GetClientsAdmin()
     {
     	$clientsAdmin = [];
-    	$q = $this->_Db->query('SELECT * FROM clients ORDER BY DateCrea_client');
+    	$q = $this->_Db->query('SELECT * FROM clients');
 
     	while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
@@ -98,6 +98,7 @@ class ClientManager
         }
 
         return $clientsAdmin;
+
     }
 
    public function GetClients($iduser)

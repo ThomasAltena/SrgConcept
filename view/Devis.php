@@ -8,7 +8,7 @@
 <?php include('header.php'); ?>
 
 
-<!-- Il faut mettre le chemin dans les value -->
+<!-------------------------- Il faut mettre le chemin dans les value -------------------------->
 <body >
 	<input type="text" id="MV" value="2.8" hidden="hidden"/>
 	<input type="text" id="PT" value="7800" hidden="hidden" />
@@ -21,101 +21,203 @@
 		<img id="imgSch4" src="">
 		<img id="imgSch5" src="">
 	</div>
+<div class='row'>
+	<div id="Div1" class="Sel col-8">
+ 
+       <label for="Piece">Selectionnez une piéce ?</label><br />
+       <select id="select1" onchange="AfficheImg(1)" >
+       <option value=""></option>
 
-	<div class='row'>
-		<div id="Div1" class="Sel">
-			<select id="select1" onchange="AfficheImg(1)">
-				<option value=""></option>
-				<option value="">== Socle simple ==</option>
-				<option value="../public/images/hb.png">Valeur 1</option>
-				<option value="../public/images/toto.jpg">Valeur 2</option>
-				<option value="">== Socle complexe ==</option>
-				<option value="../public/images/tata.jpg">Valeur 3</option>
-			</select>
-			<img id="img1" src="">
+<?php
+try
+{
+        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
+}
+catch(Exception $e)
+{
+            die('Erreur : '.$e->getMessage());
+}
+ 
+ 
+$reponse = $bdd->query('SELECT * FROM pieces');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+<?php
+}
+ 
+$reponse->closeCursor();
+ 
+?>
+</select>
+<img id="img1" src="">
 		</br></br>
-			<input type="text" class="text1"> <input type="text" class="text1"> <input type="text" class="text1">
+			<input type="text" class="text1" placeholder="Hauteur"> <input type="text" class="text1" placeholder="Largeur"> <input type="text" class="text1" placeholder="Profondeur">
 		</br></br>
 			<input type="button" id="Valide1" onclick="suite(2)" value="Suivant" /> <p id="prix1"></p>
 		</div>
-	</div>	
-
+	</div>
+<!------------------------------------------------------------------------------------- Div2 -->
 <div class='row'>
 	<div id="Div2" class="Sel col-8">
-		<select id="select2" onchange="AfficheImg(2)">
-			<option value=""></option>
-			<option value="">== Socle simple ==</option>
-			<option value="../public/images/hh.png">Valeur 1</option>
-			<option value="../public/images/toto.jpg">Valeur 2</option>
-			<option value="">== Socle complexe ==</option>
-			<option value="../public/images/tata.jpg">Valeur 3</option>
-		</select>
-		<img id="img2" src="">
-	</br></br>
-		<input type="text" class="text2"> <input type="text" class="text2"> <input type="text" class="text2">
-	</br></br>
-		<input type="button" id="Valide2" onclick="suite(3)" value="Suivant" /> <p id="prix2"></p>
-	</div>
-</div>
+       <label for="Piec2">Selectionnez une piéce ?</label><br />
+       <select id="select2" onchange="AfficheImg(2)" >
+       <option value=""></option>
 
+<?php
+try
+{
+        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
+}
+catch(Exception $e)
+{
+            die('Erreur : '.$e->getMessage());
+}
+ 
+ 
+$reponse = $bdd->query('SELECT * FROM pieces');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+<?php
+}
+ 
+$reponse->closeCursor();
+ 
+?>
+</select>
+<img id="img2" src="">
+		</br></br>
+			<input type="text" class="text2" placeholder="Hauteur"> <input type="text" class="text2" placeholder="Largeur"> <input type="text" class="text2" placeholder="Profondeur">
+		</br></br>
+			<input type="button" id="Valide2" onclick="suite(3)" value="Suivant" /> <p id="prix2"></p>
+		</div>
+	</div>
+<!------------------------------------------------------------------------------ Div3 -->
 <div class='row'>
 	<div id="Div3" class="Sel col-8">
-		<select id="select3" onchange="AfficheImg(3)">
-			<option value=""></option>
-			<option value="">== Socle simple ==</option>
-			<option value="../public/images/vg.png">Valeur 1</option>
-			<option value="../public/images/toto.jpg">Valeur 2</option>
-			<option value="">== Socle complexe ==</option>
-			<option value="../public/images/tata.jpg">Valeur 3</option>
-		</select>
-		<img id="img3" src="">
-	</br></br>
-		<input type="text" class="text3"> <input type="text" class="text3"> <input type="text" class="text3">
-	</br></br>
-		<input type="button" id="Valide3" onclick="suite(4)" value="Suivant" /> <p id="prix3"></p>
+       <label for="Piec3">Selectionnez une piéce ?</label><br />
+       <select id="select3" onchange="AfficheImg(3)" >
+       <option value=""></option>
+
+<?php
+try
+{
+        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
+}
+catch(Exception $e)
+{
+            die('Erreur : '.$e->getMessage());
+}
+ 
+ 
+$reponse = $bdd->query('SELECT * FROM pieces');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+<?php
+}
+ 
+$reponse->closeCursor();
+ 
+?>
+</select>
+<img id="img3" src="">
+		</br></br>
+			<input type="text" class="text3" placeholder="Hauteur"> <input type="text" class="text3" placeholder="Largeur"> <input type="text" class="text3" placeholder="Profondeur">
+		</br></br>
+			<input type="button" id="Valide3" onclick="suite(4)" value="Suivant" /> <p id="prix3"></p>
 	</div>
 </div>
 
+<!------------------------------------------------------------------------------------- Div4 -->
 <div class='row'>
 	<div id="Div4" class="Sel col-8">
-		<select id="select4" onchange="AfficheImg(4)">
-			<option value=""></option>
-			<option value="">== Socle simple ==</option>
-			<option value="../public/images/vd.png">Valeur 1</option>
-			<option value="../public/images/toto.jpg">Valeur 2</option>
-			<option value="">== Socle complexe ==</option>
-			<option value="../public/images/tata.jpg">Valeur 3</option>
-		</select>
-		<img id="img4" src="">
-	</br></br>
-		<input type="text" class="text4"> <input type="text" class="text4"> <input type="text" class="text4">
-	</br></br>
-		<input type="button" id="Valide4" onclick="suite(5)" value="Suivant" /> <p id="prix4"></p>
-	</div>
-</div>
+       <label for="Piec4">Selectionnez une piéce ?</label><br />
+       <select id="select4" onchange="AfficheImg(4)" >
+       <option value=""></option>
 
+<?php
+try
+{
+        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
+}
+catch(Exception $e)
+{
+            die('Erreur : '.$e->getMessage());
+}
+ 
+ 
+$reponse = $bdd->query('SELECT * FROM pieces');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+<?php
+}
+ 
+$reponse->closeCursor();
+ 
+?>
+</select>
+<img id="img4" src="">
+		</br></br>
+			<input type="text" class="text4" placeholder="Hauteur"> <input type="text" class="text2" placeholder="Largeur"> <input type="text" class="text4" placeholder="Profondeur">
+		</br></br>
+			<input type="button" id="Valide4" onclick="suite(5)" value="Suivant" /> <p id="prix4"></p>
+		</div>
+	</div>
+
+<!------------------------------------------------------------------------------------- Div5 -->
 <div class='row'>
-	<div id="Div5" class="Sel">
-		
-		<select id="select5" onchange="AfficheImg(5)">
-			<option value=""></option>
-			<option value="0">== Tombale simple ==</option>
-			<option value="../public/images/tete.jpg">Valeur 1</option>
-			<option value="../public/images/toto.jpg">Valeur 2</option>
-			<option value="../public/images/tata.jpg">Valeur 3</option>
-		</select>
-		<img id="img5" src="">
-	</br></br>
-		<input type="text" class="text5"> <input type="text" class="text5"> <input type="text" class="text5">
-	</br></br>
-		<input type="Button" id="Valide5" value="Valider le devis" onclick="" />
-	</div>
-</div>
+	<div id="Div5" class="Sel col-8">
+       <label for="Piec5">Selectionnez une piéce ?</label><br />
+       <select id="select5" onchange="AfficheImg(5)" >
+       <option value=""></option>
 
+<?php
+try
+{
+        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
+}
+catch(Exception $e)
+{
+            die('Erreur : '.$e->getMessage());
+}
+ 
+ 
+$reponse = $bdd->query('SELECT * FROM pieces');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+<?php
+}
+ 
+$reponse->closeCursor();
+ 
+?>
+</select>
+<img id="img5" src="">
+		</br></br>
+			<input type="text" class="text5" placeholder="Hauteur"> <input type="text" class="text5" placeholder="Largeur"> <input type="text" class="text5" placeholder="Profondeur">
+		</br></br>
+			<input type="button" id="Valide5" onclick="suite(6)" value="Suivant" /> <p id="prix5"></p>
+		</div>
+	</div>
+
+</div>
 </div>
 </body>
 </html>
-
 
 <script type="text/javascript">
 

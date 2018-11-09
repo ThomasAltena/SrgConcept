@@ -15,17 +15,7 @@ class PieceManager
     {
         $this->_Db = $db;
     }
-    // public function AddImage(Image $image)
-    // {
-    //     //Preparation
-    //     $q =$this->_Db->prepare('INSERT INTO images(Id_image, Chemin_image) VALUES(:idImage, :cheminImage)');
-    //     //Asignation des valeurs
-    //     $q->bindValue(':idImage', $image->GetId());
-    //     $q->bindValue(':cheminImage', $image->GetChemin());
 
-    //     //Execution de la requete
-    //     $q->execute();
-    //}
 
     public function AddPiece(Piece $piece)
     {
@@ -45,7 +35,7 @@ class PieceManager
     /** Supression d'une piéce **/
     public function DeletePiece($id)
     {
-    	$this->_Bd->exec('DELETE FROM pieces WHERE Id_piece =' .$id);
+    	$this->_Db->exec('DELETE FROM pieces WHERE Id_piece ='.$id);
     }
 
     public function UpdatePiece(Piece $piece)

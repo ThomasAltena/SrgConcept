@@ -10,10 +10,28 @@ require('../model/UserClass.php');
 
 require('../model/MatiereManager.php');
 require('../model/MatiereClass.php');
+
+require('../model/PieceManager.php');
+require('../model/PieceClass.php');
+
+require('../model/CouleurManager.php');
+require('../model/CouleurClass.php');
+
+require('../model/TvaManager.php');
+require('../model/TvaClass.php');
+
+require('../model/OptionManager.php');
+require('../model/OptionClass.php');
+
+require('../model/LigneDevisClass.php');
+require('../model/LigneDevisManager.php');
+
+require('../model/Upload.php');
  ?>
 <!DOCTYPE html>
 <html>
 <head>
+	
 	<link rel="stylesheet" type="text/css" href="../public/css/normalize.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
@@ -47,10 +65,25 @@ require('../model/MatiereClass.php');
 		if(!empty($_SESSION)){
 		  if($_SESSION['Role_user'] == 1){             //Si c'est un admin on ajoute les menus  
 		
-				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='UserView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Gestion des utilisateurs</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='UserView.php'>Liste</a><a class='dropdown-item' href='AddUserView.php'>Création</a></div></div></li>");
-				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='ClientView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Gestion des clients</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='ClientView.php'>Liste</a><a class='dropdown-item' href='AddClientView.php'>Création</a></div></div></li>");
-				echo("<li class='nav-item'><a class='nav-link' href='MatiereView.php'>Matières</a></li>");
-				echo("<li class='nav-item'><a class='nav-link' href='#'>Pièces</a></li>");
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='UserView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Utilisateurs</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='UserView.php'>Liste</a><a class='dropdown-item' href='AddUserView.php'>Création</a></div></div></li>");
+
+
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='ClientView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Clients</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='ClientView.php'>Liste</a><a class='dropdown-item' href='AddClientView.php'>Création</a></div></div></li>");
+
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='UserView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Matiéres</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='MatiereView.php'>Liste</a><a class='dropdown-item' href='AddMatiereView.php'>Création</a></div></div></li>");
+
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='PieceView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Piéces</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='PieceView.php'>Liste</a><a class='dropdown-item' href='AddPieceView.php'>Création</a></div></div></li>");
+
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='CouleurView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Couleurs</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='CouleurView.php'>Liste</a></div></div></li>");
+
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='TvaView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>TVA</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='TvaView.php'>Liste</a></div></div></li>");
+
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='OptionView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Options</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='OptionView.php'>Liste</a></div></div></li>");
+
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='UserView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Devis</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='UserView.php'>Liste</a><a class='dropdown-item' href='Devis.php'>Création</a></div></div></li>");
+
+
+
 			}else{ //C'est pas des admin afficher
 
 			}

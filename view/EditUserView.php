@@ -1,4 +1,4 @@
 <?php 
-echo "chevre v6";
+echo "chevre v2";
 
 ?>
