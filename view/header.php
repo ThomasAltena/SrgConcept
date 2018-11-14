@@ -73,14 +73,15 @@ require('../model/Upload.php');
 				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='UserView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Matiéres</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='MatiereView.php'>Liste</a><a class='dropdown-item' href='AddMatiereView.php'>Création</a></div></div></li>");
 
 				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='PieceView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Piéces</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='PieceView.php'>Liste</a><a class='dropdown-item' href='AddPieceView.php'>Création</a></div></div></li>");
-
+/*
 				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='CouleurView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Couleurs</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='CouleurView.php'>Liste</a></div></div></li>");
 
-				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='TvaView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>TVA</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='TvaView.php'>Liste</a></div></div></li>");
+*/
+				echo("<li class='nav-item'><a class='nav-link' href='OptionView.php'>Option</a></li>");
 
-				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='OptionView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Options</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='OptionView.php'>Liste</a></div></div></li>");
+				echo("<li class='nav-item'><a class='nav-link' href='TVAView.php'>TVA</a></li>");
 
-				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='UserView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Devis</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='UserView.php'>Liste</a><a class='dropdown-item' href='Devis.php'>Création</a></div></div></li>");
+				echo("<li class='nav-item'><a class='nav-link' href='Devis.php'>Devis</a></li>");
 
 
 

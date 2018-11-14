@@ -17,12 +17,8 @@ include ("header.php");
     </div>
 
     <div class="form-group">
-      <label for="Chemin_piece">Image:</label>
-      <input type="file" class="form-control" id="fileToUpload" placeholder="Image" name="fileToUpload">
+      <input type="file" id="fileToUpload" placeholder="Image" name="fileToUpload">
     </div>
-
-    <div class="form-group form-check">
-      <label class="form-check-label">
 
     <button name="submit" type="submit" value="" class="btn btn-primary"">Envoyer</button>
   </form>

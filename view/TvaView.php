@@ -8,18 +8,39 @@ include('header.php');
 $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 $ManagerTva = new TvaManager($db); //Connexion a la BDD
 
+if (isset($_GET['taux'])){
+  $NewTva = new Tva([
+    "Id_tva" => "" ,
+    "Taux_tva" => $_GET['taux'],
+  ]);
+  $ManagerTva->AddTva($NewTva);
+
+}else{
+
+}
+
+
 
 /** Get tout les utlisateurs **/
 
 echo("
 
 <body>
-<div class='container'>
+<br/>
+  <form action='TVAView.php' class='form-mid form-inline' method='get'>
+    <input style='margin-right:3%;' type='text' class='form-control' name='taux' required='required' placeholder='Taux'>
+    <input class='btn btn-success' type='submit' >
+  </form>
+
+
+<br/>
+<div class='container col-7'>
 <table class='table table-striped'>
   <thead>
     <tr>
       <th scope='col'>Id</th>
       <th scope='col'>Taux</th>
+      <th scope='col'></th>
     </tr>
   </thead>
   <tbody>");
@@ -29,7 +50,7 @@ foreach ($tvas as $tva){
     echo("<tr>");
     echo("<td>" . $tva->GetId() . "</td>");
     echo("<td>" .$tva->GetTaux(). "</td>");
-    echo ("<td> <button onclick='supp(".$tva->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
+    echo ("<td> <button style='margin-left:30%;' onclick='supp(".$tva->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
     echo ("</tr>");
 }
 
@@ -39,18 +60,14 @@ echo ("</tbody>
     </body>
 ");
 
+
 ?>
 
 <script>
 function supp(id)
 {
   if(window.confirm('Etes vous sur ?')){
-  document.location.href="DeleteCouleurView.php?id="+id}else{return false;}
-}
-
-function edit(id)
-{
-  document.location.href="EditUserView.php?id="+id
+  document.location.href="DeleteTauxView.php?id="+id}else{return false;}
 }
 
 </script>

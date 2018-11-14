@@ -14,7 +14,10 @@ $ManagerOption = new OptionManager($db); //Connexion a la BDD
 echo("
 
 <body>
-<div class='container'>
+<br/>
+<center><h5> Cette liste recense toutes les options applicables au devis </h2></center>
+<br/>
+<div class='container col-7'>
 <table class='table table-striped'>
   <thead>
     <tr>
@@ -32,7 +35,7 @@ foreach ($options as $option){
     echo("<td>" . $option->GetLibelle() . "</td>");
     echo("<td>" . $option->GetCode() . "</td>");
     echo("<td>" .$option->GetPrix(). "</td>");
-    echo ("<td><button  onclick='edit(".$option->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$option->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
+    echo ("<td><button style='margin-left:30%;' onclick='edit(".$option->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$option->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
     echo ("</tr>");
 }
 

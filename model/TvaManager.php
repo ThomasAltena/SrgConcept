@@ -18,11 +18,11 @@ class TvaManager
 
     public function AddTva(Tva $tva)
     {
-    	$q =$this->_Db->prepare('INSERT INTO Tva(Id_tva, Taux_tva) VALUES(:id, :taux)');
+    	$q =$this->_Db->prepare('INSERT INTO tva (Id_tva,Taux_tva) VALUES (NULL, :taux)');
 
     	//Assignation des valeurs
-    	$q->bindValue(':id', $tva.GetId());
-    	$q->bindValue(':taux', $tva.GetTaux());
+    	//$q->bindValue(':id', '');
+    	$q->bindValue(':taux', $tva->GetTaux());
 
     	//Execution de la requête
     	$q->execute();
