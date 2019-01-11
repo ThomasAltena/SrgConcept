@@ -26,6 +26,10 @@ require('../model/OptionClass.php');
 require('../model/LigneDevisClass.php');
 require('../model/LigneDevisManager.php');
 
+require('../model/DevisClass.php');
+require('../model/DevisManager.php');
+
+
 require('../model/Upload.php');
  ?>
 <!DOCTYPE html>
@@ -81,7 +85,7 @@ require('../model/Upload.php');
 
 				echo("<li class='nav-item'><a class='nav-link' href='TVAView.php'>TVA</a></li>");
 
-				echo("<li class='nav-item'><a class='nav-link' href='Devis.php'>Devis</a></li>");
+				echo("<li class='nav-item'><a class='nav-link' href='DevisView.php'>Devis</a></li>");
 
 
 
@@ -96,6 +100,7 @@ require('../model/Upload.php');
 		     else {
 		    	 echo("<li class='nav-item'><a class='btn btn-outline-success my-2 my-sm-0' href='ConnexionView.php'>Connexion</a> </li>");
 		     }
+		     
 	?> 
 
 	</ul>

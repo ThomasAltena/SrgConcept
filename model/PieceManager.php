@@ -17,7 +17,7 @@ class PieceManager
     }
 
 
-    public function AddPiece(Piece $piece)
+    /*public function AddPiece(Piece $piece)
     {
     	//Preparation
     	$q =$this->_Db->prepare('INSERT INTO pieces(Id_image, Id_piece, Libelle_piece, Code_piece, Chemin_piece) VALUES(:idImage, :id, :libelle, :code, :chemin)');
@@ -30,7 +30,22 @@ class PieceManager
 
     	//Execution de la requete
     	$q->execute();
+    }*/
+
+    public function AddPiece(Piece $piece)
+    {
+        //Preparation
+        $q =$this->_Db->prepare('INSERT INTO pieces(Id_piece, Libelle_piece, Code_piece, Chemin_piece) VALUES(:id, :libelle, :code, :chemin)');
+        //Assignation des valeurs
+        $q->bindValue(':id', $piece->GetId());
+        $q->bindValue(':libelle', $piece->GetLibelle());
+        $q->bindValue(':code', $piece->GetCode());
+        $q->bindValue(':chemin', '../public/images/'.$piece->GetLibelle().'.jpg');
+
+        //Execution de la requete
+        $q->execute();
     }
+
 
     /** Supression d'une piéce **/
     public function DeletePiece($id)

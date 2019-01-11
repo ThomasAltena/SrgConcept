@@ -34,6 +34,7 @@ echo("
   <tbody>");
 
 $clients = $ManagerClient->GetClients($iduser);
+var_dump($clients);
 
 foreach ($clients as $client){
     echo("<tr>");

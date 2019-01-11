@@ -1,6 +1,7 @@
 <?php
 
-Class LigneDevis {
+Class LigneDevis 
+{
 	private $_Id;
 	private $_Code;
 	private $_Remise;
@@ -68,7 +69,7 @@ Class LigneDevis {
     public function SetRemise($remise){$this -> _Remise = $remise;}
     public function SetPrix($prix){$this -> _Prix = $prix;}
     public function SetPoids($poids){$this -> _Poids = $poids;}
-    public function SetHauteur($hauteur){$this -> _Hauteur = $hauter;}
+    public function SetHauteur($hauteur){$this -> _Hauteur = $hauteur;}
     public function SetLargeur($largeur){$this -> _Largeur = $largeur;}
     public function SetIdPiece($piece){$this -> _IdPiece = $piece;}
     public function SetIdMatiere($matiere){$this -> _IdMatiere = $matiere;}
