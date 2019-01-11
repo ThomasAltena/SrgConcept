@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 25 Octobre 2018 à 14:39
+-- Généré le :  Ven 11 Janvier 2019 à 14:33
 -- Version du serveur :  10.1.16-MariaDB
 -- Version de PHP :  7.0.9
 
@@ -45,8 +45,9 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`Id_client`, `Nom_client`, `Prenom_client`, `Adresse_client`, `Cp_client`, `Ville_client`, `Tel_client`, `Mail_client`, `DateCrea_client`, `Prospect_client`, `Id_user`) VALUES
-(126, 'Test', 'Test', 'Test', '08000', 'Test ', '0200', 'fa', '2018-10-15', 0, 22),
-(127, 'Test2', 'Test2', 'Test2', 'Test2', 'Test2', 'Test2', 'Test2', '2018-10-15', 0, 22);
+(126, 'Nom', 'Prenom', 'Adresse', '08000', 'Test ', '0606060606', 'Mail', '2018-10-15', 0, 4),
+(129, 'TestNom', 'TestPrenom', 'TestAdresse', 'TestCp', 'TestVille', '060606', 'TestMail', '', 2, 1),
+(130, 'Test3', 'Test3', 'Test3', '08000', 'Test3', 'Test3', 'Test3', '', 0, 6);
 
 -- --------------------------------------------------------
 
@@ -56,9 +57,16 @@ INSERT INTO `clients` (`Id_client`, `Nom_client`, `Prenom_client`, `Adresse_clie
 
 CREATE TABLE `couleurs` (
   `Id_couleur` int(11) NOT NULL,
-  `Libelle_couleur` int(11) NOT NULL,
-  `Hexa_couleur` int(11) NOT NULL
+  `Libelle_couleur` varchar(150) NOT NULL,
+  `Hexa_couleur` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `couleurs`
+--
+
+INSERT INTO `couleurs` (`Id_couleur`, `Libelle_couleur`, `Hexa_couleur`) VALUES
+(1, 'Rouge', 'FF0000');
 
 -- --------------------------------------------------------
 
@@ -80,10 +88,19 @@ CREATE TABLE `devis` (
   `Id_devis` int(10) NOT NULL,
   `Code_devis` varchar(55) NOT NULL,
   `Date_devis` date NOT NULL,
-  `Id_client` int(10) NOT NULL,
-  `Id_user` int(10) NOT NULL,
-  `Libelle_devis` varchar(70) NOT NULL
+  `IdClient_devis` int(10) NOT NULL,
+  `IdUser_devis` int(10) NOT NULL,
+  `Libelle_devis` varchar(70) NOT NULL,
+  `CheminImage_devis` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `devis`
+--
+
+INSERT INTO `devis` (`Id_devis`, `Code_devis`, `Date_devis`, `IdClient_devis`, `IdUser_devis`, `Libelle_devis`, `CheminImage_devis`) VALUES
+(1, 'codeTest', '2018-05-10', 126, 1, 'Test', 'test'),
+(2, 'code', '2019-01-16', 126, 1, 'libelle', 'test');
 
 -- --------------------------------------------------------
 
@@ -134,8 +151,33 @@ CREATE TABLE `liens_couleurs_matieres` (
 
 CREATE TABLE `lignes_devis` (
   `Id_ligne` int(11) NOT NULL,
-  `Code_devis` varchar(20) NOT NULL
+  `Code_ligne` varchar(20) NOT NULL,
+  `Remise_ligne` decimal(10,0) DEFAULT NULL,
+  `Prix_ligne` decimal(10,0) DEFAULT NULL,
+  `Poids_ligne` decimal(10,0) DEFAULT NULL,
+  `Hauteur_ligne` decimal(10,0) DEFAULT NULL,
+  `Largeur_ligne` decimal(10,0) DEFAULT NULL,
+  `Profondeur_ligne` decimal(10,0) DEFAULT NULL,
+  `Id_devis` int(11) NOT NULL,
+  `Id_piece` int(11) NOT NULL,
+  `Id_matiere` int(11) NOT NULL,
+  `Id_couleur` int(11) NOT NULL,
+  `Id_tva` int(11) NOT NULL,
+  `Option1` int(11) DEFAULT NULL,
+  `Option2` int(11) DEFAULT NULL,
+  `Option3` int(11) DEFAULT NULL,
+  `Option4` int(11) DEFAULT NULL,
+  `Option5` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `lignes_devis`
+--
+
+INSERT INTO `lignes_devis` (`Id_ligne`, `Code_ligne`, `Remise_ligne`, `Prix_ligne`, `Poids_ligne`, `Hauteur_ligne`, `Largeur_ligne`, `Profondeur_ligne`, `Id_devis`, `Id_piece`, `Id_matiere`, `Id_couleur`, `Id_tva`, `Option1`, `Option2`, `Option3`, `Option4`, `Option5`) VALUES
+(1, 'CodePiece1', '10', '10', '10', '10', '10', '10', 1, 91, 10, 1, 1, 1, 1, 1, 1, 1),
+(3, 'CodePiece2', '20', '150', '10', '10', '10', '10', 1, 93, 10, 1, 3, 1, NULL, NULL, NULL, NULL),
+(4, 'Codepiece3', '50', '4500', '12', '15', '14', '14', 2, 94, 10, 1, 4, 1, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -277,8 +319,27 @@ INSERT INTO `matieres` (`Id_matiere`, `Code_matiere`, `Libelle_matiere`, `Prix_m
 (120, 'VERTRO', 'Vert tropical', 0),
 (121, 'VEZULI', 'Vezu - lillet', 0),
 (122, 'VISCOUN', 'Viscount white', 0),
-(123, 'VIZAGW', 'Vizag white', 0),
-(124, 'TEST', 'Test', 1400);
+(123, 'VIZAGW', 'Vizag white', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `options`
+--
+
+CREATE TABLE `options` (
+  `Id_option` int(11) NOT NULL,
+  `Libelle_option` varchar(150) NOT NULL,
+  `Code_option` varchar(150) NOT NULL,
+  `Prix_option` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `options`
+--
+
+INSERT INTO `options` (`Id_option`, `Libelle_option`, `Code_option`, `Prix_option`) VALUES
+(1, 'Option1', 'OP1', 150);
 
 -- --------------------------------------------------------
 
@@ -290,17 +351,19 @@ CREATE TABLE `pieces` (
   `Id_piece` int(11) NOT NULL,
   `Libelle_piece` varchar(55) NOT NULL,
   `Code_piece` varchar(10) NOT NULL,
-  `Chemin_piece` varchar(200) DEFAULT NULL,
-  `Id_image` int(11) DEFAULT NULL
+  `Chemin_piece` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `pieces`
 --
 
-INSERT INTO `pieces` (`Id_piece`, `Libelle_piece`, `Code_piece`, `Chemin_piece`, `Id_image`) VALUES
-(84, 'Piece1', 'Code1', '../public/images/Piece1.jpg', NULL),
-(85, 'Test2', 'Code2', '../public/images/Test2.jpg', NULL);
+INSERT INTO `pieces` (`Id_piece`, `Libelle_piece`, `Code_piece`, `Chemin_piece`) VALUES
+(91, 'Piece1', 'CodePiece1', '../public/images/Piece1.jpg'),
+(92, 'Piece2', 'CodePiece2', '../public/images/Piece2.jpg'),
+(93, 'Piece3', 'CodePiece3', '../public/images/Piece3.jpg'),
+(94, 'Piece4', 'CodePiece4', '../public/images/Piece4.jpg'),
+(95, 'thtrh', 'htrtr', '../public/images/thtrh.jpg');
 
 -- --------------------------------------------------------
 
@@ -396,8 +459,8 @@ ALTER TABLE `croquis`
 --
 ALTER TABLE `devis`
   ADD PRIMARY KEY (`Id_devis`),
-  ADD KEY `fk_user_Id_devis` (`Id_user`),
-  ADD KEY `fk_client_Id_devis` (`Id_client`);
+  ADD KEY `fk_user_Id_devis` (`IdUser_devis`),
+  ADD KEY `fk_client_Id_devis` (`IdClient_devis`);
 
 --
 -- Index pour la table `familles`
@@ -423,7 +486,19 @@ ALTER TABLE `liens_couleurs_matieres`
 -- Index pour la table `lignes_devis`
 --
 ALTER TABLE `lignes_devis`
-  ADD PRIMARY KEY (`Id_ligne`);
+  ADD PRIMARY KEY (`Id_ligne`),
+  ADD KEY `Id_matiere` (`Id_matiere`),
+  ADD KEY `Id_couleur` (`Id_couleur`),
+  ADD KEY `Id_tva` (`Id_tva`),
+  ADD KEY `Option1` (`Option1`),
+  ADD KEY `Option2` (`Option2`),
+  ADD KEY `Option3` (`Option3`),
+  ADD KEY `Option4` (`Option4`),
+  ADD KEY `Option5` (`Option5`),
+  ADD KEY `Id_piece` (`Id_piece`,`Option3`),
+  ADD KEY `Id_piece_2` (`Id_piece`),
+  ADD KEY `Id_devis` (`Id_devis`),
+  ADD KEY `Id_ligne_2` (`Id_ligne`);
 
 --
 -- Index pour la table `matieres`
@@ -432,11 +507,16 @@ ALTER TABLE `matieres`
   ADD PRIMARY KEY (`Id_matiere`);
 
 --
+-- Index pour la table `options`
+--
+ALTER TABLE `options`
+  ADD PRIMARY KEY (`Id_option`);
+
+--
 -- Index pour la table `pieces`
 --
 ALTER TABLE `pieces`
-  ADD PRIMARY KEY (`Id_piece`),
-  ADD KEY `fk_id_image` (`Id_image`);
+  ADD PRIMARY KEY (`Id_piece`);
 
 --
 -- Index pour la table `ss_familles`
@@ -465,7 +545,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `Id_client` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `Id_client` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 --
 -- AUTO_INCREMENT pour la table `croquis`
 --
@@ -475,7 +555,7 @@ ALTER TABLE `croquis`
 -- AUTO_INCREMENT pour la table `devis`
 --
 ALTER TABLE `devis`
-  MODIFY `Id_devis` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_devis` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `familles`
 --
@@ -495,17 +575,17 @@ ALTER TABLE `liens_couleurs_matieres`
 -- AUTO_INCREMENT pour la table `lignes_devis`
 --
 ALTER TABLE `lignes_devis`
-  MODIFY `Id_ligne` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_ligne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `matieres`
 --
 ALTER TABLE `matieres`
-  MODIFY `Id_matiere` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `Id_matiere` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 --
 -- AUTO_INCREMENT pour la table `pieces`
 --
 ALTER TABLE `pieces`
-  MODIFY `Id_piece` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `Id_piece` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT pour la table `ss_familles`
 --
@@ -535,8 +615,8 @@ ALTER TABLE `clients`
 -- Contraintes pour la table `devis`
 --
 ALTER TABLE `devis`
-  ADD CONSTRAINT `fk_client_Id_devis` FOREIGN KEY (`Id_client`) REFERENCES `clients` (`Id_client`),
-  ADD CONSTRAINT `fk_user_Id_devis` FOREIGN KEY (`Id_user`) REFERENCES `user` (`Id_user`);
+  ADD CONSTRAINT `fk_client_Id_devis` FOREIGN KEY (`Idclient_devis`) REFERENCES `clients` (`Id_client`),
+  ADD CONSTRAINT `fk_user_Id_devis` FOREIGN KEY (`Iduser_devis`) REFERENCES `user` (`Id_user`);
 
 --
 -- Contraintes pour la table `liens_couleurs_matieres`
@@ -544,6 +624,20 @@ ALTER TABLE `devis`
 ALTER TABLE `liens_couleurs_matieres`
   ADD CONSTRAINT `fk_id_couleur` FOREIGN KEY (`Id_couleur`) REFERENCES `couleurs` (`Id_couleur`),
   ADD CONSTRAINT `fk_id_matiere` FOREIGN KEY (`Id_matiere`) REFERENCES `matieres` (`Id_matiere`);
+
+--
+-- Contraintes pour la table `lignes_devis`
+--
+ALTER TABLE `lignes_devis`
+  ADD CONSTRAINT `lignes_devis_ibfk_1` FOREIGN KEY (`Id_piece`) REFERENCES `pieces` (`Id_piece`),
+  ADD CONSTRAINT `lignes_devis_ibfk_2` FOREIGN KEY (`Id_matiere`) REFERENCES `matieres` (`Id_matiere`),
+  ADD CONSTRAINT `lignes_devis_ibfk_3` FOREIGN KEY (`Id_couleur`) REFERENCES `couleurs` (`Id_couleur`),
+  ADD CONSTRAINT `lignes_devis_ibfk_4` FOREIGN KEY (`Id_tva`) REFERENCES `tva` (`Id_tva`),
+  ADD CONSTRAINT `lignes_devis_ibfk_5` FOREIGN KEY (`Option1`) REFERENCES `options` (`Id_option`),
+  ADD CONSTRAINT `lignes_devis_ibfk_6` FOREIGN KEY (`Option2`) REFERENCES `options` (`Id_option`),
+  ADD CONSTRAINT `lignes_devis_ibfk_7` FOREIGN KEY (`Option3`) REFERENCES `options` (`Id_option`),
+  ADD CONSTRAINT `lignes_devis_ibfk_8` FOREIGN KEY (`Option4`) REFERENCES `options` (`Id_option`),
+  ADD CONSTRAINT `lignes_devis_ibfk_9` FOREIGN KEY (`Option5`) REFERENCES `options` (`Id_option`);
 
 --
 -- Contraintes pour la table `ss_familles`
