@@ -40,7 +40,7 @@ class PieceManager
         $q->bindValue(':id', $piece->GetId());
         $q->bindValue(':libelle', $piece->GetLibelle());
         $q->bindValue(':code', $piece->GetCode());
-        $q->bindValue(':chemin', '../public/images/'.$piece->GetLibelle().'.jpg');
+        $q->bindValue(':chemin', '../public/images/'.$piece->GetLibelle().'.png');
 
         //Execution de la requete
         $q->execute();

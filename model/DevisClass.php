@@ -11,7 +11,7 @@ Class Devis
 	private $_CheminImage;
 
 	  //constructeur
-    public function _construct(array $donnees)
+    public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
     }

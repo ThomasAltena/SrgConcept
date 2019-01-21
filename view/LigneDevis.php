@@ -1,12 +1,15 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Monumac</title>
 </head>
 
-<?php include('header.php');
+<?php 
+include('header.php');
 
+$db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
+$ManagerMatiere = new MatiereManager($db); //Connexion a la BDD
+$matieres = $ManagerMatiere->GetMatieres();
 try
 {
         $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
@@ -17,69 +20,285 @@ catch(Exception $e)
 }
  
 
-$reponse = $bdd->query('SELECT Id_devis, Id_client, Id_user FROM devis ORDER BY Id_devis DESC LIMIT 1');
+$reponse = $bdd->query('SELECT Id_devis, IdClient_devis, IdUser_devis FROM devis ORDER BY Id_devis DESC LIMIT 1');
 $IdDevis = $reponse->fetchAll();
 
 foreach ($IdDevis as $IdDevi);
 $Devis = $IdDevi['Id_devis'];
-$User = $IdDevi['Id_user'];
-$Client = $IdDevi['Id_client'];
+$User = $IdDevi['IdUser_devis'];
+$Client = $IdDevi['IdClient_devis'];
+$date = date("d-m-Y");
+
  ?>
 
 
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
-<body >
-	<input type="text" id="MV" value="2.8" hidden="hidden"/>
-	<input type="text" id="PT" value="7800" hidden="hidden" />
+<body>
+<div id="content-wrapper">
 <div class='container'>
+  <div class="row">
+  <input type="file" id="fileToUpload" name="fileToUpload" style="visibility:hidden">
+  <div id='schema'>
+    <img id="imgSch1" src="">
+    <img id="imgSch2" src="">
+    <img id="imgSch3" src="">
+    <img id="imgSch4" src="">
+    <img id="imgSch5" src="">
+  </div>
+  </input>
 
-	<div id='schema'>
-		<img id="imgSch1" src="">
-		<img id="imgSch2" src="">
-		<img id="imgSch3" src="">
-		<img id="imgSch4" src="">
-		<img id="imgSch5" src="">
-	</div>
-<div class='row'>
-	<div id="Div1" class="Sel col-8">
+ <form action="../devis/NouveauDevis.php" class="form" method="post">
+ <div id='devis' class="col-xl-10 col-sm-10 mb-6 margintop">
+        <div class="card text-white bg-info o-hidden h-100">
+          <h5 class="card-title"> Sélectionner un client : </h5>
+          <input class="col-xl-4 col-sm-4 mb-2 form-control" id="myInput" type="text" placeholder="Search..">
+          <select name="Id_client" class="col-xl-4 col-sm-4 mb-2  id="select">
+<?php 
  
-       <label for="Piece">Selectionnez une piéce ?</label><br />
-       <select id="select1" onchange="AfficheImg(1)" >
-       <option value=""></option>
+$reponse = $bdd->query('SELECT * FROM clients');
+ 
+while ($donnees =$reponse->fetch())
+{
+?>  
+  
+                <option value="<?php echo $donnees['Id_client'];?>"> <?php echo $donnees['Nom_client']; ?></option>
 
 <?php
-try
-{
-        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 }
-catch(Exception $e)
-{
-            die('Erreur : '.$e->getMessage());
-}
+
+$_POST['Id_client'];
+?>  
+                  </select>
+            </div>
+                </div>
+  
+	<div id='devis' class="col-xl-10 col-sm-10 mb-6 margintop">
+        <div class="card text-white bg-info o-hidden h-100">
+            <div class="card-body">
+                <center><button name="go" onclick="nouveauDevis()" type="button" value="" class="btn btn-primary"">Crée devis</button></center>
+            </div>
+        </div>
+  </div>
+    <!-- <form action=echo $url; class="form" method="post"> -->
+   
+    <div id="mat" class="col-xl-10 col-sm-10 mb-6 margintop" style="visibility:true">
+              <div class="card">
+                  <div class="card-header">
+                   <h5 class="card-title"> Matiére : </h5>
+                  </div>
+                  <div class="card-body">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="Cadre" type="radio" value="CadreAvec" id="CadreAvec">
+                        <label class="form-check-label" for="CadreAvec">Simple</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="Cadre" type="radio" value="CadreSans" id="CadreSans">
+                        <label class="form-check-label" for="CadreSans">Double</label>
+                      </div>
+                      <br/><br/>
+                      <div class="form-check form-check-inline">
+                        <select id="select">
+                        <?php 
  
+$reponse = $bdd->query('SELECT * FROM matieres');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_matiere']; ?>"> <?php echo $donnees['Libelle_matiere']; ?></option>
+                
+
+<?php
+}
+$_POST['Id_matiere'];
+?>
+                  </select>
+                  </div>
+                  <br><br>
+                  <!-- <input type="button"  id="Valide1" onclick="suite(2)" value="Suivant" /> <p id="prix1"></p> -->
+                   <button type="button" onclick="affichePiece()" class="btn btn-warning x1">Suivant</button>
+                  </div>
+
+              </div>
+              
+    </div>
+     <!-- Case Ventail/Dim -->
+          <div id="piece" class="col-xl-6 col-sm-6 mb-3 margintop piece piece">
+            <div class="card">
+                <div class="card-header">
+                 <h5 class="card-title"> Selectionner une piéce : </h5>
+                </div>
+                <div class="card-body">
+
+                  <div class="form-check form-check-inline">
+                  <!--<p class="card-text">Choix :</p>-->
+                  <select id="select1" onchange="AfficheImg(1)">
+
+                        <?php
  
 $reponse = $bdd->query('SELECT * FROM pieces');
  
 while ($donnees = $reponse->fetch())
 {
 ?>
-		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+                <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
 <?php
 }
- 
-$reponse->closeCursor();
- 
-?>
-		</select>
-<img id="img1" src="">
-		</br></br>
-			<input name="hauteur" type="text" class="text1" placeholder="Hauteur"> <input name="largeur" type="text" class="text1" placeholder="Largeur"> <input name="profondeur" type="text" class="text1" placeholder="Profondeur">
-		</br></br>
-		<label for="Piece">Selectionnez une ou plusieurs option ?</label><br />
-		<select id="select1" onchange="AfficheImg(1)" >
-        <option value=""></option>
 
+?>
+                  </select>
+                  
+
+
+                    </div>
+                    <br><br/>
+                  <label>Selectionne une option :</label>
+                  <br>
+                  <select id="select">
+
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
 <?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php 
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+                  <br><br>
+
+                    <div class="form-inline">
+                      <div class="form-group">
+                        <input type="number" id="h" name="Hauteur" placeholder="Hauteur" class="form-control" min="0" max="500000">
+                        <input type="number" id="l" name="largeur" placeholder="Largeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                        <input type="number" id="p" name="Profondeur" placeholder="Profondeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                      </div>
+                    </div>
+
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <input type="number" id="h" name="Remise" placeholder="Remise" class="form-control" min="0" max="500000";>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+          </div>
+
+          
+     <!-- Case Ventail/Dim -->
+          <div id="image" class="col-xl-4 col-sm-4 mb-2 margintop image">
+            <div class="card">
+                <div class="card-header">
+                 <h5 class="card-title"> Aperçu image : </h5>
+                </div>
+                <div class="card-body">
+                <center><img id="img1" src=""></center>
+                </div>
+            </div>
+          </div>
+     <!-- Case Ventail/Dim -->
+          <div id="piece2" class="col-xl-6 col-sm-6 mb-3 margintop piece">
+            <div class="card">
+                <div class="card-header">
+                 <h5 class="card-title"> Selectionner une piéce : </h5>
+                </div>
+                <div class="card-body">
+
+                  <div class="form-check form-check-inline">
+                  <!--<p class="card-text">Choix :</p>-->
+                  <select id="select2" onchange="AfficheImg(2)">
+
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM pieces');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+                  
+
+
+                    </div>
+                    <br><br/>
+                  <label>Selectionne une option :</label>
+                  <br>
+                  <select id="select">
+
+                        <?php 
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php
 try
 {
         $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
@@ -95,197 +314,406 @@ $reponse = $bdd->query('SELECT * FROM options');
 while ($donnees = $reponse->fetch())
 {
 ?>
-		            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
-
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
 <?php
 }
- 
-$reponse->closeCursor();
- 
+
 ?>
-		</select>
-		</br></br>
-		<label for="Piece">Selectionnez une matiére ?</label><br />
-		<select id="select1" onchange="AfficheImg(1)" >
-        <option value=""></option>
+                  </select>
 
-<?php
-try
-{
-        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-}
-catch(Exception $e)
-{
-            die('Erreur : '.$e->getMessage());
-}
+                  <select id="select">
+
+                        <?php
  
- 
-$reponse = $bdd->query('SELECT * FROM matieres');
+$reponse = $bdd->query('SELECT * FROM options');
  
 while ($donnees = $reponse->fetch())
 {
 ?>
-		            <option value=" <?php echo $donnees['Id_matiere']; ?>"> <?php echo $donnees['Libelle_matiere']; ?></option>
-
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
 <?php
 }
- 
-$reponse->closeCursor();
- 
+
 ?>
-		</select>
-		</br></br>
-				<label for="Piece">Selectionnez une couleur de matiére ?</label><br />
-		<select id="select1" onchange="AfficheImg(1)" >
-        <option value=""></option>
+                  </select>
 
-<?php
-try
-{
-        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-}
-catch(Exception $e)
-{
-            die('Erreur : '.$e->getMessage());
-}
+                  <select id="select">
+
+                        <?php
  
- 
-$reponse = $bdd->query('SELECT * FROM couleurs');
+$reponse = $bdd->query('SELECT * FROM options');
  
 while ($donnees = $reponse->fetch())
 {
 ?>
-		            <option value=" <?php echo $donnees['Id_couleur']; ?>"> <?php echo $donnees['Libelle_couleur']; ?></option>
-
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
 <?php
-}
- 
-$reponse->closeCursor();
- 
-?>
-		</select>
-		</br></br>
-			<input type="text" class="text1" placeholder="Remise" name="Remise">
-		<br><br>
-			<button name="submit" type="submit" value="" class="btn btn-primary"">Valider la piéce</button>
-			<input type="button"  id="Valide1" onclick="suite(2)" value="Suivant" /> <p id="prix1"></p>
-
-		</div>
-
-
-
-
-<?php
-  if(isset($_POST['submit'])){
-   //if($_POST['Chemin_piece'] != "" && $_POST['Code_piece'] != "" && $_POST['hauteur'] != "" && $_POST['largeur'] != "" && $_POST['profondeur'] != ""){
-    echo "test";
-    /* Assignation var */
-    $id = "";
-    $code = $_POST['Code_piece'];
-    $Remise = $_POST['Remise'];
-    $prix = $_POST['prix1'] ;
-    $poids = "10"; 
-    $hauteur = $_POST['hauteur'];
-    $largeur = $_POST['largeur'];
-    $profondeur = $_POST['profondeur'];
-    $idpiece = $POST['Id_piece'];
-    $idmatiere = $_POST['Id_matiere'];
-    $idcouleur = $_POST['Id_couleur'];
-    $idtva = "10";
-    $option1 = $_POST['Id_option'];
-    $option2 = "1";
-    $option3 = "1";
-    $option4 = "1";
-    $option5 = "1";
-
-
-    /* Construct */
-    $ligne = new LigneDevis([
-    "Id_ligne" => $id,
-    "Code_ligne" => $libelle,
-    "Remise_ligne" => $code,
-    "Prix_ligne" => $prix,
-    "Poids_ligne" => $poids,
-    "Hauteur_ligne" => $hauteur,
-    "Largeur_ligne" => $largeur,
-    "Profondeur_ligne" => $profondeur,
-    "Id_piece" => $idpiece,
-    "Id_matiere" => $ipmatiere,
-    "Id_couleur" => $idcouleur,
-    "Id_tva" => $idtva,
-    "Option1" => $option1,
-    "Option2" => $option2,
-    "Option3" => $option3,
-    "Option4" => $option4,
-    "Option5" => $option5,
-
-    //"fileToUpload" => $image,
-    ]);
-
-    /* BDD*/
-  $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-  $ManagerLigneDevis = new LigneDevisManager($db); //Connexion a la BDD
-
-
-  /** Ajout **/
-  $ManagerLigneDevis->AddLigne($ligne);
-
-  echo("<div class='alert alert-success'><strong>Félicitation !  </strong> Le nouvelle piéce a été ajoutée.</div>");
-//}else{
-  //echo("<div class='alert alert-danger'><strong>Inforamtion :  </strong>Remplissez les champs obligatoires.</div>");
-//}
-
 }
 
 ?>
-</div>
-<!------------------------------------------------------------------------------------- Div2 -------->
-<div class='row'>
-	<div id="Div2" class="Sel col-8">
-       <label for="Piec2">Selectionnez une piéce ?</label><br />
-       <select id="select2" onchange="AfficheImg(2)" >
-       <option value=""></option>
+                  </select>
+                  <br><br>
 
-<?php
-try
-{
-        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-}
-catch(Exception $e)
-{
-            die('Erreur : '.$e->getMessage());
-}
- 
+                    <div class="form-inline">
+                      <div class="form-group">
+                        <input type="number" id="h" name="Hauteur" placeholder="Hauteur" class="form-control" min="0" max="500000"> 
+                        <input type="number" id="l" name="Largeur" placeholder="Largeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                        <input type="number" id="p" name="Profondeur" placeholder="Profondeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                      </div>
+                    </div> 
+                </div>
+            </div>
+          </div>
+
+          
+     <!-- Case Ventail/Dim -->
+          <div id="image2" class="col-xl-4 col-sm-4 mb-2 margintop image">
+            <div class="card">
+                <div cimagelass="card-header">
+                 <h5 class="card-title"> Aperçu image : </h5>
+                </div>
+                <div class="card-body">
+                <center><img id="img2" src=""></center>
+                </div>
+              </div>
+         
+
+
+
+
+
+
+
+
+ </div>
+     <!-- Case Ventail/Dim -->
+          <div id="piece3" class="col-xl-6 col-sm-6 mb-3 margintop piece">
+            <div class="card">
+                <div class="card-header">
+                 <h5 class="card-title"> Selectionner une piéce : </h5>
+                </div>
+                <div class="card-body">
+
+                  <div class="form-check form-check-inline">
+                  <!--<p class="card-text">Choix :</p>-->
+                  <select id="select3" onchange="AfficheImg(3)">
+
+                        <?php
  
 $reponse = $bdd->query('SELECT * FROM pieces');
  
 while ($donnees = $reponse->fetch())
 {
 ?>
-		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+                <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
 <?php
 }
- 
-$reponse->closeCursor();
- 
-?>
-</select>
-<img id="img2" src="">
-		</br></br>
-			<input type="text" class="text2" placeholder="Hauteur"> <input type="text" class="text2" placeholder="Largeur"> <input type="text" class="text2" placeholder="Profondeur">
-		</br></br>
-			<button name="go" type="submit" value="" class="btn btn-primary"">Valider la piéce</button>
-			<input type="button" id="Valide2" onclick="suite(3)" value="Suivant" /> <p id="prix2"></p>
-		</div>
-	</div>
-<!------------------------------------------------------------------------------ Div3 -->
-<div class='row'>
-	<div id="Div3" class="Sel col-8">
-       <label for="Piec3">Selectionnez une piéce ?</label><br />
-       <select id="select3" onchange="AfficheImg(3)" >
-       <option value=""></option>
 
+?>
+                  </select>
+                  
+
+
+                    </div>
+                    <br><br/>
+                  <label>Selectionne une option :</label>
+                  <br>
+                  <select id="select">
+
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
 <?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php 
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+                  <br><br>
+
+                    <div class="form-inline">
+                      <div class="form-group">
+                        <input type="number" id="h" name="Hauteur" placeholder="Hauteur" class="form-control" min="0" max="500000"> 
+                        <input type="number" id="l" name="Largeur" placeholder="Largeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                        <input type="number" id="p" name="Profondeur" placeholder="Profondeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                      </div>
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+
+          
+     <!-- Case Ventail/Dim -->
+          <div id="image3" class="col-xl-4 col-sm-4 mb-2 margintop image">
+            <div class="card">
+                <div class="card-header">
+                 <h5 class="card-title"> Aperçu image : </h5>
+                </div>
+                <div class="card-body">
+                <center><img id="img3" src=""></center>
+                </div>
+              </div>
+          
+
+
+
+
+
+
+
+
+
+ </div>
+     <!-- Case Ventail/Dim -->
+          <div id="piece4" class="col-xl-6 col-sm-6 mb-3 margintop piece">
+            <div class="card">
+                <div class="card-header">
+                 <h5 class="card-title"> Selectionner une piéce : </h5>
+                </div>
+                <div class="card-body">
+
+                  <div class="form-check form-check-inline">
+                  <!--<p class="card-text">Choix :</p>-->
+                  <select id="select4" onchange="AfficheImg(4)">
+
+                        <?php 
+ 
+$reponse = $bdd->query('SELECT * FROM pieces');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+                  
+
+
+                    </div>
+                    <br><br/>
+                  <label>Selectionne une option :</label>
+                  <br>
+                  <select id="select">
+
+                        <?php 
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php 
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php 
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+                  <br><br>
+
+                    <div class="form-inline">
+                      <div class="form-group">
+                        <input type="number" id="h" name="Hauteur" placeholder="Hauteur" class="form-control" min="0" max="500000"> 
+                        <input type="number" id="l" name="Largeur" placeholder="Largeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                        <input type="number" id="p" name="Profondeur" placeholder="Profondeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                      </div>
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+
+          
+     <!-- Case Ventail/Dim -->
+          <div id="image4" class="col-xl-4 col-sm-4 mb-2 margintop image">
+            <div class="card">
+                <div class="card-header">
+                 <h5 class="card-title"> Aperçu image : </h5>
+                </div>
+                <div class="card-body">
+                <center><img id="img4" src=""></center>
+                </div>
+              </div>
+        
+
+
+
+
+
+
+
+
+ </div>
+     <!-- Case Ventail/Dim -->
+          <div id="piece5" class="col-xl-6 col-sm-6 mb-3 margintop piece">
+            <div class="card">
+                <div class="card-header">
+                 <h5 class="card-title"> Selectionner une piéce : </h5>
+                </div>
+                <div class="card-body">
+
+                  <div class="form-check form-check-inline">
+                  <!--<p class="card-text">Choix :</p>-->
+                  <select id="select5" onchange="AfficheImg(5)">
+
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM pieces');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+                  
+
+
+                    </div>
+                    <br><br/>
+                  <label>Selectionne une option :</label>
+                  <br>
+                  <select id="select">
+
+                        <?php
+  
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php
+ 
+$reponse = $bdd->query('SELECT * FROM options');
+ 
+while ($donnees = $reponse->fetch())
+{
+?>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+<?php
+}
+
+?>
+                  </select>
+
+                  <select id="select">
+
+                        <?php
 try
 {
         $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
@@ -296,161 +724,96 @@ catch(Exception $e)
 }
  
  
-$reponse = $bdd->query('SELECT * FROM pieces');
+$reponse = $bdd->query('SELECT * FROM options');
  
 while ($donnees = $reponse->fetch())
 {
 ?>
-		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
 <?php
 }
- 
-$reponse->closeCursor();
- 
+
 ?>
-</select>
-<img id="img3" src="">
-		</br></br>
-			<input type="text" class="text3" placeholder="Hauteur"> <input type="text" class="text3" placeholder="Largeur"> <input type="text" class="text3" placeholder="Profondeur">
-		</br></br>
-			<button name="go" type="submit" value="" class="btn btn-primary"">Valider la piéce</button>
-			<input type="button" id="Valide3" onclick="suite(4)" value="Suivant" /> <p id="prix3"></p>
-	</div>
-</div>
+                  </select>
 
-<!------------------------------------------------------------------------------------- Div4 -->
-<div class='row'>
-	<div id="Div4" class="Sel col-8">
-       <label for="Piec4">Selectionnez une piéce ?</label><br />
-       <select id="select4" onchange="AfficheImg(4)" >
-       <option value=""></option>
+                  <select id="select">
 
-<?php
-try
-{
-        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-}
-catch(Exception $e)
-{
-            die('Erreur : '.$e->getMessage());
-}
+                        <?php
  
- 
-$reponse = $bdd->query('SELECT * FROM pieces');
+$reponse = $bdd->query('SELECT * FROM options');
  
 while ($donnees = $reponse->fetch())
 {
 ?>
-		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
+                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
 <?php
 }
- 
-$reponse->closeCursor();
- 
+
 ?>
-</select>
-<img id="img4" src="">
-		</br></br>
-			<input type="text" class="text4" placeholder="Hauteur"> <input type="text" class="text2" placeholder="Largeur"> <input type="text" class="text4" placeholder="Profondeur">
-		</br></br>
-			<button name="go" type="submit" value="" class="btn btn-primary"">Valider la piéce</button>
-			<input type="button" id="Valide4" onclick="suite(5)" value="Suivant" /> <p id="prix4"></p>
+                  </select>
+                  <br><br>
 
-		</div>
-	</div>
+                    <div class="form-inline">
+                      <div class="form-group">
+                        <input type="number" id="h" name="Hauteur" placeholder="Hauteur" class="form-control" min="0" max="500000"> 
+                        <input type="number" id="l" name="Largeur" placeholder="Largeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                        <input type="number" id="p" name="Profondeur" placeholder="Profondeur" class="form-control" min="0" max="500000" style="margin-left: 10px;">
+                      </div>
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
 
-<!------------------------------------------------------------------------------------- Div5 -->
-<div class='row'>
-	<div id="Div5" class="Sel col-8">
-       <label for="Piec5">Selectionnez une piéce ?</label><br />
-       <select id="select5" onchange="AfficheImg(5)" >
-       <option value=""></option>
+          
+     <!-- Case Ventail/Dim -->
+          <div id="image5" class="col-xl-4 col-sm-4 mb-2 margintop image">
+            <div class="card">
+                <div class="card-header">
+                 <h5 class="card-title"> Aperçu image : </h5>
+                </div>
+                <div class="card-body">
+                <center><img id="img5" src=""></center>
+                </div>
+              </div>
+            </div>
 
-<?php
-try
-{
-        $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-}
-catch(Exception $e)
-{
-            die('Erreur : '.$e->getMessage());
-}
- 
- 
-$reponse = $bdd->query('SELECT * FROM pieces');
- 
-while ($donnees = $reponse->fetch())
-{
-?>
-		            <option value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Code_piece']; ?></option>
-<?php
-}
- 
-$reponse->closeCursor();
- 
-?>
-</select>
-<img id="img5" src="">
-		</br></br>
-			<input type="text" class="text5" placeholder="Hauteur"> <input type="text" class="text5" placeholder="Largeur"> <input type="text" class="text5" placeholder="Profondeur">
-		</br></br>
-			<button name="go" type="submit" value="" class="btn btn-primary"">Valider la piéce</button>
-			<input type="button" id="Valide5" onclick="suite(6)" value="Suivant" /> <p id="prix5"></p>
-		</div>
-	</div>
+             <!--  <div id='valider' class="col-xl-10 col-sm-10 mb-6 margintop">
+        <div class="card text-white bg-info o-hidden h-100">
+            <div class="card-body">
+                <center><div class="mr-5" onclick="valideDevis()">Valider le devis</div></center>
+            </div>
+            <div class="card-body">
+                <center><div class="mr-5" onclick="valideDevis()">Recommencer le devis</div></center>
+            </div>
+            <div class="card-body">
+                <center><div class="mr-5" onclick="valideDevis()">Enoyer en liste d'attente</div></center>
+            </div>
+        </div>
+  </div> -->
+   <div id="Validation" class="col-xl-12 col-sm-12 mb-6">
+              <div class="card">
+                  <div class="card-header">
+                   <h5 class="card-title"> Validation : </h5>
+                  </div>
+                  <center><div class="card-body">
+                    <a href="pdfD/newPDF.pdf" target="_blank"><button onclick="VoirDevis()" id="BtnVoirDevis" class="btn btn-primary">Voir le devis</button></a>
 
-</div>
+                    <a href='index.php'><button id="BtnRecommencer" class="btn btn-danger x2">Recommencer sans enregistrer</button></a>
+
+                    <button id="BtnRecommencerSave" class="btn btn-secondary x2">Recommencer en enregistrant</button>
+
+                    <button onclick="UploadPic()" id="submit" class="btn btn-success x2">Valider le devis</button>
+                  </div></center>
+              </div>
+            </div>
+
+          </div>
+        </div>
 </div>
 </body>
-<footer>
-	<input type="button" id="validation" name="Validation" value="Valider le devis" onclick="window.location.href='../view/Devis.php?iddevis=<?php echo $Devis ?>&idclient=<?php echo $Client ?>&iduser=<?php echo $User ?>'">
-	<input type="button" id="saveImg">
-</footer>
-</html>
-
 <script type="text/javascript">
 
-//Fonction afficher la div suivante/calcule prix
-	function suite(idDivSuite){
-	document.getElementById('Div'+idDivSuite).style.visibility="visible";
-	t = idDivSuite - 1;
-	var pt = document.getElementById('PT').value;
-	var mv = document.getElementById('MV').value;
-	var t1 =document.getElementsByClassName('text'+ t)[0].value;
-	var t2 =document.getElementsByClassName('text'+ t)[1].value;
-	var t3 =document.getElementsByClassName('text'+ t)[2].value;
-	t1 = parseFloat(t1);
-	t2 = parseFloat(t2);
-	t3 = parseFloat(t3);
-	var cm = t1 * t2 *t3;
-	var m = cm / 1000000;
-	var tonne = m * mv;
-	var pf = tonne * pt;
-	var testprix = isNaN(pf);
-	if(testprix === true){
-		document.getElementById('prix' + t).innerHTML = "Erreur de calcul";
-	}else{
-		document.getElementById('prix' + t).innerHTML = pf.toFixed(2) + '€';
-	}
-
-	var r = document.getElementById('Valide'+ t).value;
-	if(r == 'Débloquer'){
-
-		document.getElementById('Valide'+ t).value = 'Bloquer';
-		document.getElementById('select' + t).disabled = "";
-		document.getElementsByClassName('text'+ t)[0].disabled = "";
-		document.getElementsByClassName('text'+ t)[1].disabled = "";
-		document.getElementsByClassName('text'+ t)[2].disabled = "";
-
-	}else{
-		document.getElementById('Valide'+ t).value = 'Débloquer';
-		document.getElementById('select' + t).disabled = "true";
-		document.getElementsByClassName('text'+ t)[0].disabled = "true";
-		document.getElementsByClassName('text'+ t)[1].disabled = "true";
-		document.getElementsByClassName('text'+ t)[2].disabled = "true";
-	}
-
-}
 
 //fonction recup value/ img 
 function AfficheImg(idDiv){
@@ -458,19 +821,19 @@ select = document.getElementById('select'+ idDiv);
 choice = select.selectedIndex  // Récupération de l'index du <option> choisi
  
 valeur= select.options[choice].value; // Récupération du texte du <option> d'index "choice"
-	
-	var x = document.getElementById('img' + idDiv);
-	x.setAttribute("src",valeur);
-	x.style.width = "15%";
+  
+  var x = document.getElementById('img' + idDiv);
+  x.setAttribute("src",valeur);
+  x.style.width = "62%";
 
-	var s = document.getElementById('imgSch' + idDiv);
-	s.setAttribute("src",valeur);
-	s.style.width = "110%";
-	s.style.height = "110%";
-	s.style.position= "absolute";
-	s.style.top= "0px";
-	s.style.left= "0px";
-	//s.style.opacity = "0.5";
+  var s = document.getElementById('imgSch' + idDiv);
+  s.setAttribute("src",valeur);
+  s.style.width = "195px";
+  s.style.height = "195px";
+  s.style.position= "absolute";
+  s.style.top= "0px";
+  s.style.left= "0px";
+  //s.style.opacity = "0.5";
 
 
 
@@ -483,30 +846,75 @@ function fixDiv() {
     $cache.css({'position': 'fixed', 'top': '100px '}); 
 }
 
-function exportAndSaveCanvas()  {
+// $(function() { 
+//     $("#btnSave").click(function() { 
+//         html2canvas($("#schema"), {
+//             onrendered: function(canvas) {
+//                 theCanvas = canvas;
+//                 document.body.appendChild(canvas);
 
-        html2canvas($("#schema"), { 
-        background:'#fff',
-        onrendered: function(canvas) {         
-           var imgData = canvas.toDataURL('image/jpeg');   
+//                 // Convert and download as image 
+//                 Canvas2Image.saveAsPNG(canvas); 
+//                 //$("#img-out").append(canvas);
+//                 // Clean up 
+//                 //document.body.removeChild(canvas);
+//             }
+//         });
+//     });
+// });
 
+// function UploadPic() {
+//     // Generate the image data
+//      html2canvas($("#schema"), {
+//      onrendered: function(canvas) {
+//      theCanvas = canvas;
+//      document.body.appendChild(canvas);
+//
+//     // Convert and download as image
+//     Canvas2Image.saveAsPNG(canvas);
+//     var Pic = document.getElementById(canvas).toDataURL("image/png");
+//     Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
+//
+//     // Sending the image data to Server
+//     $.ajax({
+//         type: 'POST',
+//         url: 'Save_Picture.aspx/UploadPic',
+//         data: '{ "imageData" : "' + Pic + '" }',
+//         contentType: 'application/json; charset=utf-8',
+//         dataType: 'json',
+//         success: function (msg) {
+//             alert("Done, Picture Uploaded.");
+//         }
+//     });
+// }
 
-    var url = 'upload/export.php';
-        $.ajax({ 
-            type: "POST", 
-            url: url,
-            dataType: 'text',
-            data: {
-                base64data : imgData
-            }
-        });     
-        }
+function nouveauDevis() {
+  document.getElementById('mat').style.visibility = "visible";
+  
+}
 
-    }); //End html2canvas
-    } // End exportAndSaveCanvas()
+function affichePiece() {
+  document.getElementById('piece').style.visibility = "visible";
+  document.getElementById('image').style.visibility = "visible";
 
+  document.getElementById('piece2').style.visibility = "visible";
+  document.getElementById('image2').style.visibility = "visible";
+
+  document.getElementById('piece3').style.visibility = "visible";
+  document.getElementById('image3').style.visibility = "visible";
+
+  document.getElementById('piece4').style.visibility = "visible";
+  document.getElementById('image4').style.visibility = "visible";
+
+  document.getElementById('piece5').style.visibility = "visible";
+  document.getElementById('image5').style.visibility = "visible";
+
+  document.getElementById('valider').style.visibility = "visible";
+}
 
 $(window).scroll(fixDiv);
 fixDiv();
 
 </script>
+
+

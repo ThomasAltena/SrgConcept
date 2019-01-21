@@ -62,7 +62,7 @@ class MatiereManager
         //Assignation valeur
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
-            $user = new Matiere($donnees);
+            $matiere = new Matiere($donnees);
         }
 
         return $matiere;

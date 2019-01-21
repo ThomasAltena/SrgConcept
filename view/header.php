@@ -31,6 +31,7 @@ require('../model/DevisManager.php');
 
 
 require('../model/Upload.php');
+require('../model/UploadCroquis.php');
  ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +50,7 @@ require('../model/Upload.php');
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 	<link rel="stylesheet" type="text/css" href="../public/css/main.css">
 </head>
 
@@ -85,9 +86,7 @@ require('../model/Upload.php');
 
 				echo("<li class='nav-item'><a class='nav-link' href='TVAView.php'>TVA</a></li>");
 
-				echo("<li class='nav-item'><a class='nav-link' href='DevisView.php'>Devis</a></li>");
-
-
+				echo("<li class='nav-item'><div class='dropdown '><a class='dropdown-toggle nav-link' href='DevisView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>Devis</a><div class='dropdown-menu' aria-labelledby='dropdownMenuLink'><a class='dropdown-item' href='DevisView.php'>Liste</a><a class='dropdown-item' href='LigneDevis.php'>Création</a></div></div></li>");
 
 			}else{ //C'est pas des admin afficher
 
@@ -99,10 +98,8 @@ require('../model/Upload.php');
 		     }
 		     else {
 		    	 echo("<li class='nav-item'><a class='btn btn-outline-success my-2 my-sm-0' href='ConnexionView.php'>Connexion</a> </li>");
-		     }
-		     
+		     }	     
 	?> 
-
 	</ul>
     </nav>
   </header>

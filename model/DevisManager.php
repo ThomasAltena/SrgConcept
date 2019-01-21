@@ -18,16 +18,17 @@ Class DevisManager
     }
 
 
-    public function AddDevis($iddevis)
+    public function AddDevis(Devis $devis)
     {
         //Preparation
-        $q = $this->_Db->prepare('INSERT INTO devis(Id_devis, Code_devis, Date_devis, Id_client, Id_user, Libelle_devis, CheminImage_devis) VALUES(:id, :code, :datedevis, :idclient, :iduser, :libelle, :chemin)');
-        $q->bindValue(':id', $devis->GetId());
+        $q = $this->_Db->prepare('INSERT INTO devis(Id_devis, Code_devis, Date_devis, IdClient_devis, IdUser_devis, Libelle_devis, CheminImage_devis) VALUES(:id, :code, :datedevis, :idclient, :iduser, :libelle, :chemin)');
+        $q->bindValue(':id', "");
         $q->bindValue(':code',$devis->GetCode());
         $q->bindValue(':datedevis',$devis->GetDate());
         $q->bindValue(':idclient',$devis->GetIdClient());
-        $q->bindValue(':iduser', $devis->GetLibelle());
-        $q->bindValue(':libelle', $devis->GEtCheminImage());
+        $q->bindValue(':iduser', $devis->GetIdUser());
+        $q->bindValue(':libelle',$devis->GetLibelle());
+        $q->bindValue(':chemin', '../public/images'.$devis->GetCheminImage().'jpg');
         //Assignation des valeurs
 
         //Execution de la requete
@@ -38,7 +39,7 @@ Class DevisManager
     public function GetDevis($iduser)
     {
         //Preparation
-        
+        $devis = [];
         $q = $this->_Db->prepare('SELECT * FROM devis WHERE devis.IdUser_devis = :iduser');
         $q->bindValue(':iduser', $iduser);
         $q->execute();
@@ -51,7 +52,25 @@ Class DevisManager
         return $devis;
     }
 
-    public function SelectDevisManager($iddevis)
+    public function GetImageDevis($iddevis)
+    {
+        //Preparation
+        $imageDevis = "";
+        $q = $this->_Db->prepare('SELECT CheminImage_devis FROM devis WHERE devis.Id_devis = :iddevis');
+        $q->bindValue(':iddevis', $iddevis);
+        $q->execute();
+
+        //Assignation valeur
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $imageDevis = new Devis($donnees);
+        }
+
+        return $imageDevis;
+
+    }
+
+    public function SelectLigneDevisManager($iddevis)
     {
     	//Preparation
         $lignedevis = [];

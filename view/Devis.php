@@ -21,16 +21,19 @@ include('header.php');
 
     ob_start();
     $total = 0;  $total_tva = 0;
-    
-    $iddevis = $_GET['iddevis'];    
-    $idclient = $_GET['idclient'];    
+
+    $iddevis = $_GET['iddevis'];
+    //var_dump("DEVIS", $iddevis);
+    $idclient = $_GET['idclient'];
+    //var_dump("CLIENT", $idclient);
     $iduser = $_GET['iduser'];
-    
-    $devis =$ManagerDevis->SelectDevisManager($iddevis);
+    var_dump("USER", $iduser);
+
+    $lignedevis =$ManagerDevis->SelectLigneDevisManager($iddevis);
+    $devis = $ManagerDevis->GetDevis($iddevis);
     $client = $ManagerDevis->SelectClientDevis($idclient);
     $users = $ManagerDevis->SelectUserDevis($iduser);
-
-
+    $imageDevis = $ManagerDevis->GetImageDevis($iddevis);
     
     
     //UTILISATEUR
@@ -43,6 +46,8 @@ include('header.php');
         echo("</td>");
         echo ("</tr>");
         echo("</table>");
+
+        echo ("<img src=".$imageDevis->GetCheminImage()." width='250' height='300' align='right'>");
 
 
     //CLIENT
@@ -92,10 +97,10 @@ include('header.php');
             <tbody style='height: 100%';>");
         $sommeTtc = 0;
         $sommeNet = 0;
-        foreach ($devis as $deviss) {
+        foreach ($lignedevis as $lignedeviss) {
    
-            $prix = $deviss->GetPrix();
-            $remise = $deviss->GetRemise();
+            $prix = $lignedeviss->GetPrix();
+            $remise = $lignedeviss->GetRemise();
 
             $net = $prix * ($remise / 100);
             $net = $prix - $net;
@@ -111,10 +116,10 @@ include('header.php');
 
         
             echo("<tr style='height: 100%';>");
-                echo("<td>".$deviss->GetCode()."</td>");
+                echo("<td>".$lignedeviss->GetCode()."</td>");
                 echo("<td>1</td>");
-                echo("<td>".$deviss->GetPrix()." €</td>");
-                echo("<td>".$deviss->GetRemise()." %</td>");
+                echo("<td>".$lignedeviss->GetPrix()." €</td>");
+                echo("<td>".$lignedeviss->GetRemise()." %</td>");
                 echo("<td>".$net." €</td>");
                 echo("<td>".$ttc." €</td>");
             echo("</tr>");

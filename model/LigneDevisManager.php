@@ -30,7 +30,7 @@ Class LigneDevisManager
         $q->bindValue(':remise', $LigneDevis->GetRemise());
         $q->bindValue(':prix', $LigneDevis->GetPrix());
         $q->bindValue(':poids', $LigneDevis->GetPoids());
-        $q->bindValue(':jauteur', $LigneDevis->GetHauteur());
+        $q->bindValue(':hauteur', $LigneDevis->GetHauteur());
         $q->bindValue(':largeur', $LigneDevis->GetLargeur());
         $q->bindValue(':profondeur', $LigneDevis->GetIdPiece());
         $q->bindValue(':idpiece', $LigneDevis->GetIdPiece());
