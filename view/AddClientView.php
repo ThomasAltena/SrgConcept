@@ -48,9 +48,10 @@ include('header.php');
     </div>
 
     <div class="form-group form-check">
-      <label class="form-check-label">
+        <label class="form-check-label"></label>
 
-    <button name="go" type="submit" value="" class="btn btn-primary"">Envoyer</button>
+        <button name="go" type="submit" value="" class="btn btn-primary">Envoyer</button>
+    </div>
   </form>
 </div>
 
@@ -100,5 +101,4 @@ include('header.php');
 
 }
 ?>
-</div>
 </body>
