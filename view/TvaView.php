@@ -40,9 +40,9 @@ echo("
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th scope='col'>Id</th>
-      <th scope='col'>Taux</th>
-      <th scope='col'></th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Id</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Taux</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'></th>
     </tr>
   </thead>
   <tbody>");

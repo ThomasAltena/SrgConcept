@@ -20,11 +20,11 @@ echo("
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th scope='col'>Nom</th>
-      <th scope='col'>Adresse</th>
-      <th scope='col'>Siret</th>
-      <th scope='col'>Id</th>
-      <th scope='col'></th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Nom</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Adresse</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Siret</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Id</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'></th>
     </tr>
   </thead>
   <tbody>");

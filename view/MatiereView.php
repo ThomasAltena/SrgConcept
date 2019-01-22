@@ -22,11 +22,11 @@ echo("
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th scope='col'>Id</th>
-      <th scope='col'>Code</th>
-      <th scope='col'>Libéllé</th>
-      <th scope='col'>Prix</th>
-      <th scope='col'></th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Id</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Code</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Libéllé</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Prix</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'></th>
     </tr>
   </thead>
   <tbody id='myTable'>");

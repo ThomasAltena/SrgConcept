@@ -20,10 +20,10 @@ echo("
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th class=\"text-left\" scope='col'>Couleurs</th>
-      <th class=\"text-left\" scope='col'>Hexadécimal</th>
-      <th class=\"text-left\" scope='col'></th>
-      <th class=\"text-left\" scope='col'></th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Couleurs</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Hexadécimal</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'></th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'></th>
     </tr>
   </thead>
   <tbody>");

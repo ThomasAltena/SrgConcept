@@ -18,11 +18,11 @@ echo("
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th scope='col'>N° Devis</th>
-      <th scope='col'>Libelle</th>
-      <th scope='col'>Code</th>
-      <th scope='col'>Date</th>
-      <th scope='col'>Image</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>N° Devis</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Libelle</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Code</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Date</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Image</th>
       <th></th>
     </tr>
   </thead>

@@ -1,8 +1,10 @@
-<link rel="stylesheet" href="../public/css/table.css" type="text/css">
 <?php
-
 include('header.php');
+?>
 
+<link rel="stylesheet" href="../public/css/table.css" type="text/css">
+
+<?php
 /* Mise en place de la base de donnée */
 $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 $ManagerClient = new ClientManager($db); //Connexion a la BDD
@@ -65,15 +67,15 @@ echo ("</tbody>
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th class=\"text-left\" scope='col'>Nom</th>
-      <th class=\"text-left\" scope='col'>Prenom</th>
-      <th class=\"text-left\" scope='col'>Adresse</th>
-      <th class=\"text-left\" scope='col'>Code postal</th>
-      <th class=\"text-left\" scope='col'>Ville</th>
-      <th class=\"text-left\" scope='col'>Téléphone</th>
-      <th class=\"text-left\" scope='col'>Mail</th>
-      <th class=\"text-left\" scope='col'>Date de création</th>
-      <th class=\"text-left\" scope='col'></th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Nom</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Prenom</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Adresse</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Code postal</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Ville</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Téléphone</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Mail</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Date de création</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'></th>
     </tr>
   </thead>
   <tbody>");

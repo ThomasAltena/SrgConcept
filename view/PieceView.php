@@ -16,10 +16,10 @@ echo("
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th scope='col'>Libelle</th>
-      <th scope='col'>Chemin</th>
-      <th scope='col'>Code</th>
-      <th scope='col'>Image</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Libelle</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Chemin</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Code</th>
+      <th style='border-top: 0px;' class=\"text-left\" scope='col'>Image</th>
       <th></th>
     </tr>
   </thead>
