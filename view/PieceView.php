@@ -31,7 +31,7 @@ foreach ($pieces as $piece){
     echo("<td>" .$piece->GetLibelle(). "</td>");
     echo("<td>" .$piece->GetChemin(). "</td>");
     echo("<td>" .$piece->GetCode(). "</td>");
-    echo("<td><img src=".$piece->GetChemin()."></td>");
+    echo("<td><img height=\"100\" width=\"100\" src=".$piece->GetChemin()."></td>");
     echo ("<td> <button onclick='supp(".$piece->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
     echo ("</tr>");
 }
