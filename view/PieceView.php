@@ -13,7 +13,7 @@ $ManagerPiece = new PieceManager($db); //Connexion a la BDD
 echo("
 <body>
 <div class='container'>
-<table class='table table-striped'>
+<table class='table table-striped' style='margin:10px 0;'>
   <thead>
     <tr>
       <th style='border-top: 0px;' class=\"text-left\" scope='col'>Libelle</th>
@@ -38,7 +38,7 @@ foreach ($pieces as $piece){
 
 echo ("</tbody>
     </table>
-</div class='container'>
+</div>
     </body>
 ");
 

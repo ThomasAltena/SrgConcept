@@ -37,7 +37,7 @@ echo("
 
 <br/>
 <div class='container col-7'>
-<table class='table table-striped'>
+<table class='table table-striped' style='margin:10px 0;'>
   <thead>
     <tr>
       <th style='border-top: 0px;' class=\"text-left\" scope='col'>Id</th>
@@ -58,7 +58,7 @@ foreach ($tvas as $tva){
 
 echo ("</tbody>
     </table>
-</div class='container'>
+</div>
     </body>
 ");
 
