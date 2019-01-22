@@ -1,11 +1,16 @@
+<?php
+session_start();
+
+if(empty($_SESSION)){
+    header('location:index.php');
+} else {
+    include('header.php');
+}
+?>
+
 <link rel="stylesheet" href="../public/css/table.css" type="text/css">
 
 <?php
-
-include('header.php');
-
-
-
 /* Mise en place de la base de donnée */
 $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 $ManagerMatiere = new MatiereManager($db); //Connexion a la BDD

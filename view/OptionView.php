@@ -1,8 +1,16 @@
+<?php
+session_start();
+
+if(empty($_SESSION)){
+    header('location:index.php');
+} else {
+    include('header.php');
+}
+?>
+
 <link rel="stylesheet" href="../public/css/table.css" type="text/css">
 
 <?php
-
-include('header.php');
 
 
 

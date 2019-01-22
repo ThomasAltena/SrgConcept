@@ -5,13 +5,14 @@
 <!--<link rel="stylesheet" href="../public/css/bootstrap/css/bootstrap.css" type="text/css">
 --><link rel="stylesheet" href="../public/css/login.css" type="text/css">
 <!------ Include the above in your HEAD tag ---------->
+
 <?php
 session_start();
 
-if(isset($_SESSION['Id_user'])){
-    header('location:ClientView.php');
-} else {
+if(empty($_SESSION)){
     include('header.php');
+} else {
+    header('location:ClientView.php');
 }
 ?>
 

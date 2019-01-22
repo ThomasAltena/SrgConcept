@@ -3,8 +3,14 @@
 <head>
 	<title>Monumac</title>
 </head>
+<?php
+session_start();
 
-<?php include('header.php');
+if(empty($_SESSION)){
+    header('location:index.php');
+} else {
+    include('header.php');
+}
 
 try
 {

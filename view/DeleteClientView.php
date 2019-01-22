@@ -1,10 +1,12 @@
-<?php 
+<?php
 session_start();
+
 if(empty($_SESSION)){
 	//Session inexistant
-	header('Location:ConnexionView.php');
+    header('location:index.php');
 }else{
-	require('../model/ClientManager.php');
+    include('header.php');
+    require('../model/ClientManager.php');
 	require('../model/ClientClass.php');
 	//session existe
 	$id = $_GET['id'];

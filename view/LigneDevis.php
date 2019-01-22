@@ -4,8 +4,15 @@
 	<title>Monumac</title>
 </head>
 
-<?php 
-include('header.php');
+<?php
+session_start();
+
+if(empty($_SESSION)){
+    header('location:index.php');
+} else {
+    include('header.php');
+}
+
 
 $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 $ManagerMatiere = new MatiereManager($db); //Connexion a la BDD
@@ -81,7 +88,7 @@ $_POST['Id_client'];
   </div>
     <!-- <form action=echo $url; class="form" method="post"> -->
    
-    <div id="mat" class="col-xl-10 col-sm-10 mb-6 margintop" style="visibility:true">
+    <div id="mat" class="col-xl-10 col-sm-10 mb-6 margintop" style="visibility:visible">
               <div class="card">
                   <div class="card-header">
                    <h5 class="card-title"> Matiére : </h5>

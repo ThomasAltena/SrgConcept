@@ -1,9 +1,11 @@
-<?php 
+
+<?php
 session_start();
 if(empty($_SESSION)){
 	//Session inexistant
-	header('Location:ConnexionView.php');
+    header('location:index.php');
 }else{
+    include('header.php');
 	require('../model/MatiereManager.php');
 	require('../model/MatiereClass.php');
 	//session existe

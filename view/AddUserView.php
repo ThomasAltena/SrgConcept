@@ -1,7 +1,12 @@
 <?php
-include ("header.php");
+session_start();
 
-  ?>
+if(empty($_SESSION)){
+    header('location:index.php');
+} else {
+    include('header.php');
+}
+?>
 <link rel="stylesheet" href="../public/css/form.css" type="text/css">
 
   <body>

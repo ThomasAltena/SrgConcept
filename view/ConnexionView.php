@@ -1,11 +1,11 @@
-<?php 
-	include('header.php');
-  $t = [] ;
-if($_SESSION == $t){
-}else{
-  header('location:Logout.php');
-}
+<?php
+session_start();
 
+if(empty($_SESSION)){
+    header('location:index.php');
+} else {
+    include('header.php');
+}
 ?>
     <body>
 		<div class="container">
