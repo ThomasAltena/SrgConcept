@@ -1,0 +1,45 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+body {
+    margin:0;
+    background:#c8c8c8;
+    background:url(https://hdqwalls.com/download/material-design-4k-2048x1152.jpg) fixed;
+    background-size: cover;
+    font-family: "Roboto", helvetica, arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+    color: #777;
+}
+
+.container {
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+#formbox {
+    background: #F9F9F9;
+    padding: 25px;
+    margin: 10px 0;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+div.table-title {
+    display: block;
+    margin: auto;
+    max-width: 600px;
+    padding:5px;
+    width: 100%;
+}
+
+.table-title h3 {
+    color: black;
+    font-size: 30px;
+    font-weight: 400;
+    font-style:normal;
+    font-family: "Roboto", helvetica, arial, sans-serif;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+    text-transform:uppercase;
+}
