@@ -20,7 +20,7 @@ echo("
       <th style='border-top: 0px;' class=\"text-left\" scope='col'>Chemin</th>
       <th style='border-top: 0px;' class=\"text-left\" scope='col'>Code</th>
       <th style='border-top: 0px;' class=\"text-left\" scope='col'>Image</th>
-      <th></th>
+      <th style='border-top: 0px;' class=\"text-left\" ></th>
     </tr>
   </thead>
   <tbody>");
