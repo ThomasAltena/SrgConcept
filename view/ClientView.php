@@ -33,21 +33,24 @@ echo("
   </thead>
   <tbody>");
 
-$clients = $ManagerClient->GetClients($iduser);
-var_dump($clients);
 
-foreach ($clients as $client){
-    echo("<tr>");
-    echo("<td>" .$client->GetNom(). "</td>");
-    echo("<td>" .$client->GetPrenom(). "</td>");
-    echo("<td>" .$client->GetAdresse(). "</td>");
-    echo("<td>" .$client->GetCodePostal(). "</td>");
-    echo("<td>" .$client->GetVille(). "</td>");
-    echo("<td>" .$client->GetTel(). "</td>");
-    echo("<td>" .$client->GetMail(). "</td>");
-    echo("<td>" .$client->GetDateCreation(). "</td>");
-    echo ("<td><button  onclick='edit(".$client->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$client->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
-    echo ("</tr>");
+$clients = $ManagerClient->GetClients($_SESSION['Id_user']);
+if($clients){
+    var_dump($clients);
+
+    foreach ($clients as $client){
+        echo("<tr>");
+        echo("<td>" .$client->GetNom(). "</td>");
+        echo("<td>" .$client->GetPrenom(). "</td>");
+        echo("<td>" .$client->GetAdresse(). "</td>");
+        echo("<td>" .$client->GetCodePostal(). "</td>");
+        echo("<td>" .$client->GetVille(). "</td>");
+        echo("<td>" .$client->GetTel(). "</td>");
+        echo("<td>" .$client->GetMail(). "</td>");
+        echo("<td>" .$client->GetDateCreation(). "</td>");
+        echo ("<td><button  onclick='edit(".$client->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$client->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
+        echo ("</tr>");
+    }
 }
 
 echo ("</tbody>

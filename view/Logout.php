@@ -3,5 +3,5 @@ session_start();
 session_unset();
 session_destroy();
 clearstatcache();
-header('location:ConnexionView.php');
+header('location:Index.php');
 ?>
