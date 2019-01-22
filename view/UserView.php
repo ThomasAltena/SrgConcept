@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../public/css/table.css" type="text/css">
+
 <?php
 
 include('header.php');
@@ -22,7 +24,6 @@ echo("
       <th scope='col'>Adresse</th>
       <th scope='col'>Siret</th>
       <th scope='col'>Id</th>
-      <th scope='col'></th>
       <th scope='col'></th>
     </tr>
   </thead>

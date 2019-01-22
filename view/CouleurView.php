@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../public/css/table.css" type="text/css">
+
 <?php
 
 include('header.php');
@@ -18,10 +20,10 @@ echo("
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th scope='col'>Couleurs</th>
-      <th scope='col'>Hexadécimal</th>
-      <th scope='col'></th>
-      <th scope='col'></th>
+      <th class=\"text-left\" scope='col'>Couleurs</th>
+      <th class=\"text-left\" scope='col'>Hexadécimal</th>
+      <th class=\"text-left\" scope='col'></th>
+      <th class=\"text-left\" scope='col'></th>
     </tr>
   </thead>
   <tbody>");
@@ -29,9 +31,9 @@ echo("
 $couleurs = $ManagerCouleur->GetCouleurs();
 foreach ($couleurs as $couleur){
     echo("<tr>");
-    echo("<td>" . $couleur->GetLibelle() . "</td>");
-    echo("<td>" .$couleur->GetHexa(). "</td>");
-    echo ("<td><button  onclick='edit(".$couleur->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$couleur->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
+    echo("<td class=\"text-left\">" . $couleur->GetLibelle() . "</td>");
+    echo("<td class=\"text-left\">" .$couleur->GetHexa(). "</td>");
+    echo ("<td class=\"text-left\"><button  onclick='edit(".$couleur->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$couleur->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
     echo ("</tr>");
 }
 

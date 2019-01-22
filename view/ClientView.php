@@ -1,8 +1,7 @@
+<link rel="stylesheet" href="../public/css/table.css" type="text/css">
 <?php
 
 include('header.php');
-
-
 
 /* Mise en place de la base de donnée */
 $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
@@ -19,16 +18,15 @@ echo("
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th scope='col'>Nom</th>
-      <th scope='col'>Prenom</th>
-      <th scope='col'>Adresse</th>
-      <th scope='col'>Code postal</th>
-      <th scope='col'>Ville</th>
-      <th scope='col'>Téléphone</th>
-      <th scope='col'>Mail</th>
-      <th scope='col'>Date de création</th>
-      <th scope='col'></th>
-      <th scope='col'></th>
+      <th class=\"text-left\" scope='col'>Nom</th>
+      <th class=\"text-left\" scope='col'>Prenom</th>
+      <th class=\"text-left\" scope='col'>Adresse</th>
+      <th class=\"text-left\" scope='col'>Code postal</th>
+      <th class=\"text-left\" scope='col'>Ville</th>
+      <th class=\"text-left\" scope='col'>Téléphone</th>
+      <th class=\"text-left\" scope='col'>Mail</th>
+      <th class=\"text-left\" scope='col'>Date de création</th>
+      <th class=\"text-left\" scope='col'></th>
     </tr>
   </thead>
   <tbody>");
@@ -40,15 +38,15 @@ if($clients){
 
     foreach ($clients as $client){
         echo("<tr>");
-        echo("<td>" .$client->GetNom(). "</td>");
-        echo("<td>" .$client->GetPrenom(). "</td>");
-        echo("<td>" .$client->GetAdresse(). "</td>");
-        echo("<td>" .$client->GetCodePostal(). "</td>");
-        echo("<td>" .$client->GetVille(). "</td>");
-        echo("<td>" .$client->GetTel(). "</td>");
-        echo("<td>" .$client->GetMail(). "</td>");
-        echo("<td>" .$client->GetDateCreation(). "</td>");
-        echo ("<td><button  onclick='edit(".$client->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$client->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
+        echo("<td class=\"text-left\">" .$client->GetNom(). "</td>");
+        echo("<td class=\"text-left\">" .$client->GetPrenom(). "</td>");
+        echo("<td class=\"text-left\">" .$client->GetAdresse(). "</td>");
+        echo("<td class=\"text-left\">" .$client->GetCodePostal(). "</td>");
+        echo("<td class=\"text-left\">" .$client->GetVille(). "</td>");
+        echo("<td class=\"text-left\">" .$client->GetTel(). "</td>");
+        echo("<td class=\"text-left\">" .$client->GetMail(). "</td>");
+        echo("<td class=\"text-left\">" .$client->GetDateCreation(). "</td>");
+        echo ("<td class=\"text-left\"><button  onclick='edit(".$client->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$client->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
         echo ("</tr>");
     }
 }
@@ -60,42 +58,43 @@ echo ("</tbody>
 ");
 
 }else {
-echo("
+              echo("
 
 <body>
 <div class='container'>
 <table class='table table-striped'>
   <thead>
     <tr>
-      <th scope='col'>Nom</th>
-      <th scope='col'>Prenom</th>
-      <th scope='col'>Adresse</th>
-      <th scope='col'>Code postal</th>
-      <th scope='col'>Ville</th>
-      <th scope='col'>Téléphone</th>
-      <th scope='col'>Mail</th>
-      <th scope='col'>Date de création</th>
-      <th scope='col'></th>
-      <th scope='col'></th>
+      <th class=\"text-left\" scope='col'>Nom</th>
+      <th class=\"text-left\" scope='col'>Prenom</th>
+      <th class=\"text-left\" scope='col'>Adresse</th>
+      <th class=\"text-left\" scope='col'>Code postal</th>
+      <th class=\"text-left\" scope='col'>Ville</th>
+      <th class=\"text-left\" scope='col'>Téléphone</th>
+      <th class=\"text-left\" scope='col'>Mail</th>
+      <th class=\"text-left\" scope='col'>Date de création</th>
+      <th class=\"text-left\" scope='col'></th>
     </tr>
   </thead>
   <tbody>");
 
-$clientsAdmin = $ManagerClient->GetClientsAdmin();
-foreach ($clientsAdmin as $clientAdmin){
-	//var_dump($clientAdmin->GetDateCreation());
-    echo("<tr>");
-    echo("<td>" .$clientAdmin->GetNom(). "</td>");
-    echo("<td>" .$clientAdmin->GetPrenom(). "</td>");
-    echo("<td>" .$clientAdmin->GetAdresse(). "</td>");
-    echo("<td>" .$clientAdmin->GetCodePostal(). "</td>");
-    echo("<td>" .$clientAdmin->GetVille(). "</td>");
-    echo("<td>" .$clientAdmin->GetTel(). "</td>");
-    echo("<td>" .$clientAdmin->GetMail(). "</td>");
-    echo("<td>" .$clientAdmin->GetDateCreation(). "</td>");
-    echo ("<td><button  onclick='edit(".$clientAdmin->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$clientAdmin->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
-    echo ("</tr>");
-}
+      $clientsAdmin = $ManagerClient->GetClientsAdmin();
+      if ($clientsAdmin) {
+          foreach ($clientsAdmin as $clientAdmin) {
+              //var_dump($clientAdmin->GetDateCreation());
+              echo("<tr>");
+              echo("<td class=\"text-left\">" . $clientAdmin->GetNom() . "</td>");
+              echo("<td class=\"text-left\">" . $clientAdmin->GetPrenom() . "</td>");
+              echo("<td class=\"text-left\">" . $clientAdmin->GetAdresse() . "</td>");
+              echo("<td class=\"text-left\">" . $clientAdmin->GetCodePostal() . "</td>");
+              echo("<td class=\"text-left\">" . $clientAdmin->GetVille() . "</td>");
+              echo("<td class=\"text-left\">" . $clientAdmin->GetTel() . "</td>");
+              echo("<td class=\"text-left\">" . $clientAdmin->GetMail() . "</td>");
+              echo("<td class=\"text-left\">" . $clientAdmin->GetDateCreation() . "</td>");
+              echo("<td class=\"text-left\"><button  onclick='edit(" . $clientAdmin->GetId() . ")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(" . $clientAdmin->GetId() . ")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
+              echo("</tr>");
+          }
+    }
 }
 
 echo ("</tbody>

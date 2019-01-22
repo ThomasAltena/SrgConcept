@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../public/css/table.css" type="text/css">
+
 <?php
 
 include('header.php');
@@ -24,6 +26,7 @@ echo("
       <th scope='col'>Code</th>
       <th scope='col'>Libéllé</th>
       <th scope='col'>Prix</th>
+      <th scope='col'></th>
     </tr>
   </thead>
   <tbody id='myTable'>");
