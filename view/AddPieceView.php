@@ -1,26 +1,39 @@
 <?php
 include ("header.php");
 ?>
+<link rel="stylesheet" href="../public/css/form.css" type="text/css">
 <body>
 <div class="container">
-  <h2>Création d'une matiére</h2>
-  <form action="AddPieceView.php" method="post" enctype="multipart/form-data">
+    <form id="formbox" action="AddPieceView.php" method="post" enctype="multipart/form-data">
+        <div class="table-title">
+            <h3>Création d'une piéce</h3>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width:100px" id="Libelle_piece_label">Libellé:</span>
+            </div>
+            <input required="true" type="text" class="form-control" placeholder="Libellé" name="Libelle_piece" id="Libelle_piece" aria-describedby="Libelle_piece_label">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width:100px" id="Code_piece_label">Code:</span>
+            </div>
+            <input required="true" type="text" class="form-control" placeholder="Code" name="Code_piece" id="Code_piece" aria-describedby="Code_piece_label">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="fileToUpload_label">Upload</span>
+            </div>
+            <div class="custom-file">
+                <input required="true" type="file" class="custom-file-input" placeholder="Image" id="fileToUpload" aria-describedby="fileToUpload_label">
+                <label class="custom-file-label" for="inputGroupFile01">Choisir Image</label>
+            </div>
+        </div>
 
-    <div class="form-group">
-      <label for="Libelle_piece">Libellé:</label>
-      <input type="text" class="form-control" id="Libelle_piece" placeholder="Libellé" name="Libelle_piece">
-    </div>
+        <div class="form-group form-check">
+            <button name="submit" type="submit" value="" class="btn btn-primary"">Envoyer</button>
+        </div>
 
-    <div class="form-group">
-      <label for="Code_piece">Code:</label>
-      <input type="text" class="form-control" id="Code_piece" placeholder="Code" name="Code_piece">
-    </div>
-
-    <div class="form-group">
-      <input type="file" id="fileToUpload" placeholder="Image" name="fileToUpload">
-    </div>
-
-    <button name="submit" type="submit" value="" class="btn btn-primary"">Envoyer</button>
   </form>
 </div>
 

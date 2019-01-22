@@ -1,31 +1,38 @@
 <?php
 include ("header.php");
 ?>
+
+<link rel="stylesheet" href="../public/css/form.css" type="text/css">
+
 <body>
 <div class="container">
-  <h2>Création d'une matiére</h2>
-  <form action="AddMatiereView.php" method="post">
+    <form id="formbox" action="AddMatiereView.php" method="post">
+        <div class="table-title">
+            <h3>Création d'une matiére</h3>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width:100px" id="Code_matiere_label">Code:</span>
+            </div>
+            <input required="true" type="text" class="form-control" placeholder="Code" name="Code_matiere" id="Code_matiere" aria-describedby="Code_matiere_label">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width:100px" id="Libelle_matiere_label">Libéllé:</span>
+            </div>
+            <input required="true" type="text" class="form-control" placeholder="Libéllé" name="Libelle_matiere" id="Libelle_matiere" aria-describedby="Libelle_matiere_label">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width:100px" id="Prix_matiere_label">Prix:</span>
+            </div>
+            <input required="true" type="number" class="form-control" placeholder="Prix" name="Prix_matiere" id="Prix_matiere" aria-describedby="Prix_matiere_label">
+        </div>
 
-    <div class="form-group">
-      <label for="Code_matiere">Code:</label>
-      <input type="text" class="form-control" id="Code_matiere" placeholder="Code" name="Code_matiere">
-    </div>
-
-    <div class="form-group">
-      <label for="Libelle_matiere">Libéllé:</label>
-      <input type="text" class="form-control" id="Libelle_matiere" placeholder="Libellé" name="Libelle_matiere">
-    </div>
-
-    <div class="form-group">
-      <label for="Prix_matiere">Prix:</label>
-      <input type="text" class="form-control" id="Prix_matiere" placeholder="Prix" name="Prix_matiere">
-    </div>
-
-    <div class="form-group form-check">
-      <label class="form-check-label">
-
-    <button name="go" type="submit" value="" class="btn btn-primary"">Envoyer</button>
-  </form>
+        <div class="form-group form-check">
+            <button name="go" type="submit" value="" class="btn btn-primary"">Envoyer</button>
+        </div>
+    </form>
 </div>
 
 <?php

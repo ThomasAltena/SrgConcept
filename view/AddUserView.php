@@ -2,50 +2,60 @@
 include ("header.php");
 
   ?>
+<link rel="stylesheet" href="../public/css/form.css" type="text/css">
+
   <body>
 <div class="container">
-  <h2>Création d'utilisateur</h2>
-  <form action="AddUserView.php" method="post">
+    <form id="formbox" action="AddUserView.php" method="post">
+        <div class="table-title">
+            <h3>Création d'utilisateur</h3>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width:100px" id="Nom_user_label">Nom:</span>
+            </div>
+            <input required="true" type="text" class="form-control" placeholder="Nom" name="Nom_user" id="Nom_user" aria-describedby="Nom_user_label">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width:100px" id="Adresse_user_label">Adresse:</span>
+            </div>
+            <input required="true" type="text" class="form-control" placeholder="Adresse" name="Adresse_user" id="Adresse_user" aria-describedby="Adresse_user_label">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width:100px" id="Siret_user_label">Siret:</span>
+            </div>
+            <input required="true" type="text" class="form-control" placeholder="SIRET" name="Siret_user" id="Siret_user" aria-describedby="Siret_user_label">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width:100px" id="Pseudo_user_label">Pseudo:</span>
+            </div>
+            <input required="true" type="text" class="form-control" placeholder="Pseudo" name="Pseudo_user" id="Pseudo_user" aria-describedby="Pseudo_user_label">
+        </div>
 
-    <div class="form-group">
-      <label for="Nom_user">Nom: *</label>
-      <input type="text" class="form-control" id="Nom_user" placeholder="Nom" name="Nom_user">
-    </div>
-
-    <div class="form-group">
-      <label for="Adresse_user">Adresse: *</label>
-      <input type="text" class="form-control" id="Adresse_user" placeholder="Adresse" name="Adresse_user">
-    </div>
-
-    <div class="form-group">
-      <label for="Siret_user">Siret:</label>
-      <input type="text" class="form-control" id="Siret_user" placeholder="SIRET" name="Siret_user">
-    </div>
-
-
-    <div class="form-group">
-      <label for="Pseudo_user">Pseudo: *</label>
-      <input type="text" class="form-control" id="Pseudo_user" placeholder="Pseudo" name="Pseudo_user">
-    </div>
-
-    <div class="form-group">
-      <label for="Pass_user">Mot de passe: * </label>
-      <input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" class="form-control" id="Pass_user" placeholder="Le mot de passe doit se composer d'une majuscule, une minuscule et un chiffre" name="Pass_user">
-    </div>
-
-    <div class="form-group">
-      <label for="Pass_user2">Répéter mot de passe: * </label>
-      <input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" class="form-control" id="Pass_user2" placeholder="Le mot de passe doit se composer d'une majuscule, une minuscule et un chiffre" name="Pass_user2">
-    </div>
-
-
-    <div class="form-group form-check">
-      <label class="form-check-label"></label>
-
-    <button name="go" type="submit" value="" class="btn btn-primary"">Créer</button>
-  </div>
-
-  </form>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Pass_user_label">Mot de passe: *</span>
+            </div>
+            <input required="true" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+                   class="form-control" placeholder="Mot de passe"
+                   name="Pass_user" id="Pass_user" aria-describedby="Pass_user_label">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="Pass_user2_label">Mot de passe: *</span>
+            </div>
+            <input required="true" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+                   class="form-control" placeholder="Répéter mot de passe"
+                   name="Pass_user2" id="Pass_user2" aria-describedby="Pass_user2_label">
+        </div>
+        <div class="form-group form-check">
+            <button name="go" type="submit" value="" class="btn btn-primary"">Créer</button>
+        </div>
+        <span style="margin:5px 5px 5px 10px; font-size: small">* Le mot de passe doit se composer d'une majuscule, une minuscule et un chiffre.</span>
+    </form>
 
 
 <?php
