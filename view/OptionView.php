@@ -28,7 +28,7 @@ echo("
 <center><h5> Cette liste recense toutes les options applicables au devis </h2></center>
 <br/>
 <div class='container col-7'>
-<table class='table table-striped' style='margin:10px 0;'>
+<table class='table table-striped tablebox'>
   <thead>
     <tr>
       <th style='border-top: 0px;' class=\"text-left\" scope='col'>Libelle</th>
