@@ -27,10 +27,14 @@ try {
 $reponse = $bdd->query('SELECT Id_devis, IdClient_devis, IdUser_devis FROM devis ORDER BY Id_devis DESC LIMIT 1');
 $IdDevis = $reponse->fetchAll();
 
-foreach ($IdDevis as $IdDevi) ;
-$Devis = $IdDevi['Id_devis'];
-$User = $IdDevi['IdUser_devis'];
-$Client = $IdDevi['IdClient_devis'];
+if ($IdDevis) {
+    foreach ($IdDevis as $IdDevi) ;
+    $Devis = $IdDevi['Id_devis'];
+    $User = $IdDevi['IdUser_devis'];
+    $Client = $IdDevi['IdClient_devis'];
+}
+
+
 $date = date("d-m-Y");
 
 ?>
@@ -76,18 +80,6 @@ $date = date("d-m-Y");
                         </select>
                     </div>
                 </div>
-                <!-- Button useless ?
-                                <div id='devis' class="col-xl-10 col-sm-10 mb-2 margintop">
-                                    <div id="formbox">
-                                        <div class="card-body">
-                                            <center>
-                                                <button name="go" onclick="nouveauDevis()" type="button" value=""
-                                                        class="btn btn-primary"
-                                                ">Crée devis</button></center>
-                                        </div>
-                                    </div>
-                                </div> -->
-                <!-- <form action=echo $url; class="form" method="post"> -->
 
                 <div id="mat" class="col-xl-10 col-sm-10 mb-2 margintop" style="visibility:visible">
 
@@ -543,7 +535,7 @@ $date = date("d-m-Y");
                 </div>
 
                 <!-- Card 4 -->
-                <div id="piece4" class="col-xl-6 col-sm-6 mb-3 margintop piece">
+<!--                <div id="piece4" class="col-xl-6 col-sm-6 mb-3 margintop piece">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title"> Selectionner une piéce : </h5>
@@ -551,19 +543,18 @@ $date = date("d-m-Y");
                         <div class="card-body">
                             <h5>Pièce :</h5>
                             <div class="form-check form-check-inline">
-                                <!--<p class="card-text">Choix :</p>-->
                                 <select name="Id_piece4" id="select4" onchange="AfficheImg(4)"
                                         class="mb-2 form-control">
                                     <option value="" selected>Choisir la pièce</option>
                                     <?php
-                                    $reponse = $bdd->query('SELECT * FROM pieces');
+/*                                    $reponse = $bdd->query('SELECT * FROM pieces');
                                     while ($donnees = $reponse->fetch()) {
-                                        ?>
-                                        <option id="<?php echo $donnees['Chemin_piece']; ?>"
-                                                value=" <?php echo $donnees['Id_piece']; ?>"> <?php echo $donnees['Libelle_piece']; ?></option>
+                                        */?>
+                                        <option id="<?php /*echo $donnees['Chemin_piece']; */?>"
+                                                value=" <?php /*echo $donnees['Id_piece']; */?>"> <?php /*echo $donnees['Libelle_piece']; */?></option>
                                         <?php
-                                    }
-                                    ?>
+/*                                    }
+                                    */?>
                                 </select>
                             </div>
                             <br/>
@@ -573,52 +564,52 @@ $date = date("d-m-Y");
                                     <select name="Id_option13" id="select" class="form-control">
                                         <option value="0" selected>Aucune</option>
                                         <?php
-                                        $reponse = $bdd->query('SELECT * FROM options');
+/*                                        $reponse = $bdd->query('SELECT * FROM options');
                                         while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            */?>
+                                            <option value=" <?php /*echo $donnees['Id_option']; */?>"> <?php /*echo $donnees['Libelle_option']; */?></option>
                                             <?php
-                                        }
-                                        ?>
+/*                                        }
+                                        */?>
                                     </select>
 
                                     <select name="Id_option14" id="select" class="form-control"
                                             style="margin-left: 10px;">
                                         <option value="0" selected>Aucune</option>
                                         <?php
-                                        $reponse = $bdd->query('SELECT * FROM options');
+/*                                        $reponse = $bdd->query('SELECT * FROM options');
                                         while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            */?>
+                                            <option value=" <?php /*echo $donnees['Id_option']; */?>"> <?php /*echo $donnees['Libelle_option']; */?></option>
                                             <?php
-                                        }
-                                        ?>
+/*                                        }
+                                        */?>
                                     </select>
 
                                     <select name="Id_option15" id="select" class="form-control"
                                             style="margin-left: 10px;">
                                         <option value="0" selected>Aucune</option>
                                         <?php
-                                        $reponse = $bdd->query('SELECT * FROM options');
+/*                                        $reponse = $bdd->query('SELECT * FROM options');
                                         while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            */?>
+                                            <option value=" <?php /*echo $donnees['Id_option']; */?>"> <?php /*echo $donnees['Libelle_option']; */?></option>
                                             <?php
-                                        }
-                                        ?>
+/*                                        }
+                                        */?>
                                     </select>
 
                                     <select name="Id_option16" id="select" class="form-control"
                                             style="margin-left: 10px;">
                                         <option value="0" selected>Aucune</option>
                                         <?php
-                                        $reponse = $bdd->query('SELECT * FROM options');
+/*                                        $reponse = $bdd->query('SELECT * FROM options');
                                         while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            */?>
+                                            <option value=" <?php /*echo $donnees['Id_option']; */?>"> <?php /*echo $donnees['Libelle_option']; */?></option>
                                             <?php
-                                        }
-                                        ?>
+/*                                        }
+                                        */?>
                                     </select>
                                 </div>
                             </div>
@@ -668,8 +659,8 @@ $date = date("d-m-Y");
                         </div>
                     </div>
                 </div>
-                <!-- Aprecu 4 -->
-                <div id="image4" class="col-xl-4 col-sm-4 mb-2 margintop image">
+-->                <!-- Aprecu 4 -->
+<!--                <div id="image4" class="col-xl-4 col-sm-4 mb-2 margintop image">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title"> Aperçu image : </h5>
@@ -679,10 +670,10 @@ $date = date("d-m-Y");
                         </div>
                     </div>
                 </div>
-
+-->
 
                 <!-- Card 5 -->
-                <div id="piece5" class="col-xl-6 col-sm-6 mb-3 margintop piece">
+<!--                <div id="piece5" class="col-xl-6 col-sm-6 mb-3 margintop piece">
                     <div class="card">
 
                         <div class="card-header">
@@ -691,22 +682,21 @@ $date = date("d-m-Y");
                         <div class="card-body">
                             <h5>Pièce :</h5>
                             <div class="form-check form-check-inline">
-                                <!--<p class="card-text">Choix :</p>-->
                                 <select name="Id_piece5" id="select5" onchange="AfficheImg(5)"
                                         class="mb-2 form-control">
                                     <option value="" selected>Choisir la pièce</option>
                                     <?php
-
+/*
                                     $reponse = $bdd->query('SELECT * FROM pieces');
 
                                     while ($donnees = $reponse->fetch()) {
-                                        ?>
-                                        <option id="<?php echo $donnees['Chemin_piece']; ?>"
-                                                value=" <?php echo $donnees['Id_piece']; ?>"> <?php echo $donnees['Libelle_piece']; ?></option>
+                                        */?>
+                                        <option id="<?php /*echo $donnees['Chemin_piece']; */?>"
+                                                value=" <?php /*echo $donnees['Id_piece']; */?>"> <?php /*echo $donnees['Libelle_piece']; */?></option>
                                         <?php
-                                    }
+/*                                    }
 
-                                    ?>
+                                    */?>
                                 </select>
                             </div>
                             <br/>
@@ -717,52 +707,52 @@ $date = date("d-m-Y");
                                     <select name="Id_option17" id="select" class="form-control">
                                         <option value="0" selected>Aucune</option>
                                         <?php
-                                        $reponse = $bdd->query('SELECT * FROM options');
+/*                                        $reponse = $bdd->query('SELECT * FROM options');
                                         while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            */?>
+                                            <option value=" <?php /*echo $donnees['Id_option']; */?>"> <?php /*echo $donnees['Libelle_option']; */?></option>
                                             <?php
-                                        }
-                                        ?>
+/*                                        }
+                                        */?>
                                     </select>
 
                                     <select name="Id_option18" id="select" class="form-control"
                                             style="margin-left: 10px;">
                                         <option value="0" selected>Aucune</option>
                                         <?php
-                                        $reponse = $bdd->query('SELECT * FROM options');
+/*                                        $reponse = $bdd->query('SELECT * FROM options');
                                         while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            */?>
+                                            <option value=" <?php /*echo $donnees['Id_option']; */?>"> <?php /*echo $donnees['Libelle_option']; */?></option>
                                             <?php
-                                        }
-                                        ?>
+/*                                        }
+                                        */?>
                                     </select>
 
                                     <select name="Id_option19" id="select" class="form-control"
                                             style="margin-left: 10px;">
                                         <option value="0" selected>Aucune</option>
                                         <?php
-                                        $reponse = $bdd->query('SELECT * FROM options');
+/*                                        $reponse = $bdd->query('SELECT * FROM options');
                                         while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            */?>
+                                            <option value=" <?php /*echo $donnees['Id_option']; */?>"> <?php /*echo $donnees['Libelle_option']; */?></option>
                                             <?php
-                                        }
-                                        ?>
+/*                                        }
+                                        */?>
                                     </select>
 
                                     <select name="Id_option20" id="select" class="form-control"
                                             style="margin-left: 10px;">
                                         <option value="0" selected>Aucune</option>
                                         <?php
-                                        $reponse = $bdd->query('SELECT * FROM options');
+/*                                        $reponse = $bdd->query('SELECT * FROM options');
                                         while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            */?>
+                                            <option value=" <?php /*echo $donnees['Id_option']; */?>"> <?php /*echo $donnees['Libelle_option']; */?></option>
                                             <?php
-                                        }
-                                        ?>
+/*                                        }
+                                        */?>
                                     </select>
                                 </div>
                             </div>
@@ -812,8 +802,8 @@ $date = date("d-m-Y");
                         </div>
                     </div>
                 </div>
-                <!-- Apercu 5 -->
-                <div id="image5" class="col-xl-4 col-sm-4 mb-2 margintop image">
+-->                <!-- Apercu 5 -->
+<!--                <div id="image5" class="col-xl-4 col-sm-4 mb-2 margintop image">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title"> Aperçu image : </h5>
@@ -823,7 +813,7 @@ $date = date("d-m-Y");
                         </div>
                     </div>
                 </div>
-
+-->
                 <div id="Validation" class="col-xl-12 col-sm-12 mb-6"
                      style="visibility: hidden; margin-bottom: 20px;">
                     <div class="card">
