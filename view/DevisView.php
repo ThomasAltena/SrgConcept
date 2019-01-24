@@ -38,7 +38,6 @@ $devis = $ManagerDevis->GetDevis($iduser);
 foreach ($devis as $devi){
     echo("<tr>");
     echo("<td>" .$devi->GetId()."</td>");
-    echo("<td>" .$devi->GetLibelle()."</td>");
     echo("<td>" .$devi->GetCode()."</td>");
     echo("<td>" .$devi->GetDate()."</td>");
     echo("<td>" .$devi->GetCheminImage()."</td>");

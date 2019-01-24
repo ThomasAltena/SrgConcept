@@ -34,15 +34,13 @@ if(empty($_SESSION)){
     $idclient = $_GET['idclient'];
     //var_dump("CLIENT", $idclient);
     $iduser = $_GET['iduser'];
-    var_dump("USER", $iduser);
 
     $lignedevis =$ManagerDevis->SelectLigneDevisManager($iddevis);
     $devis = $ManagerDevis->GetDevis($iddevis);
     $client = $ManagerDevis->SelectClientDevis($idclient);
     $users = $ManagerDevis->SelectUserDevis($iduser);
     $imageDevis = $ManagerDevis->GetImageDevis($iddevis);
-    
-    
+
     //UTILISATEUR
         echo ("<table >");
         echo("<tr>");
@@ -54,7 +52,7 @@ if(empty($_SESSION)){
         echo ("</tr>");
         echo("</table>");
 
-        echo ("<img src=".$imageDevis->GetCheminImage()." width='250' height='300' align='right'>");
+        //echo ("<img src=".$imageDevis->GetCheminImage()." width='250' height='300' align='right'>");
 
 
     //CLIENT
@@ -105,7 +103,7 @@ if(empty($_SESSION)){
         $sommeTtc = 0;
         $sommeNet = 0;
         foreach ($lignedevis as $lignedeviss) {
-   
+            //var_dump($lignedevis);
             $prix = $lignedeviss->GetPrix();
             $remise = $lignedeviss->GetRemise();
 
@@ -119,11 +117,10 @@ if(empty($_SESSION)){
             $sommeNet+= $net;
             $sommeTtc+= $ttc;
 
-            
 
         
             echo("<tr style='height: 100%';>");
-                echo("<td>".$lignedeviss->GetCode()."</td>");
+                echo("<td>".$lignedeviss->GetId()."</td>");
                 echo("<td>1</td>");
                 echo("<td>".$lignedeviss->GetPrix()." €</td>");
                 echo("<td>".$lignedeviss->GetRemise()." %</td>");

@@ -5,7 +5,7 @@ class Client
 	private $_Id;
 	private $_Adresse;
 	private $_CodePostal;
-	private $_DateCreation;
+	private $_DateCrea;
 	private $_Mail;
 	private $_Nom;
 	private $_Prenom;
@@ -37,14 +37,13 @@ class Client
                 $this->$method($value);
             }
         }
-
     }
 
     /**GET**/
     public function GetId(){return $this->_Id;}
     public function GetAdresse() {return $this->_Adresse;}
     public function GetCodePostal() {return $this->_CodePostal;}
-    public function GetDateCreation() {return $this->_DateCreation;}
+    public function GetDateCrea() {return $this->_DateCrea;}
     public function GetMail() {return $this->_Mail;}
     public function GetNom() {return $this->_Nom;}
     public function GetPrenom() {return $this->_Prenom;}
@@ -56,8 +55,8 @@ class Client
     /**SET**/
     public function SetId($id){$this -> _Id = (int) $id;}
     public function SetAdresse($adresse){$this -> _Adresse = $adresse;}
-    public function SetCp($codepostal){$this -> _CodePostal = $codepostal;}
-    public function SetDateCrea($datecreation){$this -> _DateCreation = $datecreation;}
+    public function SetCodePostal($codepostal){$this -> _CodePostal = $codepostal;}
+    public function SetDateCrea($datecreation){$this -> _DateCrea = $datecreation;}
     public function SetMail($mail){$this -> _Mail = $mail;}
     public function SetNom($nom){$this -> _Nom = $nom;}
     public function SetPrenom($prenom){$this -> _Prenom = $prenom;}

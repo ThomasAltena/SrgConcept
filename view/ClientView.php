@@ -53,7 +53,7 @@ if($clients){
         echo("<td class=\"text-left\">" .$client->GetVille(). "</td>");
         echo("<td class=\"text-left\">" .$client->GetTel(). "</td>");
         echo("<td class=\"text-left\">" .$client->GetMail(). "</td>");
-        echo("<td class=\"text-left\">" .$client->GetDateCreation(). "</td>");
+        echo("<td class=\"text-left\">" .$client->GetDateCre(). "</td>");
         echo ("<td class=\"text-left\"><button  onclick='edit(".$client->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$client->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
         echo ("</tr>");
     }
@@ -98,7 +98,7 @@ echo ("</tbody>
               echo("<td class=\"text-left\">" . $clientAdmin->GetVille() . "</td>");
               echo("<td class=\"text-left\">" . $clientAdmin->GetTel() . "</td>");
               echo("<td class=\"text-left\">" . $clientAdmin->GetMail() . "</td>");
-              echo("<td class=\"text-left\">" . $clientAdmin->GetDateCreation() . "</td>");
+              echo("<td class=\"text-left\">" . $clientAdmin->GetDateCrea() . "</td>");
               echo("<td class=\"text-left\"><button  onclick='edit(" . $clientAdmin->GetId() . ")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(" . $clientAdmin->GetId() . ")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
               echo("</tr>");
           }

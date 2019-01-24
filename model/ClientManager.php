@@ -18,7 +18,7 @@ class ClientManager
 	public function AddClient(Client $client)
 	{
 
-		$q = $this->_Db->prepare('INSERT INTO clients(Id_client, Adresse_client, Cp_client, DateCrea_client, Mail_client, Nom_client, Prenom_client, Prospect_client, Tel_client, Ville_client, Id_user) VALUES(:id, :adresse, :codepostal, :datecreation, :mail, :nom, :prenom, :prospect, :tel, :ville, :iduser)');
+		$q = $this->_Db->prepare('INSERT INTO clients(Id_client, Adresse_client, Cp_client, DateCrea_client, Mail_client, Nom_client, Prenom_client, Prospect_client, Tel_client, Ville_client, IdUser_client) VALUES(:id, :adresse, :codepostal, :datecreation, :mail, :nom, :prenom, :prospect, :tel, :ville, :iduser)');
 
 		//Récupération de la date du jour
 		$todaysDate = date("Y-m-d");
@@ -26,7 +26,7 @@ class ClientManager
 		$q->bindValue(':id', $client->GetId());
 		$q->bindValue(':adresse', $client->GetAdresse());
 		$q->bindValue(':codepostal', $client->GetCodePostal());
-		$q->bindValue(':datecreation', $todaysDate);
+		$q->bindValue(':datecreation', $client->GetDateCrea());
 		$q->bindValue(':mail', $client->GetMail());
 		$q->bindValue(':nom', $client->GetNom());
 		$q->bindValue(':prenom', $client->GetPrenom());
