@@ -34,3 +34,11 @@ form{
 .margintop{
 	margin-top: 13px;
 }
+
+noborder {
+    border:none;
+}
+
+nomargin{
+    margin: 0px 0px 0px 0px;
+}
