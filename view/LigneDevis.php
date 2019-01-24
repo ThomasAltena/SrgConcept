@@ -371,14 +371,14 @@ $date = date("d-m-Y");
                             <div class="form-inline no-margin" style="margin-top: 10px;">
                                 <div class="form-group col-lg-12">
                                     <h5 class="col-lg-1" style="margin:0">X </h5><input type="range" min="-50" max="150"
-                                                                                        value="50"
+                                                                                        value="0"
                                                                                         oninput="MoveImage(2)"
                                                                                         class="slider col-lg-11"
                                                                                         name="posX2" id="image_2_pos_x">
                                 </div>
                                 <div class="form-group col-lg-12">
                                     <h5 class="col-lg-1" style="margin:0">Y </h5><input type="range" min="-50" max="150"
-                                                                                        value="50"
+                                                                                        value="0"
                                                                                         oninput="MoveImage(2)"
                                                                                         class="slider col-lg-11"
                                                                                         name="posY2" id="image_2_pos_y">
@@ -514,14 +514,14 @@ $date = date("d-m-Y");
                             <div class="form-inline no-margin" style="margin-top: 10px;">
                                 <div class="form-group col-lg-12">
                                     <h5 class="col-lg-1" style="margin:0">X </h5><input type="range" min="-50" max="150"
-                                                                                        value="50"
+                                                                                        value="0"
                                                                                         oninput="MoveImage(3)"
                                                                                         class="slider col-lg-11"
                                                                                         name="posX2" id="image_3_pos_x">
                                 </div>
                                 <div class="form-group col-lg-12">
                                     <h5 class="col-lg-1" style="margin:0">Y </h5><input type="range" min="-50" max="150"
-                                                                                        value="50"
+                                                                                        value="0"
                                                                                         oninput="MoveImage(3)"
                                                                                         class="slider col-lg-11"
                                                                                         name="posY2" id="image_3_pos_y">
@@ -529,354 +529,326 @@ $date = date("d-m-Y");
                             </div>
                         </div>
                     </div>
-
-                    <!-- Apercu 3 -->
-                    <div id="image3" class="col-xl-4 col-sm-4 mb-2 margintop image">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title"> Aperçu image : </h5>
-                            </div>
-                            <div class="card-body">
-                                <center><img id="img3" src=""></center>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div id="piece4" class="col-xl-6 col-sm-6 mb-3 margintop piece">
-                        <div class="card">
-
-                            <div class="card-header">
-                                <h5 class="card-title"> Selectionner une piéce : </h5>
-                            </div>
-                            <div class="card-body">
-                                <h5>Pièce :</h5>
-                                <div class="form-check form-check-inline">
-                                    <!--<p class="card-text">Choix :</p>-->
-                                    <select name="Id_piece4" id="select4" onchange="AfficheImg(4)"
-                                            class="mb-2 form-control">
-                                        <option value="" selected>Choisir la pièce</option>
-                                        <?php
-
-                                        $reponse = $bdd->query('SELECT * FROM pieces');
-
-                                        while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option id="<?php echo $donnees['Chemin_piece']; ?>"
-                                                    value=" <?php echo $donnees['Id_piece']; ?>"> <?php echo $donnees['Libelle_piece']; ?></option>
-                                            <?php
-                                        }
-
-                                        ?>
-                                    </select>
-
-
-                                </div>
-                                <br/>
-                                <h5>Option :</h5>
-
-
-                                <div class="form-inline">
-                                    <div class="form-group">
-                                        <select name="Id_option13" id="select" class="form-control">
-                                            <option value="0" selected>Aucune</option>
-                                            <?php
-                                            $reponse = $bdd->query('SELECT * FROM options');
-                                            while ($donnees = $reponse->fetch()) {
-                                                ?>
-                                                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-
-                                        <select name="Id_option14" id="select" class="form-control"
-                                                style="margin-left: 10px;">
-                                            <option value="0" selected>Aucune</option>
-                                            <?php
-                                            $reponse = $bdd->query('SELECT * FROM options');
-                                            while ($donnees = $reponse->fetch()) {
-                                                ?>
-                                                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-
-                                        <select name="Id_option15" id="select" class="form-control"
-                                                style="margin-left: 10px;">
-                                            <option value="0" selected>Aucune</option>
-                                            <?php
-                                            $reponse = $bdd->query('SELECT * FROM options');
-                                            while ($donnees = $reponse->fetch()) {
-                                                ?>
-                                                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-
-                                        <select name="Id_option16" id="select" class="form-control"
-                                                style="margin-left: 10px;">
-                                            <option value="0" selected>Aucune</option>
-                                            <?php
-                                            $reponse = $bdd->query('SELECT * FROM options');
-                                            while ($donnees = $reponse->fetch()) {
-                                                ?>
-                                                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br/>
-                                <h5>Dimension :</h5>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <input type="text" id="h" name="Hauteur4" placeholder="Hauteur"
-                                               class="form-control">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" id="l" name="Largeur4" placeholder="Largeur"
-                                               class="form-control" style="margin-left: 10px;">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" id="p" name="Profondeur4" placeholder="Profondeur"
-                                               class="form-control" style="margin-left: 10px;">
-                                    </div>
-                                </div>
-                                <br/>
-                                <h5>Remise :</h5>
-                                <div class="form-inline no-margin" style="margin-top: 10px;">
-                                    <div class="form-group">
-                                        <input type="number" id="r" name="Remis4" placeholder="Remise"
-                                               class="form-control"
-                                               min="0" max="500000">
-                                    </div>
-                                </div>
-
-                                <h5>Position :</h5>
-                                <div class="form-inline no-margin" style="margin-top: 10px;">
-                                    <div class="form-group col-lg-12">
-                                        <h5 class="col-lg-1" style="margin:0">X </h5><input type="range" min="-50" max="150"
-                                                                                            value="50"
-                                                                                            oninput="MoveImage(4)"
-                                                                                            class="slider col-lg-11"
-                                                                                            name="posX2" id="image_4_pos_x">
-                                    </div>
-                                    <div class="form-group col-lg-12">
-                                        <h5 class="col-lg-1" style="margin:0">Y </h5><input type="range" min="-50" max="150"
-                                                                                            value="50"
-                                                                                            oninput="MoveImage(4)"
-                                                                                            class="slider col-lg-11"
-                                                                                            name="posY2" id="image_4_pos_y">
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Aprecu 4 -->
-                    <div id="image4" class="col-xl-4 col-sm-4 mb-2 margintop image">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title"> Aperçu image : </h5>
-                            </div>
-                            <div class="card-body">
-                                <center><img id="img4" src=""></center>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <!-- Card 5 -->
-                    <div id="piece5" class="col-xl-6 col-sm-6 mb-3 margintop piece">
-                        <div class="card">
-
-                            <div class="card-header">
-                                <h5 class="card-title"> Selectionner une piéce : </h5>
-                            </div>
-                            <div class="card-body">
-                                <h5>Pièce :</h5>
-                                <div class="form-check form-check-inline">
-                                    <!--<p class="card-text">Choix :</p>-->
-                                    <select name="Id_piece5" id="select5" onchange="AfficheImg(5)"
-                                            class="mb-2 form-control">
-                                        <option value="" selected>Choisir la pièce</option>
-                                        <?php
-
-                                        $reponse = $bdd->query('SELECT * FROM pieces');
-
-                                        while ($donnees = $reponse->fetch()) {
-                                            ?>
-                                            <option id="<?php echo $donnees['Chemin_piece']; ?>"
-                                                    value=" <?php echo $donnees['Id_piece']; ?>"> <?php echo $donnees['Libelle_piece']; ?></option>
-                                            <?php
-                                        }
-
-                                        ?>
-                                    </select>
-
-
-                                </div>
-                                <br/>
-                                <h5>Option :</h5>
-
-
-                                <div class="form-inline">
-                                    <div class="form-group">
-                                        <select name="Id_option17" id="select" class="form-control">
-                                            <option value="0" selected>Aucune</option>
-                                            <?php
-                                            $reponse = $bdd->query('SELECT * FROM options');
-                                            while ($donnees = $reponse->fetch()) {
-                                                ?>
-                                                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-
-                                        <select name="Id_option18" id="select" class="form-control"
-                                                style="margin-left: 10px;">
-                                            <option value="0" selected>Aucune</option>
-                                            <?php
-                                            $reponse = $bdd->query('SELECT * FROM options');
-                                            while ($donnees = $reponse->fetch()) {
-                                                ?>
-                                                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-
-                                        <select name="Id_option19" id="select" class="form-control"
-                                                style="margin-left: 10px;">
-                                            <option value="0" selected>Aucune</option>
-                                            <?php
-                                            $reponse = $bdd->query('SELECT * FROM options');
-                                            while ($donnees = $reponse->fetch()) {
-                                                ?>
-                                                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-
-                                        <select name="Id_option20" id="select" class="form-control"
-                                                style="margin-left: 10px;">
-                                            <option value="0" selected>Aucune</option>
-                                            <?php
-                                            $reponse = $bdd->query('SELECT * FROM options');
-                                            while ($donnees = $reponse->fetch()) {
-                                                ?>
-                                                <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br/>
-                                <h5>Dimension :</h5>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <input type="text" id="h" name="Hauteur5" placeholder="Hauteur"
-                                               class="form-control">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" id="l" name="Largeur5" placeholder="Largeur"
-                                               class="form-control" style="margin-left: 10px;">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" id="p" name="Profondeur5" placeholder="Profondeur"
-                                               class="form-control" style="margin-left: 10px;">
-                                    </div>
-                                </div>
-                                <br/>
-                                <h5>Remise :</h5>
-                                <div class="form-inline no-margin" style="margin-top: 10px;">
-                                    <div class="form-group">
-                                        <input type="number" id="r" name="Remis5" placeholder="Remise"
-                                               class="form-control"
-                                               min="0" max="500000">
-                                    </div>
-                                </div>
-
-                                <h5>Position :</h5>
-                                <div class="form-inline no-margin" style="margin-top: 10px;">
-                                    <div class="form-group col-lg-12">
-                                        <h5 class="col-lg-1" style="margin:0">X </h5><input type="range" min="-50" max="150"
-                                                                                            value="50"
-                                                                                            oninput="MoveImage(5)"
-                                                                                            class="slider col-lg-11"
-                                                                                            name="posX2" id="image_5_pos_x">
-                                    </div>
-                                    <div class="form-group col-lg-12">
-                                        <h5 class="col-lg-1" style="margin:0">Y </h5><input type="range" min="-50" max="150"
-                                                                                            value="50"
-                                                                                            oninput="MoveImage(5)"
-                                                                                            class="slider col-lg-11"
-                                                                                            name="posY2" id="image_5_pos_y">
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Apercu 5 -->
-                    <div id="image5" class="col-xl-4 col-sm-4 mb-2 margintop image">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title"> Aperçu image : </h5>
-                            </div>
-                            <div class="card-body">
-                                <center><img id="img5" src=""></center>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--  <div id='valider' class="col-xl-10 col-sm-10 mb-6 margintop">
-               <div class="card text-white bg-info o-hidden h-100">
-                   <div class="card-body">
-                       <center><div class="mr-5" onclick="valideDevis()">Valider le devis</div></center>
-                   </div>
-                   <div class="card-body">
-                       <center><div class="mr-5" onclick="valideDevis()">Recommencer le devis</div></center>
-                   </div>
-                   <div class="card-body">
-                       <center><div class="mr-5" onclick="valideDevis()">Enoyer en liste d'attente</div></center>
-                   </div>
-               </div>
-         </div> -->
-                    <div id="Validation" class="col-xl-12 col-sm-12 mb-6"
-                         style="visibility: hidden; margin-bottom: 20px;">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title"> Validation : </h5>
-                            </div>
-                            <center>
-                                <div class="card-body">
-                                    <button id="BtnVoirDevis" class="btn btn-primary">Voir le devis</button>
-
-
-                                    <a href='LigneDevis.php'>
-                                        <button id="BtnRecommencer" class="btn btn-danger x2">Recommencer sans
-                                            enregistrer
-                                        </button>
-                                    </a>
-
-
-                                    <button onclick="UploadPic()" id="submit" class="btn btn-secondary x2">Valider le
-                                        devis
-                                    </button>
-                                </div>
-                            </center>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
+                <!-- Apercu 3 -->
+                <div id="image3" class="col-xl-4 col-sm-4 mb-2 margintop image">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"> Aperçu image : </h5>
+                        </div>
+                        <div class="card-body">
+                            <center><img id="img3" src=""></center>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div id="piece4" class="col-xl-6 col-sm-6 mb-3 margintop piece">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"> Selectionner une piéce : </h5>
+                        </div>
+                        <div class="card-body">
+                            <h5>Pièce :</h5>
+                            <div class="form-check form-check-inline">
+                                <!--<p class="card-text">Choix :</p>-->
+                                <select name="Id_piece4" id="select4" onchange="AfficheImg(4)"
+                                        class="mb-2 form-control">
+                                    <option value="" selected>Choisir la pièce</option>
+                                    <?php
+                                    $reponse = $bdd->query('SELECT * FROM pieces');
+                                    while ($donnees = $reponse->fetch()) {
+                                        ?>
+                                        <option id="<?php echo $donnees['Chemin_piece']; ?>"
+                                                value=" <?php echo $donnees['Id_piece']; ?>"> <?php echo $donnees['Libelle_piece']; ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <br/>
+                            <h5>Option :</h5>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <select name="Id_option13" id="select" class="form-control">
+                                        <option value="0" selected>Aucune</option>
+                                        <?php
+                                        $reponse = $bdd->query('SELECT * FROM options');
+                                        while ($donnees = $reponse->fetch()) {
+                                            ?>
+                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <select name="Id_option14" id="select" class="form-control"
+                                            style="margin-left: 10px;">
+                                        <option value="0" selected>Aucune</option>
+                                        <?php
+                                        $reponse = $bdd->query('SELECT * FROM options');
+                                        while ($donnees = $reponse->fetch()) {
+                                            ?>
+                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <select name="Id_option15" id="select" class="form-control"
+                                            style="margin-left: 10px;">
+                                        <option value="0" selected>Aucune</option>
+                                        <?php
+                                        $reponse = $bdd->query('SELECT * FROM options');
+                                        while ($donnees = $reponse->fetch()) {
+                                            ?>
+                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <select name="Id_option16" id="select" class="form-control"
+                                            style="margin-left: 10px;">
+                                        <option value="0" selected>Aucune</option>
+                                        <?php
+                                        $reponse = $bdd->query('SELECT * FROM options');
+                                        while ($donnees = $reponse->fetch()) {
+                                            ?>
+                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <br/>
+                            <h5>Dimension :</h5>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="text" id="h" name="Hauteur4" placeholder="Hauteur"
+                                           class="form-control">
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="l" name="Largeur4" placeholder="Largeur"
+                                           class="form-control" style="margin-left: 10px;">
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="p" name="Profondeur4" placeholder="Profondeur"
+                                           class="form-control" style="margin-left: 10px;">
+                                </div>
+                            </div>
+                            <br/>
+                            <h5>Remise :</h5>
+                            <div class="form-inline no-margin" style="margin-top: 10px;">
+                                <div class="form-group">
+                                    <input type="number" id="r" name="Remis4" placeholder="Remise"
+                                           class="form-control"
+                                           min="0" max="500000">
+                                </div>
+                            </div>
+
+                            <h5>Position :</h5>
+                            <div class="form-inline no-margin" style="margin-top: 10px;">
+                                <div class="form-group col-lg-12">
+                                    <h5 class="col-lg-1" style="margin:0">X </h5><input type="range" min="-50" max="150"
+                                                                                        value="0"
+                                                                                        oninput="MoveImage(4)"
+                                                                                        class="slider col-lg-11"
+                                                                                        name="posX2" id="image_4_pos_x">
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <h5 class="col-lg-1" style="margin:0">Y </h5><input type="range" min="-50" max="150"
+                                                                                        value="0"
+                                                                                        oninput="MoveImage(4)"
+                                                                                        class="slider col-lg-11"
+                                                                                        name="posY2" id="image_4_pos_y">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Aprecu 4 -->
+                <div id="image4" class="col-xl-4 col-sm-4 mb-2 margintop image">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"> Aperçu image : </h5>
+                        </div>
+                        <div class="card-body">
+                            <center><img id="img4" src=""></center>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Card 5 -->
+                <div id="piece5" class="col-xl-6 col-sm-6 mb-3 margintop piece">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h5 class="card-title"> Selectionner une piéce : </h5>
+                        </div>
+                        <div class="card-body">
+                            <h5>Pièce :</h5>
+                            <div class="form-check form-check-inline">
+                                <!--<p class="card-text">Choix :</p>-->
+                                <select name="Id_piece5" id="select5" onchange="AfficheImg(5)"
+                                        class="mb-2 form-control">
+                                    <option value="" selected>Choisir la pièce</option>
+                                    <?php
+
+                                    $reponse = $bdd->query('SELECT * FROM pieces');
+
+                                    while ($donnees = $reponse->fetch()) {
+                                        ?>
+                                        <option id="<?php echo $donnees['Chemin_piece']; ?>"
+                                                value=" <?php echo $donnees['Id_piece']; ?>"> <?php echo $donnees['Libelle_piece']; ?></option>
+                                        <?php
+                                    }
+
+                                    ?>
+                                </select>
+                            </div>
+                            <br/>
+                            <h5>Option :</h5>
+
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <select name="Id_option17" id="select" class="form-control">
+                                        <option value="0" selected>Aucune</option>
+                                        <?php
+                                        $reponse = $bdd->query('SELECT * FROM options');
+                                        while ($donnees = $reponse->fetch()) {
+                                            ?>
+                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <select name="Id_option18" id="select" class="form-control"
+                                            style="margin-left: 10px;">
+                                        <option value="0" selected>Aucune</option>
+                                        <?php
+                                        $reponse = $bdd->query('SELECT * FROM options');
+                                        while ($donnees = $reponse->fetch()) {
+                                            ?>
+                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <select name="Id_option19" id="select" class="form-control"
+                                            style="margin-left: 10px;">
+                                        <option value="0" selected>Aucune</option>
+                                        <?php
+                                        $reponse = $bdd->query('SELECT * FROM options');
+                                        while ($donnees = $reponse->fetch()) {
+                                            ?>
+                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <select name="Id_option20" id="select" class="form-control"
+                                            style="margin-left: 10px;">
+                                        <option value="0" selected>Aucune</option>
+                                        <?php
+                                        $reponse = $bdd->query('SELECT * FROM options');
+                                        while ($donnees = $reponse->fetch()) {
+                                            ?>
+                                            <option value=" <?php echo $donnees['Id_option']; ?>"> <?php echo $donnees['Libelle_option']; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <br/>
+                            <h5>Dimension :</h5>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="text" id="h" name="Hauteur5" placeholder="Hauteur"
+                                           class="form-control">
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="l" name="Largeur5" placeholder="Largeur"
+                                           class="form-control" style="margin-left: 10px;">
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="p" name="Profondeur5" placeholder="Profondeur"
+                                           class="form-control" style="margin-left: 10px;">
+                                </div>
+                            </div>
+                            <br/>
+                            <h5>Remise :</h5>
+                            <div class="form-inline no-margin" style="margin-top: 10px;">
+                                <div class="form-group">
+                                    <input type="number" id="r" name="Remis5" placeholder="Remise"
+                                           class="form-control"
+                                           min="0" max="500000">
+                                </div>
+                            </div>
+
+                            <h5>Position :</h5>
+                            <div class="form-inline no-margin" style="margin-top: 10px;">
+                                <div class="form-group col-lg-12">
+                                    <h5 class="col-lg-1" style="margin:0">X </h5><input type="range" min="-50" max="150"
+                                                                                        value="0"
+                                                                                        oninput="MoveImage(5)"
+                                                                                        class="slider col-lg-11"
+                                                                                        name="posX2" id="image_5_pos_x">
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <h5 class="col-lg-1" style="margin:0">Y </h5><input type="range" min="-50" max="150"
+                                                                                        value="0"
+                                                                                        oninput="MoveImage(5)"
+                                                                                        class="slider col-lg-11"
+                                                                                        name="posY2" id="image_5_pos_y">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Apercu 5 -->
+                <div id="image5" class="col-xl-4 col-sm-4 mb-2 margintop image">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"> Aperçu image : </h5>
+                        </div>
+                        <div class="card-body">
+                            <center><img id="img5" src=""></center>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Validation" class="col-xl-12 col-sm-12 mb-6"
+                     style="visibility: hidden; margin-bottom: 20px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"> Validation : </h5>
+                        </div>
+                        <center>
+                            <div class="card-body">
+                                <button id="BtnVoirDevis" class="btn btn-primary">Voir le devis</button>
+
+
+                                <a href='LigneDevis.php'>
+                                    <button id="BtnRecommencer" class="btn btn-danger x2">Recommencer sans
+                                        enregistrer
+                                    </button>
+                                </a>
+
+
+                                <button onclick="UploadPic()" id="submit" class="btn btn-secondary x2">Valider le
+                                    devis
+                                </button>
+                            </div>
+                        </center>
+                    </div>
+                </div>
         </div>
     </div>
 </body>
