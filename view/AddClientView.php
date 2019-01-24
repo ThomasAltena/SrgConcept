@@ -81,6 +81,7 @@ if(empty($_SESSION)){
         if($_POST['Nom_client'] != "" || $_POST['Prenom_client'] != "" || $_POST['Prospect_client'] != ""  || $_POST['Adresse_client'] != "" || $_POST['Ville_client'] != "" || $_POST['CodePostal_client'] != "" || $_POST['DateCrea_client'] != "" || $_POST['Mail_client'] != "" || $_POST['Tel_client'] != ""){
 
             /* Assignation var */
+            $id = "";
             $nom = $_POST['Nom_client'];
             $prenom = $_POST['Prenom_client'];
             $prospect = $_POST['Prospect_client'];
@@ -88,12 +89,13 @@ if(empty($_SESSION)){
             $ville = $_POST['Ville_client'];
             $codepostal = $_POST['CodePostal_client'];
             $mail = $_POST['Mail_client'];
+            $date = $date = date("d-m-Y");
             $tel = $_POST['Tel_client'];
             $idUser = $_SESSION['Id_user'];
 
             /* Construct */
             $client = new Client([
-            "Id_client" => "" ,
+            "Id_client" => $id ,
             "Nom_client" => $nom ,
             "Prenom_client" => $prenom ,
             "Prospect_client" => $prospect ,
@@ -101,6 +103,7 @@ if(empty($_SESSION)){
             "Ville_client" => $ville ,
             "CodePostal_client" => $codepostal ,
             "Mail_client" => $mail ,
+            "DateCrea_client" => $date,
             "Tel_client" => $tel ,
             "IdUser_client" => $idUser,
             ]);
