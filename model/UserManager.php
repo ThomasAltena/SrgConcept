@@ -152,8 +152,7 @@ Class UserManager
         }
         else{
                 echo("<div class='alert alert-danger'><strong>Inforamtion :  </strong>Mauvais identifiant ou mot de passe !</div>");
-                
-        }
+            }
         }
 
     }

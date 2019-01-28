@@ -163,8 +163,16 @@ $date = date("d-m-Y");
                         <div class="col-lg-12 formbox" id="schemaPiecesContainer" style="margin-bottom: 1vw; height: 600px">
                             <img id="imgPieceSelectionneeSchema" src="">
                         </div>
-                        <div class="col-lg-12 row formbox" style="margin-top: 0; height: 200px">
+                        <div class="col-lg-12 row formbox" style="margin-top: 0;">
                             <div class="col-sm-6">
+                                <div class="form-group col-lg-12 row">
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">X </h5><input type="range" min="-50" max="550"
+                                                                                        value="0"
+                                                                                        style="margin:0; padding:0"
+                                                                                        oninput="MoveImage(2)"
+                                                                                        class="slider col-sm-11"
+                                                                                        name="posX" id="pos_x">
+                                </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" style="width:100px" id="Hauteur_piece_label">Hauteur :</span>
@@ -181,7 +189,7 @@ $date = date("d-m-Y");
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" style="width:100px" id="Profondeur_piece_label">Hauteur :</span>
+                                        <span class="input-group-text" style="width:100px" id="Profondeur_piece_label">Profondeur :</span>
                                     </div>
                                     <input id="Profondeur_piece" type="number" class="form-control"
                                            placeholder="0" name="Profondeur_piece"
@@ -189,6 +197,14 @@ $date = date("d-m-Y");
                                 </div>
                             </div>
                             <div class="col-sm-6">
+                                <div class="form-group row col-lg-12">
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">Y </h5><input type="range" min="0" max="500"
+                                                                                        value="20"
+                                                                                        style="margin:0; padding:0"
+                                                                                        oninput="MoveImage(2)"
+                                                                                        class="slider col-sm-11"
+                                                                                        name="posY" id="pos_y">
+                                </div>
                                 <button class="mb-3 btn btn-primary col-lg-12" disabled onclick="">Ajouter Options
                                 </button>
                                 <button class="mb-3 btn btn-success col-lg-12" id="ajouter_piece_button" disabled onclick="SauvegardePiece()">Sauvegarder Piece
@@ -227,6 +243,19 @@ $date = date("d-m-Y");
         this.code_ss_famille = "";
         this.id_piece = "";
         this.chemin_piece = "";
+        this.pos_x = "";
+        this.pos_y = "";
+    }
+
+    function MoveImage(idDiv) {
+        var posX = $('#pos_x').val();
+        var posY = $('#pos_y').val();
+
+        selectedPiece.pos_x = posX;
+        selectedPiece.pos_y = posY;
+
+        $('#imgPieceSelectionneeSchema').css({"left": posX.toString().concat('px')});
+        $('#imgPieceSelectionneeSchema').css({"top": posY.toString().concat('px')});
     }
 
     function FilterSousFamille(code_famille) {
@@ -328,23 +357,42 @@ $date = date("d-m-Y");
         selectedPiece = pieces.find(x => x.piecePosition == piecePosition);
         document.getElementById("select_famille").value = selectedPiece.code_famille;
         FilterSousFamille(selectedPiece.code_famille);
-        
+
         document.getElementById("select_ss_famille").value = selectedPiece.code_ss_famille;
         FilterPieces(selectedPiece.code_ss_famille);
         document.getElementById("select_piece").value = selectedPiece.chemin_piece;
     }
 
     function SauvegardePiece(){
-        if(selectedPiece.piecePosition == ""){
-            selectedPiece.piecePosition = pieces.length;
+        console.log(pieces);
+        console.log(selectedPiece);
+        if(!selectedPiece.piecePosition){
+            console.log('not ment ot be here');
+            if(pieces.length){
+                selectedPiece.piecePosition = pieces.length+1;
+            } else {
+                selectedPiece.piecePosition = 1;
+            }
             pieces.push(selectedPiece);
             selectedPiece = new Piece();
             document.getElementById('imgPieceSelectionnee').setAttribute("src", "");
 
             var body = '';
 
+            var posX = $('#pos_x').val();
+            var posY = $('#pos_y').val();
+
+            selectedPiece.pos_x = posX;
+            selectedPiece.pos_y = posY;
+
+            $('#imgPieceSelectionneeSchema').css({"left": $posX.toString().concat('px')});
+            $('#imgPieceSelectionneeSchema').css({"top": $posY.toString().concat('px')});
+
+
             pieces.forEach(function(piece) {
-                var text = '<img id="schema_piece_'+selectedPiece.piecePosition+'" src="' + piece.chemin_piece + '" style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute;" >\n'
+                var text = '<img id="schema_piece_'+selectedPiece.piecePosition+'" ' +
+                    'src="' + piece.chemin_piece + '" ' +
+                    'style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute; left:'+ piece.pos_x +'px ; right:'+ piece.pos_y +'px" >\n'
                 body = body + text;
             });
             body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
@@ -355,8 +403,7 @@ $date = date("d-m-Y");
             UpdateListView();
             ToggleSubmitPieceButton(true);
         } else {
-            console.log(pieces);
-            console.log(selectedPiece);
+
         }
 
     }
