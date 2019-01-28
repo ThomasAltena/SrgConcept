@@ -189,7 +189,7 @@ $date = date("d-m-Y");
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <button class="mb-3 btn btn-primary col-lg-12" onclick="AjoutePiece()">Ajouter Options
+                                <button class="mb-3 btn btn-primary col-lg-12" disabled onclick="">Ajouter Options
                                 </button>
                                 <button class="mb-3 btn btn-success col-lg-12" onclick="AjoutePiece()">Sauvegarder Piece
                                 </button>
@@ -204,9 +204,9 @@ $date = date("d-m-Y");
 
                     </div>
                     <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
-                        <button class="mb-3 btn btn-primary col-lg-12" onclick="AjouterOptions()">Visualiser Devis
+                        <button class="mb-3 btn btn-primary col-lg-12" disabled onclick="">Visualiser Devis
                         </button>
-                        <button class="btn btn-success col-lg-12" onclick="AjouterOptions()">Sauvegarder Devis
+                        <button class="btn btn-success col-lg-12" disabled onclick="">Sauvegarder Devis
                         </button>
                     </div>
                 </div>
@@ -268,14 +268,7 @@ $date = date("d-m-Y");
     }
 
     function ResetFamilleSelector() {
-        document.getElementById("selectSousFamilleContainer").innerHTML =
-            "<div class=\"input-group-prepend\">\n" +
-            "<span class=\"input-group-text\" style=\"width:100px\"\n" +
-            "id=\"Id_ss_famille_label\">Sous-fam :</span>\n" +
-            "</div>\n" +
-            "<select name=\"Id_ss_famille\" aria-describedby=Id_ss_famille_label\" id=\"select_ss_famille\" disabled\n" +
-            "class=\"form-control\" onchange=\"FilterPieces(value)\">\n" +
-            "</select>";
+        document.getElementById("select_famille").value = "";
     }
 
     function ResetSousFamilleSelector() {
@@ -332,30 +325,35 @@ $date = date("d-m-Y");
         var body = '';
 
         pieces.forEach(function(piece) {
-            var text = '<img id="'+selectedPiece.piecePosition+'" src="' + piece.chemin_piece + '" style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute;" >\n'
+            var text = '<img id="schema_piece_'+selectedPiece.piecePosition+'" src="' + piece.chemin_piece + '" style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute;" >\n'
             body = body + text;
         });
         body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
         document.getElementById("schemaPiecesContainer").innerHTML = body;
+        ResetFamilleSelector();
+        ResetSousFamilleSelector();
+        ResetPieceSelector();
+        UpdateListView();
     }
 
     function UpdateListView(){
-        var body = '<div class="col-sm">\n' +
+        var body = '<div class="col-sm-6">\n' +
             '\n' ;
-
+        console.log(pieces);
         for(var x = 0; x < 10; x++) {
             if(x == 5){
                 body += '</div>\n' +
-                    '<div class="col-sm">\n';
+                    '<div class="col-sm-6">\n';
             }
 
-            if(x<5){
-
-
-            } else {
-
-
+            if(pieces[x]){
+                console.log(pieces[x]);
+                body += '<div class="col-sm" style="width: 135px; height:135px; "> \n' +
+                    '<img id="selectable_piece_'+pieces[x].piecePosition+'" src="' + pieces[x].chemin_piece + '" style="max-width: 135px; height: 135px; position: absolute;" >\n' +
+                    '</div>\n';
             }
+
+
         }
         body += '</div>';
 
