@@ -354,13 +354,13 @@ $date = date("d-m-Y");
     }
 
     function SelectPiece(piecePosition){
-        selectedPiece = pieces.find(x => x.piecePosition == piecePosition);
+       /* selectedPiece = pieces.find(x => x.piecePosition == piecePosition);
         document.getElementById("select_famille").value = selectedPiece.code_famille;
         FilterSousFamille(selectedPiece.code_famille);
 
         document.getElementById("select_ss_famille").value = selectedPiece.code_ss_famille;
         FilterPieces(selectedPiece.code_ss_famille);
-        document.getElementById("select_piece").value = selectedPiece.chemin_piece;
+        document.getElementById("select_piece").value = selectedPiece.chemin_piece;*/
     }
 
     function SauvegardePiece(){
@@ -379,20 +379,10 @@ $date = date("d-m-Y");
 
             var body = '';
 
-            var posX = $('#pos_x').val();
-            var posY = $('#pos_y').val();
-
-            selectedPiece.pos_x = posX;
-            selectedPiece.pos_y = posY;
-
-            $('#imgPieceSelectionneeSchema').css({"left": $posX.toString().concat('px')});
-            $('#imgPieceSelectionneeSchema').css({"top": $posY.toString().concat('px')});
-
-
             pieces.forEach(function(piece) {
                 var text = '<img id="schema_piece_'+selectedPiece.piecePosition+'" ' +
                     'src="' + piece.chemin_piece + '" ' +
-                    'style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute; left:'+ piece.pos_x +'px ; right:'+ piece.pos_y +'px" >\n'
+                    'style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute; left:'+ piece.pos_x +'px ; top:'+ piece.pos_y +'px" >\n'
                 body = body + text;
             });
             body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
