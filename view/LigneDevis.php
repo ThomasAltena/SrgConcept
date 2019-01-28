@@ -101,7 +101,7 @@ $date = date("d-m-Y");
                         </div>
                         <div class="formbox" style="">
                             <!--CHOIX FAMILLE    -->
-                            <div class="input-group mb-3" id="selectSousFamilleContainer">
+                            <div class="input-group mb-3" id="selectFamilleContainer">
                                 <div class="input-group-prepend">
                                 <span class="input-group-text" style="width:100px"
                                       id="Id_famille_label">Famille :</span>
@@ -147,8 +147,14 @@ $date = date("d-m-Y");
 
                                 </select>
                             </div>
-                            <!--Hidden Submit button-->
-                            <button type="submit" style="visibility: hidden" id="submitButton"></button>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width:100px" id="Remise_piece_label">Remise :</span>
+                                </div>
+                                <input id="Remise_piece" type="number" class="form-control"
+                                       placeholder="0" name="Remise_piece" aria-describedby="Remise_piece_label"
+                                       min="0" max="500000">
+                            </div>
                         </div>
                     </div>
 
@@ -183,20 +189,10 @@ $date = date("d-m-Y");
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" style="width:100px" id="Remise_piece_label">Remise :</span>
-                                    </div>
-                                    <input id="Remise_piece" type="number" class="form-control"
-                                           placeholder="0" name="Remise_piece" aria-describedby="Remise_piece_label"
-                                           min="0" max="500000">
-                                </div>
-                                <button class="mb-3 btn btn-primary col-lg-12" onclick="AjoutePiece()">Ajouter
-                                    Options
+                                <button class="mb-3 btn btn-primary col-lg-12" onclick="AjoutePiece()">Ajouter Options
                                 </button>
-                                <button class="mb-3 btn btn-success col-lg-12" onclick="AjoutePiece()">Ajouter Piece
+                                <button class="mb-3 btn btn-success col-lg-12" onclick="AjoutePiece()">Sauvegarder Piece
                                 </button>
-
                             </div>
                         </div>
                     </div>
@@ -204,13 +200,13 @@ $date = date("d-m-Y");
 
                 <!--PIECES SELECTIONNEES-->
                 <div class="col-sm" style="max-width: 19.9%; padding-left: 0; padding-right: 0">
-                    <div class="col-sm formbox col-lg-12" style="height: 600px; margin-bottom: 1vw">
+                    <div class="col-sm row formbox col-lg-12" style="height: 660px; margin-bottom: 1vw" id="piecesListContainer">
 
                     </div>
-                    <div class="col-sm formbox col-lg-12" style="margin-top: 0; height: 200px">
-                        <button class="mb-3 btn btn-warning col-lg-12" onclick="AjouterOptions()">Visualiser Devis
+                    <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
+                        <button class="mb-3 btn btn-primary col-lg-12" onclick="AjouterOptions()">Visualiser Devis
                         </button>
-                        <button class="mb-3 btn btn-danger col-lg-12" onclick="AjouterOptions()">Sauvegarder Devis
+                        <button class="btn btn-success col-lg-12" onclick="AjouterOptions()">Sauvegarder Devis
                         </button>
                     </div>
                 </div>
@@ -341,6 +337,29 @@ $date = date("d-m-Y");
         });
         body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
         document.getElementById("schemaPiecesContainer").innerHTML = body;
+    }
+
+    function UpdateListView(){
+        var body = '<div class="col-sm">\n' +
+            '\n' ;
+
+        for(var x = 0; x < 10; x++) {
+            if(x == 5){
+                body += '</div>\n' +
+                    '<div class="col-sm">\n';
+            }
+
+            if(x<5){
+
+
+            } else {
+
+
+            }
+        }
+        body += '</div>';
+
+        document.getElementById("piecesListContainer").innerHTML = body;
     }
 
 </script>
