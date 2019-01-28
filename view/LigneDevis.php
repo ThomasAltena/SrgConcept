@@ -326,6 +326,12 @@ $date = date("d-m-Y");
 
     function SelectPiece(piecePosition){
         selectedPiece = pieces.find(x => x.piecePosition == piecePosition);
+        document.getElementById("select_famille").value = selectedPiece.code_famille;
+        FilterSousFamille(selectedPiece.code_famille);
+        
+        document.getElementById("select_ss_famille").value = selectedPiece.code_ss_famille;
+        FilterPieces(selectedPiece.code_ss_famille);
+        document.getElementById("select_piece").value = selectedPiece.chemin_piece;
     }
 
     function SauvegardePiece(){
@@ -349,7 +355,7 @@ $date = date("d-m-Y");
             UpdateListView();
             ToggleSubmitPieceButton(true);
         } else {
-            console.log(pieces.find(x => x.piecePosition == selectedPiece.piecePosition));
+            console.log(pieces);
             console.log(selectedPiece);
         }
 
