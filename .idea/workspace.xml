@@ -1,72 +1,232 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="376" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9d27605-8d41-4044-ba8e-8636f45d8338" name="Default Changelist" comment="">
+    <list default="true" id="a9d27605-8d41-4044-ba8e-8636f45d8338" name="Default Changelist" comment="Nouvelle vue debut">
+      <change afterPath="$PROJECT_DIR$/view/LigneDevisOld.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3+DAL.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3+DALLES.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3+DALLESS.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3+dalle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3+dalles+coffrage.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3+dalles0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3+dalles1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3+dalles2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3DAL+COFF.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/3DALLES.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/4+tombales.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/5+dalles.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/5+dalles0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/5DALLES.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/7+dalles.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Arrondis.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Bordures.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/CROIX+EPIS.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/CROIXPIQU+E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Coffrets.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Cotes+dessus.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/DALLDOUCINE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/DOUCINE+BOMBEE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/ECLAT+E.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/GOUTTE+D_EAU.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Jardiniere.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/MAINCOLOME.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/OBJET+24-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/OBJET+9-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/OBJET15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/ST_PILIER.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/TABLETTE+ISERE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/brochee.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/cave+urne.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/cotes+eclates.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/croix+++epis.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/croix+piquee.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/croix+relief.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/croix.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/dalle+doucine.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/doucine+bosse.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/eclatee.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/elchanf2x2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/goute+d'eau.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/lyon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/main+colome.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/objet+15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/objet+22.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/objet+24+1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/objet+41.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/objet+75.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/objet+9+1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/octogone.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/ojival+dalle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/par+vent.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/pdeclate.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/piliers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/st+pilier.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/st+simple.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/tablette.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/attente/ATTENTE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/attente/DEJA EN ATTENTE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/bordures+et+bases/cotes eclates.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/bordures+et+bases/par vent.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/animaux/CHEVAL 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/animaux/TETE CHEVAL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/bronze/CHRIST 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/bronze/CHRIST 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/bronze/CHRIST 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/bronze/TETE VIERGE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/bronze/VIERGE 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/bronze/VIERGE 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/bronze/VIERGE 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/bronze/VIERGE 4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/croix/CROIX + EPIS BLÉ.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/croix/CROIX FINE+ROSES.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/croix/CROIX GRAVÉE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/croix/CROIX RAYONNANTE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/croix/FOND PIQUÉ.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/divers/FABRE F33A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/divers/OBJET 6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/2EPI BLE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/ARUMS 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/CEP VIGNE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/COMP 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/COMP 5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/FEUILLES 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET 15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET 16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET 17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET 22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET 23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET 25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET 28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/ROSEAUX 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/ROSEAUX 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/ROSES 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/fleurs/ROSES 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/mains/COLOMBE 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/mains/COLOME 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/mains/OBJET 8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/mains/ROSE 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 7A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET 8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/oiseaux/SOL+3 COL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/parchemins/OBJET  8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/parchemins/OBJET 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/parchemins/OBJET 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/litho/parchemins/OBJET 6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/assemblees/CROIXPIQUÉE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/assemblees/OBJET 75.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/assemblees/ST SIMPLE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/assemblees/TABLETTE ISERE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/assemblees/croix + epis.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/assemblees/croix piquee.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/assemblees/main colome.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/assemblees/objet 15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/assemblees/st pilier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/brochees/CHANT ECLATE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/brochees/OBJET 18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/brochees/OBJET 2 .png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/brochees/OBJET 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/brochees/OBJET 32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/brochees/OBJET 4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/brochees/PUP BROCH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/brochees/ROCHER 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/brochees/SDSA BROCHEE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/LIVRE DSB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/LIVRE SDSB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 12-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 14-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 15-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 15-3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 54.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 56.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 65.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/OBJET 82.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/RAYON 25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/ST LIMOUS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/STELE 500.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/classique/STELE 6040.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/coeur/COEUR 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/coeur/COEUR 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/coeur/F 33 A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/coeur/F 93.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/coeur/OBJET 70.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/DECOR C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/DETAIL F44.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/DETAIL F56 C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 32 C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 39.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 42.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 46.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 51.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 72.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 84 C .png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/F 93.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/MAINS FABRE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF F32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF F35D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF F47.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF F48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF F59C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/fabre/OBJET 23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET 20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET 32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET 61.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET 63.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET 68.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/motif/EPIS BLÉS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/motif/OBJET 18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/steles/motif/OBJET 9-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/3110 + CHANFEIN TOUT LE TOUR .png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/ANDESITE DOUBLE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/ARRONDI R3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/BANC DROIT.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/BOITE A BOUGIE 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/BOITE A BOUGIES.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/CLIENT DIFFICIL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/CROQ DOS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/DECOUP AV.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/DECOUPE ARRIERE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/DEPART SF.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL CROIX.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL STELE 4020.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL STELE 4200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL STELE 5010.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL STELE ANDESITE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/F56 C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/JARDINERE ASS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBET 62.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 35.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 39.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 42.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 43.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 47.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 49.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 50.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 51.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 55.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 57.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 58.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 59.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 61.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 63.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET 64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/P70 SANS MOTIF.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/PD_CL AV.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/PLAISANCE 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/PLAQUAGE STELE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/POSÉ LE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/RESPECT IMPR.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/SEM AV ANDESITE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/STELE ANDESITE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/STELE BOITEUX.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/STELE FERNANDEZ.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/STELE MICOLE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/TARN ROYAL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/texte+et+divers/VOIR MOTIF.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/3 DAL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/3 DALLES.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/3 DALLESS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/3 dalle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/3 dalles coffrage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/3 dalles0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/3 dalles1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/3 dalles2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/4 TOMBALES.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/5 DALLES.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/5 dalles0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/7 DALLES.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/CAVE URNE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/CROIX RELIEF.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/DOUCINE BOMBEE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/GOUTTE D_EAU.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/OBJET 22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/OBJET 24-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/OBJET 41.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/OBJET 9-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/OJIVAL DALLE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/TOMBALES 1-5.pfi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/TOMBALES 11-15.pfi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/TOMBALES 16-22.pfi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/TOMBALES 6-10.pfi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/dalle doucine.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/doucine bosse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/goute d'eau.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/objet 24 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/tombales/objet 9 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/vases/BOITE BOUGIE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/vases/Carte VASES.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/vases/CarteJARDINNIERES.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/view/LigneDevis.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/LigneDevis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/LigneDevis2.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/header.php" afterDir="false" />
     </list>
     <ignored path="C:\xampp\htdocs\SrgConcept\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,104 +243,92 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="34" column="1" lean-forward="true" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
+            <state relative-caret-position="460">
+              <caret line="155" column="94" selection-start-line="155" selection-start-column="94" selection-end-line="155" selection-end-column="94" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#4;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#1;n#div#4;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#4;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#1;n#div#4;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#4;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#1;n#div#4;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#4;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#1;n#div#4;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#2;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#style#0;n#div#2;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#option#0;n#select#0;n#div#0;n#div#2;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/ClientView.php">
+        <entry file="file://$PROJECT_DIR$/view/header.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="89" column="26" lean-forward="true" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="26" />
+            <state relative-caret-position="250">
+              <caret line="17" selection-start-line="17" selection-end-line="18" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/form.css">
+        <entry file="file://$PROJECT_DIR$/view/Devis.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="79" selection-start-line="22" selection-start-column="4" selection-end-line="25" selection-end-column="79" />
+            <state relative-caret-position="749">
+              <caret line="56" selection-start-line="56" selection-end-line="56" />
+              <folding>
+                <element signature="n#style#0;n#tr#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/normalize.css">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/login.css">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/main.css">
+        <entry file="file://$PROJECT_DIR$/view/GetFilteredPieces.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+            <state relative-caret-position="545">
+              <caret line="36" column="27" lean-forward="true" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#option#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/GetFilteredSousFamille.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+              <folding>
+                <element signature="n#style#0;n#option#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -189,6 +337,11 @@
       <find>Selectionner une piéce</find>
       <find>schema</find>
       <find>onchange</find>
+      <find>imgSch</find>
+      <find>margin</find>
+      <find>img</find>
+      <find>required</find>
+      <find>Devis</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -197,7 +350,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/view/header.php" />
         <option value="$PROJECT_DIR$/model/UploadCroquis.php" />
         <option value="$PROJECT_DIR$/model/DevisClass.php" />
         <option value="$PROJECT_DIR$/model/LigneDevisManager.php" />
@@ -211,6 +363,15 @@
         <option value="$PROJECT_DIR$/view/DevisView.php" />
         <option value="$PROJECT_DIR$/model/DevisManager.php" />
         <option value="$PROJECT_DIR$/public/css/main.css" />
+        <option value="$PROJECT_DIR$/public/css/form.css" />
+        <option value="$PROJECT_DIR$/public/css/switch.css" />
+        <option value="$PROJECT_DIR$/view/LigneDevis2.php" />
+        <option value="$PROJECT_DIR$/view/LigneDevisAjax.php" />
+        <option value="$PROJECT_DIR$/view/LigneDevisAjax/LigneDevisAjax.php" />
+        <option value="$PROJECT_DIR$/view/LigneDevisAjax/GetFilteredSousFamille.php" />
+        <option value="$PROJECT_DIR$/view/header.php" />
+        <option value="$PROJECT_DIR$/view/GetFilteredSousFamille.php" />
+        <option value="$PROJECT_DIR$/view/GetFilteredPieces.php" />
         <option value="$PROJECT_DIR$/view/LigneDevis.php" />
       </list>
     </option>
@@ -223,7 +384,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="942" />
+    <option name="x" value="202" />
+    <option name="y" value="-11" />
     <option name="width" value="978" />
     <option name="height" value="1027" />
   </component>
@@ -235,18 +397,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="SrgConcept" type="b2602c69:ProjectViewProjectNode" />
               <item name="SrgConcept" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SrgConcept" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SrgConcept" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SrgConcept" type="b2602c69:ProjectViewProjectNode" />
@@ -268,13 +424,25 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\SrgConcept\view" />
+      <recent name="C:\xampp\htdocs\SrgConcept\view\LigneDevisAjax" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\SrgConcept\view\LigneDevisAjax" />
+      <recent name="C:\xampp\htdocs\SrgConcept\view" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -305,7 +473,11 @@
       <workItem from="1548252660506" duration="9008000" />
       <workItem from="1548319090097" duration="13392000" />
       <workItem from="1548335243111" duration="1757000" />
-      <workItem from="1548346315618" duration="2593000" />
+      <workItem from="1548346315618" duration="3948000" />
+      <workItem from="1548361054628" duration="190000" />
+      <workItem from="1548415386098" duration="17870000" />
+      <workItem from="1548498794552" duration="638000" />
+      <workItem from="1548664586459" duration="15542000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/ThomasAltena/SrgConcept&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;&#10;Debut placement image (non enregistrement pour l'instant)">
       <created>1548347078035</created>
@@ -321,24 +493,30 @@
       <option name="project" value="LOCAL" />
       <updated>1548347807100</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Correction verif si idDevis vide">
+      <created>1548349973177</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1548349973177</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50000000" />
+    <option name="totallyTimeSpent" value="85595000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19189766" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14605543" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="3" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" order="3" visible="true" weight="0.09967497" />
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Find" order="6" visible="true" />
@@ -347,6 +525,7 @@
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Database" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -397,16 +576,21 @@
     <MESSAGE value="Commit" />
     <MESSAGE value="Merge branch 'master' of https://github.com/ThomasAltena/SrgConcept&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;&#10;Debut placement image (non enregistrement pour l'instant)" />
     <MESSAGE value="Correction div manquant" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction div manquant" />
+    <MESSAGE value="Correction verif si idDevis vide" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction verif si idDevis vide" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/view/GetFilteredSousFamille.php</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/view/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/CouleurManager.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -434,13 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/LigneDevisClass.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/MatiereView.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-716" />
@@ -450,13 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5">
           <caret line="34" column="12" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/AddUserView.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1020">
-          <caret column="5" selection-start-column="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -476,13 +646,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/UserClass.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/LigneDevis2.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8687">
-          <caret line="511" selection-start-line="511" selection-end-line="511" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/devis/NouveauDevis.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -512,18 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/Devis.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#tbody#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#tr#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/DevisManager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="814">
@@ -535,13 +686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
           <caret line="47" column="20" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/form.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="79" selection-start-line="22" selection-start-column="4" selection-end-line="25" selection-end-column="79" />
         </state>
       </provider>
     </entry>
@@ -558,70 +702,115 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model/LigneDevisClass.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="772">
+          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/ClientView.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="89" column="26" lean-forward="true" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="26" />
+        <state relative-caret-position="559">
+          <caret line="97" column="34" lean-forward="true" selection-start-line="97" selection-start-column="34" selection-end-line="97" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/form.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/AddUserView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="67" column="26" lean-forward="true" selection-start-line="67" selection-start-column="2" selection-end-line="67" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/switch.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/Devis.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="749">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+          <folding>
+            <element signature="n#style#0;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/LigneDevisOld.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="149" column="38" lean-forward="true" selection-start-line="136" selection-start-column="36" selection-end-line="149" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="17" selection-start-line="17" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/GetFilteredPieces.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="36" column="27" lean-forward="true" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#option#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/GetFilteredSousFamille.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#option#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="34" column="1" lean-forward="true" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
+        <state relative-caret-position="460">
+          <caret line="155" column="94" selection-start-line="155" selection-start-column="94" selection-end-line="155" selection-end-column="94" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#1;n#div#4;n#div#1;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#1;n#div#4;n#div#1;n#div#0;n#div#6;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#1;n#div#4;n#div#1;n#div#0;n#div#8;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#2;n#div#0;n#div#1;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#0;n#div#4;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#1;n#div#4;n#div#1;n#div#0;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#2;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#2;n#div#10;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#option#0;n#select#0;n#div#0;n#div#2;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
