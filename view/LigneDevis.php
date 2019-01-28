@@ -191,7 +191,9 @@ $date = date("d-m-Y");
                             <div class="col-sm-6">
                                 <button class="mb-3 btn btn-primary col-lg-12" disabled onclick="">Ajouter Options
                                 </button>
-                                <button class="mb-3 btn btn-success col-lg-12" onclick="AjoutePiece()">Sauvegarder Piece
+                                <button class="mb-3 btn btn-success col-lg-12" id="ajouter_piece_button" disabled onclick="SauvegardePiece()">Sauvegarder Piece
+                                </button>
+                                <button class="mb-3 btn btn-danger col-lg-12" id="effacer_piece_button" disabled onclick="EffacerPiece()">Effacer Piece
                                 </button>
                             </div>
                         </div>
@@ -296,60 +298,82 @@ $date = date("d-m-Y");
     //fonction recup value/ img
     function AfficheImg(idDiv) {
         var select = document.getElementById('select_piece');
-        var choice = select.selectedIndex;
+        if(select.value != ""){
+            ToggleSubmitPieceButton(false);
+            var choice = select.selectedIndex;
 
-        selectedPiece.chemin_piece = select.value;
-        selectedPiece.id_piece = select.options[choice].id;
+            selectedPiece.chemin_piece = select.value;
+            selectedPiece.id_piece = select.options[choice].id;
 
-        var s = document.getElementById('imgPieceSelectionnee');
+            var s = document.getElementById('imgPieceSelectionnee');
 
-        s.setAttribute("src", selectedPiece.chemin_piece);
-        s.style.width = "300px";
-        s.style.height = "300px";
-        s.style.position = "absolute";
+            s.setAttribute("src", selectedPiece.chemin_piece);
+            s.style.width = "300px";
+            s.style.height = "300px";
+            s.style.position = "absolute";
 
-        var s = document.getElementById('imgPieceSelectionneeSchema');
+            var s = document.getElementById('imgPieceSelectionneeSchema');
 
-        s.setAttribute("src", selectedPiece.chemin_piece);
-        s.style.width = "550";
-        s.style.height = "550px";
-        s.style.marginLeft = "100px";
-        s.style.position = "absolute";
+            s.setAttribute("src", selectedPiece.chemin_piece);
+            s.style.width = "550";
+            s.style.height = "550px";
+            s.style.marginLeft = "100px";
+            s.style.position = "absolute";
+        } else {
+            ToggleSubmitPieceButton(true);
+        }
     }
 
-    function AjoutePiece(){
-        selectedPiece.piecePosition = pieces.length;
-        pieces.push(selectedPiece);
-        selectedPiece = new Piece();
+    function SelectPiece(piecePosition){
+        selectedPiece = pieces.find(x => x.piecePosition == piecePosition);
+    }
 
-        var body = '';
+    function SauvegardePiece(){
+        if(selectedPiece.piecePosition == ""){
+            selectedPiece.piecePosition = pieces.length;
+            pieces.push(selectedPiece);
+            selectedPiece = new Piece();
+            document.getElementById('imgPieceSelectionnee').setAttribute("src", "");
 
-        pieces.forEach(function(piece) {
-            var text = '<img id="schema_piece_'+selectedPiece.piecePosition+'" src="' + piece.chemin_piece + '" style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute;" >\n'
-            body = body + text;
-        });
-        body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
-        document.getElementById("schemaPiecesContainer").innerHTML = body;
-        ResetFamilleSelector();
-        ResetSousFamilleSelector();
-        ResetPieceSelector();
-        UpdateListView();
+            var body = '';
+
+            pieces.forEach(function(piece) {
+                var text = '<img id="schema_piece_'+selectedPiece.piecePosition+'" src="' + piece.chemin_piece + '" style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute;" >\n'
+                body = body + text;
+            });
+            body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
+            document.getElementById("schemaPiecesContainer").innerHTML = body;
+            ResetFamilleSelector();
+            ResetSousFamilleSelector();
+            ResetPieceSelector();
+            UpdateListView();
+            ToggleSubmitPieceButton(true);
+        } else {
+            console.log(pieces.find(x => x.piecePosition == selectedPiece.piecePosition));
+            console.log(selectedPiece);
+        }
+
+    }
+
+    function ToggleSubmitPieceButton(bool){
+        $("#ajouter_piece_button").attr("disabled", bool);
     }
 
     function UpdateListView(){
-        var body = '<div class="col-sm-6">\n' +
+        var body = '<div class="col-sm-6" style="padding-right: 0; padding-left:0">\n' +
             '\n' ;
-        console.log(pieces);
+
         for(var x = 0; x < 10; x++) {
             if(x == 5){
                 body += '</div>\n' +
-                    '<div class="col-sm-6">\n';
+                    '<div class="col-sm-6" style="padding-right: 0; padding-left:0">\n';
             }
 
             if(pieces[x]){
-                console.log(pieces[x]);
-                body += '<div class="col-sm" style="width: 135px; height:135px; "> \n' +
-                    '<img id="selectable_piece_'+pieces[x].piecePosition+'" src="' + pieces[x].chemin_piece + '" style="max-width: 135px; height: 135px; position: absolute;" >\n' +
+                body += '<div class="col-sm btn" style="width: 135px; height:135px; padding-right: 0; padding-left:0" value="" onclick="SelectPiece('+pieces[x].piecePosition+')"> \n' +
+                    '<img id="selectable_piece_'+pieces[x].piecePosition+'" src="' + pieces[x].chemin_piece +
+                    '" style="max-width: 135px; height: 135px; box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);"' +
+                    ' >\n' +
                     '</div>\n';
             }
 
