@@ -335,6 +335,7 @@ $date = date("d-m-Y");
             selectedPiece.id_piece = select.options[choice].id;
 
             var s = document.getElementById('imgPieceSelectionnee');
+            s.removeAttribute('hidden');
 
             s.setAttribute("src", selectedPiece.chemin_piece);
             s.style.width = "300px";
@@ -364,10 +365,7 @@ $date = date("d-m-Y");
     }
 
     function SauvegardePiece(){
-        console.log(pieces);
-        console.log(selectedPiece);
         if(!selectedPiece.piecePosition){
-            console.log('not ment ot be here');
             if(pieces.length){
                 selectedPiece.piecePosition = pieces.length+1;
             } else {
@@ -376,6 +374,7 @@ $date = date("d-m-Y");
             pieces.push(selectedPiece);
             selectedPiece = new Piece();
             document.getElementById('imgPieceSelectionnee').setAttribute("src", "");
+            document.getElementById('imgPieceSelectionnee').setAttribute("hidden", true);
 
             var body = '';
 
@@ -395,7 +394,6 @@ $date = date("d-m-Y");
         } else {
 
         }
-
     }
 
     function ToggleSubmitPieceButton(bool){
@@ -406,14 +404,14 @@ $date = date("d-m-Y");
         var body = '<div class="col-sm-6" style="padding-right: 0; padding-left:0">\n' +
             '\n' ;
 
-        for(var x = 0; x < 10; x++) {
-            if(x == 5){
+        for(var x = 0; x < 8; x++) {
+            if(x == 4){
                 body += '</div>\n' +
                     '<div class="col-sm-6" style="padding-right: 0; padding-left:0">\n';
             }
 
             if(pieces[x]){
-                body += '<div class="col-sm btn" style="width: 135px; height:135px; padding-right: 0; padding-left:0" value="" onclick="SelectPiece('+pieces[x].piecePosition+')"> \n' +
+                body += '<div class="col-sm btn" style="width: 135px; height:145px; padding: 0px 0px 10px 0px; border:0;" value="" onclick="SelectPiece('+pieces[x].piecePosition+')"> \n' +
                     '<img id="selectable_piece_'+pieces[x].piecePosition+'" src="' + pieces[x].chemin_piece +
                     '" style="max-width: 135px; height: 135px; box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);"' +
                     ' >\n' +

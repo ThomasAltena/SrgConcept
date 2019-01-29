@@ -14,9 +14,11 @@ try {
 
 $q = $_GET['q'];
 $p = $_GET['p'];
+/*$r = $_GET['r'];*/
 
 $code_famille = str_replace(' ', '', $q);
 $code_ss = str_replace(' ', '', $p);
+/*$code_piece_preselect = str_replace(' ', '', $r );*/
 
 $query = 'SELECT * FROM pieces WHERE Code_famille = "'.$code_famille.'" && Code_ss = "'.$code_ss.'"';
 $reponse = $bdd->query('SELECT * FROM pieces');
@@ -42,5 +44,15 @@ if(empty($reponse)){
     }
 }
 
+
+
 ?>
 </select>
+
+<!--<script type="text/javascript">
+    function AutoSelectPiece(piecePosition){
+
+    }
+
+</script>
+-->
