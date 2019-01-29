@@ -218,7 +218,7 @@ $date = date("d-m-Y");
 
                 <!--PIECES SELECTIONNEES-->
                 <div class="col-sm" style="max-width: 19.9%; padding-left: 0; padding-right: 0">
-                    <div class="col-sm row formbox col-lg-12" style="height: 660px; margin-bottom: 1vw" id="piecesListContainer">
+                    <div class="col-sm row formbox col-lg-12" style="height: 660px; margin-bottom: 1vw; padding-right:20px;padding-left:20px;" id="piecesListContainer">
 
                     </div>
                     <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
@@ -405,13 +405,13 @@ $date = date("d-m-Y");
     }
 
     function UpdateListView(){
-        var body = '<div class="col-sm-6" style="padding-right: 0; padding-left:0">\n' +
+        var body = '<div class="col-sm" style="padding-right: 0; padding-left:0; width: 135px; max-width: 135px; margin-right: 10px;">\n' +
             '\n' ;
 
         for(var x = 0; x < 8; x++) {
             if(x == 4){
                 body += '</div>\n' +
-                    '<div class="col-sm-6" style="padding-right: 0; padding-left:0">\n';
+                    '<div class="col-sm" style="padding-right: 0; width: 135px; max-width: 135px; padding-left:0">\n';
             }
 
             if(pieces[x]){
