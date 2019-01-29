@@ -228,26 +228,37 @@ $date = date("d-m-Y");
 
             <!--PIECES SELECTIONNEES-->
             <div class="col-sm" style="max-width: 19.9%; padding-left: 0; padding-right: 0">
-                <div class="col-sm row formbox col-lg-12"
-                     style="height: 620px; margin-bottom: 1vw; padding-right:20px;padding-left:20px;"
-                     id="piecesListContainer">
+                <div class="formbox col-lg-12"
+                     style="height: 700px; margin-bottom: 1vw; padding: 25px 0 0 0"
+                >
+                    <div class="row" id="piecesListContainer"
+                         style="height: 600px;margin: 0; padding: 0px 0px 0px 20px;">
 
+                    </div>
+                    <div class="row" style="height: 25px;margin: 0; padding: 0px;">
+                        <div class="col-sm backshadow" style="text-align: center;" id="pageNumberContainer">
+
+                        </div>
+                    </div>
+                    <div class="row col-lg-12" style="height: 50px; margin: 0; padding: 0px;"
+                         id="piecesListControls">
+                        <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(0)"><i
+                                    class="fas fa-step-backward"></i>
+                        </div>
+                        <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                             onclick="PiecesListPageLeft()">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                             onclick="PiecesListPageRight()">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(-1)">
+                            <i class="fas fa-step-forward"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm row formbox col-lg-12" style="height: 50px; margin-bottom: 1vw; padding: 0px;"
-                     id="piecesListControls">
-                    <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(0)"><i class="fas fa-step-backward"></i>
-                    </div>
-                    <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListPageLeft()">
-                        <i class="fas fa-chevron-left"></i>
-                    </div>
-                    <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListPageRight()">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(-1)"><i class="fas fa-step-forward"></i>
-                    </div>
 
-
-                </div>
                 <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
                     <button class="mb-3 btn btn-primary col-lg-12" disabled onclick="">Visualiser Devis
                     </button>
@@ -435,21 +446,12 @@ $date = date("d-m-Y");
         /* -1 va a la derniere page */
         if (pageSetNumber == -1) {
             end = pieces.length;
-            console.log(pieces);
-            console.log('end');
-            console.log(end);
             start = Math.floor((pieces.length - 1) / 8) * 8;
-            console.log('start');
-            console.log(start);
-            piecesListCurrentPage = Math.floor((pieces.length- 1 ) / 8);
-            console.log(piecesListCurrentPage);
+            piecesListCurrentPage = Math.floor((pieces.length - 1) / 8);
 
         } else if (pageSetNumber >= 0) {
-            console.log(pageSetNumber);
             start = pageSetNumber * 8;
-            console.log(start);
             end = start + 8;
-            console.log(end);
         }
 
         var body = '<div class="col-sm" style="padding-right: 0; padding-left:0; width: 135px; max-width: 135px; margin-right: 10px;">\n' +
@@ -474,6 +476,7 @@ $date = date("d-m-Y");
         body += '</div>';
 
         document.getElementById("piecesListContainer").innerHTML = body;
+        SetPageNumberContainer();
     }
 
     function PiecesListPageRight() {
@@ -484,11 +487,11 @@ $date = date("d-m-Y");
     }
 
     function PiecesListGoTo(page) {
-        if(page == 0){
+        if (page == 0) {
             piecesListCurrentPage = page;
             UpdatePiecesListView(page);
         }
-        if(page == -1){
+        if (page == -1) {
             UpdatePiecesListView(page);
         }
     }
@@ -510,6 +513,21 @@ $date = date("d-m-Y");
             pieces.push(piece);
         }
         UpdatePiecesListView(-1);
+    }
+
+    function SetPageNumberContainer() {
+        var pageCount;
+        pageCount = Math.floor(pieces.length / 8);
+        if (Math.floor(pieces.length % 8) > 0) {
+            pageCount++;
+        }
+
+        var body = '<i>' +
+            (piecesListCurrentPage+1) +
+            '/' +
+            pageCount +
+            '</i>'
+        document.getElementById('pageNumberContainer').innerHTML = body;
     }
 
 </script>
