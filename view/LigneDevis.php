@@ -205,7 +205,7 @@ $date = date("d-m-Y");
                                                                                         class="slider col-sm-11"
                                                                                         name="posY" id="pos_y">
                                 </div>
-                                <button class="mb-3 btn btn-primary col-lg-12" disabled onclick="">Ajouter Options
+                                <button class="mb-3 btn btn-primary col-lg-12" onclick="DuplicatePiece()">Ajouter Options
                                 </button>
                                 <button class="mb-3 btn btn-success col-lg-12" id="ajouter_piece_button" disabled onclick="SauvegardePiece()">Sauvegarder Piece
                                 </button>
@@ -218,7 +218,10 @@ $date = date("d-m-Y");
 
                 <!--PIECES SELECTIONNEES-->
                 <div class="col-sm" style="max-width: 19.9%; padding-left: 0; padding-right: 0">
-                    <div class="col-sm row formbox col-lg-12" style="height: 660px; margin-bottom: 1vw; padding-right:20px;padding-left:20px;" id="piecesListContainer">
+                    <div class="col-sm row formbox col-lg-12" style="height: 620px; margin-bottom: 1vw; padding-right:20px;padding-left:20px;" id="piecesListContainer">
+
+                    </div>
+                    <div class="col-sm row formbox col-lg-12" style="height: 50px; margin-bottom: 1vw;" id="piecesListControls">
 
                     </div>
                     <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
@@ -236,6 +239,7 @@ $date = date("d-m-Y");
 <script type="text/javascript">
     var selectedPiece = new Piece();
     var pieces = new Array();
+    var piecesListCurrentPage = 0;
 
     function Piece() {
         this.piecePosition = '';
@@ -369,47 +373,57 @@ $date = date("d-m-Y");
     }
 
     function SauvegardePiece(){
-        if(!selectedPiece.piecePosition){
-            if(pieces.length){
-                selectedPiece.piecePosition = pieces.length+1;
-            } else {
-                selectedPiece.piecePosition = 1;
-            }
-            pieces.push(selectedPiece);
-            selectedPiece = new Piece();
-            document.getElementById('imgPieceSelectionnee').setAttribute("src", "");
-            document.getElementById('imgPieceSelectionnee').setAttribute("hidden", true);
-
-            var body = '';
-
-            pieces.forEach(function(piece) {
-                var text = '<img id="schema_piece_'+selectedPiece.piecePosition+'" ' +
-                    'src="' + piece.chemin_piece + '" ' +
-                    'style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute; left:'+ piece.pos_x +'px ; top:'+ piece.pos_y +'px" >\n'
-                body = body + text;
-            });
-            body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
-            document.getElementById("schemaPiecesContainer").innerHTML = body;
-            ResetFamilleSelector();
-            ResetSousFamilleSelector();
-            ResetPieceSelector();
-            UpdateListView();
-            ToggleSubmitPieceButton(true);
+        if(pieces.length){
+            selectedPiece.piecePosition = pieces.length+1;
         } else {
-
+            selectedPiece.piecePosition = 1;
         }
+        pieces.push(selectedPiece);
+        selectedPiece = new Piece();
+        document.getElementById('imgPieceSelectionnee').setAttribute("src", "");
+        document.getElementById('imgPieceSelectionnee').setAttribute("hidden", true);
+
+        var body = '';
+
+        pieces.forEach(function(piece) {
+            var text = '<img id="schema_piece_'+selectedPiece.piecePosition+'" ' +
+                'src="' + piece.chemin_piece + '" ' +
+                'style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute; left:'+ piece.pos_x +'px ; top:'+ piece.pos_y +'px" >\n'
+            body = body + text;
+        });
+        body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
+        document.getElementById("schemaPiecesContainer").innerHTML = body;
+        ResetFamilleSelector();
+        ResetSousFamilleSelector();
+        ResetPieceSelector();
+        UpdatePiecesListView(-1);
+        ToggleSubmitPieceButton(true);
     }
 
     function ToggleSubmitPieceButton(bool){
         $("#ajouter_piece_button").attr("disabled", bool);
     }
 
-    function UpdateListView(){
+    function UpdatePiecesListView(pageSetNumber){
+        var start = 0;
+        var end = 8;
+        piecesListCurrentPage = Math.floor((pieces.length-1)/8);
+
+        if(pageSetNumber == -1){
+            end = pieces.length;
+            start = Math.floor((pieces.length-1)/8) * 8;
+        } else if(pageSetNumber >= 0){
+            start = pageSetNumber * 8;
+            end = start+8;
+        }
+
+        console.log(start, end, pieces.length);
+
         var body = '<div class="col-sm" style="padding-right: 0; padding-left:0; width: 135px; max-width: 135px; margin-right: 10px;">\n' +
             '\n' ;
 
-        for(var x = 0; x < 8; x++) {
-            if(x == 4){
+        for(var x = start; x < end; x++) {
+            if(x == start+4){
                 body += '</div>\n' +
                     '<div class="col-sm" style="padding-right: 0; width: 135px; max-width: 135px; padding-left:0">\n';
             }
@@ -423,12 +437,36 @@ $date = date("d-m-Y");
                     ' >\n' +
                     '</div></div>\n';
             }
-
-
         }
         body += '</div>';
 
         document.getElementById("piecesListContainer").innerHTML = body;
+    }
+
+    function PiecesListPageRight(){
+        if((piecesListCurrentPage*8)+8 < pieces.length){
+            piecesListCurrentPage++;
+            UpdatePiecesListView(piecesListCurrentPage);
+        }
+    }
+
+    function PiecesListPageLeft(){
+        if(piecesListCurrentPage >= 1){
+            piecesListCurrentPage--;
+            UpdatePiecesListView(piecesListCurrentPage);
+        }
+    }
+
+    function DuplicatePiece(){
+        if(pieces[0]){
+            var piece = pieces[0];
+            piece.piecePosition++;
+            pieces.push(piece);
+        } else {
+            var piece = new Piece();
+            pieces.push(piece);
+        }
+        UpdatePiecesListView(-1);
     }
 
 </script>
