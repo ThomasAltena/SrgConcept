@@ -245,6 +245,10 @@ $date = date("d-m-Y");
         this.chemin_piece = "";
         this.pos_x = "";
         this.pos_y = "";
+        this.hauteur = "";
+        this.largeur = "";
+        this.profondeur = "";
+        this.selected = false;
     }
 
     function MoveImage(idDiv) {
@@ -411,11 +415,13 @@ $date = date("d-m-Y");
             }
 
             if(pieces[x]){
-                body += '<div class="col-sm btn" style="width: 135px; height:145px; padding: 0px 0px 10px 0px; border:0;" value="" onclick="SelectPiece('+pieces[x].piecePosition+')"> \n' +
+                body += '<div class="col-sm " style="width: 135px; height:145px; padding: 0px 0px 10px 0px; border:0;"> \n' +
+                        '<div class="btn hover-effect-a" ' +
+                    'style="width: 135px; height:135px; padding: 0; border:0;" onclick="SelectPiece(\'+pieces[x].piecePosition+\')">' +
                     '<img id="selectable_piece_'+pieces[x].piecePosition+'" src="' + pieces[x].chemin_piece +
-                    '" style="max-width: 135px; height: 135px; box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);"' +
+                    '" style="max-width: 135px; height: 135px; "' +
                     ' >\n' +
-                    '</div>\n';
+                    '</div></div>\n';
             }
 
 
