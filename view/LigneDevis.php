@@ -43,232 +43,244 @@ $date = date("d-m-Y");
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
 <body>
 <div id="content-wrapper">
-    <div class='container' style="max-width: 90%;">
+    <div class='container' style="max-width: 100%;">
         <div class="form col-lg-12" name="myform" method="post">
-            <div class="row col-lg-12">
+            <div class="row col-lg-12" style="min-width: 1050px">
                 <!--OPTIONS ET SCHEMA-->
                 <div class="col-sm row"
                      style="max-width: 80%; margin-right: 1vw; height: min-content%; padding-right: 0;">
 
                     <!--OPTIONS-->
-                    <div class="col-sm" style="max-width: 32%; margin-right: 1vw;padding-left: 0; padding-right: 0"
-                    ">
-                    <div class="formbox" style="margin-bottom: 1vw; height:200px">
+                    <div class="col-sm"
+                         style="max-width: 32%; min-width: 260px; margin-right: 1vw;padding-left: 0; padding-right: 0">
+                        <div class="formbox" style="margin-bottom: 1vw; height:200px">
 
-                        <!--CHOIX CLIENT-->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="width:100px" id="Id_client_label">Client :</span>
-                            </div>
-                            <select name="Id_client" aria-describedby=Id_client_label" class="form-control" select">
-                            <?php
-                            $reponse = $bdd->query('SELECT * FROM clients');
-                            while ($donnees = $reponse->fetch()) {
-                                ?>
-                                <option value="<?php echo $donnees['Id_client']; ?>"> <?php echo $donnees['Nom_client']; ?></option>
+                            <!--CHOIX CLIENT-->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width:100px"
+                                          id="Id_client_label">Client :</span>
+                                </div>
+                                <select name="Id_client" aria-describedby=Id_client_label" class="form-control" select">
                                 <?php
-                            }
-                            ?>
-                            </select>
-                        </div>
+                                $reponse = $bdd->query('SELECT * FROM clients');
+                                while ($donnees = $reponse->fetch()) {
+                                    ?>
+                                    <option value="<?php echo $donnees['Id_client']; ?>"> <?php echo $donnees['Nom_client']; ?></option>
+                                    <?php
+                                }
+                                ?>
+                                </select>
+                            </div>
 
-                        <!--CHOIX MATIERE-->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
+                            <!--CHOIX MATIERE-->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                 <span class="input-group-text" style="width:100px"
                                       id="Id_matiere_label">Matière :</span>
-                            </div>
-                            <select name="Id_matiere" aria-describedby=Id_matiere_label" id="select"
-                                    class="form-control">
-                                <?php
-                                $reponse = $bdd->query('SELECT * FROM matieres');
-                                while ($donnees = $reponse->fetch()) {
-                                    ?>
-                                    <option value=" <?php echo $donnees['Id_matiere']; ?>"> <?php echo $donnees['Libelle_matiere']; ?></option>
+                                </div>
+                                <select name="Id_matiere" aria-describedby=Id_matiere_label" id="select"
+                                        class="form-control">
                                     <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
+                                    $reponse = $bdd->query('SELECT * FROM matieres');
+                                    while ($donnees = $reponse->fetch()) {
+                                        ?>
+                                        <option value=" <?php echo $donnees['Id_matiere']; ?>"> <?php echo $donnees['Libelle_matiere']; ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
-                        <!--SWITCH DOUBLE SIMPLE-->
-                        <div class="mb-3 onoffswitch">
-                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
-                                   checked>
-                            <label class="onoffswitch-label" for="myonoffswitch">
-                                <span class="onoffswitch-inner"></span>
-                                <span class="onoffswitch-switch"></span>
-                            </label>
+                            <!--SWITCH DOUBLE SIMPLE-->
+                            <div class="mb-3 onoffswitch">
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                       id="myonoffswitch"
+                                       checked>
+                                <label class="onoffswitch-label" for="myonoffswitch">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="formbox" style="">
-                        <!--CHOIX FAMILLE    -->
-                        <div class="input-group mb-3" id="selectFamilleContainer">
-                            <div class="input-group-prepend">
+                        <div class="formbox" style="">
+                            <!--CHOIX FAMILLE    -->
+                            <div class="input-group mb-3" id="selectFamilleContainer">
+                                <div class="input-group-prepend">
                                 <span class="input-group-text" style="width:100px"
                                       id="Id_famille_label">Famille :</span>
-                            </div>
-                            <select name="Id_famille" aria-describedby=Id_famille_label" id="select_famille"
-                                    onchange="FilterSousFamille(value)"
-                                    class="form-control">
-                                <option value="" selected style="font-style: italic">Aucun</option>
-                                <?php
-                                $_POST = [];
-                                $reponse = $bdd->query('SELECT * FROM familles');
-                                while ($donnees = $reponse->fetch()) {
-                                    ?>
-                                    <option type="submit"
-                                            value=" <?php echo $donnees['Code_famille']; ?>"> <?php echo $donnees['Libelle_famille']; ?></option>
+                                </div>
+                                <select name="Id_famille" aria-describedby=Id_famille_label" id="select_famille"
+                                        onchange="FilterSousFamille(value)"
+                                        class="form-control">
+                                    <option value="" selected style="font-style: italic">Aucun</option>
                                     <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
+                                    $_POST = [];
+                                    $reponse = $bdd->query('SELECT * FROM familles');
+                                    while ($donnees = $reponse->fetch()) {
+                                        ?>
+                                        <option type="submit"
+                                                value=" <?php echo $donnees['Code_famille']; ?>"> <?php echo $donnees['Libelle_famille']; ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
-                        <!--CHOIX SOUS FAMILLE-->
-                        <div class="input-group mb-3" id="selectSousFamilleContainer">
-                            <div class="input-group-prepend">
+                            <!--CHOIX SOUS FAMILLE-->
+                            <div class="input-group mb-3" id="selectSousFamilleContainer">
+                                <div class="input-group-prepend">
                                 <span class="input-group-text" style="width:100px"
                                       id="Id_ss_famille_label">Sous-fam :</span>
+                                </div>
+                                <select name="Id_ss_famille" aria-describedby=Id_ss_famille_label"
+                                        id="select_ss_famille"
+                                        disabled
+                                        class="form-control" onchange="FilterPieces(value)">
+                                </select>
                             </div>
-                            <select name="Id_ss_famille" aria-describedby=Id_ss_famille_label" id="select_ss_famille"
-                                    disabled
-                                    class="form-control" onchange="FilterPieces(value)">
-                            </select>
-                        </div>
 
-                        <!--VUE PIECE-->
-                        <div class="formbox" style="width: 100%; height: 359px;">
-                            <img id="imgPieceSelectionnee" src="" style="max-width: inherit; max-height: inherit">
-                        </div>
-
-                        <!--CHOIX PIECE-->
-                        <div class="input-group mb-3" id="selectPieceContainer">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="width:100px" id="Id_piece_label">Piece :</span>
+                            <!--VUE PIECE-->
+                            <div class="formbox" style="width: 100%; min-height: 300px;  max-height: 400px;">
+                                <img id="imgPieceSelectionnee" src="" style="max-width: inherit; max-height: inherit">
                             </div>
-                            <select name="Id_piece" id="select_piece" aria-describedby=Id_piece_label"
-                                    onchange="AfficheImg(1)" class="form-control" disabled>
 
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
+                            <!--CHOIX PIECE-->
+                            <div class="input-group mb-3" id="selectPieceContainer">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width:100px"
+                                          id="Id_piece_label">Piece :</span>
+                                </div>
+                                <select name="Id_piece" id="select_piece" aria-describedby=Id_piece_label"
+                                        onchange="AfficheImg(1)" class="form-control" disabled>
+
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
                                 <span class="input-group-text" style="width:100px"
                                       id="Remise_piece_label">Remise :</span>
+                                </div>
+                                <input id="Remise_piece" type="number" class="form-control"
+                                       placeholder="0" name="Remise_piece" aria-describedby="Remise_piece_label"
+                                       min="0" max="500000">
                             </div>
-                            <input id="Remise_piece" type="number" class="form-control"
-                                   placeholder="0" name="Remise_piece" aria-describedby="Remise_piece_label"
-                                   min="0" max="500000">
+                        </div>
+
+                    </div>
+                    <!--SCHEMA-->
+                    <div class="col-sm" style="max-width: 100%; min-width: 400px; padding-right: 0; padding-left: 0;">
+                        <div class="col-lg-12 formbox" id="schemaPiecesContainer"
+                             style="margin-bottom: 1vw; height: 600px">
+                            <img id="imgPieceSelectionneeSchema" src="">
+                        </div>
+                        <div class="col-lg-12 row formbox" style="margin-top: 0;">
+                            <div class="col-sm-6">
+                                <div class="form-group col-lg-12 row">
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">X </h5><input type="range"
+                                                                                                   min="-60"
+                                                                                                   max="560"
+                                                                                                   value="0"
+                                                                                                   style="margin:0; padding:0"
+                                                                                                   oninput="MoveImage(2)"
+                                                                                                   class="slider col-sm-11"
+                                                                                                   name="posX"
+                                                                                                   id="pos_x">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width:100px" id="Hauteur_piece_label">Hauteur :</span>
+                                    </div>
+                                    <input id="Hauteur_piece" type="number" class="form-control"
+                                           placeholder="0" name="Hauteur_piece" aria-describedby="Hauteur_piece_label">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width:100px" id="Largeur_piece_label">Largeur :</span>
+                                    </div>
+                                    <input id="Largeur_piece" type="number" class="form-control"
+                                           placeholder="0" name="Largeur_piece" aria-describedby="Largeur_piece_label">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="width:100px" id="Profondeur_piece_label">Profondeur :</span>
+                                    </div>
+                                    <input id="Profondeur_piece" type="number" class="form-control"
+                                           placeholder="0" name="Profondeur_piece"
+                                           aria-describedby="Profondeur_piece_label">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group row col-lg-12">
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">Y </h5><input type="range" min="0"
+                                                                                                   max="470"
+                                                                                                   value="0"
+                                                                                                   style="margin:0; padding:0"
+                                                                                                   oninput="MoveImage(2)"
+                                                                                                   class="slider col-sm-11"
+                                                                                                   name="posY"
+                                                                                                   id="pos_y">
+                                </div>
+                                <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"
+                                        onclick="DuplicatePiece()">Ajouter Options
+                                </button>
+                                <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button"
+                                        disabled
+                                        onclick="SauvegardePiece()">Sauvegarder Piece
+                                </button>
+                                <button class="btn btn-danger col-lg-12 hover-effect-a" id="effacer_piece_button"
+                                        disabled
+                                        onclick="EffacerPiece()">Effacer Piece
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!--SCHEMA-->
-                <div class="col-sm" style="max-width: 100%; padding-right: 0; padding-left: 0;">
-                    <div class="col-lg-12 formbox" id="schemaPiecesContainer" style="margin-bottom: 1vw; height: 600px">
-                        <img id="imgPieceSelectionneeSchema" src="">
-                    </div>
-                    <div class="col-lg-12 row formbox" style="margin-top: 0;">
-                        <div class="col-sm-6">
-                            <div class="form-group col-lg-12 row">
-                                <h5 class="col-sm-1" style="margin:0; padding:0">X </h5><input type="range" min="-50"
-                                                                                               max="550"
-                                                                                               value="0"
-                                                                                               style="margin:0; padding:0"
-                                                                                               oninput="MoveImage(2)"
-                                                                                               class="slider col-sm-11"
-                                                                                               name="posX" id="pos_x">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="width:100px" id="Hauteur_piece_label">Hauteur :</span>
-                                </div>
-                                <input id="Hauteur_piece" type="number" class="form-control"
-                                       placeholder="0" name="Hauteur_piece" aria-describedby="Hauteur_piece_label">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="width:100px" id="Largeur_piece_label">Largeur :</span>
-                                </div>
-                                <input id="Largeur_piece" type="number" class="form-control"
-                                       placeholder="0" name="Largeur_piece" aria-describedby="Largeur_piece_label">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="width:100px" id="Profondeur_piece_label">Profondeur :</span>
-                                </div>
-                                <input id="Profondeur_piece" type="number" class="form-control"
-                                       placeholder="0" name="Profondeur_piece"
-                                       aria-describedby="Profondeur_piece_label">
-                            </div>
+                <!--PIECES SELECTIONNEES-->
+                <div class="col-sm" style="max-width: 326px; padding-left: 0; padding-right: 0">
+                    <div class="formbox col-lg-12"
+                         style="height: 700px; margin-bottom: 1vw; padding: 25px 0 0 0">
+                        <div class="row" id="piecesListContainer"
+                             style="height: 600px;margin: 0; padding: 0px 0px 0px 20px;">
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group row col-lg-12">
-                                <h5 class="col-sm-1" style="margin:0; padding:0">Y </h5><input type="range" min="0"
-                                                                                               max="500"
-                                                                                               value="20"
-                                                                                               style="margin:0; padding:0"
-                                                                                               oninput="MoveImage(2)"
-                                                                                               class="slider col-sm-11"
-                                                                                               name="posY" id="pos_y">
-                            </div>
-                            <button class="mb-3 btn btn-primary col-lg-12" onclick="DuplicatePiece()">Ajouter Options
-                            </button>
-                            <button class="mb-3 btn btn-success col-lg-12" id="ajouter_piece_button" disabled
-                                    onclick="SauvegardePiece()">Sauvegarder Piece
-                            </button>
-                            <button class="mb-3 btn btn-danger col-lg-12" id="effacer_piece_button" disabled
-                                    onclick="EffacerPiece()">Effacer Piece
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="row" style="height: 25px;margin: 0; padding: 0px;">
+                            <div class="col-sm" style="text-align: center;" id="pageNumberContainer">
 
-            <!--PIECES SELECTIONNEES-->
-            <div class="col-sm" style="max-width: 19.9%; padding-left: 0; padding-right: 0">
-                <div class="formbox col-lg-12"
-                     style="height: 700px; margin-bottom: 1vw; padding: 25px 0 0 0"
-                >
-                    <div class="row" id="piecesListContainer"
-                         style="height: 600px;margin: 0; padding: 0px 0px 0px 20px;">
-
-                    </div>
-                    <div class="row" style="height: 25px;margin: 0; padding: 0px;">
-                        <div class="col-sm backshadow" style="text-align: center;" id="pageNumberContainer">
-
+                            </div>
+                        </div>
+                        <div class="row col-lg-12" style="height: 50px; margin: 0; padding: 0px;"
+                             id="piecesListControls">
+                            <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                                 onclick="PiecesListGoTo(0)"><i
+                                        class="fas fa-step-backward"></i>
+                            </div>
+                            <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                                 onclick="PiecesListPageLeft()">
+                                <i class="fas fa-chevron-left"></i>
+                            </div>
+                            <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                                 onclick="PiecesListPageRight()">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                                 onclick="PiecesListGoTo(-1)">
+                                <i class="fas fa-step-forward"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="row col-lg-12" style="height: 50px; margin: 0; padding: 0px;"
-                         id="piecesListControls">
-                        <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(0)"><i
-                                    class="fas fa-step-backward"></i>
-                        </div>
-                        <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
-                             onclick="PiecesListPageLeft()">
-                            <i class="fas fa-chevron-left"></i>
-                        </div>
-                        <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
-                             onclick="PiecesListPageRight()">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                        <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(-1)">
-                            <i class="fas fa-step-forward"></i>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
-                    <button class="mb-3 btn btn-primary col-lg-12" disabled onclick="">Visualiser Devis
-                    </button>
-                    <button class="btn btn-success col-lg-12" disabled onclick="">Sauvegarder Devis
-                    </button>
+                    <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
+                        <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" disabled onclick="">Visualiser
+                            Devis
+                        </button>
+                        <button class="btn btn-success col-lg-12 hover-effect-a" disabled onclick="">Sauvegarder Devis
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 <script type="text/javascript">
@@ -381,17 +393,17 @@ $date = date("d-m-Y");
             s.removeAttribute('hidden');
 
             s.setAttribute("src", selectedPiece.chemin_piece);
-            s.style.width = "300px";
-            s.style.height = "300px";
-            s.style.position = "absolute";
+            s.style.width = "inherit";
+            s.style.position = "relative";
 
             var s = document.getElementById('imgPieceSelectionneeSchema');
 
             s.setAttribute("src", selectedPiece.chemin_piece);
-            s.style.width = "550";
-            s.style.height = "550px";
+            s.style.height = "inherit";
             s.style.marginLeft = "100px";
-            s.style.position = "absolute";
+            s.style.position = "relative";
+            s.style.overflow = "hidden";
+            s.style.maxWidth = "600px";
         } else {
             ToggleSubmitPieceButton(true);
         }
@@ -523,7 +535,7 @@ $date = date("d-m-Y");
         }
 
         var body = '<i>' +
-            (piecesListCurrentPage+1) +
+            (piecesListCurrentPage + 1) +
             '/' +
             pageCount +
             '</i>'
