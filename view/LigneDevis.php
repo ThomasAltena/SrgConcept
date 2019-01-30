@@ -178,11 +178,11 @@ $date = date("d-m-Y");
                             <div class="col-sm-4">
                                 <div class="slider-container col-lg-12 row mb-3">
                                     <h5 class="col-sm-1" style="margin:0; padding:0">X </h5><input type="range"
-                                                                                                   min="-500"
-                                                                                                   max="560"
-                                                                                                   value="-50"
+                                                                                                   min="-5000"
+                                                                                                   max="6000"
+                                                                                                   value="0"
                                                                                                    style="margin:0; padding:0"
-                                                                                                   oninput="MoveImage(2)"
+                                                                                                   oninput="MoveImage()"
                                                                                                    class="slider col-sm-11"
                                                                                                    name="posX"
                                                                                                    id="pos_x">
@@ -212,11 +212,11 @@ $date = date("d-m-Y");
                             </div>
                             <div class="col-sm-4">
                                 <div class="slider-container row col-lg-12 mb-3">
-                                    <h5 class="col-sm-1" style="margin:0; padding:0">Y </h5><input type="range" min="-100"
-                                                                                                   max="470"
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">Y </h5><input type="range" min="-1000"
+                                                                                                   max="5000"
                                                                                                    value="0"
                                                                                                    style="margin:0; padding:0"
-                                                                                                   oninput="MoveImage(2)"
+                                                                                                   oninput="MoveImage()"
                                                                                                    class="slider col-sm-11"
                                                                                                    name="posY"
                                                                                                    id="pos_y">
@@ -224,11 +224,11 @@ $date = date("d-m-Y");
                             </div>
                             <div class="col-sm-4">
                                 <div class="slider-container row col-lg-12 mb-3">
-                                    <h5 class="col-sm-1" style="margin:0; padding:0">Z </h5><input type="range" min="-100"
-                                                                                                   max="100"
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">Z </h5><input type="range" min="-1000"
+                                                                                                   max="1000"
                                                                                                    value="0"
                                                                                                    style="margin:0; padding:0"
-                                                                                                   oninput="MoveImage(2)"
+                                                                                                   oninput="MoveImage()"
                                                                                                    class="slider col-sm-11"
                                                                                                    name="posZ"
                                                                                                    id="pos_z">
@@ -317,18 +317,18 @@ $date = date("d-m-Y");
         this.selected = false;
     }
 
-    function MoveImage(idDiv) {
+    function MoveImage() {
         var posX = $('#pos_x').val();
         var posY = $('#pos_y').val();
         var posZ = $('#pos_z').val();
 
-        var ratio = 1 + posZ / 100;
+        var ratio = 1 + posZ / 1000;
 
         selectedPiece.pos_x = posX;
         selectedPiece.pos_y = posY;
         selectedPiece.ratio = ratio;
-        $('#imgPieceSelectionneeSchema').css({"left": posX.toString().concat('px')});
-        $('#imgPieceSelectionneeSchema').css({"top": posY.toString().concat('px')});
+        $('#imgPieceSelectionneeSchema').css({"left": (posX/10).toString().concat('px')});
+        $('#imgPieceSelectionneeSchema').css({"top": (posY/10).toString().concat('px')});
 
         $('#imgPieceSelectionneeSchema').css({"max-width": ''});
 
@@ -428,13 +428,15 @@ $date = date("d-m-Y");
             s.setAttribute("src", selectedPiece.chemin_piece);
             s.style.height = "inherit";
             s.style.marginLeft = "100px";
-            s.style.position = "relative";
+            s.style.position = "absolute";
             s.style.overflow = "hidden";
             s.style.maxWidth = "600px";
             s.style.width = "600px";
 
             selectedPiece.originalHeight = $('#imgPieceSelectionneeSchema').height();
             selectedPiece.originalWidth = $('#imgPieceSelectionneeSchema').width();
+
+            MoveImage();
         } else {
             ToggleSubmitPieceButton(true);
         }
@@ -466,9 +468,11 @@ $date = date("d-m-Y");
         pieces.forEach(function (piece) {
             var text = '<img id="schema_piece_' + selectedPiece.piecePosition + '" ' +
                 'src="' + piece.chemin_piece + '" ' +
-                'style="max-width: 600px; height: inherit; margin-left: 100px; position: relative; left:' + piece.pos_x + 'px ; top:' + piece.pos_y + 'px" >\n'
+                'style="height:'+ (piece.originalHeight * piece.ratio) +'px; width:'+ (piece.originalWidth * piece.ratio)+'px;' +
+                'margin-left: 100px; position: absolute; left:' + piece.pos_x/10 + 'px ; top:' + piece.pos_y/10 + 'px" >\n'
             body = body + text;
         });
+
         body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
         document.getElementById("schemaPiecesContainer").innerHTML = body;
         ResetFamilleSelector();
