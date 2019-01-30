@@ -67,3 +67,9 @@ div.table-title {
     box-shadow: inset 0 0 0 3px #3a7999;
 }
 
+slider-container {
+    margin: 0;
+    padding: 0;
+    height: 38px;
+}
+

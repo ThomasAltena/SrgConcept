@@ -152,7 +152,7 @@ $date = date("d-m-Y");
                                           id="Id_piece_label">Piece :</span>
                                 </div>
                                 <select name="Id_piece" id="select_piece" aria-describedby=Id_piece_label"
-                                        onchange="AfficheImg(1)" class="form-control" disabled>
+                                        onchange="AfficheImg()" class="form-control" disabled>
 
                                 </select>
                             </div>
@@ -175,12 +175,12 @@ $date = date("d-m-Y");
                             <img id="imgPieceSelectionneeSchema" src="">
                         </div>
                         <div class="col-lg-12 row formbox" style="margin-top: 0;">
-                            <div class="col-sm-6">
-                                <div class="form-group col-lg-12 row">
+                            <div class="col-sm-4">
+                                <div class="slider-container col-lg-12 row mb-3">
                                     <h5 class="col-sm-1" style="margin:0; padding:0">X </h5><input type="range"
-                                                                                                   min="-60"
+                                                                                                   min="-500"
                                                                                                    max="560"
-                                                                                                   value="0"
+                                                                                                   value="-50"
                                                                                                    style="margin:0; padding:0"
                                                                                                    oninput="MoveImage(2)"
                                                                                                    class="slider col-sm-11"
@@ -210,9 +210,9 @@ $date = date("d-m-Y");
                                            aria-describedby="Profondeur_piece_label">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group row col-lg-12">
-                                    <h5 class="col-sm-1" style="margin:0; padding:0">Y </h5><input type="range" min="0"
+                            <div class="col-sm-4">
+                                <div class="slider-container row col-lg-12 mb-3">
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">Y </h5><input type="range" min="-100"
                                                                                                    max="470"
                                                                                                    value="0"
                                                                                                    style="margin:0; padding:0"
@@ -220,6 +220,18 @@ $date = date("d-m-Y");
                                                                                                    class="slider col-sm-11"
                                                                                                    name="posY"
                                                                                                    id="pos_y">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="slider-container row col-lg-12 mb-3">
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">Z </h5><input type="range" min="-100"
+                                                                                                   max="100"
+                                                                                                   value="0"
+                                                                                                   style="margin:0; padding:0"
+                                                                                                   oninput="MoveImage(2)"
+                                                                                                   class="slider col-sm-11"
+                                                                                                   name="posZ"
+                                                                                                   id="pos_z">
                                 </div>
                                 <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"
                                         onclick="DuplicatePiece()">Ajouter Options
@@ -296,6 +308,9 @@ $date = date("d-m-Y");
         this.chemin_piece = "";
         this.pos_x = "";
         this.pos_y = "";
+        this.ratio = "";
+        this.originalHeight = "";
+        this.originalWidth = "";
         this.hauteur = "";
         this.largeur = "";
         this.profondeur = "";
@@ -305,12 +320,23 @@ $date = date("d-m-Y");
     function MoveImage(idDiv) {
         var posX = $('#pos_x').val();
         var posY = $('#pos_y').val();
+        var posZ = $('#pos_z').val();
+
+        var ratio = 1 + posZ / 100;
 
         selectedPiece.pos_x = posX;
         selectedPiece.pos_y = posY;
-
+        selectedPiece.ratio = ratio;
         $('#imgPieceSelectionneeSchema').css({"left": posX.toString().concat('px')});
         $('#imgPieceSelectionneeSchema').css({"top": posY.toString().concat('px')});
+
+        $('#imgPieceSelectionneeSchema').css({"max-width": ''});
+
+        var height = selectedPiece.originalHeight * ratio;
+        var width = selectedPiece.originalWidth * ratio;
+
+        $('#imgPieceSelectionneeSchema').css({"height": height.toString().concat('px')});
+        $('#imgPieceSelectionneeSchema').css({"width": width.toString().concat('px')});
     }
 
     function FilterSousFamille(code_famille) {
@@ -326,6 +352,7 @@ $date = date("d-m-Y");
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("selectSousFamilleContainer").innerHTML = this.responseText;
+                    FilterPieces(document.getElementById("selectPieceContainer").value);
                 }
             };
 
@@ -345,9 +372,9 @@ $date = date("d-m-Y");
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("selectPieceContainer").innerHTML = this.responseText;
+                    AfficheImg();
                 }
             };
-
             xhttp.open("GET", "getFilteredPieces.php?q=" + selectedPiece.code_famille + "&p=" + code_sous_famille, true);
             xhttp.send();
         }
@@ -374,13 +401,13 @@ $date = date("d-m-Y");
             "<span class=\"input-group-text\" style=\"width:100px\" id=\"Id_piece_label\">Piece :</span>\n" +
             "</div>\n" +
             "<select name=\"Id_piece\" id=\"select_piece\" aria-describedby=Id_piece_label\"\n" +
-            "onchange=\"AfficheImg(1)\" class=\"form-control\" disabled>\n" +
+            "onchange=\"AfficheImg()\" class=\"form-control\" disabled>\n" +
             "\n" +
             "</select>";
     }
 
     //fonction recup value/ img
-    function AfficheImg(idDiv) {
+    function AfficheImg() {
         var select = document.getElementById('select_piece');
         if (select.value != "") {
             ToggleSubmitPieceButton(false);
@@ -404,6 +431,10 @@ $date = date("d-m-Y");
             s.style.position = "relative";
             s.style.overflow = "hidden";
             s.style.maxWidth = "600px";
+            s.style.width = "600px";
+
+            selectedPiece.originalHeight = $('#imgPieceSelectionneeSchema').height();
+            selectedPiece.originalWidth = $('#imgPieceSelectionneeSchema').width();
         } else {
             ToggleSubmitPieceButton(true);
         }
@@ -435,7 +466,7 @@ $date = date("d-m-Y");
         pieces.forEach(function (piece) {
             var text = '<img id="schema_piece_' + selectedPiece.piecePosition + '" ' +
                 'src="' + piece.chemin_piece + '" ' +
-                'style="max-width: 550px; height: 550px; margin-left: 100px; position: absolute; left:' + piece.pos_x + 'px ; top:' + piece.pos_y + 'px" >\n'
+                'style="max-width: 600px; height: inherit; margin-left: 100px; position: relative; left:' + piece.pos_x + 'px ; top:' + piece.pos_y + 'px" >\n'
             body = body + text;
         });
         body = body + '<img id="imgPieceSelectionneeSchema" src="">\n';
