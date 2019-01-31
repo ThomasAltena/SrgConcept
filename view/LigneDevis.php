@@ -193,7 +193,7 @@ $date = date("d-m-Y");
                     <!--SCHEMA-->
                     <div class="col-sm" id="schemaOptionsContainer">
                         <div class="col-lg-12 formbox" id="schemaPiecesContainer"
-                             style="margin-bottom: 1vw; height: 600px">
+                             style="margin-bottom: 1vw; min-height: 600px">
                             <img id="imgPieceSelectionneeSchema" src="">
                         </div>
                         <div class="col-lg-12 row formbox" style="margin-top: 0;">
@@ -453,7 +453,8 @@ $date = date("d-m-Y");
             s.style.position = "absolute";
             s.style.maxWidth = "600px";
             s.style.width = "600px";
-
+            s.style.height = "600px";
+            
             selectedPiece.originalHeight = $('#imgPieceSelectionneeSchema').height();
             selectedPiece.originalWidth = $('#imgPieceSelectionneeSchema').width();
             AfficheImageCount();

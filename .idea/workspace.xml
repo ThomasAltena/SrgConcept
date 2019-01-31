@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a9d27605-8d41-4044-ba8e-8636f45d8338" name="Default Changelist" comment="Fleches de selection de piece&#10;Numerotation de piece selectionnée&#10;Numerotation de liste de piece cote droit&#10;Pre selection de sous famille et piece des selection de famille&#10;Preservation de largeur minimum de lecran creation devis sur des taille de ecran plus fine">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/form.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/attente/ATTENTE.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/attente/DEJA EN ATTENTE.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/bordures+et+bases/cotes eclates.png" beforeDir="false" />
@@ -224,7 +223,6 @@
       <change beforePath="$PROJECT_DIR$/public/images/vases/Carte VASES.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/vases/CarteJARDINNIERES.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/view/LigneDevis.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/LigneDevis.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/header.php" afterDir="false" />
     </list>
     <ignored path="C:\xampp\htdocs\SrgConcept\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -238,11 +236,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="470" column="69" selection-start-line="470" selection-start-column="69" selection-end-line="470" selection-end-column="69" />
+            <state relative-caret-position="689">
+              <caret line="456" column="12" selection-start-line="456" selection-start-column="12" selection-end-line="456" selection-end-column="12" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -284,11 +282,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/css/form.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="109" column="19" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
+            <state relative-caret-position="1224">
+              <caret line="72" column="12" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -326,6 +324,9 @@
       <find>piecePosition</find>
       <find>height: 600</find>
       <find>AfficheImg</find>
+      <find>selectedPiecesListContainerRight</find>
+      <find>height:</find>
+      <find>height</find>
     </findStrings>
     <replaceStrings>
       <replace>30px</replace>
@@ -362,8 +363,8 @@
         <option value="$PROJECT_DIR$/view/GetFilteredSousFamille.php" />
         <option value="$PROJECT_DIR$/view/GetFilteredPieces.php" />
         <option value="$PROJECT_DIR$/view/header.php" />
-        <option value="$PROJECT_DIR$/view/LigneDevis.php" />
         <option value="$PROJECT_DIR$/public/css/form.css" />
+        <option value="$PROJECT_DIR$/view/LigneDevis.php" />
       </list>
     </option>
   </component>
@@ -474,7 +475,7 @@
       <workItem from="1548785241148" duration="3645000" />
       <workItem from="1548842126618" duration="13942000" />
       <workItem from="1548883811178" duration="1198000" />
-      <workItem from="1548923372459" duration="6362000" />
+      <workItem from="1548923372459" duration="7215000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/ThomasAltena/SrgConcept&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;&#10;Debut placement image (non enregistrement pour l'instant)">
       <created>1548347078035</created>
@@ -609,11 +610,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548884986927</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Fleches de selection de piece&#10;Numerotation de piece selectionnée&#10;Numerotation de liste de piece cote droit&#10;Pre selection de sous famille et piece des selection de famille&#10;Preservation de largeur minimum de lecran creation devis sur des taille de ecran plus fine">
+      <created>1548933196669</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1548933196669</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139979000" />
+    <option name="totallyTimeSpent" value="140832000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -643,7 +651,7 @@
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="11" />
-      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32936078" />
       <window_info anchor="right" id="Database" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -911,10 +919,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/form.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="72" column="12" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="470" column="69" selection-start-line="470" selection-start-column="69" selection-end-line="470" selection-end-column="69" />
+        <state relative-caret-position="689">
+          <caret line="456" column="12" selection-start-line="456" selection-start-column="12" selection-end-line="456" selection-end-column="12" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -952,13 +967,6 @@
             <element signature="e#29278#29623#0#HTML" />
             <element signature="e#27756#28125#0#HTML" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/form.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="109" column="19" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
         </state>
       </provider>
     </entry>
