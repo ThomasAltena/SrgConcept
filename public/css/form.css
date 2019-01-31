@@ -73,3 +73,66 @@ slider-container {
     height: 38px;
 }
 
+#schemaOptionsContainer {
+    max-width: 100%;
+    min-width: 600px;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+#selectFamilleContainer, #selectSousFamilleContainer, #selectPieceContainer, #selectRemiseContainer {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+#pieceVueEtControlContainer {
+    padding: 0;
+    width: 100%;
+    min-height: 400px;
+    max-height: 400px;
+}
+
+#pieceSelectControlContainer {
+    max-width: 50px;
+    margin: 0;
+    padding: 0px;
+}
+
+#piece-select-controls {
+    padding-top: 36px;
+    height:25%;
+}
+
+#selectedPiecesListContainerRight {
+    padding-right: 0;
+    width: 135px;
+    max-width: 135px;
+    padding-left: 0px;
+}
+
+#selectedPiecesListContainerLeft {
+    padding-right: 0;
+    padding-left:0;
+    width: 135px;
+    max-width: 135px;
+    margin-right: 10px;
+}
+
+#singularSelectedPieceBoxContainer{
+    width: 135px;
+    height:145px;
+    padding: 0px 0px 10px 0px;
+    border:0;
+}
+
+#singularSelectedPieceNumberContainer {
+    position: absolute;
+    padding-top: 115px;
+    padding-left: 60px;
+}
+
+#pieceVueContainerCount {
+    position: absolute;
+    padding-top: 375px;
+    padding-left: 160px;
+}

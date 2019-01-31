@@ -59,8 +59,8 @@ require('../model/UploadCroquis.php');
     <link rel="stylesheet" type="text/css" href="../public/css/main.css">
 </head>
 
-<header>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<header style="min-width: 1250px">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="min-width: 1250px">
     <!-- Brand -->
     <a class="navbar-brand" href="#">Accueil</a>
 

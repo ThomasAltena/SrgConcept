@@ -45,7 +45,7 @@ $date = date("d-m-Y");
 <div id="content-wrapper">
     <div class='container' style="max-width: 100%;">
         <div class="form col-lg-12" name="myform" method="post">
-            <div class="row col-lg-12" style="min-width: 1050px">
+            <div class="row col-lg-12" style="min-width: 1250px">
                 <!--OPTIONS ET SCHEMA-->
                 <div class="col-sm row"
                      style="max-width: 80%; margin-right: 1vw; height: min-content%; padding-right: 0;">
@@ -103,7 +103,7 @@ $date = date("d-m-Y");
                                 </label>
                             </div>
                         </div>
-                        <div class="formbox" style="">
+                        <div class="formbox" style="padding-right: 0;padding-left: 0">
                             <!--CHOIX FAMILLE    -->
                             <div class="input-group mb-3" id="selectFamilleContainer">
                                 <div class="input-group-prepend">
@@ -141,8 +141,29 @@ $date = date("d-m-Y");
                             </div>
 
                             <!--VUE PIECE-->
-                            <div class="formbox" style="width: 100%; min-height: 300px;  max-height: 400px;">
-                                <img id="imgPieceSelectionnee" src="" style="max-width: inherit; max-height: inherit">
+                            <div class="formbox row" id="pieceVueEtControlContainer">
+                                <span id="pieceVueContainerCount"></span>
+                                <div class="col-sm"><img id="imgPieceSelectionnee" src=""
+                                                         style="max-width: inherit; max-height: inherit"></div>
+                                <div class="col-sm"
+                                     id="pieceSelectControlContainer">
+                                    <div class="col-sm btn hover-effect-a" id="piece-select-controls"
+                                         onclick="PiecesSelectListGoTo(0)"><i
+                                                class="fas fa-step-backward fa-rotate-90"></i>
+                                    </div>
+                                    <div class="col-sm btn hover-effect-a" id="piece-select-controls"
+                                         onclick="PiecesSelectListUp()">
+                                        <i class="fas fa-chevron-left fa-rotate-90"></i>
+                                    </div>
+                                    <div class="col-sm btn hover-effect-a" id="piece-select-controls"
+                                         onclick="PiecesSelectListDown()">
+                                        <i class="fas fa-chevron-right fa-rotate-90"></i>
+                                    </div>
+                                    <div class="col-sm btn hover-effect-a" id="piece-select-controls"
+                                         onclick="PiecesSelectListGoTo(-1)">
+                                        <i class="fas fa-step-forward fa-rotate-90"></i>
+                                    </div>
+                                </div>
                             </div>
 
                             <!--CHOIX PIECE-->
@@ -156,7 +177,8 @@ $date = date("d-m-Y");
 
                                 </select>
                             </div>
-                            <div class="input-group">
+
+                            <div class="input-group" id="selectRemiseContainer">
                                 <div class="input-group-prepend">
                                 <span class="input-group-text" style="width:100px"
                                       id="Remise_piece_label">Remise :</span>
@@ -169,7 +191,7 @@ $date = date("d-m-Y");
 
                     </div>
                     <!--SCHEMA-->
-                    <div class="col-sm" style="max-width: 100%; min-width: 400px; padding-right: 0; padding-left: 0;">
+                    <div class="col-sm" id="schemaOptionsContainer">
                         <div class="col-lg-12 formbox" id="schemaPiecesContainer"
                              style="margin-bottom: 1vw; height: 600px">
                             <img id="imgPieceSelectionneeSchema" src="">
@@ -212,7 +234,8 @@ $date = date("d-m-Y");
                             </div>
                             <div class="col-sm-4">
                                 <div class="slider-container row col-lg-12 mb-3">
-                                    <h5 class="col-sm-1" style="margin:0; padding:0">Y </h5><input type="range" min="-1000"
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">Y </h5><input type="range"
+                                                                                                   min="-1000"
                                                                                                    max="5000"
                                                                                                    value="0"
                                                                                                    style="margin:0; padding:0"
@@ -224,7 +247,8 @@ $date = date("d-m-Y");
                             </div>
                             <div class="col-sm-4">
                                 <div class="slider-container row col-lg-12 mb-3">
-                                    <h5 class="col-sm-1" style="margin:0; padding:0">Z </h5><input type="range" min="-1000"
+                                    <h5 class="col-sm-1" style="margin:0; padding:0">Z </h5><input type="range"
+                                                                                                   min="-1000"
                                                                                                    max="1000"
                                                                                                    value="0"
                                                                                                    style="margin:0; padding:0"
@@ -327,8 +351,8 @@ $date = date("d-m-Y");
         selectedPiece.pos_x = posX;
         selectedPiece.pos_y = posY;
         selectedPiece.ratio = ratio;
-        $('#imgPieceSelectionneeSchema').css({"left": (posX/10).toString().concat('px')});
-        $('#imgPieceSelectionneeSchema').css({"top": (posY/10).toString().concat('px')});
+        $('#imgPieceSelectionneeSchema').css({"left": (posX / 10).toString().concat('px')});
+        $('#imgPieceSelectionneeSchema').css({"top": (posY / 10).toString().concat('px')});
 
         $('#imgPieceSelectionneeSchema').css({"max-width": ''});
 
@@ -426,20 +450,28 @@ $date = date("d-m-Y");
             var s = document.getElementById('imgPieceSelectionneeSchema');
 
             s.setAttribute("src", selectedPiece.chemin_piece);
-            s.style.height = "inherit";
-            s.style.marginLeft = "100px";
             s.style.position = "absolute";
-            s.style.overflow = "hidden";
             s.style.maxWidth = "600px";
             s.style.width = "600px";
 
             selectedPiece.originalHeight = $('#imgPieceSelectionneeSchema').height();
             selectedPiece.originalWidth = $('#imgPieceSelectionneeSchema').width();
-
+            AfficheImageCount();
             MoveImage();
         } else {
             ToggleSubmitPieceButton(true);
         }
+    }
+
+    function AfficheImageCount(){
+        var piecesCount = document.getElementById('select_piece').options.length;
+        var body = '';
+        if(piecesCount > 0){
+            var selectedIndex = document.getElementById('select_piece').selectedIndex;
+            body = 'Piece ' + selectedIndex + '/' + (piecesCount - 1);
+
+        }
+        document.getElementById('pieceVueContainerCount').innerHTML = body;
     }
 
     function SelectPiece(piecePosition) {
@@ -468,8 +500,8 @@ $date = date("d-m-Y");
         pieces.forEach(function (piece) {
             var text = '<img id="schema_piece_' + selectedPiece.piecePosition + '" ' +
                 'src="' + piece.chemin_piece + '" ' +
-                'style="height:'+ (piece.originalHeight * piece.ratio) +'px; width:'+ (piece.originalWidth * piece.ratio)+'px;' +
-                'margin-left: 100px; position: absolute; left:' + piece.pos_x/10 + 'px ; top:' + piece.pos_y/10 + 'px" >\n'
+                'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
+                'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px" >\n'
             body = body + text;
         });
 
@@ -501,17 +533,20 @@ $date = date("d-m-Y");
             end = start + 8;
         }
 
-        var body = '<div class="col-sm" style="padding-right: 0; padding-left:0; width: 135px; max-width: 135px; margin-right: 10px;">\n' +
+        var body = '<div class="col-sm" id="selectedPiecesListContainerLeft">\n' +
             '\n';
 
         for (var x = start; x < end; x++) {
             if (x == start + 4) {
                 body += '</div>\n' +
-                    '<div class="col-sm" style="padding-right: 0; width: 135px; max-width: 135px; padding-left:0">\n';
+                    '<div class="col-sm" id="selectedPiecesListContainerRight">\n';
             }
 
             if (pieces[x]) {
-                body += '<div class="col-sm " style="width: 135px; height:145px; padding: 0px 0px 10px 0px; border:0;"> \n' +
+                console.log(pieces);
+                body += '<div class="col-sm" id="singularSelectedPieceBoxContainer"> \n' +
+                    '<span id="singularSelectedPieceNumberContainer">' + pieces[x].piecePosition +
+                    '</span>' +
                     '<div class="btn hover-effect-a" ' +
                     'style="width: 135px; height:135px; padding: 0; border:0;" onclick="SelectPiece(\'+pieces[x].piecePosition+\')">' +
                     '<img id="selectable_piece_' + pieces[x].piecePosition + '" src="' + pieces[x].chemin_piece +
@@ -533,6 +568,13 @@ $date = date("d-m-Y");
         }
     }
 
+    function PiecesListPageLeft() {
+        if (piecesListCurrentPage >= 1) {
+            piecesListCurrentPage--;
+            UpdatePiecesListView(piecesListCurrentPage);
+        }
+    }
+
     function PiecesListGoTo(page) {
         if (page == 0) {
             piecesListCurrentPage = page;
@@ -543,21 +585,48 @@ $date = date("d-m-Y");
         }
     }
 
-    function PiecesListPageLeft() {
-        if (piecesListCurrentPage >= 1) {
-            piecesListCurrentPage--;
-            UpdatePiecesListView(piecesListCurrentPage);
+    function PiecesSelectListGoTo(page) {
+        var optionsLength = document.getElementById("select_piece").options.length;
+        if (optionsLength > 0) {
+            var currentSelected = document.getElementById("select_piece").options.selectedIndex;
+            if (page == 0) {
+                document.getElementById("select_piece").options.selectedIndex = 0;
+                AfficheImg();
+            }
+            if (page == -1) {
+                document.getElementById("select_piece").options.selectedIndex = optionsLength - 1;
+                AfficheImg();
+            }
+        }
+    }
+
+    function PiecesSelectListUp() {
+        var currentSelected = document.getElementById("select_piece").options.selectedIndex;
+        var newSelect = currentSelected - 1;
+        if (newSelect >= 0) {
+            document.getElementById("select_piece").options.selectedIndex = newSelect;
+            AfficheImg();
+        }
+    }
+
+    function PiecesSelectListDown() {
+        var currentSelected = document.getElementById("select_piece").options.selectedIndex;
+        var newSelect = currentSelected + 1;
+        if (newSelect < document.getElementById("select_piece").options.length) {
+            document.getElementById("select_piece").options.selectedIndex = newSelect;
+            AfficheImg();
         }
     }
 
     function DuplicatePiece() {
         if (pieces[0]) {
-            var piece = pieces[0];
-            piece.piecePosition++;
+            var piece = new Piece();
             pieces.push(piece);
+            piece.piecePosition = pieces.length;
         } else {
             var piece = new Piece();
             pieces.push(piece);
+            piece.piecePosition = pieces.length;
         }
         UpdatePiecesListView(-1);
     }
@@ -569,7 +638,7 @@ $date = date("d-m-Y");
             pageCount++;
         }
 
-        var body = '<i>' +
+        var body = '<i> Page ' +
             (piecesListCurrentPage + 1) +
             '/' +
             pageCount +
