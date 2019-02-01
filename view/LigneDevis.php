@@ -493,7 +493,8 @@ $date = date("d-m-Y");
     function ReloadPieceState() {
         document.getElementById('pos_x_slider').value = selectedPiece.pos_x;
         document.getElementById('pos_y_slider').value = selectedPiece.pos_y;
-        document.getElementById('pos_z_slider').value = selectedPiece.ratio;
+        document.getElementById('pos_z_slider').value = (selectedPiece.ratio - 1) * 1000;
+
         document.getElementById('largeur_piece').value = selectedPiece.largeur;
         document.getElementById('profondeur_piece').value = selectedPiece.profondeur;
         document.getElementById('hauteur_piece').value = selectedPiece.hauteur;
@@ -585,7 +586,7 @@ $date = date("d-m-Y");
         selectedPiece = pieces.find(x => x.piecePosition === piecePosition);
         selectedPiece.selected = true;
         selectedPiece.loading = true;
-
+        ReloadSchema();
         ReloadPieceState();
         document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"\n' +
             '                                        onclick="" disabled>Ajouter Options\n' +
@@ -600,6 +601,7 @@ $date = date("d-m-Y");
         FilterSousFamille(selectedPiece.code_famille, selectedPiece.code_ss_famille);
         FilterPieces(selectedPiece.code_ss_famille, selectedPiece.chemin_piece);
 
+        MovePieceImage();
 
     }
 
@@ -685,6 +687,7 @@ $date = date("d-m-Y");
     }
 
     function SauvegarderModificationsPiece() {
+        selectedPiece.selected = false;
         selectedPiece = new Piece();
 
         document.getElementById('imagePieceSelectionnee').setAttribute("src", "");
@@ -764,11 +767,13 @@ $date = date("d-m-Y");
     function ReloadSchema() {
         let body = '';
         pieces.forEach(function (piece) {
-            let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.piecePosition + '" ' +
-                'src="' + piece.chemin_piece + '" ' +
-                'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
-                'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px" >\n';
-            body = body + text;
+            if(!piece.selected){
+                let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.piecePosition + '" ' +
+                    'src="' + piece.chemin_piece + '" ' +
+                    'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
+                    'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px" >\n';
+                body = body + text;
+            }
         });
 
         body = body + '<img alt="La piece couramment selectionnee sur schema" id="imagePieceSelectionneeSchema" src="">\n';
