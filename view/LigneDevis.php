@@ -274,6 +274,7 @@ $date = date("d-m-Y");
                                           id="Remise_piece_label">Remise :</span>
                                     </div>
                                     <input id="remise_piece" type="number" class="form-control"
+                                           onchange="UpdatePieceInputOptions()"
                                            placeholder="0" name="Remise_piece" aria-describedby="Remise_piece_label"
                                            min="0" max="500000">
                                 </div>
@@ -771,17 +772,21 @@ $date = date("d-m-Y");
                 let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.piecePosition + '" ' +
                     'src="' + piece.chemin_piece + '" ' +
                     'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
-                    'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px" >\n';
+                    'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px ; ';
+                if(piece.chemin_piece === ""){
+                    text += 'visibility: hidden;';
+                }
+                text += '" >\n'
                 body = body + text;
             }
         });
 
-        body = body + '<img alt="La piece couramment selectionnee sur schema" id="imagePieceSelectionneeSchema" src="">\n';
+        body = body + '<img alt="La piece couramment selectionnee sur schema" id="imagePieceSelectionneeSchema" src="" style="visibility: hidden">\n';
         document.getElementById("schemaPiecesContainer").innerHTML = body;
     }
 
     function DeletePiece(piecePosition) {
-        if (!piecePosition) {
+        if (!piecePosition || pieces.find(x => x.piecePosition == piecePosition).selected) {
             piecePosition = selectedPiece.piecePosition;
             selectedPiece = new Piece();
 
@@ -861,7 +866,11 @@ $date = date("d-m-Y");
                     '<div class="btn hover-effect-a" id="singularSelectedPieceImageSubContainer" ' +
                     'onclick="SelectExistingPiece(' + pieces[x].piecePosition + ')">' +
                     '<img alt="Une piece parmis pleins" id="selectable_piece_' + pieces[x].piecePosition + '" src="' + pieces[x].chemin_piece +
-                    '" style="max-width: 135px; height: 135px; "' +
+                    '" style="max-width: 135px; height: 135px; ';
+                if(pieces[x].chemin_piece === ""){
+                    body += 'visibility: hidden;';
+                }
+                body += '"' +
                     ' >\n' +
                     '</div></div>\n';
             }
