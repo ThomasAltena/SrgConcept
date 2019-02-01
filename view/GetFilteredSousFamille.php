@@ -27,19 +27,19 @@ if (empty($reponse)) {
 
 } else {
     echo('<select name="Id_ss_famille" aria-describedby=Id_ss_famille_label" id="select_ss_famille"
-    class="form-control" onchange="FilterPieces(value)">');
-    /*echo('<option value="" selected style="font-style: italic">Aucun</option>');*/
+    class="form-control" onchange="FilterPieces(value)>');
+    echo('<option value="" style="font-style: italic">Aucun</option>');
 
     while ($donnees = $reponse->fetch()) {
         if($donnees){
             if ($selectFirst) {
                 ?>
-                <option value=" <?php echo $donnees['Code_ss']; ?>" selected
+                <option value="<?php echo $donnees['Code_ss']; ?>" selected
                 > <?php echo $donnees['Libelle_ss']; ?></option>
                 <?php
             } else {
                 ?>
-                <option value=" <?php echo $donnees['Code_ss']; ?>"
+                <option value="<?php echo $donnees['Code_ss']; ?>"
                 > <?php echo $donnees['Libelle_ss']; ?></option>
                 <?php
             }

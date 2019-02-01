@@ -80,7 +80,7 @@ div.table-title {
     padding-left: 0;
 }
 
-#selectFamilleContainer, #selectSousFamilleContainer, #selectPieceContainer, #selectRemiseContainer {
+#selectFamilleContainer, #selectSousFamilleContainer, #selectPieceContainer {
     padding-left: 25px;
     padding-right: 25px;
 }
@@ -96,6 +96,7 @@ div.table-title {
     max-width: 50px;
     margin: 0;
     padding: 0px;
+    visibility: hidden;
 }
 
 #piece-select-controls {
@@ -133,7 +134,6 @@ div.table-title {
 
 #pieceVueContainerCount {
     position: absolute;
-    top: 375px;
     left: 160px;
 }
 
@@ -157,9 +157,10 @@ div.table-title {
     top: 562px;
     padding: 0px 0px 0px 0px;
     margin: 0;
+    visibility: hidden;
 }
 
-#schemaPiecesEtControlsContainer {
+#schemaPiecesEtSlidersContainer {
     margin-bottom: 1vw;
     height: 600px;
     padding: 0;
@@ -202,3 +203,16 @@ div.table-title {
     margin: 0px 15px 0px 0px;
     padding: 0;"
 }
+
+#inputOptionsContainer {
+    visibility: hidden;
+}
+
+#pieceButtonsContainer {
+    visibility: hidden;
+}
+
+/*input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}*/

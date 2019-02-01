@@ -30,24 +30,24 @@ echo ('<div class="input-group-prepend">
 
 if(empty($reponse)){
     echo('<select name="Id_piece" id="select_piece" aria-describedby=Id_piece_label"
-        onchange="AfficheImg(1)" class="form-control" disabled>');
+        onchange="SelectPiece()" class="form-control" disabled>');
     echo('<option value="" disabled selected>Aucun sous famille</option>');
     $selectFirst = false;
+
 } else {
     echo('<select name="Id_piece" id="select_piece" aria-describedby=Id_piece_label"
-        onchange="AfficheImg(1)" class="form-control">');
-/*    echo('<option value="" selected style="font-style: italic">Aucun</option>');*/
+        onchange="SelectPiece()" class="form-control">');
 
     while ($donnees = $reponse->fetch()) {
         if($selectFirst){
             ?>
             <option id="<?php echo $donnees['Id_piece']; ?>"
-                    value=" <?php echo $donnees['Chemin_piece']; ?>" selected> <?php echo $donnees['Libelle_piece']; ?></option>
+                    value="<?php echo $donnees['Chemin_piece']; ?>" selected> <?php echo $donnees['Libelle_piece']; ?></option>
             <?php
         } else {
             ?>
             <option id="<?php echo $donnees['Id_piece']; ?>"
-                    value=" <?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Libelle_piece']; ?></option>
+                    value="<?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Libelle_piece']; ?></option>
             <?php
         }
     }
