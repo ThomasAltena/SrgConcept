@@ -189,10 +189,13 @@ $date = date("d-m-Y");
                     </div>
                     <!--SCHEMA-->
                     <div class="col-sm" id="schemaOptionsContainer">
-                        <div class="col-lg-12 formbox" id="schemaPiecesEtSlidersContainer">
-                            <div class="col-lg-12" id="schemaPiecesContainer">
+                        <div class="col-lg-12 formbox row" id="schemaPiecesEtSlidersContainer">
+                            <div class="col-sm-11" id="schemaPiecesContainer">
                                 <img id="imagePieceSelectionneeSchema" src="" alt"">
 
+                            </div>
+                            <div class="col-sm-1 formbox" id="selectedPieceOptionsList">
+                                
                             </div>
                             <div id="deplacementPieceSchemaControlsContainer" class="row">
                                 <div id="slider-container" class="col-sm row formbox">
@@ -339,6 +342,7 @@ $date = date("d-m-Y");
 </body>
 <script type="text/javascript">
     let selectedPiece = new Piece();
+    let originalPiece;
     let pieces = [];
     let piecesListCurrentPage = 0;
 
@@ -359,6 +363,322 @@ $date = date("d-m-Y");
         this.profondeur = "";
         this.selected = false;
         this.loading = false;
+        this.options = [];
+    }
+
+    function Option() {
+        this.code = '';
+        this.libelle = '';
+        this.duree = '';
+        this.unite = '';
+        this.cote_1 = '';
+        this.cote_2 = '';
+    }
+
+    /*HIDE*/
+
+    /*
+    * Cache la <img> contenant la preview de l'image selectionnee dans schema quand celle ci est vide (au moment de sauvegarde ou selection de 'aucune' piece
+    */
+    function HideSelectedPieceSchema() {
+        document.getElementById('imagePieceSelectionneeSchema').setAttribute("src", "");
+        document.getElementById('imagePieceSelectionneeSchema').setAttribute('style', 'visibility: hidden');
+    }
+
+    /*
+    * Cache la <img> contenant la preview de l'image selectionnee dans selection quand celle ci est vide (au moment de sauvegarde ou selection de 'aucune' piece
+    */
+    function HideSelectedPiecePreview() {
+        document.getElementById('imagePieceSelectionnee').setAttribute("src", "");
+        document.getElementById('imagePieceSelectionnee').setAttribute('style', 'visibility: hidden');
+    }
+
+    function HideSliders() {
+        document.getElementById('pieceSelectControlContainer').setAttribute('style', 'visibility: hidden');
+    }
+
+    function HideCurrentPieceOptionsPreview() {
+        document.getElementById('selectedPieceOptionsList').setAttribute('style', 'visibility: hidden');
+    }
+
+    function HidePieceSelectors() {
+        document.getElementById('deplacementPieceSchemaControlsContainer').setAttribute('style', 'visibility: hidden');
+    }
+
+    function HideOptions() {
+        document.getElementById('inputOptionsContainer').setAttribute('style', 'visibility: hidden');
+        document.getElementById('pieceButtonsContainer').setAttribute('style', 'visibility: hidden');
+    }
+
+    /*SHOW*/
+
+    function ShowSelectedPieceSchema() {
+        if (selectedPiece.chemin_piece !== "") {
+            let imagePieceSelectionnee = document.getElementById('imagePieceSelectionnee');
+            imagePieceSelectionnee.setAttribute('style', 'visibility: visible');
+            imagePieceSelectionnee.setAttribute("src", selectedPiece.chemin_piece);
+            imagePieceSelectionnee.style.width = "inherit";
+            imagePieceSelectionnee.style.position = "relative";
+        }
+    }
+
+    function ShowSelectedPiecePreview() {
+        if (selectedPiece.chemin_piece !== "") {
+            let imagePieceSelectionneeSchema = document.getElementById('imagePieceSelectionneeSchema');
+            imagePieceSelectionneeSchema.setAttribute('style', 'visibility: visible');
+            imagePieceSelectionneeSchema.setAttribute("src", selectedPiece.chemin_piece);
+            imagePieceSelectionneeSchema.style.position = "absolute";
+            imagePieceSelectionneeSchema.style.maxWidth = "600px";
+            imagePieceSelectionneeSchema.style.width = "600px";
+            imagePieceSelectionneeSchema.style.height = "600px";
+        }
+    }
+
+    function ShowSliders() {
+        document.getElementById('pieceSelectControlContainer').setAttribute('style', 'visibility: visible');
+    }
+
+    function ShowCurrentPieceOptionsPreview() {
+        document.getElementById('selectedPieceOptionsList').setAttribute('style', 'visibility: visible');
+    }
+
+    function ShowPieceSelectors() {
+        document.getElementById('deplacementPieceSchemaControlsContainer').setAttribute('style', 'visibility: visible');
+    }
+
+    function ShowOptions() {
+        document.getElementById('inputOptionsContainer').setAttribute('style', 'visibility: visible');
+        document.getElementById('pieceButtonsContainer').setAttribute('style', 'visibility: visible');
+    }
+
+    /*RESET*/
+
+    function ResetFamilleSelector() {
+        document.getElementById("select_famille").value = "";
+    }
+
+    function ResetSousFamilleSelector() {
+        document.getElementById("selectSousFamilleContainer").innerHTML =
+            "<div class=\"input-group-prepend\">\n" +
+            "<span class=\"input-group-text\" style=\"width:100px\"\n" +
+            "id=\"Id_ss_famille_label\">Sous-fam :</span>\n" +
+            "</div>\n" +
+            "<select name=\"Id_ss_famille\" aria-describedby=Id_ss_famille_label\" id=\"select_ss_famille\" disabled\n" +
+            "class=\"form-control\" onchange=\"FilterPieces(value)\">\n" +
+            "</select>";
+    }
+
+    function ResetPieceSelector() {
+        document.getElementById("selectPieceContainer").innerHTML =
+            "<div class=\"input-group-prepend\">\n" +
+            "<span class=\"input-group-text\" style=\"width:100px\" id=\"Id_piece_label\">Piece :</span>\n" +
+            "</div>\n" +
+            "<select name=\"Id_piece\" id=\"select_piece\" aria-describedby=Id_piece_label\"\n" +
+            "onchange=\"SelectPiece()\" class=\"form-control\" disabled>\n" +
+            "\n" +
+            "</select>";
+    }
+
+    function ResetPiecePosition() {
+        selectedPiece.ratio = 0;
+        selectedPiece.pos_y = 0;
+        selectedPiece.pos_x = 0;
+    }
+
+    function ResetOptionsBoutonSchema() {
+        document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"\n' +
+            '                                        onclick="DuplicatePiece()">Ajouter Options\n' +
+            '                                </button>\n' +
+            '                                <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button"\n' +
+            '                                        disabled\n' +
+            '                                        onclick="SauvegarderNouvellePiece()">Ajouter Piece\n' +
+            '                                </button>';
+    }
+
+    function ResetSliders() {
+        document.getElementById('pos_x_slider').value = '0';
+        document.getElementById('pos_y_slider').value = '0';
+        document.getElementById('pos_z_slider').value = '0';
+        document.getElementById('pos_x_number').value = '0';
+        document.getElementById('pos_y_number').value = '0';
+        document.getElementById('pos_z_number').value = '0';
+    }
+
+    function ResetInputOptions() {
+        document.getElementById('hauteur_piece').value = '0';
+        document.getElementById('largeur_piece').value = '0';
+        document.getElementById('profondeur_piece').value = '0';
+    }
+
+    /*TOGGLE*/
+
+    function ToggleSubmitPieceButton(bool) {
+        $("#ajouter_piece_button").attr("disabled", !bool);
+    }
+
+/*
+    /--------------------------------------- ACTIONS PIECE SELECTION PREVIEW -----------------------------------------------------------/
+*/
+    function FilterSousFamille(code_famille, code_ss_famille_to_select) {
+        selectedPiece.code_famille = code_famille;
+        let xhttp;
+
+        if (code_famille === "") {
+            ResetSousFamilleSelector();
+            ResetPieceSelector();
+            HideSliders();
+            HideCurrentPieceOptionsPreview();
+            ResetSliders();
+            ResetInputOptions();
+            HidePieceSelectors();
+            HideOptions();
+            UpdateImageCount();
+            ToggleSubmitPieceButton(false);
+            HideSelectedPieceSchema();
+            HideSelectedPiecePreview();
+            ResetPiecePosition();
+        } else {
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById("selectSousFamilleContainer").innerHTML = this.responseText;
+                    FilterPieces(document.getElementById("selectPieceContainer").value);
+                    if (code_ss_famille_to_select) {
+                        var selectSousFamille = document.getElementById("select_ss_famille");
+                        for (var x = 0; x < selectSousFamille.options.length; x++) {
+                            if (selectSousFamille.options[x].value === code_ss_famille_to_select) {
+                                selectSousFamille.selectedIndex = x;
+                                break;
+                            }
+                        }
+                    }
+                }
+            };
+            xhttp.open("GET", "getFilteredSousFamille.php?q=" + code_famille, true);
+            xhttp.send();
+        }
+    }
+
+    function FilterPieces(code_sous_famille, code_piece_to_select) {
+        let ss_famille_selected_index = document.getElementById("select_ss_famille").selectedIndex;
+        if (ss_famille_selected_index >= 0) {
+            selectedPiece.code_ss_famille = document.getElementById("select_ss_famille").options[ss_famille_selected_index].value;
+        }
+
+        let xhttp;
+        if (selectedPiece.code_famille === "" || selectedPiece.code_ss_famille === "") {
+            ResetPieceSelector();
+            HideSliders();
+            HideCurrentPieceOptionsPreview();
+            ResetSliders();
+            ResetInputOptions();
+            HidePieceSelectors();
+            HideOptions();
+            UpdateImageCount();
+            ToggleSubmitPieceButton(false);
+            HideSelectedPieceSchema();
+            HideSelectedPiecePreview();
+            ResetPiecePosition();
+        } else {
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById("selectPieceContainer").innerHTML = this.responseText;
+                    let selectPiece = document.getElementById("select_piece");
+
+                    if (selectPiece.options.length >= 0) {
+                        if (code_piece_to_select) {
+                            for (let x = 0; x < selectPiece.options.length; x++) {
+                                if (selectPiece.options[x].value === code_piece_to_select) {
+                                    selectPiece.selectedIndex = x;
+                                    break;
+                                }
+                            }
+                        } else {
+                            selectPiece.selectedIndex = 0;
+                            SelectPiece();
+                        }
+                    }
+                }
+            };
+            xhttp.open("GET", "getFilteredPieces.php?q=" + selectedPiece.code_famille + "&p=" + code_sous_famille, true);
+            xhttp.send();
+        }
+    }
+
+    function UpdateImageCount() {
+        let piecesCount = document.getElementById('select_piece').options.length;
+        let body = '';
+        if (piecesCount > 0) {
+            let selectedIndex = document.getElementById('select_piece').selectedIndex;
+            body = 'Piece ' + (selectedIndex + 1) + '/' + (piecesCount);
+
+        }
+        document.getElementById('pieceVueContainerCount').innerHTML = body;
+    }
+
+    function PiecesSelectListGoTo(page) {
+        let optionsLength = document.getElementById("select_piece").options.length;
+        if (optionsLength > 0) {
+            if (page === 0) {
+                document.getElementById("select_piece").options.selectedIndex = 0;
+                SelectPiece();
+            }
+            if (page === -1) {
+                document.getElementById("select_piece").options.selectedIndex = optionsLength - 1;
+                SelectPiece();
+            }
+        }
+    }
+
+    function PiecesSelectListUp() {
+        let currentSelected = document.getElementById("select_piece").options.selectedIndex;
+        let newSelect = currentSelected - 1;
+        if (newSelect >= 0) {
+            document.getElementById("select_piece").options.selectedIndex = newSelect;
+            SelectPiece();
+        }
+    }
+
+    function PiecesSelectListDown() {
+        let currentSelected = document.getElementById("select_piece").options.selectedIndex;
+        let newSelect = currentSelected + 1;
+        if (newSelect < document.getElementById("select_piece").options.length) {
+            document.getElementById("select_piece").options.selectedIndex = newSelect;
+            SelectPiece();
+        }
+    }
+
+/*
+    /--------------------------------------- ACTIONS SCHEMA -----------------------------------------------------------/
+*/
+
+    function ReloadSchema() {
+        let body = '';
+        pieces.forEach(function (piece) {
+            if(!piece.selected){
+                let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.piecePosition + '" ' +
+                    'src="' + piece.chemin_piece + '" ' +
+                    'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
+                    'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px ; ';
+                if(piece.chemin_piece === ""){
+                    text += 'visibility: hidden;';
+                }
+                text += '" >\n'
+                body = body + text;
+            }
+        });
+
+        body = body + '<img alt="La piece couramment selectionnee sur schema" id="imagePieceSelectionneeSchema" src="" style="visibility: hidden">\n';
+        document.getElementById("schemaPiecesContainer").innerHTML = body;
+    }
+
+    function ReloadCurrentPieceOptionsPreview() {
+        let body = '';
+        selectedPiece.options.forEach(option => {
+            body += '<label class="formbox" id="singleOptionPreviewContainer">' + option.code +
+                '</label>'
+        });
     }
 
     function MoveBySlider() {
@@ -406,133 +726,14 @@ $date = date("d-m-Y");
         selectedPiece.remise = document.getElementById('remise_piece').value;
     }
 
-    function FilterSousFamille(code_famille, code_ss_famille_to_select) {
-        selectedPiece.code_famille = code_famille;
-        let xhttp;
+/*
+    /--------------------------------------- ACTIONS PIECE -----------------------------------------------------------/
+*/
 
-        if (code_famille === "") {
-            ResetSousFamilleSelector();
-            ResetPieceSelector();
-            HideSliders();
-            ResetSliders();
-            ResetInputOptions();
-            HidePieceSelectors();
-            HideOptions();
-            UpdateImageCount();
-            ToggleSubmitPieceButton(false);
-            HideSelectedPieceSchema();
-            HideSelectedPiecePreview();
-            ResetPiecePosition();
-        } else {
-            xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById("selectSousFamilleContainer").innerHTML = this.responseText;
-                    FilterPieces(document.getElementById("selectPieceContainer").value);
-                    if (code_ss_famille_to_select) {
-                        var selectSousFamille = document.getElementById("select_ss_famille");
-                        for (var x = 0; x < selectSousFamille.options.length; x++) {
-                            if (selectSousFamille.options[x].value === code_ss_famille_to_select) {
-                                selectSousFamille.selectedIndex = x;
-                                break;
-                            }
-                        }
-                    }
-                }
-            };
-            xhttp.open("GET", "getFilteredSousFamille.php?q=" + code_famille, true);
-            xhttp.send();
-        }
-    }
-
-    function FilterPieces(code_sous_famille, code_piece_to_select) {
-        let ss_famille_selected_index = document.getElementById("select_ss_famille").selectedIndex;
-        if (ss_famille_selected_index >= 0) {
-            selectedPiece.code_ss_famille = document.getElementById("select_ss_famille").options[ss_famille_selected_index].value;
-        }
-
-        let xhttp;
-        if (selectedPiece.code_famille === "" || selectedPiece.code_ss_famille === "") {
-            ResetPieceSelector();
-            HideSliders();
-            ResetSliders();
-            ResetInputOptions();
-            HidePieceSelectors();
-            HideOptions();
-            UpdateImageCount();
-            ToggleSubmitPieceButton(false);
-            HideSelectedPieceSchema();
-            HideSelectedPiecePreview();
-            ResetPiecePosition();
-        } else {
-            xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById("selectPieceContainer").innerHTML = this.responseText;
-                    let selectPiece = document.getElementById("select_piece");
-
-                    if (selectPiece.options.length >= 0) {
-                        if (code_piece_to_select) {
-                            for (let x = 0; x < selectPiece.options.length; x++) {
-                                if (selectPiece.options[x].value === code_piece_to_select) {
-                                    selectPiece.selectedIndex = x;
-                                    break;
-                                }
-                            }
-                        } else {
-                            selectPiece.selectedIndex = 0;
-                            SelectPiece();
-                        }
-                    }
-                }
-            };
-            xhttp.open("GET", "getFilteredPieces.php?q=" + selectedPiece.code_famille + "&p=" + code_sous_famille, true);
-            xhttp.send();
-        }
-    }
-
-    function ReloadPieceState() {
-        document.getElementById('pos_x_slider').value = selectedPiece.pos_x;
-        document.getElementById('pos_y_slider').value = selectedPiece.pos_y;
-        document.getElementById('pos_z_slider').value = (selectedPiece.ratio - 1) * 1000;
-
-        document.getElementById('largeur_piece').value = selectedPiece.largeur;
-        document.getElementById('profondeur_piece').value = selectedPiece.profondeur;
-        document.getElementById('hauteur_piece').value = selectedPiece.hauteur;
-        document.getElementById('remise_piece').value = selectedPiece.remise;
-    }
-
-
-    function ResetFamilleSelector() {
-        document.getElementById("select_famille").value = "";
-    }
-
-
-    function ResetSousFamilleSelector() {
-        document.getElementById("selectSousFamilleContainer").innerHTML =
-            "<div class=\"input-group-prepend\">\n" +
-            "<span class=\"input-group-text\" style=\"width:100px\"\n" +
-            "id=\"Id_ss_famille_label\">Sous-fam :</span>\n" +
-            "</div>\n" +
-            "<select name=\"Id_ss_famille\" aria-describedby=Id_ss_famille_label\" id=\"select_ss_famille\" disabled\n" +
-            "class=\"form-control\" onchange=\"FilterPieces(value)\">\n" +
-            "</select>";
-    }
-
-    function ResetPieceSelector() {
-        document.getElementById("selectPieceContainer").innerHTML =
-            "<div class=\"input-group-prepend\">\n" +
-            "<span class=\"input-group-text\" style=\"width:100px\" id=\"Id_piece_label\">Piece :</span>\n" +
-            "</div>\n" +
-            "<select name=\"Id_piece\" id=\"select_piece\" aria-describedby=Id_piece_label\"\n" +
-            "onchange=\"SelectPiece()\" class=\"form-control\" disabled>\n" +
-            "\n" +
-            "</select>";
-    }
-
-    //fonction recup value/ img
     function SelectPiece() {
         let select = document.getElementById('select_piece');
+
+        // Si une  nouvelle piece est selectionnee par l'utilisateur et non rechargee depuis la selection dune piece existante
         if (!selectedPiece.loading) {
             if (select.value !== "") {
                 let imagePieceSelectionneeSchema = $('#imagePieceSelectionneeSchema');
@@ -551,6 +752,8 @@ $date = date("d-m-Y");
                 selectedPiece.originalWidth = imagePieceSelectionneeSchema.width();
 
                 ShowSliders();
+                ShowCurrentPieceOptionsPreview();
+                ReloadCurrentPieceOptionsPreview();
                 ShowPieceSelectors();
                 ShowOptions();
                 UpdateImageCount();
@@ -560,6 +763,7 @@ $date = date("d-m-Y");
             } else {
                 ReloadSchema();
                 HideSliders();
+                HideCurrentPieceOptionsPreview();
                 ResetSliders();
                 ResetInputOptions();
                 HidePieceSelectors();
@@ -571,12 +775,13 @@ $date = date("d-m-Y");
                 ResetPiecePosition();
             }
         } else {
-
             ShowSelectedPieceSchema();
             ShowSelectedPiecePreview();
             MoveBySlider();
             UpdateImageCount();
             ShowSliders();
+            ShowCurrentPieceOptionsPreview();
+            ReloadCurrentPieceOptionsPreview();
             ShowPieceSelectors();
             ShowOptions();
             selectedPiece.loading = false;
@@ -585,109 +790,50 @@ $date = date("d-m-Y");
 
     function SelectExistingPiece(piecePosition) {
         selectedPiece = pieces.find(x => x.piecePosition === piecePosition);
-        selectedPiece.selected = true;
-        selectedPiece.loading = true;
-        ReloadSchema();
-        ReloadPieceState();
-        document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"\n' +
-            '                                        onclick="" disabled>Ajouter Options\n' +
-            '</button>\n' +
-            '<button class="mb-3 btn btn-warning col-lg-12 hover-effect-a" id="ajouter_piece_button"\n' +
-            '                                        onclick="SauvegarderModificationsPiece()">Sauvegarder Piece\n' +
-            '</button>\n' +
-            '<button class="btn btn-danger col-lg-12 hover-effect-a" id="effacer_piece_button"\n' +
-            '                                        onclick="DeletePiece()">Effacer Piece\n' +
-            '</button>';
-        document.getElementById("select_famille").value = selectedPiece.code_famille;
-        FilterSousFamille(selectedPiece.code_famille, selectedPiece.code_ss_famille);
-        FilterPieces(selectedPiece.code_ss_famille, selectedPiece.chemin_piece);
 
-        MovePieceImage();
-
-    }
-
-    function ResetPiecePosition() {
-        selectedPiece.ratio = 0;
-        selectedPiece.pos_y = 0;
-        selectedPiece.pos_x = 0;
-    }
-
-    function HideSelectedPieceSchema() {
-        document.getElementById('imagePieceSelectionneeSchema').setAttribute("src", "");
-        document.getElementById('imagePieceSelectionneeSchema').setAttribute('style', 'visibility: hidden');
-    }
-
-    function HideSelectedPiecePreview() {
-        document.getElementById('imagePieceSelectionnee').setAttribute("src", "");
-        document.getElementById('imagePieceSelectionnee').setAttribute('style', 'visibility: hidden');
-    }
-
-    function ShowSelectedPieceSchema() {
-        if (selectedPiece.chemin_piece !== "") {
-            let imagePieceSelectionnee = document.getElementById('imagePieceSelectionnee');
-            imagePieceSelectionnee.setAttribute('style', 'visibility: visible');
-            imagePieceSelectionnee.setAttribute("src", selectedPiece.chemin_piece);
-            imagePieceSelectionnee.style.width = "inherit";
-            imagePieceSelectionnee.style.position = "relative";
-        }
-    }
-
-    function ShowSelectedPiecePreview() {
-        if (selectedPiece.chemin_piece !== "") {
-            let imagePieceSelectionneeSchema = document.getElementById('imagePieceSelectionneeSchema');
-            imagePieceSelectionneeSchema.setAttribute('style', 'visibility: visible');
-            imagePieceSelectionneeSchema.setAttribute("src", selectedPiece.chemin_piece);
-            imagePieceSelectionneeSchema.style.position = "absolute";
-            imagePieceSelectionneeSchema.style.maxWidth = "600px";
-            imagePieceSelectionneeSchema.style.width = "600px";
-            imagePieceSelectionneeSchema.style.height = "600px";
-        }
-    }
-
-    function UpdateImageCount() {
-        let piecesCount = document.getElementById('select_piece').options.length;
-        let body = '';
-        if (piecesCount > 0) {
-            let selectedIndex = document.getElementById('select_piece').selectedIndex;
-            body = 'Piece ' + (selectedIndex + 1) + '/' + (piecesCount);
-
-        }
-        document.getElementById('pieceVueContainerCount').innerHTML = body;
-    }
-
-    function SauvegarderNouvellePiece() {
-        if (pieces.length) {
-            selectedPiece.piecePosition = pieces.length + 1;
+        if(selectedPiece.selected){
+            AnnulerModificationsPiece();
         } else {
-            selectedPiece.piecePosition = 1;
+            SaveOriginal();
+
+            pieces.forEach(x => x.selected = false);
+
+            selectedPiece.selected = true;
+            selectedPiece.loading = true;
+
+            UpdatePiecesListView(piecesListCurrentPage);
+            ReloadSchema();
+            ReloadPieceState();
+
+            document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"\n' +
+                '                                        onclick="" disabled>Ajouter Options\n' +
+                '</button>\n' +
+                '<button class="mb-3 btn btn-warning col-lg-12 hover-effect-a" id="ajouter_piece_button"\n' +
+                '                                        onclick="SauvegarderModificationsPiece()">Sauvegarder Piece\n' +
+                '</button>\n' +
+                '<button class="btn btn-danger col-lg-12 hover-effect-a" id="effacer_piece_button"\n' +
+                '                                        onclick="DeletePiece()">Effacer Piece\n' +
+                '</button>';
+            document.getElementById("select_famille").value = selectedPiece.code_famille;
+
+            FilterSousFamille(selectedPiece.code_famille, selectedPiece.code_ss_famille);
+            FilterPieces(selectedPiece.code_ss_famille, selectedPiece.chemin_piece);
+
+            MovePieceImage();
         }
-        pieces.push(selectedPiece);
-
-        selectedPiece = new Piece();
-
-        document.getElementById('imagePieceSelectionnee').setAttribute("src", "");
-        document.getElementById('imagePieceSelectionnee').setAttribute('style', 'visibility: hidden');
-
-        ReloadSchema();
-        ResetFamilleSelector();
-        ResetSousFamilleSelector();
-        ResetPieceSelector();
-
-        HideSliders();
-        ResetSliders();
-        ResetInputOptions();
-        HidePieceSelectors();
-        HideOptions();
-        UpdateImageCount();
-        ToggleSubmitPieceButton(false);
-        HideSelectedPieceSchema();
-        HideSelectedPiecePreview();
-        ResetPiecePosition();
-
-        UpdatePiecesListView(-1);
     }
 
-    function SauvegarderModificationsPiece() {
+    function SaveOriginal() {
+        originalPiece = Object.assign({}, selectedPiece);
+    }
+
+    function ReplaceOriginal() {
+        let index = pieces.findIndex(x => x == selectedPiece);
+        pieces.splice(index, 1, originalPiece);
+        originalPiece = undefined;
+    }
+
+    function DeselectPiece() {
         selectedPiece.selected = false;
         selectedPiece = new Piece();
 
@@ -700,6 +846,7 @@ $date = date("d-m-Y");
         ResetPieceSelector();
 
         HideSliders();
+        HideCurrentPieceOptionsPreview();
         ResetSliders();
         ResetInputOptions();
         HidePieceSelectors();
@@ -714,75 +861,15 @@ $date = date("d-m-Y");
         ResetOptionsBoutonSchema();
     }
 
-    function ResetOptionsBoutonSchema() {
-        document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"\n' +
-            '                                        onclick="DuplicatePiece()">Ajouter Options\n' +
-            '                                </button>\n' +
-            '                                <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button"\n' +
-            '                                        disabled\n' +
-            '                                        onclick="SauvegarderNouvellePiece()">Ajouter Piece\n' +
-            '                                </button>';
-    }
+    function ReloadPieceState() {
+        document.getElementById('pos_x_slider').value = selectedPiece.pos_x;
+        document.getElementById('pos_y_slider').value = selectedPiece.pos_y;
+        document.getElementById('pos_z_slider').value = (selectedPiece.ratio - 1) * 1000;
 
-    function HideSliders() {
-        document.getElementById('pieceSelectControlContainer').setAttribute('style', 'visibility: hidden');
-    }
-
-    function HidePieceSelectors() {
-        document.getElementById('deplacementPieceSchemaControlsContainer').setAttribute('style', 'visibility: hidden');
-    }
-
-    function HideOptions() {
-        document.getElementById('inputOptionsContainer').setAttribute('style', 'visibility: hidden');
-        document.getElementById('pieceButtonsContainer').setAttribute('style', 'visibility: hidden');
-    }
-
-    function ShowSliders() {
-        document.getElementById('pieceSelectControlContainer').setAttribute('style', 'visibility: visible');
-    }
-
-    function ShowPieceSelectors() {
-        document.getElementById('deplacementPieceSchemaControlsContainer').setAttribute('style', 'visibility: visible');
-    }
-
-    function ShowOptions() {
-        document.getElementById('inputOptionsContainer').setAttribute('style', 'visibility: visible');
-        document.getElementById('pieceButtonsContainer').setAttribute('style', 'visibility: visible');
-    }
-
-    function ResetSliders() {
-        document.getElementById('pos_x_slider').value = '0';
-        document.getElementById('pos_y_slider').value = '0';
-        document.getElementById('pos_z_slider').value = '0';
-        document.getElementById('pos_x_number').value = '0';
-        document.getElementById('pos_y_number').value = '0';
-        document.getElementById('pos_z_number').value = '0';
-    }
-
-    function ResetInputOptions() {
-        document.getElementById('hauteur_piece').value = '0';
-        document.getElementById('largeur_piece').value = '0';
-        document.getElementById('profondeur_piece').value = '0';
-    }
-
-    function ReloadSchema() {
-        let body = '';
-        pieces.forEach(function (piece) {
-            if(!piece.selected){
-                let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.piecePosition + '" ' +
-                    'src="' + piece.chemin_piece + '" ' +
-                    'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
-                    'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px ; ';
-                if(piece.chemin_piece === ""){
-                    text += 'visibility: hidden;';
-                }
-                text += '" >\n'
-                body = body + text;
-            }
-        });
-
-        body = body + '<img alt="La piece couramment selectionnee sur schema" id="imagePieceSelectionneeSchema" src="" style="visibility: hidden">\n';
-        document.getElementById("schemaPiecesContainer").innerHTML = body;
+        document.getElementById('largeur_piece').value = selectedPiece.largeur;
+        document.getElementById('profondeur_piece').value = selectedPiece.profondeur;
+        document.getElementById('hauteur_piece').value = selectedPiece.hauteur;
+        document.getElementById('remise_piece').value = selectedPiece.remise;
     }
 
     function DeletePiece(piecePosition) {
@@ -799,6 +886,7 @@ $date = date("d-m-Y");
             document.getElementById('imagePieceSelectionnee').setAttribute('style', 'visibility: hidden');
 
             HideSliders();
+            HideCurrentPieceOptionsPreview();
             ResetSliders();
             ResetInputOptions();
             HidePieceSelectors();
@@ -820,13 +908,90 @@ $date = date("d-m-Y");
         ReloadSchema();
     }
 
-    function ToggleSubmitPieceButton(bool) {
-        $("#ajouter_piece_button").attr("disabled", !bool);
+    function SauvegarderNouvellePiece() {
+        if (pieces.length) {
+            selectedPiece.piecePosition = pieces.length + 1;
+        } else {
+            selectedPiece.piecePosition = 1;
+        }
+        pieces.push(selectedPiece);
+
+        selectedPiece = new Piece();
+
+        document.getElementById('imagePieceSelectionnee').setAttribute("src", "");
+        document.getElementById('imagePieceSelectionnee').setAttribute('style', 'visibility: hidden');
+
+        ReloadSchema();
+        ResetFamilleSelector();
+        ResetSousFamilleSelector();
+        ResetPieceSelector();
+
+        HideSliders();
+        HideCurrentPieceOptionsPreview();
+        ResetSliders();
+        ResetInputOptions();
+        HidePieceSelectors();
+        HideOptions();
+        UpdateImageCount();
+        ToggleSubmitPieceButton(false);
+        HideSelectedPieceSchema();
+        HideSelectedPiecePreview();
+        ResetPiecePosition();
+
+        UpdatePiecesListView(-1);
+    }
+
+    function SauvegarderModificationsPiece() {
+        DeselectPiece();
+    }
+
+    function AnnulerModificationsPiece() {
+        ReplaceOriginal();
+        DeselectPiece();
+    }
+
+    function DuplicatePiece() {
+        let piece = new Piece();
+        pieces.push(piece);
+        piece.piecePosition = pieces.length;
+        UpdatePiecesListView(-1);
+    }
+
+
+/*
+    /--------------------------------------- FONCTIONS PIECE LIST -----------------------------------------------------------/
+*/
+    function PiecesListPageRight() {
+        if ((piecesListCurrentPage * 8) + 8 < pieces.length) {
+            piecesListCurrentPage++;
+            UpdatePiecesListView(piecesListCurrentPage);
+        }
+    }
+
+    function PiecesListPageLeft() {
+        if (piecesListCurrentPage >= 1) {
+            piecesListCurrentPage--;
+            UpdatePiecesListView(piecesListCurrentPage);
+        }
+    }
+
+    function PiecesListGoTo(page) {
+        if (page === 0) {
+            piecesListCurrentPage = page;
+            UpdatePiecesListView(page);
+        }
+        if (page === -1) {
+            UpdatePiecesListView(page);
+        }
     }
 
     function UpdatePiecesListView(pageSetNumber) {
         let start = 0;
         let end = 8;
+
+        if(!pageSetNumber){
+            pageSetNumber = piecesListCurrentPage;
+        }
 
         /* -1 va a la derniere page */
         if (pageSetNumber === -1) {
@@ -863,7 +1028,14 @@ $date = date("d-m-Y");
                     '</div>' +
                     '<span id="singularSelectedPieceNumberContainer">' + pieces[x].piecePosition +
                     '</span>' +
-                    '<div class="btn hover-effect-a" id="singularSelectedPieceImageSubContainer" ' +
+                    '<div class="btn hover-effect-a';
+
+                if(pieces[x].selected){
+                    body += ' overlay'
+                }
+
+
+                body += '" id="singularSelectedPieceImageSubContainer" ' +
                     'onclick="SelectExistingPiece(' + pieces[x].piecePosition + ')">' +
                     '<img alt="Une piece parmis pleins" id="selectable_piece_' + pieces[x].piecePosition + '" src="' + pieces[x].chemin_piece +
                     '" style="max-width: 135px; height: 135px; ';
@@ -879,69 +1051,6 @@ $date = date("d-m-Y");
 
         document.getElementById("piecesListContainer").innerHTML = body;
         SetPageNumberContainer();
-    }
-
-    function PiecesListPageRight() {
-        if ((piecesListCurrentPage * 8) + 8 < pieces.length) {
-            piecesListCurrentPage++;
-            UpdatePiecesListView(piecesListCurrentPage);
-        }
-    }
-
-    function PiecesListPageLeft() {
-        if (piecesListCurrentPage >= 1) {
-            piecesListCurrentPage--;
-            UpdatePiecesListView(piecesListCurrentPage);
-        }
-    }
-
-    function PiecesListGoTo(page) {
-        if (page === 0) {
-            piecesListCurrentPage = page;
-            UpdatePiecesListView(page);
-        }
-        if (page === -1) {
-            UpdatePiecesListView(page);
-        }
-    }
-
-    function PiecesSelectListGoTo(page) {
-        let optionsLength = document.getElementById("select_piece").options.length;
-        if (optionsLength > 0) {
-            if (page === 0) {
-                document.getElementById("select_piece").options.selectedIndex = 0;
-                SelectPiece();
-            }
-            if (page === -1) {
-                document.getElementById("select_piece").options.selectedIndex = optionsLength - 1;
-                SelectPiece();
-            }
-        }
-    }
-
-    function PiecesSelectListUp() {
-        let currentSelected = document.getElementById("select_piece").options.selectedIndex;
-        let newSelect = currentSelected - 1;
-        if (newSelect >= 0) {
-            document.getElementById("select_piece").options.selectedIndex = newSelect;
-            SelectPiece();
-        }
-    }
-
-    function PiecesSelectListDown() {
-        let currentSelected = document.getElementById("select_piece").options.selectedIndex;
-        let newSelect = currentSelected + 1;
-        if (newSelect < document.getElementById("select_piece").options.length) {
-            document.getElementById("select_piece").options.selectedIndex = newSelect;
-            SelectPiece();
-        }
-    }
-
-    function DuplicatePiece() {
-        let piece = new Piece();
-        pieces.push(piece);
-        piece.piecePosition = pieces.length;
-        UpdatePiecesListView(-1);
     }
 
     function SetPageNumberContainer() {

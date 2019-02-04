@@ -212,7 +212,27 @@ div.table-title {
     visibility: hidden;
 }
 
-/*input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+.overlay {
+    position: absolute;
+    content:"";
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity: .5;
+    background-color: orange;
+}
+
+#selectedPieceOptionsList {
+    margin: 0 0 38px 0;
+    padding: 0;
+    visibility: hidden;
+}
+
+#singleOptionPreviewContainer {
+    padding: 0;
     margin: 0;
-}*/
+    width: 100%;
+    text-align: center;
+}
+
