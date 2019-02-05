@@ -195,7 +195,7 @@ $date = date("d-m-Y");
 
                             </div>
                             <div class="col-sm-1 formbox" id="selectedPieceOptionsList">
-                                
+
                             </div>
                             <div id="deplacementPieceSchemaControlsContainer" class="row">
                                 <div id="slider-container" class="col-sm row formbox">
@@ -283,8 +283,8 @@ $date = date("d-m-Y");
                                 </div>
                             </div>
                             <div class="col-sm" id="pieceButtonsContainer">
-                                <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"
-                                        onclick="DuplicatePiece()">Ajouter Options
+                                <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="HighlightSelectedOptions()"
+                                        onclick="" data-toggle="modal" data-target="#optionSelectionModal">Ajouter Options
                                 </button>
                                 <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button"
                                         disabled
@@ -339,6 +339,67 @@ $date = date("d-m-Y");
         </div>
     </div>
 </div>
+
+<div class="modal fade bd-example-modal-lg" id="optionSelectionModal" tabindex="-1" role="dialog"
+     aria-labelledby="optionSelectionModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ajouterOptionsModal">Options</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0">
+                <table class="table table-hover table-sm">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Libelle</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Durée</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Unité</th>
+                        <th scope="col">Cote 1</th>
+                        <th scope="col">Cote 2</th>
+                    </tr>
+                    </thead>
+                    <tbody id="optionsTableInnerContents">
+                    <?php
+                    $i = 0;
+                    $reponse = $bdd->query('SELECT * FROM options');
+                    while ($donnees = $reponse->fetch()) {
+                        $i++;
+                        ?>
+
+                        <tr id="select_option_<?php echo $donnees['Id_option']; ?>"
+                            onclick='ToggleOption(<?php echo json_encode($donnees); ?>)'>
+                            <th scope="col"><?php echo $i; ?></th>
+                            <td scope="col"><?php echo $donnees['Code_option']; ?></td>
+                            <td scope="col"><?php echo $donnees['Libelle_option']; ?></td>
+                            <td scope="col"><?php echo $donnees['Prix_option']; ?></td>
+                            <td scope="col"><?php ?></td>
+                            <td scope="col"><?php ?></td>
+                            <td scope="col"><?php ?></td>
+                            <td scope="col"><?php ?></td>
+                            <td scope="col"><?php ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 <script type="text/javascript">
     let selectedPiece = new Piece();
@@ -367,12 +428,10 @@ $date = date("d-m-Y");
     }
 
     function Option() {
-        this.code = '';
-        this.libelle = '';
-        this.duree = '';
-        this.unite = '';
-        this.cote_1 = '';
-        this.cote_2 = '';
+        this.Code_option = "";
+        this.Id_option = "";
+        this.Libelle_option = "";
+        this.Prix_option = "";
     }
 
     /*HIDE*/
@@ -486,8 +545,8 @@ $date = date("d-m-Y");
     }
 
     function ResetOptionsBoutonSchema() {
-        document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"\n' +
-            '                                        onclick="DuplicatePiece()">Ajouter Options\n' +
+        document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="HighlightSelectedOptions()"\n' +
+            '                                        onclick="" data-toggle="modal" data-target="#optionSelectionModal">Ajouter Options\n' +
             '                                </button>\n' +
             '                                <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button"\n' +
             '                                        disabled\n' +
@@ -516,9 +575,11 @@ $date = date("d-m-Y");
         $("#ajouter_piece_button").attr("disabled", !bool);
     }
 
-/*
-    /--------------------------------------- ACTIONS PIECE SELECTION PREVIEW -----------------------------------------------------------/
-*/
+
+    /*
+        /--------------------------------------- ACTIONS PIECE SELECTION PREVIEW -----------------------------------------------------------/
+    */
+
     function FilterSousFamille(code_famille, code_ss_famille_to_select) {
         selectedPiece.code_famille = code_famille;
         let xhttp;
@@ -530,6 +591,7 @@ $date = date("d-m-Y");
             HideCurrentPieceOptionsPreview();
             ResetSliders();
             ResetInputOptions();
+            ResetSelectedOptions();
             HidePieceSelectors();
             HideOptions();
             UpdateImageCount();
@@ -542,7 +604,6 @@ $date = date("d-m-Y");
             xhttp.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     document.getElementById("selectSousFamilleContainer").innerHTML = this.responseText;
-                    FilterPieces(document.getElementById("selectPieceContainer").value);
                     if (code_ss_famille_to_select) {
                         var selectSousFamille = document.getElementById("select_ss_famille");
                         for (var x = 0; x < selectSousFamille.options.length; x++) {
@@ -572,6 +633,7 @@ $date = date("d-m-Y");
             HideCurrentPieceOptionsPreview();
             ResetSliders();
             ResetInputOptions();
+            ResetSelectedOptions();
             HidePieceSelectors();
             HideOptions();
             UpdateImageCount();
@@ -649,19 +711,19 @@ $date = date("d-m-Y");
         }
     }
 
-/*
-    /--------------------------------------- ACTIONS SCHEMA -----------------------------------------------------------/
-*/
+    /*
+        /--------------------------------------- ACTIONS SCHEMA -----------------------------------------------------------/
+    */
 
     function ReloadSchema() {
         let body = '';
         pieces.forEach(function (piece) {
-            if(!piece.selected){
+            if (!piece.selected) {
                 let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.piecePosition + '" ' +
                     'src="' + piece.chemin_piece + '" ' +
                     'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
                     'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px ; ';
-                if(piece.chemin_piece === ""){
+                if (piece.chemin_piece === "") {
                     text += 'visibility: hidden;';
                 }
                 text += '" >\n'
@@ -676,9 +738,10 @@ $date = date("d-m-Y");
     function ReloadCurrentPieceOptionsPreview() {
         let body = '';
         selectedPiece.options.forEach(option => {
-            body += '<label class="formbox" id="singleOptionPreviewContainer">' + option.code +
+            body += '<label class="formbox" id="singleOptionPreviewContainer">' + option.Code_option +
                 '</label>'
         });
+        document.getElementById('selectedPieceOptionsList').innerHTML = body;
     }
 
     function MoveBySlider() {
@@ -726,9 +789,51 @@ $date = date("d-m-Y");
         selectedPiece.remise = document.getElementById('remise_piece').value;
     }
 
-/*
-    /--------------------------------------- ACTIONS PIECE -----------------------------------------------------------/
-*/
+    /*
+        /--------------------------------------- ACTIONS PIECE -----------------------------------------------------------/
+    */
+
+    function HighlightSelectedOptions(){
+       selectedPiece.options.forEach(option => {
+           $('#select_option_'+option.Id_option).addClass('table-primary');
+       }) ;
+    }
+
+    /*$('#optionSelectionModal').on('shown.bs.modal', function () {
+        console.log("SHOW");
+    });
+
+    $(function(){ // let all dom elements are loaded
+        $(document).on('hide.bs.modal', function (e) {
+            alert('event fired')
+        });
+        $(document).on('shown.bs.modal', function () {
+            alert('event fired')
+        });
+    });*/
+
+    function ResetSelectedOptions(){
+//TODO
+        /*$('optionsTableInnerContents').each(function(i,row){
+           let $row = $(row);
+           $row.removeClass('table-primary');
+
+        });
+        selectedPiece.options.forEach(option => {
+            $('#select_option_'+option.Id_option).removeClass('table-primary');
+        });*/
+    }
+
+    function ToggleOption(option) {
+        if (selectedPiece.options.some(x => x.Id_option == option.Id_option)) {
+            selectedPiece.options = selectedPiece.options.filter(x => x.Id_option != option.Id_option);
+            $('#select_option_'+option.Id_option).removeClass('table-primary');
+        } else {
+            selectedPiece.options.push(option);
+            $('#select_option_'+option.Id_option).addClass('table-primary');
+        }
+        ReloadCurrentPieceOptionsPreview();
+    }
 
     function SelectPiece() {
         let select = document.getElementById('select_piece');
@@ -745,8 +850,6 @@ $date = date("d-m-Y");
                 ShowSelectedPieceSchema();
                 ShowSelectedPiecePreview();
 
-                //ResetSliders();
-                //ResetPiecePosition();
 
                 selectedPiece.originalHeight = imagePieceSelectionneeSchema.height();
                 selectedPiece.originalWidth = imagePieceSelectionneeSchema.width();
@@ -766,6 +869,7 @@ $date = date("d-m-Y");
                 HideCurrentPieceOptionsPreview();
                 ResetSliders();
                 ResetInputOptions();
+                ResetSelectedOptions();
                 HidePieceSelectors();
                 HideOptions();
                 UpdateImageCount();
@@ -791,7 +895,7 @@ $date = date("d-m-Y");
     function SelectExistingPiece(piecePosition) {
         selectedPiece = pieces.find(x => x.piecePosition === piecePosition);
 
-        if(selectedPiece.selected){
+        if (selectedPiece.selected) {
             AnnulerModificationsPiece();
         } else {
             SaveOriginal();
@@ -805,8 +909,8 @@ $date = date("d-m-Y");
             ReloadSchema();
             ReloadPieceState();
 
-            document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a"\n' +
-                '                                        onclick="" disabled>Ajouter Options\n' +
+            document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="HighlightSelectedOptions()"\n' +
+                '                                        onclick="" data-toggle="modal" data-target="#optionSelectionModal">Ajouter Options\n' +
                 '</button>\n' +
                 '<button class="mb-3 btn btn-warning col-lg-12 hover-effect-a" id="ajouter_piece_button"\n' +
                 '                                        onclick="SauvegarderModificationsPiece()">Sauvegarder Piece\n' +
@@ -818,7 +922,7 @@ $date = date("d-m-Y");
 
             FilterSousFamille(selectedPiece.code_famille, selectedPiece.code_ss_famille);
             FilterPieces(selectedPiece.code_ss_famille, selectedPiece.chemin_piece);
-
+            SelectPiece();
             MovePieceImage();
         }
     }
@@ -849,6 +953,7 @@ $date = date("d-m-Y");
         HideCurrentPieceOptionsPreview();
         ResetSliders();
         ResetInputOptions();
+        ResetSelectedOptions();
         HidePieceSelectors();
         HideOptions();
         UpdateImageCount();
@@ -889,6 +994,7 @@ $date = date("d-m-Y");
             HideCurrentPieceOptionsPreview();
             ResetSliders();
             ResetInputOptions();
+            ResetSelectedOptions();
             HidePieceSelectors();
             HideOptions();
             UpdateImageCount();
@@ -930,6 +1036,7 @@ $date = date("d-m-Y");
         HideCurrentPieceOptionsPreview();
         ResetSliders();
         ResetInputOptions();
+        ResetSelectedOptions();
         HidePieceSelectors();
         HideOptions();
         UpdateImageCount();
@@ -958,9 +1065,9 @@ $date = date("d-m-Y");
     }
 
 
-/*
-    /--------------------------------------- FONCTIONS PIECE LIST -----------------------------------------------------------/
-*/
+    /*
+        /--------------------------------------- FONCTIONS PIECE LIST -----------------------------------------------------------/
+    */
     function PiecesListPageRight() {
         if ((piecesListCurrentPage * 8) + 8 < pieces.length) {
             piecesListCurrentPage++;
@@ -989,7 +1096,7 @@ $date = date("d-m-Y");
         let start = 0;
         let end = 8;
 
-        if(!pageSetNumber){
+        if (!pageSetNumber) {
             pageSetNumber = piecesListCurrentPage;
         }
 
@@ -1030,7 +1137,7 @@ $date = date("d-m-Y");
                     '</span>' +
                     '<div class="btn hover-effect-a';
 
-                if(pieces[x].selected){
+                if (pieces[x].selected) {
                     body += ' overlay'
                 }
 
@@ -1039,7 +1146,7 @@ $date = date("d-m-Y");
                     'onclick="SelectExistingPiece(' + pieces[x].piecePosition + ')">' +
                     '<img alt="Une piece parmis pleins" id="selectable_piece_' + pieces[x].piecePosition + '" src="' + pieces[x].chemin_piece +
                     '" style="max-width: 135px; height: 135px; ';
-                if(pieces[x].chemin_piece === ""){
+                if (pieces[x].chemin_piece === "") {
                     body += 'visibility: hidden;';
                 }
                 body += '"' +

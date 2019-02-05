@@ -2,11 +2,12 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="278" />
+    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="879" />
+    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="805" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9d27605-8d41-4044-ba8e-8636f45d8338" name="Default Changelist" comment="Fleches de selection de piece&#10;Numerotation de piece selectionnée&#10;Numerotation de liste de piece cote droit&#10;Pre selection de sous famille et piece des selection de famille&#10;Preservation de largeur minimum de lecran creation devis sur des taille de ecran plus fine">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/form.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/attente/ATTENTE.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/attente/DEJA EN ATTENTE.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/bordures+et+bases/cotes eclates.png" beforeDir="false" />
@@ -226,6 +227,7 @@
       <change beforePath="$PROJECT_DIR$/public/images/vases/BOITE BOUGIE.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/vases/Carte VASES.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/vases/CarteJARDINNIERES.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/GetFilteredSousFamille.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/GetFilteredSousFamille.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/LigneDevis.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/LigneDevis.php" afterDir="false" />
     </list>
     <ignored path="C:\xampp\htdocs\SrgConcept\.idea\shelf/" />
@@ -243,61 +245,36 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="782" column="42" selection-start-line="782" selection-start-column="12" selection-end-line="782" selection-end-column="42" />
+            <state relative-caret-position="433">
+              <caret line="801" column="28" selection-start-line="801" selection-start-column="28" selection-end-line="801" selection-end-column="28" />
               <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#20494#20562#0#HTML" />
-                <element signature="e#27519#27724#0#HTML" />
-                <element signature="e#20907#21074#0#HTML" />
-                <element signature="e#27766#27959#0#HTML" />
-                <element signature="e#35855#35970#0#HTML" />
-                <element signature="e#21665#21786#0#HTML" />
-                <element signature="e#36006#36133#0#HTML" />
-                <element signature="e#36162#36373#0#HTML" />
-                <element signature="e#32264#32711#0#HTML" />
-                <element signature="e#32753#33366#0#HTML" />
-                <element signature="e#36402#36518#0#HTML" />
-                <element signature="e#23345#23361#0#HTML" />
-                <element signature="e#36554#36682#0#HTML" />
-                <element signature="e#36711#36924#0#HTML" />
-                <element signature="e#29107#29176#0#HTML" />
-                <element signature="e#29218#29736#0#HTML" />
+                <element signature="n#style#0;n#div#3;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#20560#20567#1#HTML" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#29772#30256#0#HTML" />
                 <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#33840#33946#0#HTML" />
-                <element signature="e#33976#34652#0#HTML" />
-                <element signature="e#36954#37327#0#HTML" />
-                <element signature="e#37362#37558#0#HTML" />
-                <element signature="e#39792#39859#0#HTML" />
-                <element signature="e#26296#27867#0#HTML" />
-                <element signature="e#27936#29905#0#HTML" />
-                <element signature="e#31902#32292#0#HTML" />
-                <element signature="e#43114#43581#0#HTML" />
-                <element signature="e#43617#43916#0#HTML" />
-                <element signature="e#43954#44305#0#HTML" />
-                <element signature="e#36624#37606#0#HTML" />
                 <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-                <element signature="e#32815#33157#0#HTML" />
-                <element signature="e#33187#33529#0#HTML" />
-                <element signature="e#33561#34458#0#HTML" />
-                <element signature="e#34499#34830#0#HTML" />
-                <element signature="e#36486#37814#0#HTML" />
-                <element signature="e#39496#39512#0#HTML" />
-                <element signature="e#39696#39849#0#HTML" />
-                <element signature="e#39557#40474#0#HTML" />
-                <element signature="e#37626#38202#0#HTML" />
-                <element signature="e#38252#39387#0#HTML" />
-                <element signature="e#39422#40309#0#HTML" />
-                <element signature="e#43325#43357#0#HTML" />
-                <element signature="e#43429#43461#0#HTML" />
-                <element signature="e#44337#44484#0#HTML" />
-                <element signature="e#41314#41488#0#HTML" />
-                <element signature="e#41524#41677#0#HTML" />
-                <element signature="e#41713#41915#0#HTML" />
-                <element signature="e#41974#44498#0#HTML" />
-                <element signature="e#44578#44928#0#HTML" />
+                <element signature="e#43093#43158#0#HTML" />
+                <element signature="e#43191#43344#0#HTML" />
+                <element signature="e#43375#44179#0#HTML" />
+                <element signature="e#44213#44789#0#HTML" />
+                <element signature="e#44831#46012#0#HTML" />
+                <element signature="e#47030#47062#0#HTML" />
+                <element signature="e#47105#47164#0#HTML" />
+                <element signature="e#47196#47343#0#HTML" />
+                <element signature="e#47526#47700#0#HTML" />
+                <element signature="e#47736#47889#0#HTML" />
+                <element signature="e#47925#48127#0#HTML" />
+                <element signature="e#48178#50708#0#HTML" />
+                <element signature="e#50748#51098#0#HTML" />
               </folding>
             </state>
           </provider>
@@ -306,8 +283,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/css/form.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="807">
-              <caret line="235" column="23" lean-forward="true" selection-start-line="235" selection-start-column="23" selection-end-line="235" selection-end-column="23" />
+            <state relative-caret-position="3995">
+              <caret line="235" column="23" selection-start-line="235" selection-start-column="23" selection-end-line="235" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -315,11 +292,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/GetFilteredSousFamille.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
-              <folding>
-                <element signature="n#style#0;n#option#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="680">
+              <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/GetFilteredPieces.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -345,17 +328,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pos_z_slider</find>
-      <find>$('#pos_z_slider');</find>
-      <find>SauvegarderNouvellePiece</find>
-      <find>EffacerPiece</find>
-      <find>HideAllPieceState</find>
-      <find>ShowAllPieceState</find>
-      <find>setAttribute(&quot;hidden&quot;, true);</find>
-      <find>hidden</find>
-      <find>ShowSelectedPiecePreview</find>
-      <find>console.log</find>
-      <find>schemaPiecesEt</find>
       <find>ReloadPieceState</find>
       <find>imagePieceSelectionneeSchema</find>
       <find>remise</find>
@@ -375,6 +347,17 @@
       <find>ShowSliders</find>
       <find>DeselectPiece</find>
       <find>ShowCurrentPieceOptionsPreview</find>
+      <find>pieceButtonsContainer</find>
+      <find>code_sous_famille</find>
+      <find>&lt;option value=</find>
+      <find>option value=</find>
+      <find>onclick</find>
+      <find>$</find>
+      <find>Ajouter Options</find>
+      <find>selectedPieceOptionsList</find>
+      <find>CurrentPieceOptionsPreview</find>
+      <find>optionSelectionModal</find>
+      <find>ResetSliders</find>
     </findStrings>
     <replaceStrings>
       <replace>30px</replace>
@@ -415,11 +398,11 @@
         <option value="$PROJECT_DIR$/view/index.php" />
         <option value="$PROJECT_DIR$/view/header.php" />
         <option value="$PROJECT_DIR$/view/GetFilteredPieces.php" />
-        <option value="$PROJECT_DIR$/view/GetFilteredSousFamille.php" />
         <option value="$PROJECT_DIR$/Modules/LigneDevis/PiecesListWidget/PiecesListWidget.js" />
         <option value="$PROJECT_DIR$/Modules/LigneDevis/Piece.js" />
         <option value="$PROJECT_DIR$/modules/LigneDevis/PiecesListWidget.js" />
         <option value="$PROJECT_DIR$/public/css/form.css" />
+        <option value="$PROJECT_DIR$/view/GetFilteredSousFamille.php" />
         <option value="$PROJECT_DIR$/view/LigneDevis.php" />
       </list>
     </option>
@@ -432,7 +415,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1223" />
+    <option name="x" value="34" />
+    <option name="y" value="-8" />
     <option name="width" value="978" />
     <option name="height" value="1020" />
   </component>
@@ -444,7 +428,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -461,6 +444,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -523,7 +507,9 @@
       <workItem from="1548923372459" duration="17891000" />
       <workItem from="1549007448276" duration="27326000" />
       <workItem from="1549096975813" duration="1705000" />
-      <workItem from="1549267424070" duration="12829000" />
+      <workItem from="1549267424070" duration="15248000" />
+      <workItem from="1549357973416" duration="4773000" />
+      <workItem from="1549373742474" duration="4565000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/ThomasAltena/SrgConcept&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;&#10;Debut placement image (non enregistrement pour l'instant)">
       <created>1548347078035</created>
@@ -700,11 +686,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549063288912</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Ajout zone de code options par piece selectionnee">
+      <created>1549294933536</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1549294933536</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193368000" />
+    <option name="totallyTimeSpent" value="205125000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -716,11 +709,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.16044776" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.16364606" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
@@ -782,7 +775,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merge branch 'master' of https://github.com/ThomasAltena/SrgConcept&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;&#10;Debut placement image (non enregistrement pour l'instant)" />
     <MESSAGE value="Correction div manquant" />
     <MESSAGE value="Correction verif si idDevis vide" />
     <MESSAGE value="Nouvelle vue selection de pieces et shcema principale visible." />
@@ -807,7 +799,8 @@
     <MESSAGE value="Selection, modification et suppression de peice possible.&#10;Options different sur selection de piece deja ajoutee.&#10;Valeurs de sliders affichees." />
     <MESSAGE value="La piece modifié garde toute ses valeurs.&#10;Loriginal napparait plus dans le shcema, seulement la version modifiable&#10;Apres sauvegarde la piece est deselectionnee." />
     <MESSAGE value="Suppression correct de piece si preselectionnee et suppression depuis X sur piece" />
-    <option name="LAST_COMMIT_MESSAGE" value="Suppression correct de piece si preselectionnee et suppression depuis X sur piece" />
+    <MESSAGE value="Ajout zone de code options par piece selectionnee" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout zone de code options par piece selectionnee" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -981,20 +974,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/GetFilteredPieces.php">
+    <entry file="file://$PROJECT_DIR$/Modules/LigneDevis/Piece.js" />
+    <entry file="file://$PROJECT_DIR$/Modules/LigneDevis/PiecesListWidget.js" />
+    <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="433">
+          <caret line="801" column="28" selection-start-line="801" selection-start-column="28" selection-end-line="801" selection-end-column="28" />
           <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#20560#20567#1#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
+            <element signature="e#43093#43158#0#HTML" />
+            <element signature="e#43191#43344#0#HTML" />
+            <element signature="e#43375#44179#0#HTML" />
+            <element signature="e#44213#44789#0#HTML" />
+            <element signature="e#44831#46012#0#HTML" />
+            <element signature="e#47030#47062#0#HTML" />
+            <element signature="e#47105#47164#0#HTML" />
+            <element signature="e#47196#47343#0#HTML" />
+            <element signature="e#47526#47700#0#HTML" />
+            <element signature="e#47736#47889#0#HTML" />
+            <element signature="e#47925#48127#0#HTML" />
+            <element signature="e#48178#50708#0#HTML" />
+            <element signature="e#50748#51098#0#HTML" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/LigneDevis/Piece.js">
+    <entry file="file://$PROJECT_DIR$/public/css/form.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        <state relative-caret-position="3995">
+          <caret line="235" column="23" selection-start-line="235" selection-start-column="23" selection-end-line="235" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/GetFilteredSousFamille.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/GetFilteredPieces.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -1002,91 +1037,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/GetFilteredSousFamille.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#option#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/LigneDevis/PiecesListWidget.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
-          <caret line="104" column="27" lean-forward="true" selection-start-line="104" selection-start-column="27" selection-end-line="104" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/form.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="807">
-          <caret line="235" column="23" lean-forward="true" selection-start-line="235" selection-start-column="23" selection-end-line="235" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="782" column="42" selection-start-line="782" selection-start-column="12" selection-end-line="782" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#div#2;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#20494#20562#0#HTML" />
-            <element signature="e#27519#27724#0#HTML" />
-            <element signature="e#20907#21074#0#HTML" />
-            <element signature="e#27766#27959#0#HTML" />
-            <element signature="e#35855#35970#0#HTML" />
-            <element signature="e#21665#21786#0#HTML" />
-            <element signature="e#36006#36133#0#HTML" />
-            <element signature="e#36162#36373#0#HTML" />
-            <element signature="e#32264#32711#0#HTML" />
-            <element signature="e#32753#33366#0#HTML" />
-            <element signature="e#36402#36518#0#HTML" />
-            <element signature="e#23345#23361#0#HTML" />
-            <element signature="e#36554#36682#0#HTML" />
-            <element signature="e#36711#36924#0#HTML" />
-            <element signature="e#29107#29176#0#HTML" />
-            <element signature="e#29218#29736#0#HTML" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#29772#30256#0#HTML" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#33840#33946#0#HTML" />
-            <element signature="e#33976#34652#0#HTML" />
-            <element signature="e#36954#37327#0#HTML" />
-            <element signature="e#37362#37558#0#HTML" />
-            <element signature="e#39792#39859#0#HTML" />
-            <element signature="e#26296#27867#0#HTML" />
-            <element signature="e#27936#29905#0#HTML" />
-            <element signature="e#31902#32292#0#HTML" />
-            <element signature="e#43114#43581#0#HTML" />
-            <element signature="e#43617#43916#0#HTML" />
-            <element signature="e#43954#44305#0#HTML" />
-            <element signature="e#36624#37606#0#HTML" />
-            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-            <element signature="e#32815#33157#0#HTML" />
-            <element signature="e#33187#33529#0#HTML" />
-            <element signature="e#33561#34458#0#HTML" />
-            <element signature="e#34499#34830#0#HTML" />
-            <element signature="e#36486#37814#0#HTML" />
-            <element signature="e#39496#39512#0#HTML" />
-            <element signature="e#39696#39849#0#HTML" />
-            <element signature="e#39557#40474#0#HTML" />
-            <element signature="e#37626#38202#0#HTML" />
-            <element signature="e#38252#39387#0#HTML" />
-            <element signature="e#39422#40309#0#HTML" />
-            <element signature="e#43325#43357#0#HTML" />
-            <element signature="e#43429#43461#0#HTML" />
-            <element signature="e#44337#44484#0#HTML" />
-            <element signature="e#41314#41488#0#HTML" />
-            <element signature="e#41524#41677#0#HTML" />
-            <element signature="e#41713#41915#0#HTML" />
-            <element signature="e#41974#44498#0#HTML" />
-            <element signature="e#44578#44928#0#HTML" />
-          </folding>
         </state>
       </provider>
     </entry>
