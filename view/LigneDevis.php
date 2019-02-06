@@ -283,7 +283,7 @@ $date = date("d-m-Y");
                                 </div>
                             </div>
                             <div class="col-sm" id="pieceButtonsContainer">
-                                <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="HighlightSelectedOptions()"
+                                <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="LoadOptions()"
                                         onclick="" data-toggle="modal" data-target="#optionSelectionModal">Ajouter Options
                                 </button>
                                 <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button"
@@ -352,7 +352,7 @@ $date = date("d-m-Y");
                 </button>
             </div>
             <div class="modal-body" style="padding: 0">
-                <table class="table table-hover table-sm">
+                <table class="table table-hover table-sm" style="margin: 0">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
@@ -367,28 +367,7 @@ $date = date("d-m-Y");
                     </tr>
                     </thead>
                     <tbody id="optionsTableInnerContents">
-                    <?php
-                    $i = 0;
-                    $reponse = $bdd->query('SELECT * FROM options');
-                    while ($donnees = $reponse->fetch()) {
-                        $i++;
-                        ?>
 
-                        <tr id="select_option_<?php echo $donnees['Id_option']; ?>"
-                            onclick='ToggleOption(<?php echo json_encode($donnees); ?>)'>
-                            <th scope="col"><?php echo $i; ?></th>
-                            <td scope="col"><?php echo $donnees['Code_option']; ?></td>
-                            <td scope="col"><?php echo $donnees['Libelle_option']; ?></td>
-                            <td scope="col"><?php echo $donnees['Prix_option']; ?></td>
-                            <td scope="col"><?php ?></td>
-                            <td scope="col"><?php ?></td>
-                            <td scope="col"><?php ?></td>
-                            <td scope="col"><?php ?></td>
-                            <td scope="col"><?php ?></td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
                     </tbody>
                 </table>
             </div>
@@ -545,7 +524,7 @@ $date = date("d-m-Y");
     }
 
     function ResetOptionsBoutonSchema() {
-        document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="HighlightSelectedOptions()"\n' +
+        document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="LoadOptions()"\n' +
             '                                        onclick="" data-toggle="modal" data-target="#optionSelectionModal">Ajouter Options\n' +
             '                                </button>\n' +
             '                                <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button"\n' +
@@ -793,6 +772,20 @@ $date = date("d-m-Y");
         /--------------------------------------- ACTIONS PIECE -----------------------------------------------------------/
     */
 
+    function LoadOptions() {
+        let xhttp;
+
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                document.getElementById("optionsTableInnerContents").innerHTML = this.responseText;
+                HighlightSelectedOptions();
+            }
+        };
+        xhttp.open("GET", "getOptions.php", true);
+        xhttp.send();
+    }
+
     function HighlightSelectedOptions(){
        selectedPiece.options.forEach(option => {
            $('#select_option_'+option.Id_option).addClass('table-primary');
@@ -909,11 +902,14 @@ $date = date("d-m-Y");
             ReloadSchema();
             ReloadPieceState();
 
-            document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="HighlightSelectedOptions()"\n' +
+            document.getElementById('pieceButtonsContainer').innerHTML = '<button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="LoadOptions()"\n' +
                 '                                        onclick="" data-toggle="modal" data-target="#optionSelectionModal">Ajouter Options\n' +
                 '</button>\n' +
+                '<button class="mb-3 btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button"\n' +
+                '                                        onclick="SauvegarderModificationsPiece()">Sauvegarder Modifications\n' +
+                '</button>\n' +
                 '<button class="mb-3 btn btn-warning col-lg-12 hover-effect-a" id="ajouter_piece_button"\n' +
-                '                                        onclick="SauvegarderModificationsPiece()">Sauvegarder Piece\n' +
+                '                                        onclick="AnnulerModificationsPiece()">Annuler Modifications\n' +
                 '</button>\n' +
                 '<button class="btn btn-danger col-lg-12 hover-effect-a" id="effacer_piece_button"\n' +
                 '                                        onclick="DeletePiece()">Effacer Piece\n' +

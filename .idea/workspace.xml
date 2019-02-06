@@ -2,8 +2,8 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="278" />
-    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="879" />
-    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="805" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="881" />
+    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="807" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9d27605-8d41-4044-ba8e-8636f45d8338" name="Default Changelist" comment="Fleches de selection de piece&#10;Numerotation de piece selectionnée&#10;Numerotation de liste de piece cote droit&#10;Pre selection de sous famille et piece des selection de famille&#10;Preservation de largeur minimum de lecran creation devis sur des taille de ecran plus fine">
@@ -227,7 +227,6 @@
       <change beforePath="$PROJECT_DIR$/public/images/vases/BOITE BOUGIE.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/vases/Carte VASES.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/vases/CarteJARDINNIERES.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/GetFilteredSousFamille.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/GetFilteredSousFamille.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/LigneDevis.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/LigneDevis.php" afterDir="false" />
     </list>
     <ignored path="C:\xampp\htdocs\SrgConcept\.idea\shelf/" />
@@ -245,37 +244,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="801" column="28" selection-start-line="801" selection-start-column="28" selection-end-line="801" selection-end-column="28" />
+            <state relative-caret-position="569">
+              <caret line="911" column="91" selection-start-line="911" selection-start-column="91" selection-end-line="911" selection-end-column="91" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#20560#20567#1#HTML" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-                <element signature="e#43093#43158#0#HTML" />
-                <element signature="e#43191#43344#0#HTML" />
-                <element signature="e#43375#44179#0#HTML" />
-                <element signature="e#44213#44789#0#HTML" />
-                <element signature="e#44831#46012#0#HTML" />
-                <element signature="e#47030#47062#0#HTML" />
-                <element signature="e#47105#47164#0#HTML" />
-                <element signature="e#47196#47343#0#HTML" />
-                <element signature="e#47526#47700#0#HTML" />
-                <element signature="e#47736#47889#0#HTML" />
-                <element signature="e#47925#48127#0#HTML" />
-                <element signature="e#48178#50708#0#HTML" />
-                <element signature="e#50748#51098#0#HTML" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/GetOptions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -328,9 +312,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ReloadPieceState</find>
-      <find>imagePieceSelectionneeSchema</find>
-      <find>remise</find>
       <find>UpdatePieceInputOptions</find>
       <find>update</find>
       <find>select</find>
@@ -358,6 +339,9 @@
       <find>CurrentPieceOptionsPreview</find>
       <find>optionSelectionModal</find>
       <find>ResetSliders</find>
+      <find>console</find>
+      <find>HighlightSelectedOptions</find>
+      <find>LoadOptions</find>
     </findStrings>
     <replaceStrings>
       <replace>30px</replace>
@@ -403,6 +387,7 @@
         <option value="$PROJECT_DIR$/modules/LigneDevis/PiecesListWidget.js" />
         <option value="$PROJECT_DIR$/public/css/form.css" />
         <option value="$PROJECT_DIR$/view/GetFilteredSousFamille.php" />
+        <option value="$PROJECT_DIR$/view/GetOptions.php" />
         <option value="$PROJECT_DIR$/view/LigneDevis.php" />
       </list>
     </option>
@@ -428,6 +413,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -444,7 +430,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -455,12 +440,12 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\SrgConcept\view\LigneDevisAjax" />
-      <recent name="C:\xampp\htdocs\SrgConcept\view" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\SrgConcept\Modules\LigneDevis" />
+      <recent name="C:\xampp\htdocs\SrgConcept\view" />
+      <recent name="C:\xampp\htdocs\SrgConcept\view\LigneDevisAjax" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\SrgConcept\view" />
       <recent name="C:\xampp\htdocs\SrgConcept\view\LigneDevisAjax" />
     </key>
@@ -509,7 +494,8 @@
       <workItem from="1549096975813" duration="1705000" />
       <workItem from="1549267424070" duration="15248000" />
       <workItem from="1549357973416" duration="4773000" />
-      <workItem from="1549373742474" duration="4565000" />
+      <workItem from="1549373742474" duration="6311000" />
+      <workItem from="1549464428014" duration="1176000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/ThomasAltena/SrgConcept&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;&#10;Debut placement image (non enregistrement pour l'instant)">
       <created>1548347078035</created>
@@ -693,11 +679,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549294933536</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="sous famille non selectionnee automatiquement sur selection famille.&#10;Modal selection options (pas fini) les options ne se deselectionnent pas dans la vue a la fermeture de la modal.&#10;&#10;Les evenements boostrap ne sont pas detectes.">
+      <created>1549378514870</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1549378514871</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205125000" />
+    <option name="totallyTimeSpent" value="208047000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -713,7 +706,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.16364606" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.1652452" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
@@ -775,7 +768,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction div manquant" />
     <MESSAGE value="Correction verif si idDevis vide" />
     <MESSAGE value="Nouvelle vue selection de pieces et shcema principale visible." />
     <MESSAGE value="Fichiers oubliers" />
@@ -800,7 +792,8 @@
     <MESSAGE value="La piece modifié garde toute ses valeurs.&#10;Loriginal napparait plus dans le shcema, seulement la version modifiable&#10;Apres sauvegarde la piece est deselectionnee." />
     <MESSAGE value="Suppression correct de piece si preselectionnee et suppression depuis X sur piece" />
     <MESSAGE value="Ajout zone de code options par piece selectionnee" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout zone de code options par piece selectionnee" />
+    <MESSAGE value="sous famille non selectionnee automatiquement sur selection famille.&#10;Modal selection options (pas fini) les options ne se deselectionnent pas dans la vue a la fermeture de la modal.&#10;&#10;Les evenements boostrap ne sont pas detectes." />
+    <option name="LAST_COMMIT_MESSAGE" value="sous famille non selectionnee automatiquement sur selection famille.&#10;Modal selection options (pas fini) les options ne se deselectionnent pas dans la vue a la fermeture de la modal.&#10;&#10;Les evenements boostrap ne sont pas detectes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -976,42 +969,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/LigneDevis/Piece.js" />
     <entry file="file://$PROJECT_DIR$/Modules/LigneDevis/PiecesListWidget.js" />
-    <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="801" column="28" selection-start-line="801" selection-start-column="28" selection-end-line="801" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#20560#20567#1#HTML" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-            <element signature="e#43093#43158#0#HTML" />
-            <element signature="e#43191#43344#0#HTML" />
-            <element signature="e#43375#44179#0#HTML" />
-            <element signature="e#44213#44789#0#HTML" />
-            <element signature="e#44831#46012#0#HTML" />
-            <element signature="e#47030#47062#0#HTML" />
-            <element signature="e#47105#47164#0#HTML" />
-            <element signature="e#47196#47343#0#HTML" />
-            <element signature="e#47526#47700#0#HTML" />
-            <element signature="e#47736#47889#0#HTML" />
-            <element signature="e#47925#48127#0#HTML" />
-            <element signature="e#48178#50708#0#HTML" />
-            <element signature="e#50748#51098#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/form.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3995">
@@ -1037,6 +994,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/GetOptions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="911" column="91" selection-start-line="911" selection-start-column="91" selection-end-line="911" selection-end-column="91" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
