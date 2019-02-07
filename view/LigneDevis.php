@@ -64,7 +64,7 @@ $date = date("d-m-Y");
                                 $reponse = $bdd->query('SELECT * FROM clients');
                                 while ($donnees = $reponse->fetch()) {
                                     ?>
-                                    <option value="<?php echo $donnees['Id_client']; ?>"> <?php echo $donnees['Nom_client']; ?></option>
+                                    <option value='<?php echo $donnees['Id_client']; ?>'> <?php echo $donnees['Nom_client']; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -78,12 +78,12 @@ $date = date("d-m-Y");
                                       id="Id_matiere_label">Matière :</span>
                                 </div>
                                 <select name="Id_matiere" aria-describedby=Id_matiere_label" id="select"
-                                        class="form-control">
+                                        class="form-control" onchange="SelectMatiere(value)">
                                     <?php
                                     $reponse = $bdd->query('SELECT * FROM matieres');
                                     while ($donnees = $reponse->fetch()) {
                                         ?>
-                                        <option value=" <?php echo $donnees['Id_matiere']; ?>"> <?php echo $donnees['Libelle_matiere']; ?></option>
+                                        <option value='<?php echo json_encode($donnees); ?>'> <?php echo $donnees['Libelle_matiere']; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -104,8 +104,7 @@ $date = date("d-m-Y");
                                     </div>
                                 </div>
                                 <div class="col-sm formbox" id="matiereImageContainer">
-                                    <img id="matiereImage" src="" alt=""
-                                         style="max-width: inherit; max-height: inherit">
+                                    <img id="matiereImagePreview" src="" alt="">
                                 </div>
                             </div>
                         </div>
@@ -284,7 +283,8 @@ $date = date("d-m-Y");
                             </div>
                             <div class="col-sm" id="pieceButtonsContainer">
                                 <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" onclick="LoadOptions()"
-                                        onclick="" data-toggle="modal" data-target="#optionSelectionModal">Ajouter Options
+                                        onclick="" data-toggle="modal" data-target="#optionSelectionModal">Ajouter
+                                    Options
                                 </button>
                                 <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button"
                                         disabled
@@ -385,6 +385,8 @@ $date = date("d-m-Y");
     let originalPiece;
     let pieces = [];
     let piecesListCurrentPage = 0;
+
+    let matiere = '';
 
     function Piece() {
         this.piecePosition = '';
@@ -559,6 +561,27 @@ $date = date("d-m-Y");
         /--------------------------------------- ACTIONS PIECE SELECTION PREVIEW -----------------------------------------------------------/
     */
 
+    function SelectMatiere(m) {
+        matiere = JSON.parse(m);
+
+        UpdateMatierePreview(matiere.Chemin_matiere);
+    }
+
+    function UpdateMatierePreview(cheminMatiereImage) {
+        let imageMatiereSelectionnee = document.getElementById('matiereImagePreview');
+        if(cheminMatiereImage != ''){
+            imageMatiereSelectionnee.setAttribute('style', 'visibility: visible');
+            imageMatiereSelectionnee.setAttribute("src", cheminMatiereImage);
+            imageMatiereSelectionnee.style.position = "absolute";
+            imageMatiereSelectionnee.style.maxWidth = "200";
+            imageMatiereSelectionnee.style.width = "200";
+            imageMatiereSelectionnee.style.height = "200";
+        } else {
+            imageMatiereSelectionnee.setAttribute('style', 'visibility: hidden');
+        }
+
+    }
+
     function FilterSousFamille(code_famille, code_ss_famille_to_select) {
         selectedPiece.code_famille = code_famille;
         let xhttp;
@@ -570,7 +593,6 @@ $date = date("d-m-Y");
             HideCurrentPieceOptionsPreview();
             ResetSliders();
             ResetInputOptions();
-            ResetSelectedOptions();
             HidePieceSelectors();
             HideOptions();
             UpdateImageCount();
@@ -612,7 +634,6 @@ $date = date("d-m-Y");
             HideCurrentPieceOptionsPreview();
             ResetSliders();
             ResetInputOptions();
-            ResetSelectedOptions();
             HidePieceSelectors();
             HideOptions();
             UpdateImageCount();
@@ -786,10 +807,10 @@ $date = date("d-m-Y");
         xhttp.send();
     }
 
-    function HighlightSelectedOptions(){
-       selectedPiece.options.forEach(option => {
-           $('#select_option_'+option.Id_option).addClass('table-primary');
-       }) ;
+    function HighlightSelectedOptions() {
+        selectedPiece.options.forEach(option => {
+            $('#select_option_' + option.Id_option).addClass('table-primary');
+        });
     }
 
     /*$('#optionSelectionModal').on('shown.bs.modal', function () {
@@ -805,25 +826,13 @@ $date = date("d-m-Y");
         });
     });*/
 
-    function ResetSelectedOptions(){
-//TODO
-        /*$('optionsTableInnerContents').each(function(i,row){
-           let $row = $(row);
-           $row.removeClass('table-primary');
-
-        });
-        selectedPiece.options.forEach(option => {
-            $('#select_option_'+option.Id_option).removeClass('table-primary');
-        });*/
-    }
-
     function ToggleOption(option) {
         if (selectedPiece.options.some(x => x.Id_option == option.Id_option)) {
             selectedPiece.options = selectedPiece.options.filter(x => x.Id_option != option.Id_option);
-            $('#select_option_'+option.Id_option).removeClass('table-primary');
+            $('#select_option_' + option.Id_option).removeClass('table-primary');
         } else {
             selectedPiece.options.push(option);
-            $('#select_option_'+option.Id_option).addClass('table-primary');
+            $('#select_option_' + option.Id_option).addClass('table-primary');
         }
         ReloadCurrentPieceOptionsPreview();
     }
@@ -862,7 +871,6 @@ $date = date("d-m-Y");
                 HideCurrentPieceOptionsPreview();
                 ResetSliders();
                 ResetInputOptions();
-                ResetSelectedOptions();
                 HidePieceSelectors();
                 HideOptions();
                 UpdateImageCount();
@@ -949,7 +957,6 @@ $date = date("d-m-Y");
         HideCurrentPieceOptionsPreview();
         ResetSliders();
         ResetInputOptions();
-        ResetSelectedOptions();
         HidePieceSelectors();
         HideOptions();
         UpdateImageCount();
@@ -990,7 +997,6 @@ $date = date("d-m-Y");
             HideCurrentPieceOptionsPreview();
             ResetSliders();
             ResetInputOptions();
-            ResetSelectedOptions();
             HidePieceSelectors();
             HideOptions();
             UpdateImageCount();
@@ -1032,7 +1038,6 @@ $date = date("d-m-Y");
         HideCurrentPieceOptionsPreview();
         ResetSliders();
         ResetInputOptions();
-        ResetSelectedOptions();
         HidePieceSelectors();
         HideOptions();
         UpdateImageCount();

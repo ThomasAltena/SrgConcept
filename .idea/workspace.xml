@@ -1,13 +1,230 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="278" />
-    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="881" />
-    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="807" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="277" />
+    <bookmark url="file://$PROJECT_DIR$/view/LigneDevis.php" line="889" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9d27605-8d41-4044-ba8e-8636f45d8338" name="Default Changelist" comment="Fleches de selection de piece&#10;Numerotation de piece selectionnée&#10;Numerotation de liste de piece cote droit&#10;Pre selection de sous famille et piece des selection de famille&#10;Preservation de largeur minimum de lecran creation devis sur des taille de ecran plus fine">
+    <list default="true" id="a9d27605-8d41-4044-ba8e-8636f45d8338" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/LigneDevis.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/LigneDevis.php" afterDir="false" />
+    </list>
+    <list id="b1904643-69bc-4532-97db-67e02f6b148e" name="Ignore images" comment="Ignore images">
+      <change afterPath="$PROJECT_DIR$/public/images/bordures+et+bases/cotes+eclates.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/bordures+et+bases/par+vent.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/animaux/CHEVAL+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/animaux/TETE+CHEVAL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/bronze/CHRIST+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/bronze/CHRIST+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/bronze/CHRIST+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/bronze/TETE+VIERGE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/bronze/VIERGE+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/bronze/VIERGE+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/bronze/VIERGE+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/bronze/VIERGE+4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/croix/CROIX+++EPIS+BLE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/croix/CROIX+FINE+ROSES.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/croix/CROIX+GRAVEE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/croix/CROIX+RAYONNANTE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/croix/FOND+PIQUE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/divers/FABRE+F33A.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/divers/OBJET+6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/2EPI+BLE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/ARUMS+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/CEP+VIGNE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/COMP+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/COMP+5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/FEUILLES+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET+15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET+16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET+17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET+22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET+23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET+25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/OBJET+28.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/ROSEAUX+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/ROSEAUX+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/ROSES+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/fleurs/ROSES+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/mains/COLOMBE+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/mains/COLOME+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/mains/OBJET+8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/mains/ROSE+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+7A.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/OBJET+8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/oiseaux/SOL+3+COL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/parchemins/OBJET++8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/parchemins/OBJET+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/parchemins/OBJET+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/litho/parchemins/OBJET+6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/assemblees/CROIXPIQUEE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/assemblees/TABLETTE+ISERE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/assemblees/croix+++epis.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/assemblees/croix+piquee.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/assemblees/main+colome.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/assemblees/objet+15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/assemblees/objet+75.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/assemblees/st+pilier.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/assemblees/st+simple.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/brochees/CHANT+ECLATE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/brochees/OBJET+18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/brochees/OBJET+2+.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/brochees/OBJET+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/brochees/OBJET+32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/brochees/OBJET+4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/brochees/PUP+BROCH.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/brochees/ROCHER+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/brochees/SDSA+BROCHEE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/LIVRE+DSB.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/LIVRE+SDSB.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+12-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+14-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+15-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+15-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+28.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+30.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+31.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+54.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+65.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/OBJET+82.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/RAYON+25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/ST+LIMOUS.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/STELE+500.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/classique/STELE+6040.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/coeur/COEUR+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/coeur/COEUR+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/coeur/F+33+A.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/coeur/F+93.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/coeur/OBJET+70.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/DECOR+C.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/DETAIL+F44.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/DETAIL+F56+C.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+32+C.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+38.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+39.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+40.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+42.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+46.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+51.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+72.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+84+C+.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/F+93.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/MAINS+FABRE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF+F32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF+F35D.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF+F47.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF+F48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/MOTIF+F59C.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/fabre/OBJET+23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET+20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET+32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET+61.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET+63.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/israelithes/OBJET+68.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/motif/EPIS+BLES.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/motif/OBJET+18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/steles/motif/OBJET+9-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/3110+++CHANFEIN+TOUT+LE+TOUR+.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/ANDESITE+DOUBLE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/ARRONDI+R3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/BANC+DROIT.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/BOITE+A+BOUGIE+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/BOITE+A+BOUGIES.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/CLIENT+DIFFICIL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/CROQ+DOS.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/DECOUP+AV.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/DECOUPE+ARRIERE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/DEPART+SF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL+CROIX.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL+STELE+4020.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL+STELE+4200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL+STELE+5010.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/DETAIL+STELE+ANDESITE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/F56+C.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/JARDINERE+ASS.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBET+62.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+35.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+39.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+42.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+43.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+47.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+49.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+50.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+51.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+55.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+57.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+58.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+59.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+61.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+63.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/OBJET+64.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/P70+SANS+MOTIF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/PD_CL+AV.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/PLAISANCE+2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/PLAQUAGE+STELE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/POSE+LE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/RESPECT+IMPR.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/SEM+AV+ANDESITE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/STELE+ANDESITE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/STELE+BOITEUX.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/STELE+FERNANDEZ.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/STELE+MICOLE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/TARN+ROYAL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/texte+et+divers/VOIR+MOTIF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/3+DAL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/3+DALLES.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/3+DALLESS.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/3+dalle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/3+dalles+coffrage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/3+dalles0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/3+dalles1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/3+dalles2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/4+tombales.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/5+dalles.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/5+dalles0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/7+dalles.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/DOUCINE+BOMBEE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/GOUTTE+D_EAU.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/OBJET+24-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/OBJET+9-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/TOMBALES+1-5.pfi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/TOMBALES+11-15.pfi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/TOMBALES+16-22.pfi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/TOMBALES+6-10.pfi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/cave+urne.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/croix+relief.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/dalle+doucine.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/doucine+bosse.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/goute+d'eau.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/objet+22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/objet+24+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/objet+41.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/objet+9+1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/tombales/ojival+dalle.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/attente/ATTENTE.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/attente/DEJA EN ATTENTE.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/bordures+et+bases/cotes eclates.png" beforeDir="false" />
@@ -227,7 +444,6 @@
       <change beforePath="$PROJECT_DIR$/public/images/vases/BOITE BOUGIE.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/vases/Carte VASES.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/vases/CarteJARDINNIERES.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/LigneDevis.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/LigneDevis.php" afterDir="false" />
     </list>
     <ignored path="C:\xampp\htdocs\SrgConcept\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -241,11 +457,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
-              <caret line="911" column="91" selection-start-line="911" selection-start-column="91" selection-end-line="911" selection-end-column="91" />
+            <state relative-caret-position="514">
+              <caret line="579" column="78" selection-start-line="579" selection-start-column="78" selection-end-line="579" selection-end-column="78" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
@@ -258,17 +474,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/GetOptions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="357">
+              <caret line="21" column="29" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/css/form.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3995">
-              <caret line="235" column="23" selection-start-line="235" selection-start-column="23" selection-end-line="235" selection-end-column="23" />
+            <state relative-caret-position="232">
+              <caret line="206" column="15" selection-start-line="206" selection-start-column="15" selection-end-line="206" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -312,12 +528,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>UpdatePieceInputOptions</find>
-      <find>update</find>
-      <find>select</find>
-      <find>selectEx</find>
-      <find>selectExi</find>
-      <find>piecesListCurrentPage</find>
       <find>UpdatePiecesListView</find>
       <find>PiecesListGoTo</find>
       <find>PiecesListPageLeft</find>
@@ -342,6 +552,12 @@
       <find>console</find>
       <find>HighlightSelectedOptions</find>
       <find>LoadOptions</find>
+      <find>matiereImage</find>
+      <find>ResetSelectedOptions</find>
+      <find>SelectM</find>
+      <find>ToggleOption</find>
+      <find>matiere</find>
+      <find>matiereImagePreview</find>
     </findStrings>
     <replaceStrings>
       <replace>30px</replace>
@@ -385,10 +601,10 @@
         <option value="$PROJECT_DIR$/Modules/LigneDevis/PiecesListWidget/PiecesListWidget.js" />
         <option value="$PROJECT_DIR$/Modules/LigneDevis/Piece.js" />
         <option value="$PROJECT_DIR$/modules/LigneDevis/PiecesListWidget.js" />
-        <option value="$PROJECT_DIR$/public/css/form.css" />
         <option value="$PROJECT_DIR$/view/GetFilteredSousFamille.php" />
         <option value="$PROJECT_DIR$/view/GetOptions.php" />
         <option value="$PROJECT_DIR$/view/LigneDevis.php" />
+        <option value="$PROJECT_DIR$/public/css/form.css" />
       </list>
     </option>
   </component>
@@ -413,7 +629,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -424,12 +639,18 @@
             <path>
               <item name="SrgConcept" type="b2602c69:ProjectViewProjectNode" />
               <item name="SrgConcept" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SrgConcept" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SrgConcept" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -468,6 +689,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a9d27605-8d41-4044-ba8e-8636f45d8338" name="Default Changelist" comment="" />
+      <changelist id="b1904643-69bc-4532-97db-67e02f6b148e" name="Ignore images" comment="" />
       <created>1547740439373</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -495,7 +717,8 @@
       <workItem from="1549267424070" duration="15248000" />
       <workItem from="1549357973416" duration="4773000" />
       <workItem from="1549373742474" duration="6311000" />
-      <workItem from="1549464428014" duration="1176000" />
+      <workItem from="1549464428014" duration="2012000" />
+      <workItem from="1549534686860" duration="2485000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/ThomasAltena/SrgConcept&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;&#10;Debut placement image (non enregistrement pour l'instant)">
       <created>1548347078035</created>
@@ -686,11 +909,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549378514871</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Bouton annuler modifications&#10;Reset des options a louverture de nouvelle piece">
+      <created>1549466022644</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1549466022644</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208047000" />
+    <option name="totallyTimeSpent" value="211368000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -706,7 +936,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.1652452" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.16684435" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
@@ -768,7 +998,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction verif si idDevis vide" />
     <MESSAGE value="Nouvelle vue selection de pieces et shcema principale visible." />
     <MESSAGE value="Fichiers oubliers" />
     <MESSAGE value="Un debut de liste" />
@@ -793,7 +1022,8 @@
     <MESSAGE value="Suppression correct de piece si preselectionnee et suppression depuis X sur piece" />
     <MESSAGE value="Ajout zone de code options par piece selectionnee" />
     <MESSAGE value="sous famille non selectionnee automatiquement sur selection famille.&#10;Modal selection options (pas fini) les options ne se deselectionnent pas dans la vue a la fermeture de la modal.&#10;&#10;Les evenements boostrap ne sont pas detectes." />
-    <option name="LAST_COMMIT_MESSAGE" value="sous famille non selectionnee automatiquement sur selection famille.&#10;Modal selection options (pas fini) les options ne se deselectionnent pas dans la vue a la fermeture de la modal.&#10;&#10;Les evenements boostrap ne sont pas detectes." />
+    <MESSAGE value="Bouton annuler modifications&#10;Reset des options a louverture de nouvelle piece" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bouton annuler modifications&#10;Reset des options a louverture de nouvelle piece" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -969,20 +1199,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/LigneDevis/Piece.js" />
     <entry file="file://$PROJECT_DIR$/Modules/LigneDevis/PiecesListWidget.js" />
-    <entry file="file://$PROJECT_DIR$/public/css/form.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3995">
-          <caret line="235" column="23" selection-start-line="235" selection-start-column="23" selection-end-line="235" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/GetFilteredSousFamille.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/GetFilteredPieces.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
@@ -997,22 +1213,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/GetOptions.php">
+    <entry file="file://$PROJECT_DIR$/view/GetFilteredSousFamille.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="680">
+          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/LigneDevis.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="911" column="91" selection-start-line="911" selection-start-column="91" selection-end-line="911" selection-end-column="91" />
+        <state relative-caret-position="514">
+          <caret line="579" column="78" selection-start-line="579" selection-start-column="78" selection-end-line="579" selection-end-column="78" />
           <folding>
             <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/GetOptions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="29" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/form.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="206" column="15" selection-start-line="206" selection-start-column="15" selection-end-line="206" selection-end-column="15" />
         </state>
       </provider>
     </entry>
