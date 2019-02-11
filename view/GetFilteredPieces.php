@@ -21,7 +21,7 @@ $code_ss = str_replace(' ', '', $p);
 /*$code_piece_preselect = str_replace(' ', '', $r );*/
 
 $query = 'SELECT * FROM pieces WHERE Code_famille = "'.$code_famille.'" && Code_ss = "'.$code_ss.'"';
-$reponse = $bdd->query('SELECT * FROM pieces');
+$reponse = $bdd->query($query);
 $selectFirst = true;
 
 echo ('<div class="input-group-prepend">
