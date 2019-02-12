@@ -122,7 +122,14 @@ $date = date("d-m-Y");
                                     <?php
                                     $_POST = [];
                                     $reponse = $bdd->query('SELECT * FROM familles');
+                                    $regroupement = '';
                                     while ($donnees = $reponse->fetch()) {
+                                        if($regroupement != $donnees['Regroupement_fam']){
+                                            $regroupement = $donnees['Regroupement_fam'];
+                                            ?>
+                                            <option disabled value="<?php echo $regroupement; ?>"> --- <?php echo $regroupement; ?> ---</option>
+                                            <?php
+                                        }
                                         ?>
                                         <option type="submit"
                                                 value="<?php echo $donnees['Code_famille']; ?>"> <?php echo $donnees['Libelle_famille']; ?></option>

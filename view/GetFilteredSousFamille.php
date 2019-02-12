@@ -29,7 +29,16 @@ if (empty($reponse)) {
     echo('<select name="Id_ss_famille" aria-describedby=Id_ss_famille_label" id="select_ss_famille"
     class="form-control" onchange="FilterPieces(value)">');
     echo('<option value="">Aucun</option>');
+
+    $regroupement = '';
     while ($donnees = $reponse->fetch()) {
+        if($regroupement != $donnees['Regroupement_ss_fam']){
+            $regroupement = $donnees['Regroupement_ss_fam'];
+            ?>
+            <option disabled value="<?php echo $regroupement; ?>"> --- <?php echo $regroupement; ?> ---</option>
+            <?php
+        }
+        
         if ($selectFirst) {
             ?>
             <option value="<?php echo $donnees['Code_ss']; ?>" selected> <?php echo $donnees['Libelle_ss']; ?></option>
