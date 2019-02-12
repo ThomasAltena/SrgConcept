@@ -38,7 +38,7 @@ if (empty($reponse)) {
             <option disabled value="<?php echo $regroupement; ?>"> --- <?php echo $regroupement; ?> ---</option>
             <?php
         }
-        
+
         if ($selectFirst) {
             ?>
             <option value="<?php echo $donnees['Code_ss']; ?>" selected> <?php echo $donnees['Libelle_ss']; ?></option>

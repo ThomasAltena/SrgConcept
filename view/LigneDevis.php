@@ -592,7 +592,9 @@ $date = date("d-m-Y");
     function FilterSousFamille(code_famille, code_ss_famille_to_select) {
         selectedPiece.code_famille = code_famille;
         let xhttp;
-
+        ResetPieceSelector();
+        HideSelectedPieceSchema();
+        HideSelectedPiecePreview();
         if (code_famille === "") {
             ResetSousFamilleSelector();
             ResetPieceSelector();
@@ -604,8 +606,7 @@ $date = date("d-m-Y");
             HideOptions();
             UpdateImageCount();
             ToggleSubmitPieceButton(false);
-            HideSelectedPieceSchema();
-            HideSelectedPiecePreview();
+
             ResetPiecePosition();
         } else {
             xhttp = new XMLHttpRequest();
