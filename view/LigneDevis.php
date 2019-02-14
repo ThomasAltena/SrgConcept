@@ -38,6 +38,7 @@ if ($IdDevis) {
 $date = date("d-m-Y");
 
 ?>
+
 <link rel="stylesheet" href="../public/css/form.css" type="text/css">
 <link rel="stylesheet" href="../public/css/switch.css" type="text/css">
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
@@ -1183,5 +1184,6 @@ $date = date("d-m-Y");
     }
 
 </script>
+
 
 
