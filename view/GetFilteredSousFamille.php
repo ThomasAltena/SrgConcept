@@ -14,7 +14,7 @@ try {
 
 $q = $_GET['q'];
 $code_famille = str_replace(' ', '', $q);
-$query = 'SELECT * FROM ss_familles WHERE Code_famille = "' . $code_famille . '"';
+$query = 'SELECT * FROM ss_familles WHERE Code_famille = "' . $code_famille . '" ORDER BY Regroupement_ss_fam ASC, Libelle_ss ASC';
 $reponse = $bdd->query($query);
 $selectFirst = false;
 

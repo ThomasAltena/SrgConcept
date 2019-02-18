@@ -97,6 +97,8 @@ div.table-title {
     margin: 0;
     padding: 0px;
     visibility: hidden;
+    min-height: 400px;
+    max-height: 400px;
 }
 
 #piece-select-controls {

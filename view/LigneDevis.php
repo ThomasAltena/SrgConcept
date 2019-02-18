@@ -122,7 +122,7 @@ $date = date("d-m-Y");
                                     <option value="" selected style="font-style: italic">Aucun</option>
                                     <?php
                                     $_POST = [];
-                                    $reponse = $bdd->query('SELECT * FROM familles');
+                                    $reponse = $bdd->query('SELECT * FROM familles ORDER BY Regroupement_fam ASC, Libelle_famille ASC');
                                     $regroupement = '';
                                     while ($donnees = $reponse->fetch()) {
                                         if($regroupement != $donnees['Regroupement_fam']){
