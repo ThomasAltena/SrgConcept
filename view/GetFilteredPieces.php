@@ -42,12 +42,12 @@ if(empty($reponse)){
         if($selectFirst){
             ?>
             <option id="<?php echo $donnees['Id_piece']; ?>"
-                    value="<?php echo $donnees['Chemin_piece']; ?>" selected> <?php echo $donnees['Libelle_piece']; ?></option>
+                    value='<?php echo json_encode($donnees); ?>' selected> <?php echo $donnees['Libelle_piece']; ?></option>
             <?php
         } else {
             ?>
             <option id="<?php echo $donnees['Id_piece']; ?>"
-                    value="<?php echo $donnees['Chemin_piece']; ?>"> <?php echo $donnees['Libelle_piece']; ?></option>
+                    value='<?php echo json_encode($donnees); ?>'> <?php echo $donnees['Libelle_piece']; ?></option>
             <?php
         }
     }

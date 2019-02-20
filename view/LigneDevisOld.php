@@ -881,47 +881,43 @@ $date = date("d-m-Y");
             $cache.css({'position': 'fixed', 'top': '100px '});
     }
 
-    // $(function() {
-    //     $("#btnSave").click(function() {
-    //         html2canvas($("#schema"), {
-    //             onrendered: function(canvas) {
-    //                 theCanvas = canvas;
-    //                 document.body.appendChild(canvas);
+    $(function() {
+        $("#btnSave").click(function() {
+            html2canvas($("#schema"), {
+                onrendered: function(canvas) {
+                    theCanvas = canvas;
+                    document.body.appendChild(canvas);
 
-    //                 // Convert and download as image
-    //                 Canvas2Image.saveAsPNG(canvas);
-    //                 //$("#img-out").append(canvas);
-    //                 // Clean up
-    //                 //document.body.removeChild(canvas);
-    //             }
-    //         });
-    //     });
-    // });
+                    Canvas2Image.saveAsPNG(canvas);
+                    var Pic = document.getElementById(canvas).toDataURL("image/png");
+                    Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
 
-    // function UploadPic() {
-    //     // Generate the image data
-    //      html2canvas($("#schema"), {
-    //      onrendered: function(canvas) {
-    //      theCanvas = canvas;
-    //      document.body.appendChild(canvas);
-    //
-    //     // Convert and download as image
-    //     Canvas2Image.saveAsPNG(canvas);
-    //     var Pic = document.getElementById(canvas).toDataURL("image/png");
-    //     Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
-    //
-    //     // Sending the image data to Server
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: 'Save_Picture.aspx/UploadPic',
-    //         data: '{ "imageData" : "' + Pic + '" }',
-    //         contentType: 'application/json; charset=utf-8',
-    //         dataType: 'json',
-    //         success: function (msg) {
-    //             alert("Done, Picture Uploaded.");
-    //         }
-    //     });
-    // }
+                    // Sending the image data to Server
+                    $.ajax({
+                        type: 'POST',
+                        url: 'Save_Picture.aspx/UploadPic',
+                        data: '{ "imageData" : "' + Pic + '" }',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (msg) {
+                            alert("Done, Picture Uploaded.");
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+    function UploadPic() {
+        // Generate the image data
+         html2canvas($("#schema"), {
+         onrendered: function(canvas) {
+         theCanvas = canvas;
+         document.body.appendChild(canvas);
+
+        // Convert and download as image
+
+    }
 
     function nouveauDevis() {
         document.getElementById('mat').style.visibility = "visible";

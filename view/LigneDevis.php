@@ -38,7 +38,7 @@ if ($IdDevis) {
 $date = date("d-m-Y");
 
 ?>
-
+<script src="../jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="../public/css/form.css" type="text/css">
 <link rel="stylesheet" href="../public/css/switch.css" type="text/css">
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
@@ -78,7 +78,7 @@ $date = date("d-m-Y");
                                 <span class="input-group-text" style="width:100px"
                                       id="Id_matiere_label">Matière :</span>
                                 </div>
-                                <select name="Id_matiere" aria-describedby=Id_matiere_label" id="select"
+                                <select name="Id_matiere" aria-describedby=Id_matiere_label" id="id_matiere"
                                         class="form-control" onchange="SelectMatiere(value)">
                                     <?php
                                     $reponse = $bdd->query('SELECT * FROM matieres');
@@ -339,7 +339,7 @@ $date = date("d-m-Y");
                         <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" disabled onclick="">Visualiser
                             Devis
                         </button>
-                        <button class="btn btn-success col-lg-12 hover-effect-a" disabled onclick="">Sauvegarder Devis
+                        <button class="btn btn-success col-lg-12 hover-effect-a" onclick="SauvegarderDevis()">Sauvegarder Devis
                         </button>
                     </div>
                 </div>
@@ -397,7 +397,7 @@ $date = date("d-m-Y");
     let matiere = '';
 
     function Piece() {
-        this.piecePosition = '';
+        this.pos_z = '';
         this.code_famille = "";
         this.code_ss_famille = "";
         this.id_piece = "";
@@ -556,6 +556,7 @@ $date = date("d-m-Y");
         document.getElementById('hauteur_piece').value = '0';
         document.getElementById('largeur_piece').value = '0';
         document.getElementById('profondeur_piece').value = '0';
+        document.getElementById('remise_piece').value = '0';
     }
 
     /*TOGGLE*/
@@ -630,7 +631,7 @@ $date = date("d-m-Y");
         }
     }
 
-    function FilterPieces(code_sous_famille, code_piece_to_select) {
+    function FilterPieces(code_sous_famille, id_piece_to_select) {
         let ss_famille_selected_index = document.getElementById("select_ss_famille").selectedIndex;
         if (ss_famille_selected_index >= 0) {
             selectedPiece.code_ss_famille = document.getElementById("select_ss_famille").options[ss_famille_selected_index].value;
@@ -658,9 +659,9 @@ $date = date("d-m-Y");
                     let selectPiece = document.getElementById("select_piece");
 
                     if (selectPiece.options.length >= 0) {
-                        if (code_piece_to_select) {
+                        if (id_piece_to_select) {
                             for (let x = 0; x < selectPiece.options.length; x++) {
-                                if (selectPiece.options[x].value === code_piece_to_select) {
+                                if (JSON.parse(selectPiece.options[x].value)['Id_piece'] === id_piece_to_select) {
                                     selectPiece.selectedIndex = x;
                                     break;
                                 }
@@ -728,7 +729,7 @@ $date = date("d-m-Y");
         let body = '';
         pieces.forEach(function (piece) {
             if (!piece.selected) {
-                let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.piecePosition + '" ' +
+                let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.pos_z + '" ' +
                     'src="' + piece.chemin_piece + '" ' +
                     'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
                     'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px ; ';
@@ -848,15 +849,15 @@ $date = date("d-m-Y");
 
     function SelectPiece() {
         let select = document.getElementById('select_piece');
-
         // Si une  nouvelle piece est selectionnee par l'utilisateur et non rechargee depuis la selection dune piece existante
         if (!selectedPiece.loading) {
             if (select.value !== "") {
+                let piece = JSON.parse(select.value);
                 let imagePieceSelectionneeSchema = $('#imagePieceSelectionneeSchema');
                 let choice = select.selectedIndex;
 
-                selectedPiece.chemin_piece = select.value;
-                selectedPiece.id_piece = select.options[choice].id;
+                selectedPiece.chemin_piece = piece['Chemin_piece'];
+                selectedPiece.id_piece = piece['Id_piece'];
 
                 ShowSelectedPieceSchema();
                 ShowSelectedPiecePreview();
@@ -903,7 +904,7 @@ $date = date("d-m-Y");
     }
 
     function SelectExistingPiece(piecePosition) {
-        selectedPiece = pieces.find(x => x.piecePosition === piecePosition);
+        selectedPiece = pieces.find(x => x.pos_z === piecePosition);
 
         if (selectedPiece.selected) {
             AnnulerModificationsPiece();
@@ -934,7 +935,7 @@ $date = date("d-m-Y");
             document.getElementById("select_famille").value = selectedPiece.code_famille;
 
             FilterSousFamille(selectedPiece.code_famille, selectedPiece.code_ss_famille);
-            FilterPieces(selectedPiece.code_ss_famille, selectedPiece.chemin_piece);
+            FilterPieces(selectedPiece.code_ss_famille, selectedPiece.id_piece);
             SelectPiece();
             MovePieceImage();
         }
@@ -990,8 +991,8 @@ $date = date("d-m-Y");
     }
 
     function DeletePiece(piecePosition) {
-        if (!piecePosition || pieces.find(x => x.piecePosition == piecePosition).selected) {
-            piecePosition = selectedPiece.piecePosition;
+        if (!piecePosition || pieces.find(x => x.pos_z == piecePosition).selected) {
+            piecePosition = selectedPiece.pos_z;
             selectedPiece = new Piece();
 
             ResetOptionsBoutonSchema();
@@ -1014,10 +1015,10 @@ $date = date("d-m-Y");
             HideSelectedPiecePreview();
         }
 
-        pieces = pieces.filter(x => x.piecePosition !== piecePosition);
+        pieces = pieces.filter(x => x.pos_z !== piecePosition);
         let pos = 1;
         pieces.forEach(piece => {
-            piece.piecePosition = pos;
+            piece.pos_z = pos;
             pos++;
         });
 
@@ -1027,9 +1028,9 @@ $date = date("d-m-Y");
 
     function SauvegarderNouvellePiece() {
         if (pieces.length) {
-            selectedPiece.piecePosition = pieces.length + 1;
+            selectedPiece.pos_z = pieces.length + 1;
         } else {
-            selectedPiece.piecePosition = 1;
+            selectedPiece.pos_z = 1;
         }
         pieces.push(selectedPiece);
 
@@ -1070,10 +1071,47 @@ $date = date("d-m-Y");
     function DuplicatePiece() {
         let piece = new Piece();
         pieces.push(piece);
-        piece.piecePosition = pieces.length;
+        piece.pos_z = pieces.length;
         UpdatePiecesListView(-1);
     }
 
+    function SauvegarderDevis() {
+        //UploadPic();
+        let idClient = document.getElementById('id_client').value;
+        let idMatiere = JSON.parse(document.getElementById('id_matiere').value)['Id_matiere'];
+        let cheminImageDevis = 'unknown';
+        let arguments = [idClient, idMatiere, cheminImageDevis, pieces];
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+           if (this.readyState === 4 && this.status === 200) {
+               console.log(this.responseText);
+               //SauvegarderLignes();
+
+           }
+        };
+        xhttp.open("POST", "AddLignesDevis.php?functionname=" + 'AddDevis' + "&arguments=" + JSON.stringify(arguments), true);
+        xhttp.send();
+    }
+
+    function UploadPic() {
+        html2canvas($("#schemaPiecesContainer"), {
+            onrendered: function(canvas) {
+                document.body.appendChild(canvas);
+
+                //Canvas2Image.saveAsPNG(canvas);
+
+                //var Pic = document.getElementById(canvas).toDataURL("image/png");
+                //Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
+
+                // Sending the image data to Server
+                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+
+
+                window.location.href=image;
+            }
+        });
+    }
 
     /*
         /--------------------------------------- FONCTIONS PIECE LIST -----------------------------------------------------------/
@@ -1139,11 +1177,11 @@ $date = date("d-m-Y");
             if (pieces[x]) {
                 body += '<div class="col-sm" id="singularSelectedPieceBoxContainer"> \n' +
                     '<div id="deletePieceIconContainer">\n' +
-                    '    <div class="btn hover-effect-a" id="deletePieceIcon" onclick="DeletePiece(' + pieces[x].piecePosition + ' )">\n' +
+                    '    <div class="btn hover-effect-a" id="deletePieceIcon" onclick="DeletePiece(' + pieces[x].pos_z + ' )">\n' +
                     '        <i class="fas fa-trash-alt"></i>\n' +
                     '    </div>\n' +
                     '</div>' +
-                    '<span id="singularSelectedPieceNumberContainer">' + pieces[x].piecePosition +
+                    '<span id="singularSelectedPieceNumberContainer">' + pieces[x].pos_z +
                     '</span>' +
                     '<div class="btn hover-effect-a';
 
@@ -1153,8 +1191,8 @@ $date = date("d-m-Y");
 
 
                 body += '" id="singularSelectedPieceImageSubContainer" ' +
-                    'onclick="SelectExistingPiece(' + pieces[x].piecePosition + ')">' +
-                    '<img alt="Une piece parmis pleins" id="selectable_piece_' + pieces[x].piecePosition + '" src="' + pieces[x].chemin_piece +
+                    'onclick="SelectExistingPiece(' + pieces[x].pos_z + ')">' +
+                    '<img alt="Une piece parmis pleins" id="selectable_piece_' + pieces[x].pos_z + '" src="' + pieces[x].chemin_piece +
                     '" style="max-width: 135px; height: 135px; ';
                 if (pieces[x].chemin_piece === "") {
                     body += 'visibility: hidden;';

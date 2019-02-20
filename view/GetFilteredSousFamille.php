@@ -4,8 +4,6 @@ if (empty($_SESSION)) {
     header('location:index.php');
 }
 
-$db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-
 try {
     $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 } catch (Exception $e) {

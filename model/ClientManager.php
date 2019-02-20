@@ -18,7 +18,7 @@ class ClientManager
 	public function AddClient(Client $client)
 	{
 
-		$q = $this->_Db->prepare('INSERT INTO clients(Id_client, Adresse_client, Cp_client, DateCrea_client, Mail_client, Nom_client, Prenom_client, Prospect_client, Tel_client, Ville_client, IdUser_client) VALUES(:id, :adresse, :codepostal, :datecreation, :mail, :nom, :prenom, :prospect, :tel, :ville, :iduser)');
+		$q = $this->_Db->prepare('INSERT INTO clients(Id_client, Adresse_client, CodePostal_client, DateCrea_client, Mail_client, Nom_client, Prenom_client, Prospect_client, Tel_client, Ville_client, IdUser_client) VALUES(:id, :adresse, :codepostal, :datecreation, :mail, :nom, :prenom, :prospect, :tel, :ville, :iduser)');
 
 		//Récupération de la date du jour
 		$todaysDate = date("Y-m-d");
@@ -36,7 +36,11 @@ class ClientManager
 		$q->bindValue(':iduser', $client->GetIdUser());
 
 		//Execution de la requete
-		$q->execute();
+        if(!$q->execute()) {
+            print_r($q->errorInfo());
+            return false;
+        }
+        return true;
 	}
 	/** Suppression d'un utilisateur **/
 	public function DeleteClient($id)
@@ -48,7 +52,7 @@ class ClientManager
 	public function UpdateClient(Client $client)
 	{
 		//Preparation
-		$q = $this->_Db->prepare('UPDATE `clients` SET `Adresse_client` = :adresse , `Cp_client` = :codepostal , `DateCrea_client` = :datecreation , `Mail_client` = :mail , `Nom_client` = :nom , `Prenom_client` = :prenom , `Prospect_client` = :prospect , `Tel_client` = :tel , `Ville_client` = :ville , `Id_user` = :iduser WHERE `client`.`Id_client` = :id');
+		$q = $this->_Db->prepare('UPDATE `clients` SET `Adresse_client` = :adresse , `CodePostal_client` = :codepostal , `DateCrea_client` = :datecreation , `Mail_client` = :mail , `Nom_client` = :nom , `Prenom_client` = :prenom , `Prospect_client` = :prospect , `Tel_client` = :tel , `Ville_client` = :ville , `Id_user` = :iduser WHERE `client`.`Id_client` = :id');
 
 		//Assignation de valeur
 		$q->bindValue(':id', $client->GetId());
@@ -64,8 +68,11 @@ class ClientManager
 		$q->bindValue(':iduser', $client->GetUserId());
 		
 		//Execution de la requete
-		$q->execute();
-
+        if(!$q->execute()) {
+            print_r($q->errorInfo());
+            return false;
+        }
+        return true;
 	}
 
 	/** Retourne UN client **/
@@ -115,5 +122,4 @@ class ClientManager
 
         return $clients;
     }
-
 }

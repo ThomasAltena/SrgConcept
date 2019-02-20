@@ -3,11 +3,12 @@
 Class Devis
 {
 	private $_Id;
-	private $_Code;
+	//private $_Code;
 	private $_Date;
 	private $_IdClient;
 	private $_IdUser;
 	private $_CheminImage;
+    private $_IdMatiere;
 
 	  //constructeur
     public function __construct(array $donnees)
@@ -37,7 +38,7 @@ Class Devis
 
     //*get*//
     public function GetId(){return $this->_Id;}
-    public function GetCode(){return $this->_Code;}
+    public function GetIdMatiere(){return $this->_IdMatiere;}
     public function GetDate(){return $this->_Date;}
     public function GetIdClient(){return $this->_IdClient;}
     public function GetIdUser(){return $this->_IdUser;}
@@ -45,8 +46,8 @@ Class Devis
 
     //*Set*//
     public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetCode($code){$this -> _Code = $code;}
-    public function SetDatedevis($date){return $this -> _Date = $date;}
+    public function SetIdMatiere($idMatiere){$this -> _IdMatiere = $idMatiere;}
+    public function SetDate($date){return $this -> _Date = $date;}
     public function SetIdClient($idclient){return $this -> _IdClient = $idclient;}
     public function SetIdUser($iduser){return $this -> _IdUser = $iduser;}
     public function SetChemin($chemin){return $this-> _CheminImage = $chemin;}

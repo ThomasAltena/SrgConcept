@@ -3,24 +3,17 @@
 Class LigneDevis 
 {
 	private $_Id;
-	private $_Code;
 	private $_Remise;
-	private $_Prix;
 	private $_Poids;
 	private $_Hauteur;
 	private $_Largeur;
 	private $_Profondeur;
 	private $_IdPiece;
-	private $_IdMatiere;
-	private $_IdCouleur;
-	private $_IdTva;
 	private $_IdDevis;
-	private $_Option1;
-	private $_Option2;
-	private $_Option3;
-	private $_Option4;
-	private $_Option5;
-
+    private $_Pos_x_piece;
+    private $_Pos_y_piece;
+    private $_Ratio_piece;
+    private $_Pos_z_piece;
 
 	  //constructeur
     public function __construct(array $donnees)
@@ -40,12 +33,10 @@ Class LigneDevis
     {
         foreach ($donnees as $key => $value)
         {
-
             // Setter
             $method = 'Set'.ucfirst($key);
-            $method = substr($method, 0, -6);
 
-
+            //$method = substr($method, 0, -6);
             // Si le setter correspondant existe.
             if (method_exists($this, $method))
             {
@@ -58,41 +49,29 @@ Class LigneDevis
 
     //*get*//
     public function GetId(){return $this->_Id;}
-    public function GetCode(){return $this->_Code;}
     public function GetRemise(){return $this->_Remise;}
-    public function GetPrix(){return $this->_Prix;}
     public function GetPoids(){return $this->_Poids;}
     public function GetHauteur(){return $this->_Hauteur;}
     public function GetLargeur(){return $this->_Largeur;}
-    public function GetIdPiece(){return $this->_IdPiece;}
-    public function GetIdMatiere(){return $this->_IdMatiere;}
-    public function GetIdCouleur(){return $this->_IdCouleur;}
-    public function GetIdTva(){return $this->_IdTva;}
-    public function GetIdDevis(){return $this->_IdDevis;}
-    public function GetOption1(){return $this->_Option1;}
-    public function GetOption2(){return $this->_Option2;}
-    public function GetOption3(){return $this->_Option3;}
-    public function GetOption4(){return $this->_Option4;}
-    public function GetOption5(){return $this->_Option5;}
     public function GetProfondeur(){return $this->_Profondeur;}
+    public function GetIdPiece(){return $this->_IdPiece;}
+    public function GetIdDevis(){return $this->_IdDevis;}
+    public function GetPos_x_piece(){return $this->_Pos_x_piece;}
+    public function GetPos_y_piece(){return $this->_Pos_y_piece;}
+    public function GetRatio_piece(){return $this->_Ratio_piece;}
+    public function GetPos_z_piece(){return $this->_Pos_z_piece;}
 
     //*set*//
     public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetCode($code){$this -> _Code = $code;}
     public function SetRemise($remise){$this -> _Remise = $remise;}
-    public function SetPrix($prix){$this -> _Prix = $prix;}
     public function SetPoids($poids){$this -> _Poids = $poids;}
     public function SetHauteur($hauteur){$this -> _Hauteur = $hauteur;}
     public function SetLargeur($largeur){$this -> _Largeur = $largeur;}
+    public function SetProfondeur($profondeur) {$this -> _Profondeur = $profondeur;}
     public function SetIdpiece($piece){$this -> _IdPiece = $piece;}
-    public function SetIdmatiere($matiere){$this -> _IdMatiere = $matiere;}
-    public function SetIdcouleur($couleur){$this -> _IdCouleur = $couleur;}
-    public function SetIdtva($tva){$this -> _IdTva = $tva;}
     public function SetIddevis($devis){$this-> _IdDevis = $devis;}
-    public function SetOption1($option1){$this -> _Option1 = $option1;}
-    public function SetOption2($option2){$this -> _Option2 = $option2;}
-    public function SetOption3($option3){$this -> _Option3 = $option3;}
-    public function SetOption4($option4){$this -> _Option4 = $option4;}
-    public function SetOption5($option5){$this -> _Option5 = $option5;}
-    public  function SetProfondeur($profondeur) {$this -> _Profondeur = $profondeur;}
-} 
+    public function SetPos_x_piece($Pos_x_piece){$this -> _Pos_x_piece = $Pos_x_piece;}
+    public function SetPos_y_piece($Pos_y_piece){$this -> _Pos_y_piece = $Pos_y_piece;}
+    public function SetRatio_piece($Ratio_piece){$this -> _Ratio_piece = $Ratio_piece;}
+    public function SetPos_z_piece($Pos_z_piece){$this -> _Pos_z_piece = $Pos_z_piece;}
+}
