@@ -30,6 +30,9 @@ require('../model/OptionClass.php');
 require('../model/LigneDevisClass.php');
 require('../model/LigneDevisManager.php');
 
+require('../model/OptionLigneClass.php');
+require('../model/OptionLigneManager.php');
+
 require('../model/DevisClass.php');
 require('../model/DevisManager.php');
 
@@ -93,4 +96,3 @@ require('../model/UploadCroquis.php');
 	</ul>
     </nav>
 </header>
-

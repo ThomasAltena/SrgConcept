@@ -1077,7 +1077,7 @@ $date = date("d-m-Y");
     function SauvegarderDevis() {
       html2canvas($("#schemaPiecesContainer"), {
           onrendered: function(canvas) {
-              document.body.appendChild(canvas);
+              //document.body.appendChild(canvas);
               //var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
               let dataURL = canvas.toDataURL("image/png");
               let idClient = document.getElementById('id_client').value;
@@ -1085,12 +1085,10 @@ $date = date("d-m-Y");
               let cheminImageDevis = 'unknown';
               let arguments = [idClient, idMatiere, cheminImageDevis, dataURL, pieces];
 
-
               let xhttp = new XMLHttpRequest();
               xhttp.onreadystatechange = function () {
                  if (this.readyState === 4 && this.status === 200) {
-                     console.log(this.responseText);
-
+                     //console.log(this.responseText);
 
                  }
               };

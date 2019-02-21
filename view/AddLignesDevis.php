@@ -15,6 +15,9 @@ require('../model/DevisManager.php');
 require('../model/LigneDevisClass.php');
 require('../model/LigneDevisManager.php');
 
+require('../model/OptionLigneClass.php');
+require('../model/OptionLigneManager.php');
+
 try {
     $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 } catch (Exception $e) {
@@ -25,10 +28,10 @@ $aResult = array();
 $input = file_get_contents('php://input');
 $arguments = null;
 
-if( !isset($_GET['functionname']) ) { $aResult['error'] = 'No function name!'; }
+if( !isset($_GET['functionname']) ) { $aResult['error'] .= 'No function name!'; }
 
 if( !isset($input) ) {
-    $aResult['error'] = 'No function arguments!'; }
+    $aResult['error'] .= '\n No function arguments!'; }
 else {
     $arguments = json_decode($input);
 }
@@ -37,13 +40,13 @@ if( !isset($aResult['error']) ) {
     switch($_GET['functionname']) {
         case 'AddDevis':
             if( !is_array($arguments) || (count($arguments) < 5) ) {
-                $aResult['error'] = 'Erreur - manque données devis!';
+                $aResult['error'] .= '\n Erreur - manque données devis!';
             }
             else {
                 $lignes = $arguments[4];
 
                 if( !is_array($lignes) || (count($lignes) < 1) ) {
-                    $aResult['error'] = '\'Erreur - manque données pieces!!';
+                    $aResult['error'] .= '\n Erreur - manque données pieces!!';
                 } else {
                     $idUser = $_SESSION['Id_user'];
                     $date = date("Y-m-d");
@@ -64,10 +67,11 @@ if( !isset($aResult['error']) ) {
                     $devisInsertResult = $DevisManager->AddDevis($devis);
 
                     if(!$devisInsertResult[0]){
-                        $aResult['error'] = "Erreur INSERT de DEVIS - ".$devisInsertResult[1][2];
+                        $aResult['error'] .= '\n Erreur INSERT de DEVIS - '.$devisInsertResult[1][2];
                     } else {
-                        $lastId = $db->lastInsertId();
+                        $devisInsertId = $db->lastInsertId();
                         $LigneDevisManager = new LigneDevisManager($db); //Connexion a la BDD
+                        $OptionLigneManager = new OptionLigneManager($db);
 
                         //PREPARATION IMAGE
                         $img = $arguments[3];
@@ -77,15 +81,15 @@ if( !isset($aResult['error']) ) {
 
                         //SAUVEGARDE IMAGE QUAND DEVIS INSERT REUSSI
                         $upload_dir = "../public/images/schemas/";
-                        $fichier_nom = "DEVIS_" . $lastId . "_" . mktime() . ".png";
+                        $fichier_nom = "DEVIS_" . $devisInsertId . "_" . mktime() . ".png";
                         $fichier = $upload_dir . $fichier_nom;
                         $success = file_put_contents($fichier, $data);
 
                         $fichier_full_path = $upload_dir . $fichier_nom;
-                        $devisUpdateResult = $DevisManager->UpdateCheminSchema($lastId, $fichier_full_path);
+                        $devisUpdateResult = $DevisManager->UpdateCheminSchema($devisInsertId, $fichier_full_path);
 
                         foreach ($lignes as $ligne){
-                            print_r($ligne->id_piece);
+                            $options = $ligne->options;
 
                             $formattedLigne = new LigneDevis([
                                 "Id" => '',
@@ -95,7 +99,7 @@ if( !isset($aResult['error']) ) {
                                 "Largeur" => $ligne->largeur,
                                 "Profondeur" => $ligne->profondeur,
                                 "IdPiece" => $ligne->id_piece,
-                                "IdDevis" => $lastId,
+                                "IdDevis" => $devisInsertId,
                                 "Pos_x_piece" => $ligne->pos_x,
                                 "Pos_y_piece" => $ligne->pos_y,
                                 "Ratio_piece" => $ligne->ratio,
@@ -105,11 +109,26 @@ if( !isset($aResult['error']) ) {
                             $ligneInsertResult = $LigneDevisManager->AddLigne($formattedLigne);
 
                             if(!$ligneInsertResult[0]){
-                                $aResult['error'] = "Erreur INSERT de DEVIS - ".$ligneInsertResult[1][2];
+                                $aResult['error'] .= '\n Erreur INSERT de LIGNE - '.$ligneInsertResult[1][2];
                             } else {
-                                //insert options lignes devis
-                                //TODO
 
+                                if( is_array($options) && (count($options) > 0) ) {
+                                    $ligneInsertId = $db->lastInsertId();
+
+                                    foreach ($options as $option) {
+                                        $formattedOption = new OptionLigne([
+                                            "Id" => '',
+                                            "IdLigne" => $ligneInsertId,
+                                            "IdOption" => $option->Id_option
+                                        ]);
+
+                                        $optionLigneInsertResult = $OptionLigneManager->AddOptionLigne($formattedOption);
+
+                                        if(!$optionLigneInsertResult[0]){
+                                            $aResult['error'] .= '\n Erreur INSERT de OPTION_LIGNE - '.$optionLigneInsertResult[1][2];
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
