@@ -22,24 +22,24 @@ try {
 }
 
 $aResult = array();
-$arguments = null;
+$arguments = json_decode(file_get_contents('php://input'));
 
 if( !isset($_GET['functionname']) ) { $aResult['error'] = 'No function name!'; }
 
-if( !isset($_GET['arguments']) ) {
-    $aResult['error'] = 'No function arguments!'; }
-else {
-    $arguments = json_decode($_GET['arguments']);
-}
+//if( !isset($_GET['arguments']) ) {
+//    $aResult['error'] = 'No function arguments!'; }
+//else {
+//    $arguments = json_decode(file_get_contents('php://input'));
+//}
 
 if( !isset($aResult['error']) ) {
     switch($_GET['functionname']) {
         case 'AddDevis':
-            if( !is_array($arguments) || (count($arguments) < 4) ) {
+            if( !is_array($arguments) || (count($arguments) < 5) ) {
                 $aResult['error'] = 'Erreur - manque données devis!';
             }
             else {
-                $lignes = $arguments[3];
+                $lignes = $arguments[4];
 
                 if( !is_array($lignes) || (count($lignes) < 1) ) {
                     $aResult['error'] = '\'Erreur - manque données pieces!!';
@@ -65,9 +65,24 @@ if( !isset($aResult['error']) ) {
                     if(!$devisInsertResult[0]){
                         $aResult['error'] = "Erreur INSERT de DEVIS - ".$devisInsertResult[1][2];
                     } else {
+                        $lastId = $db->lastInsertId();
                         $LigneDevisManager = new LigneDevisManager($db); //Connexion a la BDD
 
-                        $lastId = $db->lastInsertId();
+                        //PREPARATION IMAGE
+                        $img = $arguments[3];
+                        $img = str_replace('data:image/png;base64,', '', $img);
+                        $img = str_replace(' ', '+', $img);
+                        $data = base64_decode($img);
+
+                        //SAUVEGARDE IMAGE QUAND DEVIS INSERT REUSSI
+                        $upload_dir = "../public/images/schemas/";
+                        $fichier_nom = "DEVIS_" . $lastId . "_" . mktime() . ".png";
+                        $fichier = $upload_dir . $fichier_nom;
+                        $success = file_put_contents($fichier, $data);
+
+                        $fichier_full_path = $upload_dir . $fichier_nom;
+                        $devisUpdateResult = $DevisManager->UpdateCheminSchema($lastId, $fichier_full_path);
+
                         foreach ($lignes as $ligne){
                             print_r($ligne->id_piece);
 
@@ -85,7 +100,7 @@ if( !isset($aResult['error']) ) {
                                 "Ratio_piece" => $ligne->ratio,
                                 "Pos_z_piece" => $ligne->pos_z
                             ]);
-                            print_r($formattedLigne);
+
                             $ligneInsertResult = $LigneDevisManager->AddLigne($formattedLigne);
 
                             if(!$ligneInsertResult[0]){

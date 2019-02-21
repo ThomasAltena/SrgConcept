@@ -386,7 +386,6 @@ $date = date("d-m-Y");
     </div>
 </div>
 
-
 </body>
 <script type="text/javascript">
     let selectedPiece = new Piece();
@@ -1076,43 +1075,30 @@ $date = date("d-m-Y");
     }
 
     function SauvegarderDevis() {
-        //UploadPic();
-        let idClient = document.getElementById('id_client').value;
-        let idMatiere = JSON.parse(document.getElementById('id_matiere').value)['Id_matiere'];
-        let cheminImageDevis = 'unknown';
-        let arguments = [idClient, idMatiere, cheminImageDevis, pieces];
+      html2canvas($("#schemaPiecesContainer"), {
+          onrendered: function(canvas) {
+              document.body.appendChild(canvas);
+              //var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+              let dataURL = canvas.toDataURL("image/png");
+              let idClient = document.getElementById('id_client').value;
+              let idMatiere = JSON.parse(document.getElementById('id_matiere').value)['Id_matiere'];
+              let cheminImageDevis = 'unknown';
+              let arguments = [idClient, idMatiere, cheminImageDevis, dataURL, pieces];
 
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-           if (this.readyState === 4 && this.status === 200) {
-               console.log(this.responseText);
-               //SauvegarderLignes();
 
-           }
-        };
-        xhttp.open("POST", "AddLignesDevis.php?functionname=" + 'AddDevis' + "&arguments=" + JSON.stringify(arguments), true);
-        xhttp.send();
+              let xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                 if (this.readyState === 4 && this.status === 200) {
+                     console.log(this.responseText);
+
+
+                 }
+              };
+              xhttp.open("POST", "AddLignesDevis.php?functionname=" + 'AddDevis' , true);
+              xhttp.send(JSON.stringify(arguments));
+          }
+      });
     }
-
-    function UploadPic() {
-        html2canvas($("#schemaPiecesContainer"), {
-            onrendered: function(canvas) {
-                document.body.appendChild(canvas);
-
-                //Canvas2Image.saveAsPNG(canvas);
-
-                //var Pic = document.getElementById(canvas).toDataURL("image/png");
-                //Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
-
-                // Sending the image data to Server
-                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
-
-
-                window.location.href=image;
-            }
-        });
-    }
-
     /*
         /--------------------------------------- FONCTIONS PIECE LIST -----------------------------------------------------------/
     */
@@ -1222,6 +1208,3 @@ $date = date("d-m-Y");
     }
 
 </script>
-
-
-

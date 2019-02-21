@@ -17,6 +17,21 @@ Class DevisManager
         $this->_Db = $db;
     }
 
+    public function UpdateCheminSchema($idDevis, $cheminSchema)
+    {
+        if(isset($idDevis) && isset($cheminSchema)){
+            $q = $this->_Db->prepare('UPDATE devis SET CheminImage_devis = (:chemin) WHERE Id_devis = (:id);');
+            $q->bindValue(':chemin',$cheminSchema);
+            $q->bindValue(':id',$idDevis);
+            if(!$q->execute()) {
+                return [false,$q->errorInfo()];
+            }
+            return [true, 'OK'];
+        } else {
+            return [false, 'Données incompletes'];
+        }
+    }
+
 
     public function AddDevis(Devis $devis)
     {
@@ -126,7 +141,7 @@ Class DevisManager
     	}
 
     	return $client;
-    	
+
     }
 
     public function SommePrix($iddevis)
