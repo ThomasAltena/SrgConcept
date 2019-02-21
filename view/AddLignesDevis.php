@@ -22,15 +22,16 @@ try {
 }
 
 $aResult = array();
-$arguments = json_decode(file_get_contents('php://input'));
+$input = file_get_contents('php://input');
+$arguments = null;
 
 if( !isset($_GET['functionname']) ) { $aResult['error'] = 'No function name!'; }
 
-//if( !isset($_GET['arguments']) ) {
-//    $aResult['error'] = 'No function arguments!'; }
-//else {
-//    $arguments = json_decode(file_get_contents('php://input'));
-//}
+if( !isset($input) ) {
+    $aResult['error'] = 'No function arguments!'; }
+else {
+    $arguments = json_decode($input);
+}
 
 if( !isset($aResult['error']) ) {
     switch($_GET['functionname']) {
@@ -106,11 +107,10 @@ if( !isset($aResult['error']) ) {
                             if(!$ligneInsertResult[0]){
                                 $aResult['error'] = "Erreur INSERT de DEVIS - ".$ligneInsertResult[1][2];
                             } else {
-                                // insert options lignes devis
+                                //insert options lignes devis
                                 //TODO
 
                             }
-
                         }
                     }
                 }
