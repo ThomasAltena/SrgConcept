@@ -3,7 +3,7 @@
 <head>
     <title>Monumac</title>
 </head>
-
+<link rel="stylesheet" href="../public/css/form.css" type="text/css">
 <?php
 session_start();
 
@@ -13,18 +13,30 @@ if (empty($_SESSION)) {
     include('header.php');
 }
 
+$q = $_GET['q'];
 
-$db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-$ManagerMatiere = new MatiereManager($db); //Connexion a la BDD
-$matieres = $ManagerMatiere->GetMatieres();
 try {
     $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 
+$query = 'SELECT * FROM devis WHERE Id_devis = '.$q.'';
+$reponse = $bdd->query($query);
 
-$date = date("d-m-Y");
+while ($devi = $reponse->fetch()){
+  $deviModel = new Devis($devi);
+
+  ?>
+  <input hidden id='devisId' value='<?php echo json_encode($devi); ?>'>
+  <?php
+}
+
+$query = 'SELECT * FROM clients WHERE Id_client = '.$deviModel->GetIdClient().'';
+$reponse = $bdd->query($query);
+while ($donnees = $reponse->fetch()){
+  $clientModel = new Client($donnees);
+}
 
 ?>
 <script src="../pixi.min.js"></script>
@@ -42,10 +54,29 @@ $date = date("d-m-Y");
                 <div class="col-sm row" id="optionsPrincipaleEtSchemaContainer">
                     <!--OPTIONS-->
                     <div class="col-sm" id="optionsPrincipalContainer">
-
+                      <div class="formbox" style="margin-bottom: 1vw;">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Devis N˚</span>
+                          </div>
+                          <input type="text" class="form-control" disabled aria-describedby="basic-addon1" value="<?php echo $deviModel->GetId(); ?>">
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Client :</span>
+                          </div>
+                          <input type="text" class="form-control" disabled aria-describedby="basic-addon1" value="<?php echo $clientModel->GetNom(); ?> <?php echo $clientModel->GetPrenom(); ?> " >
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Date :</span>
+                          </div>
+                          <input type="text" class="form-control" disabled aria-describedby="basic-addon1" value="<?php echo $deviModel->GetDate(); ?>">
+                        </div>
+                      </div>
                     </div>
                     <!--SCHEMA-->
-                    <div class="col-sm" id="schemaOptionsContainer">
+                    <div class="col-sm formbox row" style="max-width:1000px; min-width:1000px; max-height:700px; min-height:700px; padding:0" id="schemaContainer">
 
                     </div>
                 </div>
@@ -63,77 +94,66 @@ $date = date("d-m-Y");
 </body>
 <script type="text/javascript">// This is demo of pixi-display.js, https://github.com/gameofbombs/pixi-display
     // Drag the rabbits to understand what's going on
+    let devis = JSON.parse(document.getElementById('devisId').value);
 
-    var app = new PIXI.Application(950, 600, {backgroundColor: 0xEEEEEE});
-    document.getElementById('schemaOptionsContainer').appendChild(app.view);
-    //document.body.appendChild(app.view);
+    let app = new PIXI.Application(1000, 700, {backgroundColor: 0xEEEEEE});
+    document.getElementById('schemaContainer').appendChild(app.view);
 
     //META STUFF, groups exist without stage just fine
 
     // z-index = 0, sorting = true;
-    var greenGroup = new PIXI.display.Group(0, true);
-    greenGroup.on('sort', function (sprite) {
-        //green bunnies go down
-        sprite.zOrder = -sprite.y;
+
+    let schemaGroup = new PIXI.display.Group(0, true);
+
+    let donneesGroup = new PIXI.display.Group(1, function (sprite) {
+        //blue bunnies go up
+        sprite.zOrder = +sprite.y;
     });
 
-    // z-index = 1, sorting = true, we can provide zOrder function directly in constructor
-    var blueGroup = new PIXI.display.Group(1, function (sprite) {
+    let flechesGroup = new PIXI.display.Group(2, function (sprite) {
         //blue bunnies go up
         sprite.zOrder = +sprite.y;
     });
 
     // Drag is the best layer, dragged element is above everything else
-    var dragGroup = new PIXI.display.Group(2, false);
+    let dragGroup = new PIXI.display.Group(3, false);
 
     // Shadows are the lowest
-    var shadowGroup = new PIXI.display.Group(-1, false);
+    let shadowGroup = new PIXI.display.Group(-1, false);
 
     //specify display list component
     app.stage = new PIXI.display.Stage();
     app.stage.group.enableSort = true;
     //sorry, group cant exist without layer yet :(
-    app.stage.addChild(new PIXI.display.Layer(greenGroup));
-    app.stage.addChild(new PIXI.display.Layer(blueGroup));
+
+    app.stage.addChild(new PIXI.display.Layer(schemaGroup));
+    app.stage.addChild(new PIXI.display.Layer(donneesGroup));
+    app.stage.addChild(new PIXI.display.Layer(flechesGroup));
     app.stage.addChild(new PIXI.display.Layer(dragGroup));
     app.stage.addChild(new PIXI.display.Layer(shadowGroup));
 
-    var blurFilter = new PIXI.filters.BlurFilter();
+    let blurFilter = new PIXI.filters.BlurFilter();
     blurFilter.blur = 0.5;
 
     // create a texture from an image path
-    var texture_green = PIXI.Texture.fromImage('../public/images/figure-65.png');
-    var texture_blue = PIXI.Texture.fromImage('../public/images/figure-65.png');
+    let texture_Schema = PIXI.Texture.fromImage(devis.CheminImage_devis);
 
     // make obsolete containers. Why do we need them?
     // Just to show that we can do everything without caring of actual parent container
-    var bunniesOdd = new PIXI.Container();
-    var bunniesEven = new PIXI.Container();
-    var bunniesBlue = new PIXI.Container();
-    app.stage.addChild(bunniesOdd);
-    app.stage.addChild(bunniesBlue);
-    app.stage.addChild(bunniesEven);
+    let flechesContainer = new PIXI.Container();
+    let donneesContainer = new PIXI.Container();
+    let schemaContainer = new PIXI.Container();
+    app.stage.addChild(flechesContainer);
+    app.stage.addChild(donneesContainer);
+    app.stage.addChild(schemaContainer);
 
-    var ind = [];
-    for (var i = 0; i < 1; i++) {
-        //let bunny = new PIXI.BitmapText("text using a fancy font!", {font: "35px Times New Roman", align: "right"});
-        //bunny.width = 150;
-        //bunny.height = 100;
-        //bunny.position.set(100 + 20 * i, 100 + 20 * i);
-        //bunny.anchor.set(0.5);
-        // that thing is required
-        //bunny.parentGroup = greenGroup;
-        if (i % 2 == 0) {
-            //bunniesEven.addChild(bunny);
-        } else {
-            //bunniesOdd.addChild(bunny);
-        }
-        //subscribe(bunny);
-        //addShadow(bunny);
-    }
+    let schemaImage = new PIXI.Sprite(texture_Schema);
+    schemaImage.parentGroup = schemaGroup;
+    schemaContainer.addChild(schemaImage);
+    subscribe(schemaImage);
 
-    for (var i = 0; i >= 0; i--) {
-        var bunny = new PIXI.Sprite(texture_blue);
+    /*for (let i = 0; i >= 0; i--) {
+        let bunny = new PIXI.Sprite(texture_blue);
         bunny.width = 150;
         bunny.height = 100;
         bunny.position.set(400 + 20 * i, 400 - 20 * i);
@@ -143,7 +163,7 @@ $date = date("d-m-Y");
         bunniesBlue.addChild(bunny);
         subscribe(bunny);
         addShadow(bunny);
-    }
+    }*/
 
     function subscribe(obj) {
         obj.interactive = true;
@@ -158,10 +178,10 @@ $date = date("d-m-Y");
     }
 
     function addShadow(obj) {
-        var gr = new PIXI.Graphics();
+        let gr = new PIXI.Graphics();
         gr.beginFill(0x0, 1);
         //yes , I know bunny size, I'm sorry for this hack
-        var scale = 1.1;
+        let scale = 1.1;
         gr.drawRect(-25/2 * scale, -36/2 * scale, 25 * scale, 36 * scale);
         gr.endFill();
         gr.filters = [blurFilter];
@@ -177,8 +197,8 @@ $date = date("d-m-Y");
             this.parentGroup = dragGroup;
             this.dragging = true;
 
-            this.scale.x *= 1.1;
-            this.scale.y *= 1.1;
+            this.scale.x *= 1.001;
+            this.scale.y *= 1.001;
             this.dragPoint = event.data.getLocalPosition(this.parent);
             this.dragPoint.x -= this.x;
             this.dragPoint.y -= this.y;
@@ -189,8 +209,8 @@ $date = date("d-m-Y");
         if (this.dragging) {
             this.dragging = false;
             this.parentGroup = this.oldGroup;
-            this.scale.x /= 1.1;
-            this.scale.y /= 1.1;
+            this.scale.x /= 1.001;
+            this.scale.y /= 1.001;
             // set the interaction data to null
             this.data = null;
         }
@@ -198,7 +218,7 @@ $date = date("d-m-Y");
 
     function onDragMove() {
         if (this.dragging) {
-            var newPosition = this.data.getLocalPosition(this.parent);
+            let newPosition = this.data.getLocalPosition(this.parent);
             this.x = newPosition.x - this.dragPoint.x;
             this.y = newPosition.y - this.dragPoint.y;
         }
@@ -206,6 +226,3 @@ $date = date("d-m-Y");
 
 
 </script>
-
-
-

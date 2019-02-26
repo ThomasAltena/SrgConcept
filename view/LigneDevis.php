@@ -40,12 +40,13 @@ $date = date("d-m-Y");
 ?>
 <script src="../jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="../public/css/form.css" type="text/css">
+<link rel="stylesheet" href="../public/css/ligneDevis.css" type="text/css">
 <link rel="stylesheet" href="../public/css/switch.css" type="text/css">
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
 <body>
 <div id="content-wrapper">
     <div class='container' style="max-width: 100%;">
-        <div class="form col-lg-12" name="myform" method="post">
+        <div class="form col-lg-12">
             <div class="row col-lg-12" style="min-width: 1250px">
                 <!--OPTIONS ET SCHEMA-->
                 <div class="col-sm row" id="optionsPrincipaleEtSchemaContainer">

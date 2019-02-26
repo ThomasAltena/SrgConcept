@@ -2,7 +2,7 @@
 
 class Client
 {
-	private $_Id;
+	public $_Id;
 	private $_Adresse;
 	private $_CodePostal;
 	private $_DateCrea;

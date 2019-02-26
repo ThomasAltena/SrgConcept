@@ -25,7 +25,7 @@ Class Devis
             // Setter
             $method = 'Set'.ucfirst($key);
 
-            //$method = substr($method, 0, -6);
+            $method = substr($method, 0, -6);
             // Si le setter correspondant existe.
             if (method_exists($this, $method))
             {
@@ -50,5 +50,5 @@ Class Devis
     public function SetDate($date){return $this -> _Date = $date;}
     public function SetIdClient($idclient){return $this -> _IdClient = $idclient;}
     public function SetIdUser($iduser){return $this -> _IdUser = $iduser;}
-    public function SetChemin($chemin){return $this-> _CheminImage = $chemin;}
+    public function SetCheminImage($chemin){return $this-> _CheminImage = $chemin;}
 }

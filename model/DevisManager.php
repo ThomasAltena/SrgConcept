@@ -64,7 +64,6 @@ Class DevisManager
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
             $devis[] = new Devis($donnees);
-
         }
         return $devis;
     }

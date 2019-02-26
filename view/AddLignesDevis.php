@@ -55,12 +55,12 @@ if( !isset($aResult['error']) ) {
                     $chemin = $arguments[2];
 
                     $devis = new Devis([
-                        "Id" => "",
-                        "Date" => $date,
-                        "IdClient" => $idclient,
-                        "IdUser" => $idUser,
-                        "Chemin" => "",
-                        "IdMatiere" => $idMatiere
+                        "Id_devis" => "",
+                        "Date_devis" => $date,
+                        "IdClient_devis" => $idclient,
+                        "IdUser_devis" => $idUser,
+                        "Chemin_devis" => "",
+                        "IdMatiere_devis" => $idMatiere
                     ]);
 
                     $DevisManager = new DevisManager($db); //Connexion a la BDD
