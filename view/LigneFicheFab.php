@@ -26,11 +26,22 @@ $reponse = $bdd->query($query);
 
 while ($devi = $reponse->fetch()){
   $deviModel = new Devis($devi);
-
   ?>
   <input hidden id='devisId' value='<?php echo json_encode($devi); ?>'>
   <?php
 }
+
+$query = 'SELECT * FROM lignes_devis WHERE Id_devis = '.$deviModel->GetId().'';
+$reponse = $bdd->query($query);
+$lignes = array();
+while ($donnees = $reponse->fetch()){
+  array_push($lignes, $donnees);
+}
+?>
+<input hidden id='lignesDevis' value='<?php echo json_encode($lignes); ?>'>
+<?php
+
+
 
 $query = 'SELECT * FROM clients WHERE Id_client = '.$deviModel->GetIdClient().'';
 $reponse = $bdd->query($query);
@@ -51,9 +62,9 @@ while ($donnees = $reponse->fetch()){
         <div class="form col-lg-12" name="myform" method="post">
             <div class="row col-lg-12" style="min-width: 1250px">
                 <!--OPTIONS ET SCHEMA-->
-                <div class="col-sm row" id="optionsPrincipaleEtSchemaContainer">
+                <div class="col-sm row" style="width:500px">
                     <!--OPTIONS-->
-                    <div class="col-sm" id="optionsPrincipalContainer">
+                    <div class="col-sm">
                       <div class="formbox" style="margin-bottom: 1vw;">
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
@@ -76,13 +87,16 @@ while ($donnees = $reponse->fetch()){
                       </div>
                     </div>
                     <!--SCHEMA-->
-                    <div class="col-sm formbox row" style="max-width:1000px; min-width:1000px; max-height:700px; min-height:700px; padding:0" id="schemaContainer">
 
-                    </div>
                 </div>
 
                 <!--PIECES SELECTIONNEES-->
-                <div class="col-sm" id="piecesSelectionneeEtOptionsDevisContainer">
+                <div class="col-sm">
+                  <div class="col-sm formbox row" style="max-width:1000px; min-width:1000px; max-height:700px; min-height:700px; padding:0" id="schemaContainer">
+
+                  </div>
+                </div>
+                <div class="col-sm">
 
                 </div>
             </div>
@@ -92,9 +106,15 @@ while ($donnees = $reponse->fetch()){
 
 
 </body>
-<script type="text/javascript">// This is demo of pixi-display.js, https://github.com/gameofbombs/pixi-display
-    // Drag the rabbits to understand what's going on
+<script type="text/javascript">
+    window.WebFontConfig = {
+        google: {
+            families: ['Roboto', 'Arvo:700italic', 'Podkova:700']
+        }
+    };
+
     let devis = JSON.parse(document.getElementById('devisId').value);
+    let lignes = JSON.parse(document.getElementById('lignesDevis').value);
 
     let app = new PIXI.Application(1000, 700, {backgroundColor: 0xEEEEEE});
     document.getElementById('schemaContainer').appendChild(app.view);
@@ -148,22 +168,32 @@ while ($donnees = $reponse->fetch()){
     app.stage.addChild(schemaContainer);
 
     let schemaImage = new PIXI.Sprite(texture_Schema);
+    schemaImage.position.set(100,0);
     schemaImage.parentGroup = schemaGroup;
     schemaContainer.addChild(schemaImage);
     subscribe(schemaImage);
+    //let bitmapText = new PIXI.extras.BitmapText("text using a fancy font!", {font: "VCR OSD MONO", align: "right"});
 
-    /*for (let i = 0; i >= 0; i--) {
-        let bunny = new PIXI.Sprite(texture_blue);
-        bunny.width = 150;
-        bunny.height = 100;
-        bunny.position.set(400 + 20 * i, 400 - 20 * i);
-        bunny.anchor.set(0.5);
-        // that thing is required
-        bunny.parentGroup = blueGroup;
-        bunniesBlue.addChild(bunny);
-        subscribe(bunny);
-        addShadow(bunny);
-    }*/
+
+
+    console.log(lignes);
+    let i = 1;
+    lignes.forEach(function(ligne) {
+      let donnes = new PIXI.Text('HAUTEUR: '+ligne.Hauteur_ligne+' LARGEUR: '+ligne.Largeur_ligne+' PROFONDEUR: '+ligne.Hauteur_ligne, {
+              fontFamily: 'Roboto',
+              fontSize: 15,
+              fill: 'black',
+              align: 'left'
+      });
+      donnes.parentGroup = donneesGroup;
+      donneesContainer.addChild(donnes);
+      donnes.position.set(150,20 * i);
+      donnes.anchor.set(0.5);
+      subscribe(donnes);
+      //addShadow(donnes);
+        i++;
+    });
+
 
     function subscribe(obj) {
         obj.interactive = true;
