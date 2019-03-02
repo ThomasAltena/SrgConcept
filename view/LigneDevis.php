@@ -199,7 +199,7 @@ $date = date("d-m-Y");
                     <div class="col-sm" id="schemaOptionsContainer">
                         <div class="col-lg-12 formbox row" id="schemaPiecesEtSlidersContainer">
                             <div class="col-sm-11" id="schemaPiecesContainer">
-                                <img id="imagePieceSelectionneeSchema" src="" alt"">
+                                <img id="imagePieceSelectionneeSchema" src="" alt""  style="top:100px; left:50px; position:absolute;">
 
                             </div>
                             <div class="col-sm-1 formbox" id="selectedPieceOptionsList">
@@ -479,6 +479,7 @@ $date = date("d-m-Y");
             imagePieceSelectionneeSchema.style.maxWidth = "600px";
             imagePieceSelectionneeSchema.style.width = "600px";
             imagePieceSelectionneeSchema.style.height = "600px";
+            $('#imagePieceSelectionneeSchema').css({top: "100px", left: "50px", position:'absolute'});
         }
     }
 
@@ -732,7 +733,7 @@ $date = date("d-m-Y");
                 let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.pos_z + '" ' +
                     'src="' + piece.chemin_piece + '" ' +
                     'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
-                    'position: absolute; left:' + piece.pos_x / 10 + 'px ; top:' + piece.pos_y / 10 + 'px ; ';
+                    'position: absolute; left:' + (50 + piece.pos_x / 10) + 'px ; top:' + (100 + piece.pos_y / 10) + 'px ; ';
                 if (piece.chemin_piece === "") {
                     text += 'visibility: hidden;';
                 }
@@ -780,8 +781,8 @@ $date = date("d-m-Y");
         selectedPiece.pos_y = posY;
         selectedPiece.ratio = ratio;
 
-        imagePieceSelectionneeSchema.css({"left": (posX / 10).toString().concat('px')});
-        imagePieceSelectionneeSchema.css({"top": (posY / 10).toString().concat('px')});
+        imagePieceSelectionneeSchema.css({"left": (50+(posX / 10)).toString().concat('px')});
+        imagePieceSelectionneeSchema.css({"top": (100+(posY / 10)).toString().concat('px')});
 
         imagePieceSelectionneeSchema.css({"max-width": ''});
 

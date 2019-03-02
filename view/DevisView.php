@@ -94,7 +94,7 @@ while ($devi = $reponse->fetch()){
      aria-labelledby="optionSelectionModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 900px;">
             <div class="modal-header">
                 <h4 class="modal-title" id="previewSchemaTitle"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
