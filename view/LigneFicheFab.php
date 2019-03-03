@@ -31,7 +31,7 @@ try {
 <body>
   <div id="content-wrapper">
     <div class='container' style="max-width: 100%;">
-      <div class="form col-lg-12" name="myform" method="post">
+      <div class="col-lg-12">
         <div class="row col-lg-12" style="min-width: 1250px">
           <!--OPTIONS ET SCHEMA-->
           <div class="col-sm row" style="width:500px">
@@ -56,12 +56,16 @@ try {
                   </div>
                   <input type="text" class="form-control" disabled aria-describedby="basic-addon1" id="dateLibelle" value="">
                 </div>
-                <button class="btn btn-success col-lg-12 hover-effect-a" onclick="addFleche()">Ajouter Fleche
+                <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" onclick="addFleche()">Ajouter Fleche
+                </button>
+                <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" disabled onclick="">Visualiser
+                    Fiche
+                </button>
+                <button class="btn btn-success col-lg-12 hover-effect-a" onclick="">Sauvegarder Fiche
                 </button>
               </div>
+              <div class="formbox"></div>
             </div>
-
-
           </div>
 
           <!--PIECES SELECTIONNEES-->
@@ -118,6 +122,7 @@ try {
 
 </body>
 <script type="text/javascript">
+let listContents = 'pieces';
 let arrowSource = '../public/images/arrow.png';
 let action = 'drag';
 let currentMouseRotation = null;
@@ -316,6 +321,7 @@ function generateFlecheListHtml(ligne, index){
 }
 
 function loadList(action){
+  listContents = action;
   switch (action) {
     case 'pieces':
       body = '';
@@ -388,6 +394,10 @@ function addFleche(){
   subscribe(arrow);
 
   fleches.push({'parent': arrow, 'child': graphics, 'index': fleches.length });
+
+  if(listContents != 'pieces'){
+    loadList(listContents);
+  }
 }
 
 function removeFleche(index){
