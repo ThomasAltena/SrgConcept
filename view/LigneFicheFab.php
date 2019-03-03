@@ -56,6 +56,8 @@ try {
                   </div>
                   <input type="text" class="form-control" disabled aria-describedby="basic-addon1" id="dateLibelle" value="">
                 </div>
+                <button class="btn btn-success col-lg-12 hover-effect-a" onclick="addFleche()">Ajouter Fleche
+                </button>
               </div>
             </div>
 
@@ -116,6 +118,7 @@ try {
 
 </body>
 <script type="text/javascript">
+let arrowSource = '../public/images/arrow.png';
 let action = 'drag';
 let currentMouseRotation = null;
 let currentMouseDistance = null;
@@ -269,14 +272,10 @@ function loadPieces(){
     donnees.anchor.set(0.5);
     subscribe(donnees);
 
-    donnees.fill = 'red';
-
     let graphics ;
-
-    layers.push({'parent': donnees, 'child': graphics, 'index': i-1});
+    layers.push({'ligne': ligne, 'parent': donnees, 'child': graphics, 'index': i-1});
 
     body += generatePieceListHtml(ligne, i-1);
-
     i++;
   });
 
@@ -284,10 +283,11 @@ function loadPieces(){
 }
 
 function generatePieceListHtml(ligne, index){
+  let action = "'pieces'";
   body = '';
   body += '<div class="row formbox col-lg-12 hover-effect-b" style="margin: 0 0 5px 0; height:150px; padding:0"';
-  body += 'onmouseenter="addHighlight('+ index + ')"';
-  body += 'onmouseleave="removeHighlight('+ index + ')" >';
+  body += 'onmouseenter="addHighlight('+ index + ',' + action + ')"';
+  body += 'onmouseleave="removeHighlight('+ index + ',' + action + ')" >';
   body += '<div class="col-sm" style="width: 150px; max-width:150px; padding:0; margin: 0 1px 0 0">';
   body += '<img alt="Une piece parmis pleins" style="left:0;max-width: 150px; min-width:150px;" src="'+ ligne.piece.Chemin_piece +'">';
   body += '</div>';
@@ -299,16 +299,34 @@ function generatePieceListHtml(ligne, index){
   return body;
 }
 
+function generateFlecheListHtml(ligne, index){
+  let action = "'fleches'";
+  body = '';
+  body += '<div class="row formbox col-lg-12 hover-effect-b" style="margin: 0 0 5px 0; height:50px; padding:0"';
+  body += 'onmouseenter="addHighlight('+ index + ',' + action + ')"';
+  body += 'onmouseleave="removeHighlight('+ index + ',' + action + ')" >';
+
+  body += '<img alt="Une piece parmis pleins" style="left:0;" src="'+ arrowSource +'">';
+
+  body += '</div>';
+  return body;
+}
+
 function loadList(action){
   switch (action) {
     case 'pieces':
-    body = '';
+      body = '';
       layers.forEach(function(layer){
-        body += generatePieceListHtml(layer.parent, layer.index);
+        body += generatePieceListHtml(layer.ligne, layer.index);
       });
       document.getElementById("piecesListView").innerHTML = body + body + body;
       break;
     case 'fleches':
+      body = '';
+      fleches.forEach(function(layer){
+        body += generateFlecheListHtml(layer.parent, layer.index);
+      });
+      document.getElementById("piecesListView").innerHTML = body + body + body;
 
       break;
     default:
@@ -316,26 +334,54 @@ function loadList(action){
   }
 }
 
-function addHighlight(index){
-  layer = layers[index];
+function addHighlight(index, type){
+  switch (type) {
+    case 'pieces':
+      layer = layers[index];
+      break;
+    case 'fleches':
+      layer = fleches[index];
+      break;
+    default:
+      break;
+  }
   layer.child = new PIXI.Graphics();
   layer.child.lineStyle(2, 0xFF0000);
-  layer.child.drawRect(layer.parent.x - layer.parent.width/2 , layer.parent.y - layer.parent.height/2, layer.parent.width, layer.parent.height);
-  layer.child.rotation = layer.parent.rotation;
-  layer.parent.parent.addChild(layer.child);
+  layer.child.drawRect(-layer.parent.width/2, -layer.parent.height/2, layer.parent.width, layer.parent.height);
+  layer.parent.addChild(layer.child);
 }
 
-function removeHighlight(index){
-  layer = layers[index];
-  layer.parent.parent.removeChild(layer.child);
+function removeHighlight(index, type){
+  switch (type) {
+    case 'pieces':
+      layer = layers[index];
+      break;
+    case 'fleches':
+      layer = fleches[index];
+      break;
+    default:
+      break;
+  }
+  layer.parent.removeChild(layer.child);
 }
 
 function addFleche(){
+  let texture_arrow = PIXI.Texture.fromImage(arrowSource);
+  let graphics ;
+  let arrow = new PIXI.Sprite(texture_arrow);
 
+  arrow.position.set(200,200);
+  arrow.parentGroup = flechesGroup;
+  arrow.anchor.set(0.5);
+  stage.addChild(arrow);
+  subscribe(arrow);
+
+  fleches.push({'parent': arrow, 'child': graphics, 'index': fleches.length });
 }
 
-function removeFleche(){
-
+function removeFleche(index){
+  arrow = fleches[index].fleche;
+  stage.removeChild(arrow);
 }
 
 function addGroups(){
@@ -371,7 +417,6 @@ function addGroups(){
 }
 
 function loadSchema(){
-  // create a texture from an image path
   let texture_Schema = PIXI.Texture.fromImage(devis.CheminImage_devis);
   let schemaImage = new PIXI.Sprite(texture_Schema);
   schemaImage.position.set(100,0);
