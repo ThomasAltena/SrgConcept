@@ -279,7 +279,7 @@ function loadPieces(){
     i++;
   });
 
-  document.getElementById("piecesListView").innerHTML = body + body + body;
+  document.getElementById("piecesListView").innerHTML = body;
 }
 
 function generatePieceListHtml(ligne, index){
@@ -308,6 +308,9 @@ function generateFlecheListHtml(ligne, index){
 
   body += '<img alt="Une piece parmis pleins" style="left:0;" src="'+ arrowSource +'">';
 
+  body += '<div class="btn hover-effect-a" style="color: red; position: absolute; left: 5px top: 5px;" onclick="removeFleche(' + index + ' )">\n';
+  body += '<i class="fas fa-trash-alt"></i>\n';
+  body += '</div>\n';
   body += '</div>';
   return body;
 }
@@ -319,17 +322,25 @@ function loadList(action){
       layers.forEach(function(layer){
         body += generatePieceListHtml(layer.ligne, layer.index);
       });
-      document.getElementById("piecesListView").innerHTML = body + body + body;
+      document.getElementById("piecesListView").innerHTML = body;
       break;
     case 'fleches':
       body = '';
       fleches.forEach(function(layer){
         body += generateFlecheListHtml(layer.parent, layer.index);
       });
-      document.getElementById("piecesListView").innerHTML = body + body + body;
+      document.getElementById("piecesListView").innerHTML = body;
 
       break;
     default:
+      body = '';
+      layers.forEach(function(layer){
+        body += generatePieceListHtml(layer.ligne, layer.index);
+      });
+      fleches.forEach(function(layer){
+        body += generateFlecheListHtml(layer.parent, layer.index);
+      });
+      document.getElementById("piecesListView").innerHTML = body;
       break;
   }
 }
