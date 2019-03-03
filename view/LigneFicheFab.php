@@ -56,15 +56,17 @@ try {
                   </div>
                   <input type="text" class="form-control" disabled aria-describedby="basic-addon1" id="dateLibelle" value="">
                 </div>
-                <button class="mb-3 btn btn-success col-lg-12 hover-effect-a" onclick="addFleche()">Ajouter Fleche
+                <button class="btn btn-default col-lg-12 hover-effect-a" onclick="addFleche()">Ajouter Fleche
                 </button>
+
+              </div>
+              <div class="formbox">
                 <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" disabled onclick="">Visualiser
                     Fiche
                 </button>
                 <button class="btn btn-success col-lg-12 hover-effect-a" onclick="">Sauvegarder Fiche
                 </button>
               </div>
-              <div class="formbox"></div>
             </div>
           </div>
 
