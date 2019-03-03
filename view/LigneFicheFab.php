@@ -21,34 +21,6 @@ try {
   die('Erreur : ' . $e->getMessage());
 }
 
-$query = 'SELECT * FROM devis WHERE Id_devis = '.$q.'';
-$reponse = $bdd->query($query);
-
-while ($devi = $reponse->fetch()){
-  $deviModel = new Devis($devi);
-  ?>
-  <input hidden id='devisId' value='<?php echo json_encode($devi); ?>'>
-  <?php
-}
-
-$query = 'SELECT * FROM lignes_devis WHERE Id_devis = '.$deviModel->GetId().'';
-$reponse = $bdd->query($query);
-$lignes = array();
-while ($donnees = $reponse->fetch()){
-  array_push($lignes, $donnees);
-}
-?>
-<input hidden id='lignesDevis' value='<?php echo json_encode($lignes); ?>'>
-<?php
-
-
-
-$query = 'SELECT * FROM clients WHERE Id_client = '.$deviModel->GetIdClient().'';
-$reponse = $bdd->query($query);
-while ($donnees = $reponse->fetch()){
-  $clientModel = new Client($donnees);
-}
-
 ?>
 <script src="../pixi.min.js"></script>
 <script src="../pixi-layers.js"></script>
@@ -64,40 +36,77 @@ while ($donnees = $reponse->fetch()){
           <!--OPTIONS ET SCHEMA-->
           <div class="col-sm row" style="width:500px">
             <!--OPTIONS-->
-            <div class="col-sm">
+            <div class="col-sm" style="padding:0">
               <div class="formbox" style="margin-bottom: 1vw;">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Devis N˚</span>
                   </div>
-                  <input type="text" class="form-control" disabled aria-describedby="basic-addon1" value="<?php echo $deviModel->GetId(); ?>">
+                  <input type="text" class="form-control" disabled aria-describedby="basic-addon1" id="devisId" value="<?php echo $q; ?>">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Client :</span>
                   </div>
-                  <input type="text" class="form-control" disabled aria-describedby="basic-addon1" value="<?php echo $clientModel->GetNom(); ?> <?php echo $clientModel->GetPrenom(); ?> " >
+                  <input type="text" class="form-control" disabled aria-describedby="basic-addon1" id="clientLibelle" value="" >
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Date :</span>
                   </div>
-                  <input type="text" class="form-control" disabled aria-describedby="basic-addon1" value="<?php echo $deviModel->GetDate(); ?>">
+                  <input type="text" class="form-control" disabled aria-describedby="basic-addon1" id="dateLibelle" value="">
                 </div>
               </div>
             </div>
-            <!--SCHEMA-->
+
 
           </div>
 
           <!--PIECES SELECTIONNEES-->
-          <div class="col-sm">
-            <div class="col-sm formbox row" style="max-width:1000px; min-width:1000px; max-height:700px; min-height:700px; padding:0" id="schemaContainer">
+          <div class="col-sm formbox" style="padding:0; margin-right:1vw; margin-left:1vw;">
+            <!--SCHEMA FICHE DE FABRICATION-->
+            <div class="col-sm" style="max-width:1000px; min-width:1000px; max-height:700px; min-height:700px; padding:0" id="schemaContainer">
 
             </div>
+            <!--OPTIONS FICHE DE FABRICATION-->
+            <div class="row col-lg-12" style="height: 50px; margin: 0; padding: 0;"
+                 id="piecesListControls">
+              <div class="col-sm btn hover-effect-a" id="undoButton" style="padding-top: 12px;"
+                   onclick="undo()">CTRL+Z &nbsp
+                   <i class="fas fa-undo"></i>
+              </div>
+              <div class="col-sm btn hover-effect-a" id="redoButton" style="padding-top: 12px;"
+                   onclick="redo()">CTRL+Y &nbsp
+                  <i class="fas fa-redo"></i>
+              </div>
+              <div class="col-sm btn hover-effect-a" id="rotationButton" style="padding-top: 12px;"
+                   onclick="toggleRotation()">CTRL+CLICK &nbsp
+                  <i class="fas fa-sync-alt"></i>
+              </div>
+              <div class="col-sm btn hover-effect-a" id="ratiationButton" style="padding-top: 12px;"
+                   onclick="toggleRatiation()">SHIFT+CLICK &nbsp
+                  <i class="fas fa-expand"></i>
+              </div>
+            </div>
           </div>
-          <div class="col-sm">
+          <!--PIECES FICHE DE FABRICATION-->
+          <div class="col-sm formbox" style="padding:0; max-height:750px; min-height:750px; ">
+            <div class="col-sm" style="max-height:700px; min-height:700px; min-width:300px; max-width:400px; padding:5px; overflow:scroll" id="piecesListView" >
 
+            </div>
+            <div class="row col-lg-12" style="height: 50px; margin: 0; padding: 0;"
+                 id="piecesListControls">
+              <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                   onclick="loadList('pieces')">PIECES
+              </div>
+              <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                   onclick="loadList('fleches')">FLECHES
+              </div>
+              <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                   onclick="loadList()">TOUT
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -112,8 +121,8 @@ let currentMouseRotation = null;
 let currentMouseDistance = null;
 let actionEnCours = false;
 
-let devis = JSON.parse(document.getElementById('devisId').value);
-let lignes = JSON.parse(document.getElementById('lignesDevis').value);
+let devisId = JSON.parse(document.getElementById('devisId').value);
+let devis = null;
 let app = new PIXI.autoDetectRenderer(1000, 700, {backgroundColor: 0xEEEEEE});
 document.getElementById('schemaContainer').appendChild(app.view);
 let schemaGroup;
@@ -122,45 +131,113 @@ let flechesGroup;
 let dragGroup;
 let shadowGroup;
 let stage;
+let history = [];
+let historyIndex = 0;
+let startState = [];
+let endState = [];
+let layers = [];
+let fleches = [];
 
+let controlKey = false;
+let shiftKey = false;
 
-setBackground();
-addGroups();
-fillGroups();
-animate();
+getDevisData();
+
+function getDevisData() {
+  let xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      let response = JSON.parse(this.responseText)
+      devis = response.data;
+      console.log(devis);
+
+      fillDevisInfo();
+      setBackground();
+      addGroups();
+      loadSchema();
+      loadPieces();
+      animate();
+    }
+  };
+  xhttp.open("GET", "../controller/DevisController.php?functionname=" + 'GetAllDevisInfo' + "&devisId=" + devisId, true);
+  xhttp.send();
+}
 
 $(document).ready(function () {
   $(document).on("keydown", function (e) {
     if(!actionEnCours){
-      if(event.ctrlKey && !event.shiftKey){
-        action = 'rotate';
-      }
-      if(event.shiftKey && !event.ctrlKey){
-        action = 'ratiate';
-      }
-      if(event.shiftKey && event.ctrlKey){
-        action = 'ratiateAndRotate';
-      }
-    }
-  });
-
-  $(document).on("keyup", function (e) {
-    if(!actionEnCours){
       if(event.ctrlKey){
-        action = 'drag';
+        if(!controlKey){
+          controlKey = true;
+          highlightToggleButton(controlKey, '#rotationButton');
+        }
       }
       if(event.shiftKey){
-        action = 'drag';
+        if(!shiftKey){
+          shiftKey = true;
+          highlightToggleButton(shiftKey, '#ratiationButton');
+        }
+      }
+      if(event.ctrlKey && event.keyCode == 90 ){
+        clickButton('#undoButton');
+
+      }
+      if(event.ctrlKey && event.keyCode == 89 ){
+        clickButton('#redoButton');
       }
     }
   });
-
+  $(document).keyup(function (e) {
+    if(!event.ctrlKey){
+      if(controlKey){
+        controlKey = false;
+        highlightToggleButton(controlKey, '#rotationButton');
+      }
+    }
+    if(!event.shiftKey){
+      if(shiftKey){
+        shiftKey = false;
+        highlightToggleButton(shiftKey, '#ratiationButton');
+      }
+    }
+  });
 });
+
+function toggleRotation(){
+  controlKey = !controlKey;
+  highlightToggleButton(controlKey, '#rotationButton');
+}
+
+function toggleRatiation(){
+  shiftKey = !shiftKey;
+  highlightToggleButton(shiftKey, '#ratiationButton');
+}
+
+function clickButton(id){
+  $(id).click();
+  highlightToggleButton(true, id);
+  setTimeout(function(){ highlightToggleButton(false, id); }, 100);
+}
+
+function highlightToggleButton(bool, id){
+  if(bool){
+    $(id).addClass('buttonActive');
+  } else {
+    $(id).removeClass('buttonActive');
+  }
+}
+
 window.WebFontConfig = {
   google: {
     families: ['Roboto', 'Arvo:700italic', 'Podkova:700']
   }
 };
+
+function fillDevisInfo(){
+  document.getElementById('clientLibelle').value = devis.client.Nom_client.toUpperCase() + ' ' + devis.client.Prenom_client;
+  document.getElementById('dateLibelle').value = devis.Date_devis;
+}
 
 function setBackground(){
   stage = new PIXI.Container();
@@ -172,6 +249,93 @@ function setBackground(){
 
   stage.addChild(background);
   stage.interactive = true;
+}
+
+function loadPieces(){
+  body = '';
+  let i = 1;
+  devis.lignes.forEach(function(ligne){
+    let donnees = new PIXI.Text('H:'+ligne.Hauteur_ligne+'cm L:'+ligne.Largeur_ligne+'cm P:'+ligne.Hauteur_ligne +'cm', {
+      fontFamily: 'Roboto',
+      fontSize: 25,
+      fill: 'black',
+      align: 'left'
+    });
+
+    donnees.buttonMode = true;
+    donnees.parentGroup = donneesGroup;
+    stage.addChild(donnees);
+    donnees.position.set((donnees.width/2)+10,23 * i);
+    donnees.anchor.set(0.5);
+    subscribe(donnees);
+
+    donnees.fill = 'red';
+
+    let graphics ;
+
+    layers.push({'parent': donnees, 'child': graphics, 'index': i-1});
+
+    body += generatePieceListHtml(ligne, i-1);
+
+    i++;
+  });
+
+  document.getElementById("piecesListView").innerHTML = body + body + body;
+}
+
+function generatePieceListHtml(ligne, index){
+  body = '';
+  body += '<div class="row formbox col-lg-12 hover-effect-b" style="margin: 0 0 5px 0; height:150px; padding:0"';
+  body += 'onmouseenter="addHighlight('+ index + ')"';
+  body += 'onmouseleave="removeHighlight('+ index + ')" >';
+  body += '<div class="col-sm" style="width: 150px; max-width:150px; padding:0; margin: 0 1px 0 0">';
+  body += '<img alt="Une piece parmis pleins" style="left:0;max-width: 150px; min-width:150px;" src="'+ ligne.piece.Chemin_piece +'">';
+  body += '</div>';
+  body += '<div class="col-sm" style="height: 150px; max-height: 150px; padding:0; margin; 0">';
+  body += '<span>Code: ' + ligne.piece.Code_piece + '<br>Famille: ' + ligne.piece.Code_famille + ' - ' + ligne.piece.Code_ss;
+  body += '<br>Hauteur: ' + ligne.Hauteur_ligne + 'cm<br>Largeur: ' + ligne.Largeur_ligne + 'cm<br>Profondeur: ' + ligne.Profondeur_ligne + 'cm';
+  body += '<br>Remise: ' + ligne.Remise_ligne + '</span>';
+  body += '</div></div>';
+  return body;
+}
+
+function loadList(action){
+  switch (action) {
+    case 'pieces':
+    body = '';
+      layers.forEach(function(layer){
+        body += generatePieceListHtml(layer.parent, layer.index);
+      });
+      document.getElementById("piecesListView").innerHTML = body + body + body;
+      break;
+    case 'fleches':
+
+      break;
+    default:
+      break;
+  }
+}
+
+function addHighlight(index){
+  layer = layers[index];
+  layer.child = new PIXI.Graphics();
+  layer.child.lineStyle(2, 0xFF0000);
+  layer.child.drawRect(layer.parent.x - layer.parent.width/2 , layer.parent.y - layer.parent.height/2, layer.parent.width, layer.parent.height);
+  layer.child.rotation = layer.parent.rotation;
+  layer.parent.parent.addChild(layer.child);
+}
+
+function removeHighlight(index){
+  layer = layers[index];
+  layer.parent.parent.removeChild(layer.child);
+}
+
+function addFleche(){
+
+}
+
+function removeFleche(){
+
 }
 
 function addGroups(){
@@ -206,7 +370,7 @@ function addGroups(){
   blurFilter.blur = 0.5;
 }
 
-function fillGroups(){
+function loadSchema(){
   // create a texture from an image path
   let texture_Schema = PIXI.Texture.fromImage(devis.CheminImage_devis);
   let schemaImage = new PIXI.Sprite(texture_Schema);
@@ -214,22 +378,6 @@ function fillGroups(){
   schemaImage.parentGroup = schemaGroup;
   stage.addChild(schemaImage);
   subscribe(schemaImage);
-
-  let i = 1;
-  lignes.forEach(function(ligne) {
-    let donnes = new PIXI.Text('H: '+ligne.Hauteur_ligne+' L: '+ligne.Largeur_ligne+' P: '+ligne.Hauteur_ligne, {
-      fontFamily: 'Roboto',
-      fontSize: 25,
-      fill: 'black',
-      align: 'left'
-    });
-    donnes.parentGroup = donneesGroup;
-    stage.addChild(donnes);
-    donnes.position.set(80,23 * i);
-    donnes.anchor.set(0.5);
-    subscribe(donnes);
-    i++;
-  });
 }
 
 //let bitmapText = new PIXI.extras.BitmapText("text using a fancy font!", {font: "VCR OSD MONO", align: "right"});
@@ -253,26 +401,26 @@ function subscribe(obj) {
   .on('touchmove', onDragMove);
 }
 
-function addShadow(obj) {
-  let gr = new PIXI.Graphics();
-  gr.beginFill(0x0, 1);
-  //yes , I know bunny size, I'm sorry for this hack
-  let scale = 1.1;
-  gr.drawRect(-25/2 * scale, -36/2 * scale, 25 * scale, 36 * scale);
-  gr.endFill();
-  gr.filters = [blurFilter];
-
-  gr.parentGroup = shadowGroup;
-  obj.addChild(gr);
-}
-
 function onDragStart(event) {
   if (!this.dragging) {
+    copyState(startState, this);
+
     this.data = event.data;
     this.oldGroup = this.parentGroup;
     this.parentGroup = dragGroup;
     this.dragging = true;
     actionEnCours = true;
+
+    if(controlKey && !shiftKey){
+      action = 'rotate';
+    } else if(shiftKey && !controlKey){
+      action = 'ratiate';
+    } else if(shiftKey && controlKey){
+      action = 'ratiateAndRotate';
+    } else {
+      action = 'drag';
+    }
+
     switch(action) {
       case 'drag':
         this.dragPoint = event.data.getLocalPosition(this.parent);
@@ -303,18 +451,22 @@ function onDragEnd() {
     this.data = null;
     actionEnCours = false;
     action = 'drag';
+
+    copyState(endState, this);
+    let different = compareStates(startState, endState);
+    if(different){
+      addHistory(startState, endState);
+    }
   }
 }
 
 /* Voir Demo Rotation http://proclive.io/shooting-tutorial/ */
 function onDragMove() {
-  if (this.dragging) {
+  if (this.dragging && actionEnCours) {
     switch(action) {
       case 'drag':
-        let newPosition = this.data.getLocalPosition(this.parent);
-        this.x = newPosition.x - this.dragPoint.x;
-        this.y = newPosition.y - this.dragPoint.y;
-        break;
+        moveObject(this);
+      break;
       case 'rotate':
         rotateObject(this);
       break;
@@ -331,6 +483,39 @@ function onDragMove() {
   }
 }
 
+function copyState(stateHolder, stateToSave){
+  stateHolder['object'] = stateToSave;
+  stateHolder['x'] = stateToSave.x;
+  stateHolder['y'] = stateToSave.y;
+  stateHolder['rotation'] = stateToSave.rotation;
+  stateHolder['ratio'] = 1;
+}
+
+/*
+* Retourne vrai si il y a une difference et faux si elles sont pareil.
+*/
+function compareStates(startState, endState){
+  if(startState.x != endState.x){
+    return true;
+  }
+  if(startState.y != endState.y){
+    return true;
+  }
+  if(startState.rotation != endState.rotation){
+    return true;
+  }
+  if(startState.ratio != 1){
+    return true;
+  }
+  return false;
+}
+
+function moveObject(object){
+  let newPosition = object.data.getLocalPosition(object.parent);
+  object.x = newPosition.x - object.dragPoint.x;
+  object.y = newPosition.y - object.dragPoint.y;
+}
+
 function rotateObject(object){
   let newMouseRotation = calculateAngle(app.plugins.interaction.mouse.global.x, app.plugins.interaction.mouse.global.y, object.position.x, object.position.y);
   let rotationDiff = newMouseRotation - currentMouseRotation;
@@ -343,6 +528,8 @@ function ratiateObject(object){
   let distanceDiff = newMouseDistance - currentMouseDistance;
   let ratio = 1 + (distanceDiff*0.01);
 
+  // On garde le ratio pour concerver les changements sur l'etat original
+  startState['ratio'] = startState['ratio'] * ratio;
   object.scale.x *= ratio;
   object.scale.y *= ratio;
   currentMouseDistance = newMouseDistance;
@@ -362,6 +549,48 @@ function calculateAngle(mx, my, px, py){
   let angle = Math.atan2(dist_Y,dist_X);
   //let degrees = angle * 180/ Math.PI;
   return angle;
+}
+
+function addHistory(startState, endState){
+  let historyItem = [];
+  endState['ratio'] = startState['ratio'];
+  historyItem['start'] = Object.assign({}, startState);
+  historyItem['end'] = Object.assign({}, endState);
+  if(history.length >  0){
+    history = history.slice(0,historyIndex);
+  }
+  history.push(historyItem);
+  historyIndex = history.length;
+}
+
+function undo(){
+  if(historyIndex > 0 && history.length > 0){
+    historyIndex--;
+    let previousState = history[historyIndex]['start'];
+    let object = previousState.object;
+
+    object.x = previousState.x;
+    object.y = previousState.y;
+    object.rotation = previousState.rotation;
+    object.scale.x /= previousState.ratio;
+    object.scale.y /= previousState.ratio;
+  }
+}
+
+function redo(){
+  if(historyIndex < history.length ){
+
+    let nextState = history[historyIndex]['end'];
+    let object = nextState.object;
+
+    object.x = nextState.x;
+    object.y = nextState.y;
+    object.rotation = nextState.rotation;
+    object.scale.x *= nextState.ratio;
+    object.scale.y *= nextState.ratio;
+
+    historyIndex++;
+  }
 }
 
 </script>

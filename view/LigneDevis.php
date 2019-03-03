@@ -1090,11 +1090,10 @@ $date = date("d-m-Y");
               let xhttp = new XMLHttpRequest();
               xhttp.onreadystatechange = function () {
                  if (this.readyState === 4 && this.status === 200) {
-                     //console.log(this.responseText);
-
+                   // this.responseText
                  }
               };
-              xhttp.open("POST", "AddLignesDevis.php?functionname=" + 'AddDevis' , true);
+              xhttp.open("POST", "../controller/DevisController.php?functionname=" + 'AddLignesDevis' , true);
               xhttp.send(JSON.stringify(arguments));
           }
       });

@@ -46,9 +46,9 @@ Class Devis
 
     //*Set*//
     public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetIdMatiere($idMatiere){$this -> _IdMatiere = $idMatiere;}
+    public function SetIdMatiere($idMatiere){$this -> _IdMatiere = (int) $idMatiere;}
     public function SetDate($date){return $this -> _Date = $date;}
-    public function SetIdClient($idclient){return $this -> _IdClient = $idclient;}
-    public function SetIdUser($iduser){return $this -> _IdUser = $iduser;}
+    public function SetIdClient($idclient){return $this -> _IdClient = (int) $idclient;}
+    public function SetIdUser($iduser){return $this -> _IdUser = (int) $iduser;}
     public function SetCheminImage($chemin){return $this-> _CheminImage = $chemin;}
 }

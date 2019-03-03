@@ -1,6 +1,6 @@
 <?php
 
-Class LigneDevis 
+Class LigneDevis
 {
 	private $_Id;
 	private $_Remise;
@@ -22,11 +22,9 @@ Class LigneDevis
 
         }else{
             $this->hydrate($donnees);
-
         }
 
     }
-
 
       //*Hydratation de l'objet *//
     public function hydrate(array $donnees)
@@ -36,7 +34,7 @@ Class LigneDevis
             // Setter
             $method = 'Set'.ucfirst($key);
 
-            //$method = substr($method, 0, -6);
+            $method = substr($method, 0, -6);
             // Si le setter correspondant existe.
             if (method_exists($this, $method))
             {
@@ -63,15 +61,15 @@ Class LigneDevis
 
     //*set*//
     public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetRemise($remise){$this -> _Remise = $remise;}
-    public function SetPoids($poids){$this -> _Poids = $poids;}
-    public function SetHauteur($hauteur){$this -> _Hauteur = $hauteur;}
-    public function SetLargeur($largeur){$this -> _Largeur = $largeur;}
+    public function SetRemise($remise){$this -> _Remise = (int) $remise;}
+    public function SetPoids($poids){$this -> _Poids = (int) $poids;}
+    public function SetHauteur($hauteur){$this -> _Hauteur = (int) (int) $hauteur;}
+    public function SetLargeur($largeur){$this -> _Largeur = (int) $largeur;}
     public function SetProfondeur($profondeur) {$this -> _Profondeur = $profondeur;}
-    public function SetIdpiece($piece){$this -> _IdPiece = $piece;}
-    public function SetIddevis($devis){$this-> _IdDevis = $devis;}
-    public function SetPos_x_piece($Pos_x_piece){$this -> _Pos_x_piece = $Pos_x_piece;}
-    public function SetPos_y_piece($Pos_y_piece){$this -> _Pos_y_piece = $Pos_y_piece;}
-    public function SetRatio_piece($Ratio_piece){$this -> _Ratio_piece = $Ratio_piece;}
-    public function SetPos_z_piece($Pos_z_piece){$this -> _Pos_z_piece = $Pos_z_piece;}
+    public function SetIdPiece($piece){$this -> _IdPiece = (int) $piece;}
+    public function SetIdDevis($devis){$this-> _IdDevis = (int) $devis;}
+    public function SetPos_x_piece($Pos_x_piece){$this -> _Pos_x_piece = (int) $Pos_x_piece;}
+    public function SetPos_y_piece($Pos_y_piece){$this -> _Pos_y_piece = (int) $Pos_y_piece;}
+    public function SetRatio_piece($Ratio_piece){$this -> _Ratio_piece = (int) $Ratio_piece;}
+    public function SetPos_z_piece($Pos_z_piece){$this -> _Pos_z_piece = (int) $Pos_z_piece;}
 }

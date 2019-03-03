@@ -19,8 +19,6 @@ body {
     position: relative;
 }
 
-
-
 .formbox {
     background: #F9F9F9;
     padding: 25px;
@@ -62,7 +60,25 @@ div.table-title {
 }
 
 .hover-effect-a:hover {
-    background: rgba(0,0,0,0);
+    /* background: rgba(0,0,0,0); */
+    color: #3a7999;
+    box-shadow: inset 0 0 0 3px #3a7999;
+}
+
+.hover-effect-a:active {
+  background-color: #86a9e0;
+}
+
+.buttonActive {
+  background-color: #86a9e0;
+}
+
+.hover-effect-b {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.hover-effect-b:hover {
+    /* background: rgba(0,0,0,0); */
     color: #3a7999;
     box-shadow: inset 0 0 0 3px #3a7999;
 }

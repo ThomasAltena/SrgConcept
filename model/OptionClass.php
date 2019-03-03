@@ -5,16 +5,14 @@ Class Option
 
 	private $_Id;
 	private $_Libelle;
-    private $_Code;
+  private $_Code;
 	private $_Prix;
 
-	//constructeur
 	//constructeur
 	public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
     }
-
 
     //*Hydratation de l'objet *//
     public function hydrate(array $donnees)
@@ -33,7 +31,6 @@ Class Option
                 $this->$method($value);
             }
         }
-
     }
 
     //*GET*//
