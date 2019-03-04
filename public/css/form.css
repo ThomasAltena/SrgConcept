@@ -3,7 +3,7 @@
 body {
     margin:0;
     background:#c8c8c8;
-    background:url(https://hdqwalls.com/download/material-design-4k-2048x1152.jpg) fixed;
+    background:url('../images/background.jpg') fixed;
     background-size: cover;
     font-family: "Roboto", helvetica, arial, sans-serif;
     font-size: 16px;

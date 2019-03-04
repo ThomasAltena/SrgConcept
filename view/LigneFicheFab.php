@@ -180,13 +180,13 @@ $(document).ready(function () {
       if(event.ctrlKey){
         if(!controlKey){
           controlKey = true;
-          highlightToggleButton(controlKey, '#rotationButton');
+          toggleHighlightButton(controlKey, '#rotationButton');
         }
       }
       if(event.shiftKey){
         if(!shiftKey){
           shiftKey = true;
-          highlightToggleButton(shiftKey, '#ratiationButton');
+          toggleHighlightButton(shiftKey, '#ratiationButton');
         }
       }
       if(event.ctrlKey && event.keyCode == 90 ){
@@ -202,13 +202,13 @@ $(document).ready(function () {
     if(!event.ctrlKey){
       if(controlKey){
         controlKey = false;
-        highlightToggleButton(controlKey, '#rotationButton');
+        toggleHighlightButton(controlKey, '#rotationButton');
       }
     }
     if(!event.shiftKey){
       if(shiftKey){
         shiftKey = false;
-        highlightToggleButton(shiftKey, '#ratiationButton');
+        toggleHighlightButton(shiftKey, '#ratiationButton');
       }
     }
   });
@@ -216,21 +216,21 @@ $(document).ready(function () {
 
 function toggleRotation(){
   controlKey = !controlKey;
-  highlightToggleButton(controlKey, '#rotationButton');
+  toggleHighlightButton(controlKey, '#rotationButton');
 }
 
 function toggleRatiation(){
   shiftKey = !shiftKey;
-  highlightToggleButton(shiftKey, '#ratiationButton');
+  toggleHighlightButton(shiftKey, '#ratiationButton');
 }
 
 function clickButton(id){
   $(id).click();
-  highlightToggleButton(true, id);
-  setTimeout(function(){ highlightToggleButton(false, id); }, 100);
+  toggleHighlightButton(true, id);
+  setTimeout(function(){ toggleHighlightButton(false, id); }, 100);
 }
 
-function highlightToggleButton(bool, id){
+function toggleHighlightButton(bool, id){
   if(bool){
     $(id).addClass('buttonActive');
   } else {
@@ -366,8 +366,19 @@ function addHighlight(index, type){
   }
   layer.child = new PIXI.Graphics();
   layer.child.lineStyle(2, 0xFF0000);
-  layer.child.drawRect(-layer.parent.width/2, -layer.parent.height/2, layer.parent.width, layer.parent.height);
-  layer.parent.addChild(layer.child);
+
+  // Dessiner le rectangle a la position 0,0. Les coordonnees interne (x, y) du rectangle sont basee la ou on la Dessiner
+  // SI on la dessine a 50,100 (global), cela devient 0 , 0 pour le rectangle (tres ennuyant) tandis que auqnd on charge un sprit ou un text
+  // les coordonees 0,0 du spirte ou text sont celles du global et le x, y du sprite ou text est la ou on le charge.
+  layer.child.drawRect(0,0, layer.parent.width, layer.parent.height);
+
+  layer.child.pivot.set(layer.parent.width/2, layer.parent.height/2);
+
+  layer.child.x = layer.parent.x;
+  layer.child.y = layer.parent.y;
+  layer.child.rotation = layer.parent.rotation;
+
+  stage.addChild(layer.child);
 }
 
 function removeHighlight(index, type){
@@ -381,7 +392,7 @@ function removeHighlight(index, type){
     default:
       break;
   }
-  layer.parent.removeChild(layer.child);
+  stage.removeChild(layer.child);
 }
 
 function addFleche(){
@@ -442,8 +453,13 @@ function addGroups(){
 function loadSchema(){
   let texture_Schema = PIXI.Texture.fromImage(devis.CheminImage_devis);
   let schemaImage = new PIXI.Sprite(texture_Schema);
-  schemaImage.position.set(100,0);
+  schemaImage.position.set(schemaImage.width,schemaImage.height);
+
+
   schemaImage.parentGroup = schemaGroup;
+  console.log(schemaImage.width);
+  schemaImage.position.set(400,400);
+  schemaImage.anchor.set(0.5);
   stage.addChild(schemaImage);
   subscribe(schemaImage);
 }
@@ -600,6 +616,7 @@ function ratiateObject(object){
   startState['ratio'] = startState['ratio'] * ratio;
   object.scale.x *= ratio;
   object.scale.y *= ratio;
+  console.log(object.width);
   currentMouseDistance = newMouseDistance;
 }
 
