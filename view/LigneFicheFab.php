@@ -160,7 +160,6 @@ function getDevisData() {
     if (this.readyState === 4 && this.status === 200) {
       let response = JSON.parse(this.responseText)
       devis = response.data;
-      console.log(devis);
 
       fillDevisInfo();
       setBackground();
@@ -414,8 +413,21 @@ function addFleche(){
 }
 
 function removeFleche(index){
-  arrow = fleches[index].fleche;
-  stage.removeChild(arrow);
+  arrow = fleches[index].parent;
+  graphics = fleches[index].child;
+
+  stage.removeChild();
+
+  arrow.destroy();
+  graphics.destroy();
+
+  fleches.splice(index, 1);
+
+  for(let i = 0; i < fleches.length; i++){
+    fleches[i].index = i;
+  }
+  loadList(listContents);
+
 }
 
 function addGroups(){
@@ -457,7 +469,6 @@ function loadSchema(){
 
 
   schemaImage.parentGroup = schemaGroup;
-  console.log(schemaImage.width);
   schemaImage.position.set(400,400);
   schemaImage.anchor.set(0.5);
   stage.addChild(schemaImage);
@@ -616,7 +627,6 @@ function ratiateObject(object){
   startState['ratio'] = startState['ratio'] * ratio;
   object.scale.x *= ratio;
   object.scale.y *= ratio;
-  console.log(object.width);
   currentMouseDistance = newMouseDistance;
 }
 
