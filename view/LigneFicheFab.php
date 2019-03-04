@@ -56,7 +56,7 @@ try {
                   </div>
                   <input type="text" class="form-control" disabled aria-describedby="basic-addon1" id="dateLibelle" value="">
                 </div>
-                <button class="btn btn-default col-lg-12 hover-effect-a" onclick="addFleche()">Ajouter Fleche
+                <button class="btn btn-default col-lg-12 hover-effect-a" onclick="addArrow()">Ajouter Fleche
                 </button>
 
               </div>
@@ -108,7 +108,7 @@ try {
                    onclick="loadList('pieces')">PIECES
               </div>
               <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
-                   onclick="loadList('fleches')">FLECHES
+                   onclick="loadList('arrows')">FLECHES
               </div>
               <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
                    onclick="loadList()">TOUT
@@ -137,7 +137,7 @@ let app = new PIXI.autoDetectRenderer(1000, 700, {backgroundColor: 0xEEEEEE});
 document.getElementById('schemaContainer').appendChild(app.view);
 let schemaGroup;
 let donneesGroup;
-let flechesGroup;
+let arrowsGroup;
 let dragGroup;
 let shadowGroup;
 let stage;
@@ -146,7 +146,7 @@ let historyIndex = 0;
 let startState = [];
 let endState = [];
 let layers = [];
-let fleches = [];
+let arrows = [];
 
 let controlKey = false;
 let shiftKey = false;
@@ -306,7 +306,7 @@ function generatePieceListHtml(ligne, index){
 }
 
 function generateFlecheListHtml(ligne, index){
-  let action = "'fleches'";
+  let action = "'arrows'";
   body = '';
   body += '<div class="row formbox col-lg-12 hover-effect-b" style="margin: 0 0 5px 0; height:50px; padding:0"';
   body += 'onmouseenter="addHighlight('+ index + ',' + action + ')"';
@@ -314,7 +314,7 @@ function generateFlecheListHtml(ligne, index){
 
   body += '<img alt="Une piece parmis pleins" style="left:0;" src="'+ arrowSource +'">';
 
-  body += '<div class="btn hover-effect-a" style="color: red; position: absolute; left: 5px top: 5px;" onclick="removeFleche(' + index + ' )">\n';
+  body += '<div class="btn hover-effect-a" style="color: red; position: absolute; left: 5px top: 5px;" onclick="removeArrow(' + index + ' )">\n';
   body += '<i class="fas fa-trash-alt"></i>\n';
   body += '</div>\n';
   body += '</div>';
@@ -331,9 +331,9 @@ function loadList(action){
       });
       document.getElementById("piecesListView").innerHTML = body;
       break;
-    case 'fleches':
+    case 'arrows':
       body = '';
-      fleches.forEach(function(layer){
+      arrows.forEach(function(layer){
         body += generateFlecheListHtml(layer.parent, layer.index);
       });
       document.getElementById("piecesListView").innerHTML = body;
@@ -344,7 +344,7 @@ function loadList(action){
       layers.forEach(function(layer){
         body += generatePieceListHtml(layer.ligne, layer.index);
       });
-      fleches.forEach(function(layer){
+      arrows.forEach(function(layer){
         body += generateFlecheListHtml(layer.parent, layer.index);
       });
       document.getElementById("piecesListView").innerHTML = body;
@@ -357,8 +357,8 @@ function addHighlight(index, type){
     case 'pieces':
       layer = layers[index];
       break;
-    case 'fleches':
-      layer = fleches[index];
+    case 'arrows':
+      layer = arrows[index];
       break;
     default:
       break;
@@ -385,8 +385,8 @@ function removeHighlight(index, type){
     case 'pieces':
       layer = layers[index];
       break;
-    case 'fleches':
-      layer = fleches[index];
+    case 'arrows':
+      layer = arrows[index];
       break;
     default:
       break;
@@ -394,41 +394,48 @@ function removeHighlight(index, type){
   stage.removeChild(layer.child);
 }
 
-function addFleche(){
+function addArrow(){
   let texture_arrow = PIXI.Texture.fromImage(arrowSource);
-  let graphics ;
+  let graphics;
   let arrow = new PIXI.Sprite(texture_arrow);
+  let index = arrows.length;
 
   arrow.position.set(200,200);
-  arrow.parentGroup = flechesGroup;
+  arrow.parentGroup = arrowsGroup;
   arrow.anchor.set(0.5);
-  stage.addChild(arrow);
+
   subscribe(arrow);
 
-  fleches.push({'parent': arrow, 'child': graphics, 'index': fleches.length });
+  stage.addChild(arrow);
+  arrows.push({'parent': arrow, 'child': graphics, 'index': index });
 
   if(listContents != 'pieces'){
     loadList(listContents);
   }
+  addHistory('add',{'child': arrow, 'index': index, 'parent': stage, 'container': arrows}, 'arrow' );
 }
 
-function removeFleche(index){
-  arrow = fleches[index].parent;
-  graphics = fleches[index].child;
-
-  stage.removeChild();
-
-  arrow.destroy();
-  graphics.destroy();
-
-  fleches.splice(index, 1);
-
-  for(let i = 0; i < fleches.length; i++){
-    fleches[i].index = i;
+function removeArrow(index){
+  arrow = arrows[index].parent;
+  graphics = arrows[index].child;
+  stage.removeChild(arrow);
+  if(graphics){
+    graphics.destroy();
   }
-  loadList(listContents);
 
+  arrows.splice(index, 1);
+
+  recalculateArrowsIndex();
+  loadList(listContents);
+  addHistory('remove',{'child': arrow, 'index': index, 'parent': stage, 'container': arrows}, 'arrow' );
 }
+
+function recalculateArrowsIndex(){
+  for(let i = 0; i < arrows.length; i++){
+    arrows[i].index = i;
+  }
+}
+
 
 function addGroups(){
   // z-index = 0, sorting = true;
@@ -437,7 +444,7 @@ function addGroups(){
     //blue bunnies go up
     sprite.zOrder = +sprite.y;
   });
-  let flechesGroup = new PIXI.display.Group(2, function (sprite) {
+  let arrowsGroup = new PIXI.display.Group(2, function (sprite) {
     //blue bunnies go up
     sprite.zOrder = +sprite.y;
   });
@@ -454,7 +461,7 @@ function addGroups(){
 
   app.stage.addChild(new PIXI.display.Layer(schemaGroup));
   app.stage.addChild(new PIXI.display.Layer(donneesGroup));
-  app.stage.addChild(new PIXI.display.Layer(flechesGroup));
+  app.stage.addChild(new PIXI.display.Layer(arrowsGroup));
   app.stage.addChild(new PIXI.display.Layer(dragGroup));
   app.stage.addChild(new PIXI.display.Layer(shadowGroup));
 
@@ -550,7 +557,7 @@ function onDragEnd() {
     copyState(endState, this);
     let different = compareStates(startState, endState);
     if(different){
-      addHistory(startState, endState);
+      addHistory('move', {'startState': startState, 'endState': endState}, 'state');
     }
   }
 }
@@ -646,14 +653,47 @@ function calculateAngle(mx, my, px, py){
   return angle;
 }
 
-function addHistory(startState, endState){
+function addHistory(action, objects, type){
   let historyItem = [];
-  endState['ratio'] = startState['ratio'];
-  historyItem['start'] = Object.assign({}, startState);
-  historyItem['end'] = Object.assign({}, endState);
+  switch (action) {
+    case 'move':
+      if(type == 'state'){
+        endState['ratio'] = startState['ratio'];
+        historyItem['action'] = action;
+        historyItem['type'] = type;
+        historyItem['start'] = Object.assign({}, objects.startState);
+        historyItem['end'] = Object.assign({}, objects.endState);
+      }
+      break;
+    case 'add':
+      if(type == 'arrow'){
+        historyItem['action'] = action;
+        historyItem['type'] = type;
+        historyItem['child'] = objects.child;
+        historyItem['parent'] = objects.parent;
+        historyItem['index'] = objects.index;
+        historyItem['container'] = objects.container;
+      }
+      break;
+    case 'remove':
+      if(type == 'arrow'){
+        historyItem['action'] = action;
+        historyItem['type'] = type;
+        historyItem['child'] = objects.child;
+        historyItem['parent'] = objects.parent;
+        historyItem['index'] = objects.index;
+        historyItem['container'] = objects.container;
+      }
+      break;
+      break;
+    default:
+  }
+
   if(history.length >  0){
     history = history.slice(0,historyIndex);
   }
+
+
   history.push(historyItem);
   historyIndex = history.length;
 }
@@ -661,31 +701,117 @@ function addHistory(startState, endState){
 function undo(){
   if(historyIndex > 0 && history.length > 0){
     historyIndex--;
-    let previousState = history[historyIndex]['start'];
-    let object = previousState.object;
+    let historyItem = history[historyIndex];
+    switch (historyItem.action) {
+      case 'move':
+        if(historyItem.type == 'state'){
+          let previousState = historyItem.start;
+          let object = previousState.object;
 
-    object.x = previousState.x;
-    object.y = previousState.y;
-    object.rotation = previousState.rotation;
-    object.scale.x /= previousState.ratio;
-    object.scale.y /= previousState.ratio;
+          object.x = previousState.x;
+          object.y = previousState.y;
+          object.rotation = previousState.rotation;
+          object.scale.x /= previousState.ratio;
+          object.scale.y /= previousState.ratio;
+        }
+        break;
+      case 'add':
+        if(historyItem.type == 'arrow'){
+          containerItem = historyItem.container[historyItem.index];
+          arrow = containerItem.parent;
+          graphics = containerItem.child;
+
+          historyItem.parent.removeChild(arrow);
+          if(graphics){
+            graphics.destroy();
+          }
+
+          historyItem.container.splice(historyItem.index, 1);
+
+          recalculateArrowsIndex();
+          if(listContents != 'pieces'){
+            loadList(listContents);
+          }
+        }
+        break;
+      case 'remove':
+        if(historyItem.type == 'arrow'){
+          let graphics;
+          historyItem.parent.addChild(historyItem.child);
+          historyItem.container.splice(historyItem.index, 0, {'parent': historyItem.child, 'child': graphics, 'index': historyItem.index });
+          recalculateArrowsIndex();
+
+          if(listContents != 'pieces'){
+            loadList(listContents);
+          }
+        }
+        break;
+        break;
+      default:
+    }
   }
 }
 
 function redo(){
   if(historyIndex < history.length ){
+    let historyItem = history[historyIndex];
 
-    let nextState = history[historyIndex]['end'];
-    let object = nextState.object;
+    switch (historyItem.action) {
+      case 'move':
+        if(historyItem.type == 'state'){
+          let nextState = historyItem.end;
+          let object = nextState.object;
 
-    object.x = nextState.x;
-    object.y = nextState.y;
-    object.rotation = nextState.rotation;
-    object.scale.x *= nextState.ratio;
-    object.scale.y *= nextState.ratio;
+          object.x = nextState.x;
+          object.y = nextState.y;
+          object.rotation = nextState.rotation;
+          object.scale.x *= nextState.ratio;
+          object.scale.y *= nextState.ratio;
+        }
+        break;
+      case 'add':
+        if(historyItem.type == 'arrow'){
+
+          let graphics;
+          historyItem.parent.addChild(historyItem.child);
+          historyItem.container.splice(historyItem.index, 0, {'parent': historyItem.child, 'child': graphics, 'index': historyItem.index });
+          recalculateArrowsIndex();
+
+          if(listContents != 'pieces'){
+            loadList(listContents);
+          }
+        }
+        break;
+      case 'remove':
+        if(historyItem.type == 'arrow'){
+          containerItem = historyItem.container[historyItem.index];
+          arrow = containerItem.parent;
+          graphics = containerItem.child;
+
+          historyItem.parent.removeChild(arrow);
+          if(graphics){
+            graphics.destroy();
+          }
+
+          historyItem.container.splice(historyItem.index, 1);
+
+          recalculateArrowsIndex();
+          if(listContents != 'pieces'){
+            loadList(listContents);
+          }
+        }
+        break;
+        break;
+      default:
+    }
 
     historyIndex++;
   }
+
+  if(listContents != 'pieces'){
+    loadList(listContents);
+  }
+
 }
 
 </script>
