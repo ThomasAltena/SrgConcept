@@ -24,7 +24,7 @@ Class OptionLigne
         {
             // Setter
             $method = 'Set'.ucfirst($key);
-            $method = substr($method, 0, -14);
+            $method = substr($method, 0, -12);
             // Si le setter correspondant existe.
             if (method_exists($this, $method))
             {

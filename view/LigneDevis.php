@@ -43,7 +43,7 @@ $date = date("d-m-Y");
 <link rel="stylesheet" href="../public/css/ligneDevis.css" type="text/css">
 <link rel="stylesheet" href="../public/css/switch.css" type="text/css">
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
-<body>
+<body style="overflow: scroll;">
 <div id="content-wrapper">
     <div class='container' style="max-width: 100%;">
         <div class="form col-lg-12">
@@ -1090,7 +1090,10 @@ $date = date("d-m-Y");
               let xhttp = new XMLHttpRequest();
               xhttp.onreadystatechange = function () {
                  if (this.readyState === 4 && this.status === 200) {
-                   // this.responseText
+                   responseText = JSON.parse(this.responseText);
+                   if(responseText.error){
+                     console.log(responseText);
+                   }
                  }
               };
               xhttp.open("POST", "../controller/DevisController.php?functionname=" + 'AddLignesDevis' , true);

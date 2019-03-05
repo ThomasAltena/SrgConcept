@@ -23,7 +23,7 @@ $aResult = array();
 $input = file_get_contents('php://input');
 $arguments = null;
 
-if( !isset($_GET['functionname']) ) { $aResult['error'] .= 'No function name!'; }
+if( !isset($_GET['functionname']) ) { $aResult['error'] = 'No function name!'; }
 
 
 if( !isset($aResult['error']) ) {
@@ -44,11 +44,11 @@ if( !isset($aResult['error']) ) {
 function PostLignesDevis() {
   global $_SESSION, $input, $aResult, $arguments, $bdd;
   if( !isset($input) ) {
-    $aResult['error'] .= '\n No function arguments!';
+    $aResult['error'] = 'No function arguments!';
   } else {
     $arguments = json_decode($input);
     if( !is_array($arguments) || (count($arguments) < 5) ) {
-      $aResult['error'] .= '\n Erreur - manque donnees devis!';
+      $aResult['error'] = 'Erreur - manque donnees devis!';
     }
   }
 
@@ -56,7 +56,7 @@ function PostLignesDevis() {
     $lignes = $arguments[4];
 
     if( !is_array($lignes) || (count($lignes) < 1) ) {
-      $aResult['error'] .= '\n Erreur - manque données pieces!!';
+      $aResult['error'] = 'Erreur - manque données pieces!!';
     } else {
       $idUser = $_SESSION['Id_user'];
       $date = date("Y-m-d");
@@ -64,20 +64,27 @@ function PostLignesDevis() {
       $idMatiere = $arguments[1];
       $chemin = $arguments[2];
 
-      $devis = new Devis([
-        "Id_devis" => "",
+      $devis = ["Id_devis" => "",
         "Date_devis" => $date,
         "IdClient_devis" => $idclient,
         "IdUser_devis" => $idUser,
         "Chemin_devis" => "",
         "IdMatiere_devis" => $idMatiere
-      ]);
+      ];
+      $devisModel = new Devis($devis);
 
       $DevisManager = new DevisManager($bdd); //Connexion a la BDD
-      $devisInsertResult = $DevisManager->AddDevis($devis);
+      $devisInsertResult = $DevisManager->AddDevis($devisModel);
+
+      $aResult['devisResults'] = [
+        "insertResult" => $devisInsertResult,
+        "updateResult" => [],
+        "devis" => $devis,
+        "ligneResults" => []
+      ];
 
       if(!$devisInsertResult[0]){
-        $aResult['error'] .= '\n Erreur INSERT de DEVIS - '.$devisInsertResult[1][2];
+        $aResult['error'] = 'Erreur INSERT de DEVIS - '.$devisInsertResult[1][2];
       } else {
         $devisInsertId = $bdd->lastInsertId();
         $LigneDevisManager = new LigneDevisManager($bdd); //Connexion a la BDD
@@ -98,48 +105,67 @@ function PostLignesDevis() {
         $fichier_full_path = $upload_dir . $fichier_nom;
         $devisUpdateResult = $DevisManager->UpdateCheminSchema($devisInsertId, $fichier_full_path);
 
+        $aResult['devisResults']['updateResult'] = $devisUpdateResult;
+
         foreach ($lignes as $ligne){
           $options = $ligne->options;
 
-          $formattedLigne = new LigneDevis([
-            "Id" => '',
-            "Remise" => $ligne->remise,
-            "Poids" => '',
-            "Hauteur" => $ligne->hauteur,
-            "Largeur" => $ligne->largeur,
-            "Profondeur" => $ligne->profondeur,
-            "IdPiece" => $ligne->id_piece,
-            "IdDevis" => $devisInsertId,
-            "Pos_x_piece" => $ligne->pos_x,
-            "Pos_y_piece" => $ligne->pos_y,
-            "Ratio_piece" => $ligne->ratio,
-            "Pos_z_piece" => $ligne->pos_z
-          ]);
+          $formattedLigne = [
+            "Id_ligne" => '',
+            "Remise_ligne" => $ligne->remise,
+            "Poids_ligne" => '',
+            "Hauteur_ligne" => $ligne->hauteur,
+            "Largeur_ligne" => $ligne->largeur,
+            "Profondeur_ligne" => $ligne->profondeur,
+            "IdPiece_ligne" => $ligne->id_piece,
+            "IdDevis_ligne" => $devisInsertId,
+            "Pos_x_piece_ligne" => $ligne->pos_x,
+            "Pos_y_piece_ligne" => $ligne->pos_y,
+            "Ratio_piece_ligne" => $ligne->ratio,
+            "Pos_z_piece_ligne" => $ligne->pos_z
+          ];
 
-          $ligneInsertResult = $LigneDevisManager->AddLigne($formattedLigne);
+          $formattedLigneModel = new LigneDevis($formattedLigne);
+
+          $ligneInsertResult = $LigneDevisManager->AddLigne($formattedLigneModel);
+
+          $ligneResultObject = [
+            "insertResult" => $ligneInsertResult,
+            "ligne" =>$ligne,
+            "optionResults" => []
+          ];
 
           if(!$ligneInsertResult[0]){
-            $aResult['error'] .= '\n Erreur INSERT de LIGNE - '.$ligneInsertResult[1][2];
+            $aResult['error'] = 'Erreur INSERT de LIGNE - '.$ligneInsertResult[1][2];
+            break;
           } else {
-
             if( is_array($options) && (count($options) > 0) ) {
               $ligneInsertId = $bdd->lastInsertId();
 
               foreach ($options as $option) {
-                $formattedOption = new OptionLigne([
-                  "Id" => '',
-                  "IdLigne" => $ligneInsertId,
-                  "IdOption" => $option->Id_option
-                ]);
+                $formattedOption = [
+                  "Id_optionLigne" => '',
+                  "IdLigne_optionLigne" => $ligneInsertId,
+                  "IdOption_optionLigne" => $option->Id_option
+                ];
+                $formattedOptionModel = new OptionLigne($formattedOption);
 
-                $optionLigneInsertResult = $OptionLigneManager->AddOptionLigne($formattedOption);
+                $optionLigneInsertResult = $OptionLigneManager->AddOptionLigne($formattedOptionModel);
+
+                $optionResultObject = [
+                  "insertResult" => $optionLigneInsertResult,
+                  "option" =>$option
+                ];
+                array_push($ligneResultObject['optionResults'], $optionResultObject);
 
                 if(!$optionLigneInsertResult[0]){
-                  $aResult['error'] .= '\n Erreur INSERT de OPTION_LIGNE - '.$optionLigneInsertResult[1][2];
+                  $aResult['error'] = 'Erreur INSERT de OPTION_LIGNE - '.$optionLigneInsertResult[1][2];
+                  break 2;
                 }
               }
             }
           }
+          array_push($aResult['devisResults']['ligneResults'], $ligneResultObject);
         }
       }
     }
