@@ -627,7 +627,7 @@ $date = date("d-m-Y");
                     }
                 }
             };
-            xhttp.open("GET", "getFilteredSousFamille.php?q=" + code_famille, true);
+            xhttp.open("GET", "../module/LigneDeviModule.php?functionname=GetFilteredSousFamille&codeFamille=" + code_famille, true);
             xhttp.send();
         }
     }
@@ -674,7 +674,7 @@ $date = date("d-m-Y");
                     }
                 }
             };
-            xhttp.open("GET", "getFilteredPieces.php?q=" + selectedPiece.code_famille + "&p=" + code_sous_famille, true);
+            xhttp.open("GET", "../module/LigneDeviModule.php?functionname=GetFilteredPieces&codeFamille=" + selectedPiece.code_famille + "&codeSs=" + code_sous_famille, true);
             xhttp.send();
         }
     }
