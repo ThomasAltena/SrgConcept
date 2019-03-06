@@ -157,15 +157,24 @@ function getDevisData() {
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
-      let response = JSON.parse(this.responseText)
-      devis = response.data;
+      try {
+        let response = JSON.parse(this.responseText);
+        if(!response.error){
+          devis = response.data;
 
-      fillDevisInfo();
-      setBackground();
-      addGroups();
-      loadSchema();
-      loadPieces();
-      animate();
+          fillDevisInfo();
+          setBackground();
+          addGroups();
+          loadSchema();
+          loadPieces();
+          animate();
+        } else {
+          console.log(response.error);
+          //TODO add crash message
+        }
+      } catch (e) {
+        console.log(this.responseText);
+      }
     }
   };
   xhttp.open("GET", "../controller/DevisController.php?functionname=" + 'GetAllDevisInfo' + "&devisId=" + devisId, true);
@@ -297,7 +306,7 @@ function generatePieceListHtml(ligne, index){
   body += '<img alt="Une piece parmis pleins" style="left:0;max-width: 150px; min-width:150px;" src="'+ ligne.piece.Chemin_piece +'">';
   body += '</div>';
   body += '<div class="col-sm" style="height: 150px; max-height: 150px; padding:0; margin; 0">';
-  body += '<span>Code: ' + ligne.piece.Code_piece + '<br>Famille: ' + ligne.piece.Code_famille + ' - ' + ligne.piece.Code_ss;
+  body += '<span>Code: ' + ligne.piece.Code_piece + '<br>Famille: ' + ligne.piece.CodeFamille_piece + ' - ' + ligne.piece.CodeSs_piece;
   body += '<br>Hauteur: ' + ligne.Hauteur_ligne + 'cm<br>Largeur: ' + ligne.Largeur_ligne + 'cm<br>Profondeur: ' + ligne.Profondeur_ligne + 'cm';
   body += '<br>Remise: ' + ligne.Remise_ligne + '</span>';
   body += '</div></div>';
