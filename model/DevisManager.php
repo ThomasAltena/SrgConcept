@@ -36,13 +36,14 @@ Class DevisManager
     public function AddDevis(Devis $devis)
     {
         //Preparation
-        $q = $this->_Db->prepare('INSERT INTO devis VALUES(:id, :datedevis, :idclient, :iduser, :chemin, :idMatiere)');
+        $q = $this->_Db->prepare('INSERT INTO devis VALUES(:id, :datedevis, :idclient, :iduser, :cheminImage, :idMatiere, :cheminPdf)');
         $q->bindValue(':id', "");
         $q->bindValue(':idMatiere',$devis->GetIdMatiere());
         $q->bindValue(':datedevis',$devis->GetDate());
         $q->bindValue(':idclient',$devis->GetIdClient());
         $q->bindValue(':iduser', $devis->GetIdUser());
-        $q->bindValue(':chemin', $devis->GetCheminImage());
+        $q->bindValue(':cheminImage', $devis->GetCheminImage());
+        $q->bindValue(':cheminPdf', $devis->GetCheminPdf());
         //Assignation des valeurs
 
         //Execution de la requete
@@ -93,21 +94,18 @@ Class DevisManager
         $lignedevis = [];
     	$q = $this->_Db->prepare('SELECT * FROM lignes_devis WHERE lignes_devis.Id_devis = :iddevis');
     	$q->bindValue(':iddevis', $iddevis);
-    	$q->execute()or die(print_r($q->errorInfo()));
 
+      if(!$q->execute()) {
+          return [false,$q->errorInfo()];
+      }
 
     	while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     	{
-
     		$lignedevis[] = new LigneDevis($donnees);
-
     	}
 
     	return $lignedevis;
-
     }
-
-
 
     public function SelectUserDevis($iduser)
     {
@@ -115,11 +113,14 @@ Class DevisManager
         $user = "";
     	$q=$this->_Db->prepare('SELECT Nom_user, Siret_user FROM user WHERE user.Id_user = :iduser');
     	$q->bindValue(':iduser', $iduser);
-        if(!$q->execute()) print_r($q->errorInfo());
+
+      if(!$q->execute()) {
+          return [false,$q->errorInfo()];
+      }
 
     	while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     	{
-    		$user = new Utilisateur($donnees);
+    		$user = new User($donnees);
     	}
 
     	return $user;
@@ -127,12 +128,14 @@ Class DevisManager
 
     public function SelectClientDevis($idclient)
     {
-
     	//Preparation
-        $client = "";
-    	$q=$this->_Db->prepare('SELECT Nom_client, DateCrea_Client, Prenom_Client, Tel_Client, Adresse_client, Ville_client, CodePostal_client, Mail_client FROM clients C WHERE C.Id_client = :idclient');
+      $client = "";
+    	$q=$this->_Db->prepare('SELECT * FROM clients WHERE Id_client = :idclient');
     	$q->bindValue(':idclient', $idclient);
-        if(!$q->execute()) print_r($q->errorInfo());
+
+      if(!$q->execute()) {
+          return [false,$q->errorInfo()];
+      }
 
     	while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
     	{
@@ -140,35 +143,17 @@ Class DevisManager
     	}
 
     	return $client;
-
     }
 
-    public function SommePrix($iddevis)
+    public function ArchiveDevis($idDevi)
     {
-        $somme = "";
-        $q=$this->_Db->prepare('SELECT sum(Prix_ligne) FROM lignes_devis WHERE lignes_devis.Id_devis = :iddevis');
-        $q->bindValue(':iddevis', $iddevis);
-        if(!$q->execute()) print_r($q->errorInfo());
+    	//Preparation
+    	$q=$this->_Db->prepare('UPDATE * FROM devis SET Archive_devis = true WHERE Id_devis = :iddevi');
+    	$q->bindValue(':iddevi', $idDevi);
 
-        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-        {
-            $somme = $donnees;
-        }
-        return $somme;
-    }
-
-    public function PrixMatiére($idmatiere){
-        $matiere = "";
-        $q=$this->_Db->prepare('SELECT Prix_matiere FROM matieres where Id_matiere = :idmatiere');
-        $q->bindValue(':idmatiere', $idmatiere);
-        if(!$q->execute()) print_r($q->errorInfo());
-
-        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-    	{
-    		$matiere = new Matiere($donnees);
-    	}
-
-    	return $matiere;
-
+      if(!$q->execute()) {
+          return [false,$q->errorInfo()];
+      }
+      return [true, 'OK'];
     }
 }
