@@ -44,6 +44,6 @@ class Matiere
  	public function SetId($id){$this -> _Id = (int) $id;}
  	public function SetCode($code){$this -> _Code = $code;}
  	public function SetLibelle($libelle){$this -> _Libelle = $libelle;}
-    public function SetPrix($prix){$this -> _Prix = $prix;}
+    public function SetPrix($prix){$this -> _Prix = (int) $prix;}
 
 }

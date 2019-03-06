@@ -1,6 +1,6 @@
 <?php
 
-Class Utilisateur
+Class User
 {
     private $_Id;
     private $_Nom;
@@ -59,17 +59,4 @@ Class Utilisateur
     public function SetPseudo($ps){$this -> _Pseudo = $ps;}
     public function SetPass($pass){$this -> _Pass = $pass;}
     public function SetRole($rol){$this -> _Role = $rol;}
-
-
-
-
-
-    //*test class*//
-
-    public function GetHeure()
-    {
-       setlocale(LC_TIME, 'fra_fra');
-       echo strftime('%d/%m/%y');
-    }
-
 }
