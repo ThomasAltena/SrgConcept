@@ -6,35 +6,13 @@ if (session_status() == PHP_SESSION_NONE) {
 
 header("Cache-Control:no-cache");
 
-require('../model/ClientManager.php');
-require('../model/ClientClass.php');
-
-require('../model/UserManager.php');
-require('../model/UserClass.php');
-
-require('../model/MatiereManager.php');
-require('../model/MatiereClass.php');
-
-require('../model/PieceManager.php');
-require('../model/PieceClass.php');
-
-require('../model/CouleurManager.php');
-require('../model/CouleurClass.php');
-
-require('../model/TvaManager.php');
-require('../model/TvaClass.php');
-
-require('../model/OptionManager.php');
-require('../model/OptionClass.php');
-
-require('../model/LigneDevisClass.php');
-require('../model/LigneDevisManager.php');
-
-require('../model/OptionLigneClass.php');
-require('../model/OptionLigneManager.php');
-
-require('../model/DevisClass.php');
-require('../model/DevisManager.php');
+spl_autoload_register(function ($class_name) {
+  if(strpos($class_name, 'Manager')){
+    include '../model/'. $class_name . '.php';
+  } else {
+    include '../model/'. $class_name . 'Class.php';
+  }
+});
 
 
 require('../model/Upload.php');
@@ -59,7 +37,6 @@ require('../model/UploadCroquis.php');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
 </head>
 
 <header style="min-width: 1250px">
