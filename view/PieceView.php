@@ -9,6 +9,7 @@ if(empty($_SESSION)){
 ?>
 
 <link rel="stylesheet" href="../public/css/table.css" type="text/css">
+<link rel="stylesheet" href="../public/css/form.css" type="text/css">
 
 <?php
 
