@@ -1,17 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 
-body {
-    margin:0;
-    color:#edf3ff;
-    background:#c8c8c8;
-    background:url(https://hdqwalls.com/download/material-design-4k-2048x1152.jpg) fixed;
-    background-size: cover;
-    font-family: "Roboto", helvetica, arial, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    text-rendering: optimizeLegibility;
-}
-
 tablebox {
     margin:10px 0;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);

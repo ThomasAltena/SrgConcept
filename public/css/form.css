@@ -12,13 +12,6 @@ body {
     color: #777;
 }
 
-.container {
-    max-width: 550px;
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
-}
-
 .formbox {
     background: #F9F9F9;
     padding: 25px;
