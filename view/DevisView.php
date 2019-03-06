@@ -22,7 +22,6 @@ $ManagerClient = new ClientManager($db); //Connexion a la BDD
 $clients = $ManagerClient->GetClientsAdmin();
 /** Get tout les devis d'un utilisateur **/
 
-
 ?>
 <body>
 <div class='container'>
@@ -61,7 +60,7 @@ while ($devi = $reponse->fetch()){
     <td> <?php echo $clientlibelle; ?></td>
     <td> <?php echo $devi['Date_devis']; ?></td>
     <td>
-    <button  onclick='' class='btn btn-link'>Voir</button>
+    <button  onclick='getDevis(<?php echo $devi['Id_devis']; ?>)' class='btn btn-link'>Voir</button>
     <button  onclick='' class='btn btn-link'>Modifier</span></button>
     <button  onclick='' class='btn btn-link'>Télécharger</span></button>
     </td>
@@ -122,6 +121,11 @@ function supp(id)
 function edit(id)
 {
   document.location.href="devis.php?id="+id
+}
+
+function getDevis(devisId)
+{
+  window.open('../controller/DevisController.php?functionname=GenerateDevisPDF' + "&devisId=" + devisId, '_blank');
 }
 
 function loadModalData(d, c){

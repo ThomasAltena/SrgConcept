@@ -265,7 +265,7 @@ function GetAllDevisInfo($deviId){
       }
 
 
-      $ligne['$options'] = array();
+      $ligne['options'] = array();
       $optionsLignes = [];
 
       $syntax = 'SELECT * FROM options_lignes WHERE IdLigne_OptionsLignes = :idligne';
@@ -295,7 +295,7 @@ function GetAllDevisInfo($deviId){
         } else {
           while ($option = $query->fetch(PDO::FETCH_ASSOC))
           {
-            array_push($ligne['$options'], $option);
+            array_push($ligne['options'], $option);
           }
         }
       }
@@ -367,7 +367,7 @@ function GenerateDevisPDF($deviId){
 
     $ligneModelItems = [];
     foreach ($devi['lignes'] as $ligne){
-      $ligneModel = new Ligne($ligne);
+      $ligneModel = new LigneDevis($ligne);
       $pieceModel = new Piece($ligne['piece']);
       $optionModels = [];
 
@@ -384,9 +384,12 @@ function GenerateDevisPDF($deviId){
       array_push($ligneModelItems, $ligneModelsItem);
     }
 
+    $dataPDF .= "<div class='container'><div class='row'>";
+    //COLONE GAUCHE
+    $dataPDF .= "<div class='col-lg-5' style='max-width:40%'>";
     //UTILISATEUR
     $dataPDF .= "<table><tr><td>";
-    $dataPDF .= "<strong>".$userModel->GetNom()." ".$userModel->GetPrenom(). "</strong><br>";
+    $dataPDF .= "<strong>".$userModel->GetNom()."</strong><br>";
     $dataPDF .= $userModel->GetAdresse();
     $dataPDF .= "<strong>SIRET:".$userModel->GetSiret()."</strong><br>";
     $dataPDF .= "</td></tr></table>";
@@ -416,6 +419,11 @@ function GenerateDevisPDF($deviId){
 
     $dataPDF .= "<tr><td>".$clientModel->GetMail()."</td></tr>";
     $dataPDF .= "</table>";
+    $dataPDF .= "</div>";
+    //COLONE DROITE
+    $dataPDF .= "<div class='col-lg-5' style='max-width:40%'>";
+    $dataPDF .= "</div>";
+    $dataPDF .= "</div>";
 
     //DEVIS
     $dataPDF .= "<div>";
@@ -424,7 +432,8 @@ function GenerateDevisPDF($deviId){
     $dataPDF .= "<tr>";
     $dataPDF .= "<th style='width: 50%';>Ref.</th>";
     $dataPDF .= "<th style='width: 10%';>Prix HT</th>";
-    $dataPDF .= "<th style='width: 10%';>Remise</th>";
+    $dataPDF .= "<th style='width: 10%';>Remise %</th>";
+    $dataPDF .= "<th style='width: 10%';>Remise €</th>";
     $dataPDF .= "<th style='width: 10%';>Prix NET</th>";
     $dataPDF .= "<th style='width: 10%';>Prix TTC</th>";
     $dataPDF .= "</tr>";
@@ -439,10 +448,10 @@ function GenerateDevisPDF($deviId){
       $pieceModel = $ligneModelItem['pieceModel'];
       $optionModels = $ligneModelItem['optionModels'];
 
-      $prixMatiereTonne = $matiereModel.GetPrix();
+      $prixMatiereTonne = $matiereModel->GetPrix();
 
       $masseVolumique = 2700;
-      $volumeCM3 = $largeur * $hauteur * $profondeur;
+      $volumeCM3 = $ligneModel->GetLargeur() * $ligneModel->GetHauteur() * $ligneModel->GetProfondeur();
       $volumeM3 = $volumeCM3 /1000000;
       $masseKG = $volumeM3 * $masseVolumique;
       $masseTonne = $masseKG/1000;
@@ -464,7 +473,8 @@ function GenerateDevisPDF($deviId){
       $dataPDF .= "<tr style='height: 100%';>";
       $dataPDF .= "<td>".$pieceModel->GetCode()." ".$pieceModel->GetCodeSs()." ".$pieceModel->GetCodeFamille()."</td>";
       $dataPDF .= "<td>".$prix." €</td>";
-      $dataPDF .= "<td>".$pourcentageRemise." % -".$valeurRemise."€</td>";
+      $dataPDF .= "<td>".$pourcentageRemise."%</td>";
+      $dataPDF .= "<td>".$valeurRemise."€</td>";
       $dataPDF .= "<td>".$net." €</td>";
       $dataPDF .= "<td>".$ttc." €</td>";
       $dataPDF .= "</tr>";
@@ -499,18 +509,18 @@ function GenerateDevisPDF($deviId){
     $dataPDF .= "<td>".$sommeTtc." €</td>";
     $dataPDF .= "</tr>";
     $dataPDF .= "</table>";
-    $dataPDF .= "</div>";
+    $dataPDF .= "</div></div>";
 
     //$content = ob_get_clean();
     try {
       $pdf = new HTML2PDF("p","A4","fr");
-      $pdf->pdf->SetAuthor('DOE John');
-      $pdf->pdf->SetTitle('Devis 14');
-      $pdf->pdf->SetSubject('Création d\'un Portfolio');
-      $pdf->pdf->SetKeywords('HTML2PDF, Devis, PHP');
+      $pdf->pdf->SetAuthor($userModel->GetNom());
+      $pdf->pdf->SetTitle('DEVIS_'.$deviId."_".$userModel->GetNom()."_".$clientModel->GetNom()."_".mktime());
+      $pdf->pdf->SetSubject('Devis SRG');
+      $pdf->pdf->SetKeywords('HTML2PDF, SRG, Devis');
       $pdf->writeHTML($dataPDF);
       ob_clean();
-      $pdf->Output('Devis.pdf');
+      $pdf->Output('DEVIS_'.$deviId."_".$userModel->GetNom()."_".$clientModel->GetNom()."_".mktime().'.pdf');
     } catch (HTML2PDF_exception $e) {
       $result['error'] = $e;
 
