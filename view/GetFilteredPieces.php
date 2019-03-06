@@ -20,7 +20,7 @@ $code_famille = str_replace(' ', '', $q);
 $code_ss = str_replace(' ', '', $p);
 /*$code_piece_preselect = str_replace(' ', '', $r );*/
 
-$query = 'SELECT * FROM pieces WHERE Code_famille = "'.$code_famille.'" && Code_ss = "'.$code_ss.'" ORDER BY Libelle_piece ASC';
+$query = 'SELECT * FROM pieces WHERE CodeFamille_piece = "'.$code_famille.'" && CodeSs_piece = "'.$code_ss.'" ORDER BY Libelle_piece ASC';
 $reponse = $bdd->query($query);
 $selectFirst = true;
 

@@ -12,7 +12,7 @@ try {
 
 $q = $_GET['q'];
 $code_famille = str_replace(' ', '', $q);
-$query = 'SELECT * FROM ss_familles WHERE Code_famille = "' . $code_famille . '" ORDER BY Regroupement_ss_fam ASC, Libelle_ss ASC';
+$query = 'SELECT * FROM ss_familles WHERE CodeFamille_ss = "' . $code_famille . '" ORDER BY Regroupement_ss ASC, Libelle_ss ASC';
 $reponse = $bdd->query($query);
 $selectFirst = false;
 
@@ -30,8 +30,8 @@ if (empty($reponse)) {
 
     $regroupement = '';
     while ($donnees = $reponse->fetch()) {
-        if($regroupement != $donnees['Regroupement_ss_fam']){
-            $regroupement = $donnees['Regroupement_ss_fam'];
+        if($regroupement != $donnees['Regroupement_ss']){
+            $regroupement = $donnees['Regroupement_ss'];
             ?>
             <option disabled value="<?php echo $regroupement; ?>"> --- <?php echo $regroupement; ?> ---</option>
             <?php

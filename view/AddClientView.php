@@ -76,7 +76,7 @@ if(empty($_SESSION)){
 </div>
 
 <?php
-  
+
     if(isset($_POST['go'])){
         if($_POST['Nom_client'] != "" || $_POST['Prenom_client'] != "" || $_POST['Prospect_client'] != ""  || $_POST['Adresse_client'] != "" || $_POST['Ville_client'] != "" || $_POST['CodePostal_client'] != "" || $_POST['DateCrea_client'] != "" || $_POST['Mail_client'] != "" || $_POST['Tel_client'] != ""){
 

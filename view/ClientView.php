@@ -9,6 +9,7 @@ if(empty($_SESSION)){
 ?>
 
 <link rel="stylesheet" href="../public/css/table.css" type="text/css">
+<link rel="stylesheet" href="../public/css/form.css" type="text/css">
 
 <?php
 /* Mise en place de la base de donnée */
@@ -16,7 +17,7 @@ $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 $ManagerClient = new ClientManager($db); //Connexion a la BDD
 
 if(!empty($_SESSION)){
-		  if($_SESSION['Role_user'] != 1){  
+		  if($_SESSION['Role_user'] != 1){
 /** Get tout les utlisateurs **/
 
 echo("

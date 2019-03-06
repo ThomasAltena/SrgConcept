@@ -64,11 +64,11 @@ if(empty($_SESSION)){
 
 
 <?php
-  
+
   if(isset($_POST['go'])){
 
     if($_POST['Nom_user'] != "" && $_POST['Adresse_user'] != "" && $_POST['Pseudo_user'] != "" && $_POST['Pass_user'] != "" && $_POST['Pass_user2'] != "" && $_POST['Pass_user'] ==  $_POST['Pass_user2']){
-      
+
     /* Assignation var */
     $nom = $_POST['Nom_user'];
     $adresse=  $_POST['Adresse_user'];
@@ -77,7 +77,7 @@ if(empty($_SESSION)){
     $siret= $_POST['Siret_user'];
 
     /* Construct */
-    $user = new Utilisateur([
+    $user = new User([
     "Id_user" => "" ,
     "Nom_user" => $nom ,
     "Adresse_user" => $adresse ,

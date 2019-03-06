@@ -3,7 +3,10 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 
 <!--<link rel="stylesheet" href="../public/css/bootstrap/css/bootstrap.css" type="text/css">
---><link rel="stylesheet" href="../public/css/login.css" type="text/css">
+-->
+<link rel="stylesheet" href="../public/css/login.css" type="text/css">
+<link rel="stylesheet" href="../public/css/form.css" type="text/css">
+
 <!------ Include the above in your HEAD tag ---------->
 
 <?php
