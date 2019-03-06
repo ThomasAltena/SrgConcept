@@ -17,8 +17,8 @@ Class UserManager
     }
 
 
-    /** Ajout d'un utilisateur **/
-    public function AddUser(Utilisateur $user)
+    /** Ajout d'un User **/
+    public function AddUser(User $user)
     {
         //Preparation
         $q = $this->_Db->prepare('INSERT INTO user(Id_user ,Nom_user, Adresse_user, DateCo_user, Pseudo_user , Pass_user , Role_user, Siret_user) VALUES(:id,:nom, :adresse, :dateco, :pseudo , :pass , :role , :siret)');
@@ -37,14 +37,14 @@ Class UserManager
         $q->execute();
     }
 
-    /** Suppression d'un utilisateur **/
+    /** Suppression d'un User **/
     public function DeleteUser($id)
     {
         $this->_Db->exec('DELETE FROM user WHERE Id_user = '.$id);
     }
 
-    /** Mise a jour d'un utilisateur **/
-    public function UpdateUser(Utilisateur $user)
+    /** Mise a jour d'un User **/
+    public function UpdateUser(User $user)
     {
         //Preparation
         $q = $this->_Db->prepare('UPDATE `user` SET `Nom_user` = :nom , `Adresse_user` = :adresse, `DateCo_user` = :dateco ,Siret_user = :siret, `Pseudo_user` = :pseudo, `Pass_user` = :pass, `Role_user` = :role WHERE `user`.`Id_user` = :id');
@@ -63,7 +63,7 @@ Class UserManager
         $q->execute();
     }
 
-    /** Retourne UN utilisateur **/
+    /** Retourne UN User **/
     public function GetUser($nom)
     {
         //Preparation
@@ -74,13 +74,13 @@ Class UserManager
         //Assignation valeur
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
-            $user = new Utilisateur($donnees);
+            $user = new User($donnees);
         }
 
         return $user;
     }
 
-    /**  Retourne tous les utilisateurs **/
+    /**  Retourne tous les Users **/
     public function GetUsers()
     {
         $users = [];
@@ -89,7 +89,7 @@ Class UserManager
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
-            $users[] = new Utilisateur($donnees);
+            $users[] = new User($donnees);
         }
 
         return $users;
@@ -107,14 +107,14 @@ Class UserManager
         //Assignation valeur
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
         {
-            $user = new Utilisateur($donnees);
+            $user = new User($donnees);
         }
 
         if(!isset($user)){
              echo("<div class='alert alert-danger'><strong>Inforamtion :  </strong>Mauvais identifiant ou mot de passe !</div>");
 
         }else{
-        //Mise en place dans des var 
+        //Mise en place dans des var
 
         $id = $user->GetId();
         $passbdd = $user->GetPass();
@@ -122,7 +122,7 @@ Class UserManager
         $psdbdd = $user->GetPseudo();
         $siret = $user->GetSiret();
 
-        
+
 
         if(!empty($passbdd))
         {
@@ -133,17 +133,17 @@ Class UserManager
                 $_SESSION['Role_user'] = $role;
                 $_SESSION['Siret_role'] = $siret;
                 echo("<div class='alert alert-success'><strong>Connexion.</div>");
-                
+
                 if($role == 1){/* A modif plus tard */
-                
+
                 header('Location:UserView.php');
-                
+
             }else{
-                
+
                header('Location:ClientView.php');
-             
+
             }
-                
+
             }
             else{
                 echo("<div class='alert alert-danger'><strong>Inforamtion :  </strong>Mauvais identifiant ou mot de passe !</div>");
