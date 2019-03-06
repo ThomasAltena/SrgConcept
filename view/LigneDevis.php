@@ -814,7 +814,7 @@ $date = date("d-m-Y");
                 HighlightSelectedOptions();
             }
         };
-        xhttp.open("GET", "getOptions.php", true);
+        xhttp.open("GET", "../module/LigneDeviModule.php?functionname=GetOptions", true);
         xhttp.send();
     }
 

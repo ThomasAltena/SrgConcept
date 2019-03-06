@@ -32,6 +32,15 @@ if( !isset($_GET['functionname']) ) { $result['error'] = 'No function name!'; }
 
 if( !isset($result['error']) ) {
   switch($_GET['functionname']) {
+    case 'ArchiveDevis':
+      if( !isset($_GET['devisId']) ) {
+        $result['error'] .= 'No devis Id! ';
+      } else {
+        $result['data'] = ArchiveDevis(($_GET['devisId']));
+      }
+
+      echo json_encode($result);
+      break;
     case 'AddLignesDevis':
       PostLignesDevis();
       echo json_encode($result);
@@ -62,6 +71,12 @@ if( !isset($result['error']) ) {
       echo json_encode($result);
     break;
   }
+}
+
+function ArchiveDevis($deviId){
+  global $_SESSION, $input, $result, $arguments, $bdd;
+  $devisManager = new DevisManager($bdd);
+  return $devisManager->ArchiveDevis($deviId);
 }
 
 function PostLignesDevis() {

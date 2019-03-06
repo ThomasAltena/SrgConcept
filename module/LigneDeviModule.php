@@ -36,11 +36,40 @@ if( !isset($result['error']) ) {
     case 'GetFilteredSousFamille':
       GetFilteredSousFamille();
       break;
+    case 'GetOptions':
+      GetOptions();
+      break;
     default:
       $result['error'] = 'Not found function '.$_GET['functionname'].'!';
       echo json_encode($result);
     break;
   }
+}
+
+function GetOptions(){
+  global $_SESSION, $input, $result, $arguments, $bdd;
+
+  $data = '';
+  $i = 0;
+  $reponse = $bdd->query('SELECT * FROM options');
+  while ($donnees = $reponse->fetch()) {
+      $i++;
+      $data .= '<tr id="select_option_'.$donnees['Id_option'].'" ';
+      $data .= "onclick='ToggleOption(".json_encode($donnees).")'>";
+      $data .= '<th scope="col"><?php echo $i; ?></th>';
+      $data .= '<td scope="col">'.$donnees['Code_option'].'</td>';
+      $data .= '<td scope="col">'.$donnees['Libelle_option'].'</td>';
+      $data .= '<td scope="col">'.$donnees['Prix_option'].'</td>';
+      $data .= '<td scope="col"><?php ?></td>';
+      $data .= '<td scope="col"><?php ?></td>';
+      $data .= '<td scope="col"><?php ?></td>';
+      $data .= '<td scope="col"><?php ?></td>';
+      $data .= '<td scope="col"><?php ?></td>';
+      $data .= '</tr>';
+  }
+
+  $data .= '</select>';
+  echo $data;
 }
 
 function GetFilteredSousFamille(){
