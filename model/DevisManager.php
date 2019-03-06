@@ -36,14 +36,15 @@ Class DevisManager
     public function AddDevis(Devis $devis)
     {
         //Preparation
-        $q = $this->_Db->prepare('INSERT INTO devis VALUES(:id, :datedevis, :idclient, :iduser, :cheminImage, :idMatiere, :cheminPdf)');
+        $q = $this->_Db->prepare('INSERT INTO devis VALUES(:id, :datedevis, :idclient, :iduser, :cheminImage, :idMatiere, :archive)');
         $q->bindValue(':id', "");
         $q->bindValue(':idMatiere',$devis->GetIdMatiere());
         $q->bindValue(':datedevis',$devis->GetDate());
         $q->bindValue(':idclient',$devis->GetIdClient());
         $q->bindValue(':iduser', $devis->GetIdUser());
         $q->bindValue(':cheminImage', $devis->GetCheminImage());
-        $q->bindValue(':cheminPdf', $devis->GetCheminPdf());
+        $q->bindValue(':archive', $devis->GetArchive());
+
         //Assignation des valeurs
 
         //Execution de la requete

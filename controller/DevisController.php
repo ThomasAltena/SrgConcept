@@ -106,9 +106,11 @@ function PostLignesDevis() {
         "Date_devis" => $date,
         "IdClient_devis" => $idclient,
         "IdUser_devis" => $idUser,
-        "Chemin_devis" => "",
-        "IdMatiere_devis" => $idMatiere
+        "CheminImage_devis" => "",
+        "IdMatiere_devis" => $idMatiere,
+        "Archive_devis" => false
       ];
+
       $devisModel = new Devis($devis);
 
       $DevisManager = new DevisManager($bdd); //Connexion a la BDD
@@ -384,53 +386,66 @@ function GenerateDevisPDF($deviId){
       array_push($ligneModelItems, $ligneModelsItem);
     }
 
-    $dataPDF .= "<div class='container'><div class='row'>";
+    $dataPDF .= "<div style='width:100%'><table style='width:100%'>";
     //COLONE GAUCHE
-    $dataPDF .= "<div class='col-lg-5' style='max-width:40%'>";
-    //UTILISATEUR
-    $dataPDF .= "<table><tr><td>";
-    $dataPDF .= "<strong>".$userModel->GetNom()."</strong><br>";
-    $dataPDF .= $userModel->GetAdresse();
-    $dataPDF .= "<strong>SIRET:".$userModel->GetSiret()."</strong><br>";
-    $dataPDF .= "</td></tr></table>";
+    $dataPDF .= "<td style='width:60%'>";
 
     //CLIENT
     $dataPDF .= "<table>";
     $dataPDF .= "<tr>";
-
     $dataPDF .= "<td><h2>Devis N°".$deviId."</h2></td></tr>";
-    $dataPDF .= "<tr>";
-    $dataPDF .= "<td >Emis le ".date('d/m/y')."<br></td></tr>";
-
-    $dataPDF .= "<tr>";
-    $dataPDF .= "<td>Par ".$clientModel->GetNom()." ".$clientModel->GetPrenom()."<br></td></tr>";
-
-    $dataPDF .= "<tr>";
-    $dataPDF .= "<td>".$clientModel->GetAdresse()."<br></td></tr>";
-
-    $dataPDF .= "<tr>";
-    $dataPDF .= "<td>".$clientModel->GetVille()."<br></td></tr>";
-
-    $dataPDF .= "<tr>";
-    $dataPDF .= "<td>".$clientModel->GetCodePostal()."<br></td></tr>";
-
-    $dataPDF .= "<tr>";
-    $dataPDF .= "<td>".$clientModel->GetTel()."</td></tr>";
-
+    $dataPDF .= "<tr><td><strong>Client:</strong><br></td></tr>";
+    $dataPDF .= "<tr><td>".$clientModel->GetNom()." ".$clientModel->GetPrenom()."<br></td></tr>";
+    $dataPDF .= "<tr><td>".$clientModel->GetAdresse()."<br></td></tr>";
+    $dataPDF .= "<tr><td>".$clientModel->GetVille()."<br></td></tr>";
+    $dataPDF .= "<tr><td>".$clientModel->GetCodePostal()."<br></td></tr>";
+    $dataPDF .= "<tr><td>".$clientModel->GetTel()."</td></tr>";
     $dataPDF .= "<tr><td>".$clientModel->GetMail()."</td></tr>";
     $dataPDF .= "</table>";
-    $dataPDF .= "</div>";
+
+    $dataPDF .= "</td>";
     //COLONE DROITE
-    $dataPDF .= "<div class='col-lg-5' style='max-width:40%'>";
-    $dataPDF .= "</div>";
+    $dataPDF .= "<td style='width:40%'>";
+
+    $dataPDF .= "<table style='width:100%; table-layout: fixed'>";
+    $dataPDF .= "<tr><td><h2>SRG CONCEPT</h2></td></tr>";
+    //UTILISATEUR
+    $dataPDF .= "<tr><td>Emis le ".date('d/m/y')."<br></td></tr>";
+    $dataPDF .= "<tr><td><strong>".$userModel->GetNom()."</strong><br></td></tr>";
+    $dataPDF .= "<tr><td style='word-wrap:break-word'><strong>".$userModel->GetAdresse()."</strong><br></td></tr>";
+    $dataPDF .= "<tr><td><strong>SIRET: ".$userModel->GetSiret()."</strong><br></td></tr>";
+    $dataPDF .= "</table>";
+
+    $dataPDF .= "</td>";
+    $dataPDF .= "</table>";
     $dataPDF .= "</div>";
 
+    $dataPDF .= "<div style='width:100%;'>";
+    $dataPDF .= "<table style='border-collapse: collapse; border: 1px solid black; width: 100%;'>";
+    $dataPDF .= "<tr style='border: 1px solid black;'>";
+    $dataPDF .= "<td style='border: 1px solid black; width: 15%'>Poids:<br>Nb Pieces: ".sizeof($devi['lignes'])."</td>";
+    $dataPDF .= "<td style='border: 1px solid black; width: 20%'>Délai:</td>";
+    $dataPDF .= "<td style='border: 1px solid black; width: 45%'>Reglement</td>";
+    $dataPDF .= "<td style='border: 1px solid black; width: 20%'></td>";
+    $dataPDF .= "</tr>";
+    $dataPDF .= "</table>";
+    $dataPDF .= "</div>";
+
+    $dataPDF .= "<div>";
+    $dataPDF .= "<span>";
+    $dataPDF .= "<br>Suite a votre demande, veuillez trouver ci-dessous notre DEVIS ( valable 2 mois ). <br>";
+    $dataPDF .= "Pour acceptation, merci de retourner le devis signé, précédé du cachet de l'entreprise et de la mention 'BON POUR COMMANDE'. <br>";
+    $dataPDF .= "Nous vous prions d'agréer nos meilleures salutations. ";
+
+    $dataPDF .= "</span><br><br>";
+    $dataPDF .= "</div>";
     //DEVIS
     $dataPDF .= "<div>";
-    $dataPDF .= "<table  style='border: 1px solid ; width: 100%; '>";
+    $dataPDF .= "<table style='border: 1px solid ; width: 100%; '>";
     $dataPDF .= "<thead>";
     $dataPDF .= "<tr>";
-    $dataPDF .= "<th style='width: 50%';>Ref.</th>";
+    $dataPDF .= "<th style='width: 20%';>Dimensions LxHxP.</th>";
+    $dataPDF .= "<th style='width: 30%';>Ref.</th>";
     $dataPDF .= "<th style='width: 10%';>Prix HT</th>";
     $dataPDF .= "<th style='width: 10%';>Remise %</th>";
     $dataPDF .= "<th style='width: 10%';>Remise €</th>";
@@ -438,7 +453,7 @@ function GenerateDevisPDF($deviId){
     $dataPDF .= "<th style='width: 10%';>Prix TTC</th>";
     $dataPDF .= "</tr>";
     $dataPDF .= "</thead>";
-    $dataPDF .= "<tbody style='height: 100%';>";
+    $dataPDF .= "<tbody style='height: 100%'>";
 
     $sommeTtc = 0;
     $sommeNetSansRemise = 0;
@@ -471,10 +486,11 @@ function GenerateDevisPDF($deviId){
       $sommeTtc += $ttc;
 
       $dataPDF .= "<tr style='height: 100%';>";
+      $dataPDF .= "<td>".$ligneModel->GetLargeur()." x ".$ligneModel->GetProfondeur()." x ".$ligneModel->GetHauteur()."</td>";
       $dataPDF .= "<td>".$pieceModel->GetCode()." ".$pieceModel->GetCodeSs()." ".$pieceModel->GetCodeFamille()."</td>";
       $dataPDF .= "<td>".$prix." €</td>";
       $dataPDF .= "<td>".$pourcentageRemise."%</td>";
-      $dataPDF .= "<td>".$valeurRemise."€</td>";
+      $dataPDF .= "<td>-".$valeurRemise."€</td>";
       $dataPDF .= "<td>".$net." €</td>";
       $dataPDF .= "<td>".$ttc." €</td>";
       $dataPDF .= "</tr>";
@@ -509,8 +525,9 @@ function GenerateDevisPDF($deviId){
     $dataPDF .= "<td>".$sommeTtc." €</td>";
     $dataPDF .= "</tr>";
     $dataPDF .= "</table>";
-    $dataPDF .= "</div></div>";
+    $dataPDF .= "<img style='width:100%' src='".$deviModel->GetCheminImage()."'>";
 
+    $dataPDF .= "</div>";
     //$content = ob_get_clean();
     try {
       $pdf = new HTML2PDF("p","A4","fr");

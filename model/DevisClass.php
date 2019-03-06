@@ -8,8 +8,9 @@ Class Devis
 	private $_IdClient;
 	private $_IdUser;
 	private $_CheminImage;
-	private $_CheminPdf;
   private $_IdMatiere;
+	private $_Archive;
+
 
 	  //constructeur
     public function __construct(array $donnees)
@@ -44,7 +45,7 @@ Class Devis
     public function GetIdClient(){return $this->_IdClient;}
     public function GetIdUser(){return $this->_IdUser;}
 		public function GetCheminImage(){return $this->_CheminImage;}
-		public function GetCheminPdf(){return $this->_CheminImage;}
+		public function GetArchive(){return $this->_Archive;}
 
     //*Set*//
     public function SetId($id){$this -> _Id = (int) $id;}
@@ -52,6 +53,6 @@ Class Devis
     public function SetDate($date){return $this -> _Date = $date;}
     public function SetIdClient($idclient){return $this -> _IdClient = (int) $idclient;}
     public function SetIdUser($iduser){return $this -> _IdUser = (int) $iduser;}
-		public function SetCheminImage($chemin){return $this-> _CheminImage = $chemin;}
-		public function SetCheminPdf($chemin){return $this-> _CheminImage = $chemin;}
+		public function SetCheminImage($cheminImage){return $this-> _CheminImage = $cheminImage;}
+		public function SetArchive($Archive){return $this-> _Archive = $Archive;}
 }

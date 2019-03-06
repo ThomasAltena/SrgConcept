@@ -45,9 +45,9 @@ $date = date("d-m-Y");
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
 <body style="overflow: scroll;">
 <div id="content-wrapper">
-    <div class='container' style="max-width: 100%;">
-        <div class="form col-lg-12">
-            <div class="row col-lg-12" style="min-width: 1250px">
+    <div class='container' style="max-width: 1600px; min-width: 1600px">
+        <div class="form">
+            <div class="row">
                 <!--OPTIONS ET SCHEMA-->
                 <div class="col-sm row" id="optionsPrincipaleEtSchemaContainer">
                     <!--OPTIONS-->
@@ -148,8 +148,7 @@ $date = date("d-m-Y");
                                       id="Id_ss_famille_label">Sous-fam :</span>
                                 </div>
                                 <select name="Id_ss_famille" aria-describedby=Id_ss_famille_label"
-                                        id="select_ss_famille"
-                                        disabled
+                                        id="select_ss_famille" disabled
                                         class="form-control" onchange="FilterPieces(value)">
                                 </select>
                             </div>
@@ -198,11 +197,11 @@ $date = date("d-m-Y");
                     <!--SCHEMA-->
                     <div class="col-sm" id="schemaOptionsContainer">
                         <div class="col-lg-12 formbox row" id="schemaPiecesEtSlidersContainer">
-                            <div class="col-sm-11" id="schemaPiecesContainer">
-                                <img id="imagePieceSelectionneeSchema" src="" alt""  style="top:100px; left:50px; position:absolute;">
+                            <div class="col-sm-11 formbox" id="schemaPiecesContainer">
+                                <img id="imagePieceSelectionneeSchema" src="" alt""  style="top:100px; position:absolute;">
 
                             </div>
-                            <div class="col-sm-1 formbox" id="selectedPieceOptionsList">
+                            <div class="formbox" id="selectedPieceOptionsList">
 
                             </div>
                             <div id="deplacementPieceSchemaControlsContainer" class="row">
@@ -302,46 +301,46 @@ $date = date("d-m-Y");
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!--PIECES SELECTIONNEES-->
-                <div class="col-sm" id="piecesSelectionneeEtOptionsDevisContainer">
-                    <div class="formbox col-lg-12" id="piecesSelectionneeEtOptionsPiecesContainer">
-                        <div class="row" id="piecesListContainer"
-                             style="height: 600px;margin: 0; padding: 0 0 0 20px;">
-                        </div>
-                        <div class="row" style="height: 25px;margin: 0; padding: 0;">
-                            <div class="col-sm" style="text-align: center;" id="pageNumberContainer">
+                    <!--PIECES SELECTIONNEES-->
+                    <div class="col-sm" id="piecesSelectionneeEtOptionsDevisContainer">
+                        <div class="formbox col-lg-12" id="piecesSelectionneeEtOptionsPiecesContainer">
+                            <div class="row" id="piecesListContainer"
+                                 style="height: 600px;margin: 0; padding: 0 0 0 20px;">
+                            </div>
+                            <div class="row" style="height: 25px;margin: 0; padding: 0;">
+                                <div class="col-sm" style="text-align: center;" id="pageNumberContainer">
 
+                                </div>
+                            </div>
+                            <div class="row col-lg-12" style="height: 50px; margin: 0; padding: 0;"
+                                 id="piecesListControls">
+                                <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                                     onclick="PiecesListGoTo(0)"><i
+                                            class="fas fa-step-backward"></i>
+                                </div>
+                                <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                                     onclick="PiecesListPageLeft()">
+                                    <i class="fas fa-chevron-left"></i>
+                                </div>
+                                <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                                     onclick="PiecesListPageRight()">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                                <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
+                                     onclick="PiecesListGoTo(-1)">
+                                    <i class="fas fa-step-forward"></i>
+                                </div>
                             </div>
                         </div>
-                        <div class="row col-lg-12" style="height: 50px; margin: 0; padding: 0;"
-                             id="piecesListControls">
-                            <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
-                                 onclick="PiecesListGoTo(0)"><i
-                                        class="fas fa-step-backward"></i>
-                            </div>
-                            <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
-                                 onclick="PiecesListPageLeft()">
-                                <i class="fas fa-chevron-left"></i>
-                            </div>
-                            <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
-                                 onclick="PiecesListPageRight()">
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
-                            <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
-                                 onclick="PiecesListGoTo(-1)">
-                                <i class="fas fa-step-forward"></i>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
-                        <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" disabled onclick="">Visualiser
-                            Devis
-                        </button>
-                        <button class="btn btn-success col-lg-12 hover-effect-a" onclick="SauvegarderDevis()">Sauvegarder Devis
-                        </button>
+                        <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
+                            <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" disabled onclick="">Visualiser
+                                Devis
+                            </button>
+                            <button class="btn btn-success col-lg-12 hover-effect-a" onclick="SauvegarderDevis()">Sauvegarder Devis
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -479,7 +478,7 @@ $date = date("d-m-Y");
             imagePieceSelectionneeSchema.style.maxWidth = "600px";
             imagePieceSelectionneeSchema.style.width = "600px";
             imagePieceSelectionneeSchema.style.height = "600px";
-            $('#imagePieceSelectionneeSchema').css({top: "100px", left: "50px", position:'absolute'});
+            $('#imagePieceSelectionneeSchema').css({top: "100px", position:'absolute'});
         }
     }
 
@@ -733,7 +732,7 @@ $date = date("d-m-Y");
                 let text = '<img alt="Une piece parmis pleins sur schema" id="schema_piece_' + selectedPiece.pos_z + '" ' +
                     'src="' + piece.chemin_piece + '" ' +
                     'style="height:' + (piece.originalHeight * piece.ratio) + 'px; width:' + (piece.originalWidth * piece.ratio) + 'px;' +
-                    'position: absolute; left:' + (50 + piece.pos_x / 10) + 'px ; top:' + (100 + piece.pos_y / 10) + 'px ; ';
+                    'position: absolute; left:' + (piece.pos_x / 10) + 'px ; top:' + (100 + piece.pos_y / 10) + 'px ; ';
                 if (piece.chemin_piece === "") {
                     text += 'visibility: hidden;';
                 }
@@ -781,7 +780,7 @@ $date = date("d-m-Y");
         selectedPiece.pos_y = posY;
         selectedPiece.ratio = ratio;
 
-        imagePieceSelectionneeSchema.css({"left": (50+(posX / 10)).toString().concat('px')});
+        imagePieceSelectionneeSchema.css({"left": ((posX / 10)).toString().concat('px')});
         imagePieceSelectionneeSchema.css({"top": (100+(posY / 10)).toString().concat('px')});
 
         imagePieceSelectionneeSchema.css({"max-width": ''});

@@ -5,8 +5,9 @@
 }
 
 #schemaOptionsContainer {
-    max-width: 100%;
-    min-width: 600px;
+  margin-right: 1vw;
+    max-width: 680px;
+    min-width: 680px;
     padding-right: 0;
     padding-left: 0;
 }
@@ -96,32 +97,39 @@
 #schemaPiecesEtSlidersContainer {
     margin-bottom: 1vw;
     height: 600px;
+    max-width: 680px;
+    min-width: 680px;
     padding: 0;
     overflow: hidden;
 }
 
 #schemaPiecesContainer{
-    height: 600px;
-    padding: 0;
+  overflow: hidden;
+  margin: 0;
+  height: 600px;
+  width: 600px;
+  max-width: 600px;
+  min-width: 600px;
+  padding: 0;
 }
 
 #optionsPrincipalContainer {
-    max-width: 32%;
-    min-width: 260px;
+    max-width: 450px;
+    min-width: 450px;
     margin-right: 1vw;
     padding-left: 0;
     padding-right: 0;
 }
 
 #optionsPrincipaleEtSchemaContainer {
-    max-width: 80%;
-    margin-right: 1vw;
+    margin: 0;
     height: min-content%;
     padding-right: 0;
 }
 
 #piecesSelectionneeEtOptionsDevisContainer {
     max-width: 326px;
+    min-width: 326px;
     padding-left: 0;
     padding-right: 0;
 }
@@ -161,6 +169,7 @@
 }
 
 #selectedPieceOptionsList {
+    width: 80px;
     margin: 0 0 38px 0;
     padding: 0;
     visibility: hidden;
