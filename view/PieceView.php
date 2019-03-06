@@ -36,14 +36,18 @@ echo("
   <tbody>");
 
 $pieces = $ManagerPiece->GetPieces();
-foreach ($pieces as $piece){
+
+for($i = 0; $i<5; $i++){
+  if($pieces[$i]){
+    $piece = $pieces[$i];
     echo("<tr>");
     echo("<td>" .$piece->GetLibelle(). "</td>");
     echo("<td>" .$piece->GetChemin(). "</td>");
     echo("<td>" .$piece->GetCode(). "</td>");
-    echo("<td><img height=\"100\" width=\"100\" src=".$piece->GetChemin()."></td>");
+    echo("<td><img height=\"100\" width=\"100\" src='".$piece->GetChemin()."'></td>");
     echo ("<td> <button onclick='supp(".$piece->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
     echo ("</tr>");
+  }  
 }
 
 echo ("</tbody>
