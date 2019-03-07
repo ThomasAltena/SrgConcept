@@ -56,9 +56,15 @@ try {
                   </div>
                   <input type="text" class="form-control" disabled aria-describedby="basic-addon1" id="dateLibelle" value="">
                 </div>
-                <button class="btn btn-default col-lg-12 hover-effect-a" onclick="addArrow()">Ajouter Fleche
+                <button class="mb-3 btn btn-default col-lg-12 hover-effect-a" onclick="addArrow()">Ajouter Fleche
                 </button>
 
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control hover-effect-a" aria-describedby="basic-addon1" id="textToAdd" aria-label="Text" value="" >
+                  <button class="input-group-append btn hover-effect-a btn-default" style="padding:1; margin:0; border:0" onclick="addText()">
+                    Ajouter Text
+                  </button>
+                </div>
               </div>
               <div class="formbox">
                 <!-- <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" disabled onclick="">Visualiser
@@ -110,7 +116,7 @@ try {
                    onclick="loadList('arrows')">FLECHES
               </div>
               <div class="col-sm btn hover-effect-a" style="padding-top: 12px;"
-                   onclick="loadList()">TOUT
+                   onclick="loadList('texts')">TEXT
               </div>
             </div>
           </div>
@@ -137,6 +143,7 @@ document.getElementById('schemaContainer').appendChild(app.view);
 let schemaGroup;
 let donneesGroup;
 let arrowsGroup;
+let textGroup;
 let dragGroup;
 let shadowGroup;
 let stage;
@@ -146,6 +153,7 @@ let startState = [];
 let endState = [];
 let layers = [];
 let arrows = [];
+let texts = [];
 
 let controlKey = false;
 let shiftKey = false;
@@ -272,7 +280,7 @@ function loadPieces(){
   body = '';
   let i = 1;
   devis.lignes.forEach(function(ligne){
-    let donnees = new PIXI.Text('H:'+ligne.Hauteur_ligne+'cm L:'+ligne.Largeur_ligne+'cm P:'+ligne.Hauteur_ligne +'cm', {
+    let donnees = new PIXI.Text('' + ligne.Hauteur_ligne+' x '+ligne.Largeur_ligne+' x '+ligne.Hauteur_ligne +'', {
       fontFamily: 'Roboto',
       fontSize: 25,
       fill: 'black',
@@ -313,7 +321,24 @@ function generatePieceListHtml(ligne, index){
   return body;
 }
 
-function generateFlecheListHtml(ligne, index){
+function generateTextListHtml(parent, index){
+  text = texts[index];
+  let action = "'texts'";
+  body = '';
+  body += '<div class="row formbox col-lg-12 hover-effect-b" style="margin: 0 0 5px 0; height:50px; padding:0"';
+  body += 'onmouseenter="addHighlight('+ index + ',' + action + ')"';
+  body += 'onmouseleave="removeHighlight('+ index + ',' + action + ')" >';
+
+  body += '<span style="padding: 12px 0 0 50px;">' + text.data + '</span>';
+
+  body += '<div class="btn hover-effect-a" style="color: red; position: absolute; left: 5px top: 5px;" onclick="removeText(' + index + ' )">\n';
+  body += '<i class="fas fa-trash-alt"></i>\n';
+  body += '</div>\n';
+  body += '</div>';
+  return body;
+}
+
+function generateFlecheListHtml(parent, index){
   let action = "'arrows'";
   body = '';
   body += '<div class="row formbox col-lg-12 hover-effect-b" style="margin: 0 0 5px 0; height:50px; padding:0"';
@@ -347,6 +372,14 @@ function loadList(action){
       document.getElementById("piecesListView").innerHTML = body;
 
       break;
+    case 'texts':
+      body = '';
+      texts.forEach(function(layer){
+        body += generateTextListHtml(layer.parent, layer.index);
+      });
+      document.getElementById("piecesListView").innerHTML = body;
+
+      break;
     default:
       body = '';
       layers.forEach(function(layer){
@@ -367,6 +400,9 @@ function addHighlight(index, type){
       break;
     case 'arrows':
       layer = arrows[index];
+      break;
+    case 'texts':
+      layer = texts[index];
       break;
     default:
       break;
@@ -396,10 +432,41 @@ function removeHighlight(index, type){
     case 'arrows':
       layer = arrows[index];
       break;
+    case 'texts':
+      layer = texts[index];
+      break;
     default:
       break;
   }
   stage.removeChild(layer.child);
+}
+
+function addText(){
+  let data = document.getElementById('textToAdd').value;
+  document.getElementById('textToAdd').value = '';
+  let index = texts.length;
+  let graphics ;
+  let text = new PIXI.Text(data, {
+    fontFamily: 'Roboto',
+    fontSize: 25,
+    fill: 'black',
+    align: 'left'
+  });
+
+  text.buttonMode = true;
+  text.parentGroup = textGroup;
+  text.position.set(200,200);
+  text.anchor.set(0.5);
+
+  subscribe(text);
+
+  stage.addChild(text);
+  texts.push({'parent': text, 'child': graphics, 'index': index, 'data': data});
+
+  if(listContents == 'texts'){
+    loadList(listContents);
+  }
+  addHistory('add',{'child': text, 'index': index, 'parent': stage, 'container': texts, 'data': data}, 'text' );
 }
 
 function addArrow(){
@@ -417,10 +484,25 @@ function addArrow(){
   stage.addChild(arrow);
   arrows.push({'parent': arrow, 'child': graphics, 'index': index });
 
-  if(listContents != 'pieces'){
+  if(listContents == 'arrows'){
     loadList(listContents);
   }
   addHistory('add',{'child': arrow, 'index': index, 'parent': stage, 'container': arrows}, 'arrow' );
+}
+
+function removeText(index){
+  text = texts[index].parent;
+  data = texts[index].data;
+  graphics = texts[index].child;
+  stage.removeChild(text);
+  if(graphics){
+    graphics.destroy();
+  }
+  texts.splice(index, 1);
+
+  recalculateIndex(texts);
+  loadList(listContents);
+  addHistory('remove',{'child': text, 'index': index, 'parent': stage, 'container': texts, 'data': data}, 'text' );
 }
 
 function removeArrow(index){
@@ -433,14 +515,14 @@ function removeArrow(index){
 
   arrows.splice(index, 1);
 
-  recalculateArrowsIndex();
+  recalculateIndex(arrows);
   loadList(listContents);
   addHistory('remove',{'child': arrow, 'index': index, 'parent': stage, 'container': arrows}, 'arrow' );
 }
 
-function recalculateArrowsIndex(){
-  for(let i = 0; i < arrows.length; i++){
-    arrows[i].index = i;
+function recalculateIndex(array){
+  for(let i = 0; i < array.length; i++){
+    array[i].index = i;
   }
 }
 
@@ -456,8 +538,12 @@ function addGroups(){
     //blue bunnies go up
     sprite.zOrder = +sprite.y;
   });
+  let textGroup = new PIXI.display.Group(3, function (sprite) {
+    //blue bunnies go up
+    sprite.zOrder = +sprite.y;
+  });
   // Drag is the best layer, dragged element is above everything else
-  dragGroup = new PIXI.display.Group(3, false);
+  dragGroup = new PIXI.display.Group(4, false);
 
   // Shadows are the lowest
   shadowGroup = new PIXI.display.Group(-1, false);
@@ -470,6 +556,7 @@ function addGroups(){
   app.stage.addChild(new PIXI.display.Layer(schemaGroup));
   app.stage.addChild(new PIXI.display.Layer(donneesGroup));
   app.stage.addChild(new PIXI.display.Layer(arrowsGroup));
+  app.stage.addChild(new PIXI.display.Layer(textGroup));
   app.stage.addChild(new PIXI.display.Layer(dragGroup));
   app.stage.addChild(new PIXI.display.Layer(shadowGroup));
 
@@ -682,6 +769,15 @@ function addHistory(action, objects, type){
         historyItem['index'] = objects.index;
         historyItem['container'] = objects.container;
       }
+      if(type == 'text'){
+        historyItem['action'] = action;
+        historyItem['type'] = type;
+        historyItem['child'] = objects.child;
+        historyItem['parent'] = objects.parent;
+        historyItem['index'] = objects.index;
+        historyItem['container'] = objects.container;
+        historyItem['data'] = objects.data;
+      }
       break;
     case 'remove':
       if(type == 'arrow'){
@@ -691,6 +787,15 @@ function addHistory(action, objects, type){
         historyItem['parent'] = objects.parent;
         historyItem['index'] = objects.index;
         historyItem['container'] = objects.container;
+      }
+      if(type == 'text'){
+        historyItem['action'] = action;
+        historyItem['type'] = type;
+        historyItem['child'] = objects.child;
+        historyItem['parent'] = objects.parent;
+        historyItem['index'] = objects.index;
+        historyItem['container'] = objects.container;
+        historyItem['data'] = objects.data;
       }
       break;
       break;
@@ -736,8 +841,25 @@ function undo(){
 
           historyItem.container.splice(historyItem.index, 1);
 
-          recalculateArrowsIndex();
-          if(listContents != 'pieces'){
+          recalculateIndex(arrows);
+          if(listContents == 'arrows'){
+            loadList(listContents);
+          }
+        }
+        if(historyItem.type == 'text'){
+          containerItem = historyItem.container[historyItem.index];
+          text = containerItem.parent;
+          graphics = containerItem.child;
+
+          historyItem.parent.removeChild(text);
+          if(graphics){
+            graphics.destroy();
+          }
+
+          historyItem.container.splice(historyItem.index, 1);
+
+          recalculateIndex(texts);
+          if(listContents == 'texts'){
             loadList(listContents);
           }
         }
@@ -747,15 +869,24 @@ function undo(){
           let graphics;
           historyItem.parent.addChild(historyItem.child);
           historyItem.container.splice(historyItem.index, 0, {'parent': historyItem.child, 'child': graphics, 'index': historyItem.index });
-          recalculateArrowsIndex();
 
-          if(listContents != 'pieces'){
+          recalculateIndex(arrows);
+          if(listContents == 'arrows'){
+            loadList(listContents);
+          }
+        }
+        if(historyItem.type == 'text'){
+          let graphics;
+          historyItem.parent.addChild(historyItem.child);
+          historyItem.container.splice(historyItem.index, 0, {'parent': historyItem.child, 'child': graphics, 'index': historyItem.index, 'data': historyItem.data });
+          recalculateIndex(texts);
+          if(listContents == 'texts'){
             loadList(listContents);
           }
         }
         break;
-        break;
       default:
+        break;
     }
   }
 }
@@ -783,9 +914,20 @@ function redo(){
           let graphics;
           historyItem.parent.addChild(historyItem.child);
           historyItem.container.splice(historyItem.index, 0, {'parent': historyItem.child, 'child': graphics, 'index': historyItem.index });
-          recalculateArrowsIndex();
+          recalculateIndex(arrows);
 
-          if(listContents != 'pieces'){
+          if(listContents == 'arrows'){
+            loadList(listContents);
+          }
+        }
+        if(historyItem.type == 'text'){
+
+          let graphics;
+          historyItem.parent.addChild(historyItem.child);
+          historyItem.container.splice(historyItem.index, 0, {'parent': historyItem.child, 'child': graphics, 'index': historyItem.index, 'data': historyItem.data });
+          recalculateIndex(texts);
+
+          if(listContents == 'texts'){
             loadList(listContents);
           }
         }
@@ -803,14 +945,31 @@ function redo(){
 
           historyItem.container.splice(historyItem.index, 1);
 
-          recalculateArrowsIndex();
-          if(listContents != 'pieces'){
+          recalculateIndex(arrows);
+          if(listContents == 'arrows'){
+            loadList(listContents);
+          }
+        }
+        if(historyItem.type == 'text'){
+          containerItem = historyItem.container[historyItem.index];
+          text = containerItem.parent;
+          graphics = containerItem.child;
+
+          historyItem.parent.removeChild(text);
+          if(graphics){
+            graphics.destroy();
+          }
+
+          historyItem.container.splice(historyItem.index, 1);
+
+          recalculateIndex(texts);
+          if(listContents == 'texts'){
             loadList(listContents);
           }
         }
         break;
-        break;
       default:
+        break;
     }
 
     historyIndex++;
