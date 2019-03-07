@@ -16,7 +16,7 @@ spl_autoload_register(function ($class_name) {
 
 
 require('../model/UploadClass.php');
-require('../model/UploadCroquis.php');
+require('../model/UploadCroquisClass.php');
 ?>
 
 <!DOCTYPE html>
