@@ -136,12 +136,9 @@ Class UserManager
 
                 if($role == 1){/* A modif plus tard */
 
-                header('Location:UserView.php');
-
+                echo('<meta http-equiv="refresh" content="0;URL=../view/UserView.php">');
             }else{
-
-               header('Location:ClientView.php');
-
+              echo('<meta http-equiv="refresh" content="0;URL=../view/ClientView.php">');
             }
 
             }
