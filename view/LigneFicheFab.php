@@ -260,7 +260,7 @@ function setBackground(){
   stage = new PIXI.Container();
   let background = new PIXI.Graphics();
 
-  background.beginFill(0xEEEEEE);
+  background.beginFill(0xFFFFFF);
   background.drawRect(0,0,1000,700);
   background.endFill();
 

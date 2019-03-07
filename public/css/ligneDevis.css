@@ -104,6 +104,7 @@
 }
 
 #schemaPiecesContainer{
+  background-color: white;
   overflow: hidden;
   margin: 0;
   height: 600px;
