@@ -30,11 +30,11 @@ try {
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
 <body style="overflow: scroll;">
   <div id="content-wrapper">
-    <div class='container' style="max-width: 100%;">
-      <div class="col-lg-12">
-        <div class="row col-lg-12" style="min-width: 1750px;">
+    <div class='container' style="min-width: 1600px;">
+      <div>
+        <div class="row">
           <!--OPTIONS ET SCHEMA-->
-          <div class="col-sm row" style="min-width: 300px; max-width: 500px">
+          <div class="col-sm row" style="min-width: 400px; max-width: 400px">
             <!--OPTIONS-->
             <div class="col-sm" style="padding:0">
               <div class="formbox" style="margin-bottom: 1vw;">
@@ -70,9 +70,9 @@ try {
             </div>
           </div>
 
-          <div class="col-sm formbox" style="max-width:1000px; min-width:1000px; padding:0; margin-right:1vw; margin-left:1vw;">
+          <div class="col-sm formbox" style="max-width:700px; min-width:700px; max-height:650px; min-height:650px; padding:0; margin-right:1vw; margin-left:1vw;">
             <!--SCHEMA FICHE DE FABRICATION-->
-            <div class="col-sm" style="max-width:1000px; min-width:1000px; max-height:700px; min-height:700px; padding:0" id="schemaContainer">
+            <div class="col-sm" style="max-width:700px; min-width:700px; max-height:600px; min-height:600px; padding:0; backgroundColor:white" id="schemaContainer">
 
             </div>
             <!--OPTIONS FICHE DE FABRICATION-->
@@ -97,8 +97,8 @@ try {
             </div>
           </div>
           <!--PIECES FICHE DE FABRICATION-->
-          <div class="col-sm formbox" style="padding:0; max-height:750px; min-height:750px; min-width:400px; max-width:400px;">
-            <div class="col-sm" style="max-height:700px; min-height:700px; min-width:400px; max-width:400px; padding:5px; overflow:scroll" id="piecesListView" >
+          <div class="col-sm formbox" style="padding:0; max-height:650px; min-height:650px; min-width:400px; max-width:400px;">
+            <div class="col-sm" style="max-height:600px; min-height:600px; min-width:400px; max-width:400px; padding:5px; overflow:scroll" id="piecesListView" >
 
             </div>
             <div class="row col-lg-12" style="height: 50px; margin: 0; padding: 0;"
@@ -132,7 +132,7 @@ let actionEnCours = false;
 
 let devisId = JSON.parse(document.getElementById('devisId').value);
 let devis = null;
-let app = new PIXI.autoDetectRenderer(1000, 700, {backgroundColor: 0xEEEEEE});
+let app = new PIXI.autoDetectRenderer(700, 600, {backgroundColor: 0xEEEEEE});
 document.getElementById('schemaContainer').appendChild(app.view);
 let schemaGroup;
 let donneesGroup;
@@ -484,7 +484,7 @@ function loadSchema(){
 
 
   schemaImage.parentGroup = schemaGroup;
-  schemaImage.position.set(400,400);
+  schemaImage.position.set(350,300);
   schemaImage.anchor.set(0.5);
   stage.addChild(schemaImage);
   subscribe(schemaImage);

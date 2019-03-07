@@ -93,8 +93,8 @@ while ($devi = $reponse->fetch()){
 <div class="modal fade bd-example-modal-lg" id="optionSelectionModal" tabindex="-1" role="dialog"
      aria-labelledby="optionSelectionModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="width: 900px;">
+    <div class="modal-dialog modal-lg" role="document" style="overflow:hidden;">
+        <div class="modal-content" style="width: 610px;">
             <div class="modal-header">
                 <h4 class="modal-title" id="previewSchemaTitle"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

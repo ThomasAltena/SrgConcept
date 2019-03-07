@@ -525,8 +525,10 @@ function GenerateDevisPDF($deviId){
     $dataPDF .= "<td>".$sommeTtc." €</td>";
     $dataPDF .= "</tr>";
     $dataPDF .= "</table>";
-    $dataPDF .= "<img style='width:100%' src='".$deviModel->GetCheminImage()."'>";
+    $dataPDF .= "</div>";
 
+    $dataPDF .= "<div style='overflow:hidden; height:50%; width:100%'>";
+    $dataPDF .= "<img style='height:100%' src='".$deviModel->GetCheminImage()."'>";
     $dataPDF .= "</div>";
     //$content = ob_get_clean();
     try {
