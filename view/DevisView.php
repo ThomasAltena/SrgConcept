@@ -62,7 +62,7 @@ while ($devi = $reponse->fetch()){
     <td>
     <button onclick='getDevis(<?php echo $devi['Id_devis']; ?>)' class='btn btn-link'>Voir</button>
     <button onclick='' class='btn btn-link'>Modifier</span></button>
-    <button onclick='' class='btn btn-link'>Télécharger</span></button>
+    <!-- <button onclick='' class='btn btn-link'>Télécharger</span></button> -->
     </td>
     <td>
     <?php
@@ -70,10 +70,10 @@ while ($devi = $reponse->fetch()){
           ?>
           <button onclick='loadModalData(<?php echo json_encode($devi); ?> , "<?php echo $clientlibelle; ?>", "fiche" )' class='btn btn-link' data-toggle='modal' data-target='#optionSelectionModal'>Voir</button>
           <button onclick='' class='btn btn-link'>Modifier</span></button>
-          <button onclick='' class='btn btn-link'>Télécharger</span></button>
+          <!-- <button onclick='' class='btn btn-link'>Télécharger</span></button> -->
           <?php
         } else {
-          ?><button  onclick='directCreerFicheFab(<?php echo json_encode($devi); ?>)' class='btn btn-link'>Céer</button> <?php
+          ?><button  onclick='directCreerFicheFab(<?php echo json_encode($devi); ?>)' class='btn btn-link'>Créer</button> <?php
         }
     ?>
     </td>
