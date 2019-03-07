@@ -60,18 +60,17 @@ while ($devi = $reponse->fetch()){
     <td> <?php echo $clientlibelle; ?></td>
     <td> <?php echo $devi['Date_devis']; ?></td>
     <td>
-    <button  onclick='getDevis(<?php echo $devi['Id_devis']; ?>)' class='btn btn-link'>Voir</button>
-    <button  onclick='' class='btn btn-link'>Modifier</span></button>
-    <button  onclick='' class='btn btn-link'>Télécharger</span></button>
+    <button onclick='getDevis(<?php echo $devi['Id_devis']; ?>)' class='btn btn-link'>Voir</button>
+    <button onclick='' class='btn btn-link'>Modifier</span></button>
+    <button onclick='' class='btn btn-link'>Télécharger</span></button>
     </td>
     <td>
     <?php
-    $FicheFabrication = false;
-        if($FicheFabrication == true){
+        if($devi['CheminFicheFab_devis'] != ''){
           ?>
-          <button  onclick='' class='btn btn-link'>Voir</button>
-          <button  onclick='' class='btn btn-link'>Modifier</span></button>
-          <button  onclick='' class='btn btn-link'>Télécharger</span></button>
+          <button onclick='loadModalData(<?php echo json_encode($devi); ?> , "<?php echo $clientlibelle; ?>", "fiche" )' class='btn btn-link' data-toggle='modal' data-target='#optionSelectionModal'>Voir</button>
+          <button onclick='' class='btn btn-link'>Modifier</span></button>
+          <button onclick='' class='btn btn-link'>Télécharger</span></button>
           <?php
         } else {
           ?><button  onclick='directCreerFicheFab(<?php echo json_encode($devi); ?>)' class='btn btn-link'>Céer</button> <?php
@@ -79,7 +78,7 @@ while ($devi = $reponse->fetch()){
     ?>
     </td>
     <td>
-    <button  onclick='loadModalData(<?php echo json_encode($devi); ?> , "<?php echo $clientlibelle; ?>" )' class='btn btn-link' data-toggle='modal' data-target='#optionSelectionModal'>Voir</button>
+    <button onclick='loadModalData(<?php echo json_encode($devi); ?> , "<?php echo $clientlibelle; ?>", "schema" )' class='btn btn-link' data-toggle='modal' data-target='#optionSelectionModal'>Voir</button>
     </td>
     </tr>
     <?php
@@ -94,14 +93,14 @@ while ($devi = $reponse->fetch()){
      aria-labelledby="optionSelectionModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document" style="overflow:hidden;">
-        <div class="modal-content" style="width: 610px;">
+        <div class="modal-content" style="width: 800px;">
             <div class="modal-header">
                 <h4 class="modal-title" id="previewSchemaTitle"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" style="padding: 0">
+            <div class="modal-body" style="padding: 0; overflow: hidden;">
                 <img id="previewSchema" src="" alt"">
             </div>
             <div class="modal-footer">
@@ -128,11 +127,20 @@ function getDevis(devisId)
   window.open('../controller/DevisController.php?functionname=GenerateDevisPDF' + "&devisId=" + devisId, '_blank');
 }
 
-function loadModalData(d, c){
-  document.getElementById('previewSchemaTitle').innerHTML = c;
+function loadModalData(devis, clientLibelle, type){
+  let chemin = '';
+
+  if(type == 'schema'){
+    chemin = devis.CheminImage_devis;
+  }
+  if(type == 'fiche'){
+    chemin = devis.CheminFicheFab_devis;
+  }
+
+  document.getElementById('previewSchemaTitle').innerHTML = clientLibelle;
   let previewSchema = document.getElementById('previewSchema');
   previewSchema.setAttribute('style', 'visibility: visible');
-  previewSchema.setAttribute("src", d.CheminImage_devis);
+  previewSchema.setAttribute("src", chemin);
 }
 
 function directCreerFicheFab(d){
