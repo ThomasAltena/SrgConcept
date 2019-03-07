@@ -132,7 +132,7 @@ let actionEnCours = false;
 
 let devisId = JSON.parse(document.getElementById('devisId').value);
 let devis = null;
-let app = new PIXI.autoDetectRenderer(700, 600, {backgroundColor: 0xEEEEEE});
+let app = new PIXI.autoDetectRenderer(700, 600, {backgroundColor: 0xFFFFFF});
 document.getElementById('schemaContainer').appendChild(app.view);
 let schemaGroup;
 let donneesGroup;
@@ -838,6 +838,6 @@ function saveFicheFab(){
     }
   };
   xhttp.open("POST", "../controller/DevisController.php?functionname=" + 'SaveFicheFab' , true);
-  xhttp.send(JSON.stringify(arguments));  
+  xhttp.send(JSON.stringify(arguments));
 }
 </script>
