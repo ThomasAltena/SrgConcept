@@ -15,7 +15,7 @@ spl_autoload_register(function ($class_name) {
 });
 
 
-require('../model/Upload.php');
+require('../model/UploadClass.php');
 require('../model/UploadCroquis.php');
 ?>
 
