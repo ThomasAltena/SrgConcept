@@ -32,11 +32,28 @@ Class DevisManager
         }
     }
 
+    public function UpdateCheminFicheFab($idDevis, $chemin)
+    {
+        if(isset($idDevis) && isset($chemin)){
+            $q = $this->_Db->prepare('UPDATE devis SET CheminFicheFab_devis = (:chemin) WHERE Id_devis = (:id);');
+            $q->bindValue(':chemin',$chemin);
+            $q->bindValue(':id',$idDevis);
+            if(!$q->execute()) {
+                return [false,$q->errorInfo()];
+            }
+            return [true, 'OK'];
+        } else {
+            return [false, 'Données incompletes'];
+        }
+    }
+
+
+
 
     public function AddDevis(Devis $devis)
     {
         //Preparation
-        $q = $this->_Db->prepare('INSERT INTO devis VALUES(:id, :datedevis, :idclient, :iduser, :cheminImage, :idMatiere, :archive)');
+        $q = $this->_Db->prepare('INSERT INTO devis VALUES(:id, :datedevis, :idclient, :iduser, :cheminImage, :idMatiere, :archive, :cheminFicheFab)');
         $q->bindValue(':id', "");
         $q->bindValue(':idMatiere',$devis->GetIdMatiere());
         $q->bindValue(':datedevis',$devis->GetDate());
@@ -44,6 +61,7 @@ Class DevisManager
         $q->bindValue(':iduser', $devis->GetIdUser());
         $q->bindValue(':cheminImage', $devis->GetCheminImage());
         $q->bindValue(':archive', $devis->GetArchive());
+        $q->bindValue(':cheminFicheFab', $devis->GetCheminFicheFab());
 
         //Assignation des valeurs
 

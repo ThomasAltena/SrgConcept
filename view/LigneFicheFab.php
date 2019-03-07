@@ -36,7 +36,7 @@ try {
           <!--OPTIONS ET SCHEMA-->
           <div class="col-sm row" style="min-width: 400px; max-width: 400px">
             <!--OPTIONS-->
-            <div class="col-sm" style="padding:0">
+            <div class="col-sm" style="padding:0" id="test">
               <div class="formbox" style="margin-bottom: 1vw;">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -61,10 +61,10 @@ try {
 
               </div>
               <div class="formbox">
-                <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" disabled onclick="">Visualiser
+                <!-- <button class="mb-3 btn btn-primary col-lg-12 hover-effect-a" disabled onclick="">Visualiser
                     Fiche
-                </button>
-                <button class="btn btn-success col-lg-12 hover-effect-a" onclick="">Sauvegarder Fiche
+                </button> -->
+                <button class="btn btn-success col-lg-12 hover-effect-a" onclick="saveFicheFab()">Sauvegarder Fiche
                 </button>
               </div>
             </div>
@@ -822,4 +822,22 @@ function redo(){
 
 }
 
+function saveFicheFab(){
+  let image = app.plugins.extract.image(stage);
+
+  let arguments = [devisId, image.src];
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      responseText = JSON.parse(this.responseText);
+      if(responseText.error){
+        console.log(responseText);
+      } else {
+        saved = true;
+      }
+    }
+  };
+  xhttp.open("POST", "../controller/DevisController.php?functionname=" + 'SaveFicheFab' , true);
+  xhttp.send(JSON.stringify(arguments));  
+}
 </script>
