@@ -94,10 +94,8 @@ $date = date("d-m-Y");
                 <div class="row">
                   <div class="col-sm">
                     <div class="onoffswitch">
-                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-                      id="myonoffswitch"
-                      checked>
-                      <label class="onoffswitch-label" for="myonoffswitch">
+                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="simpleOuDouble" onchange="togglePieces(event)" checked>
+                      <label class="onoffswitch-label" for="simpleOuDouble">
                         <span class="onoffswitch-inner"></span>
                         <span class="onoffswitch-switch"></span>
                       </label>
@@ -369,6 +367,7 @@ let selectedPiece = new Piece();
 let originalPiece;
 let pieces = [];
 let piecesListCurrentPage = 0;
+let format = 'simple';
 
 let matiere = '';
 
@@ -542,6 +541,18 @@ function ToggleSubmitPieceButton(bool) {
   $("#ajouter_piece_button").attr("disabled", !bool);
 }
 
+function togglePieces(bool){
+  if(format === 'simple'){
+    format = 'double';
+  } else {
+    format = 'simple';
+  }
+  sousFamille = document.getElementById('select_ss_famille').value;
+  if(sousFamille != null && sousFamille !== ''){
+    console.log(sousFamille);
+    FilterPieces(sousFamille);
+  }
+}
 
 /*
 /--------------------------------------- ACTIONS PIECE SELECTION PREVIEW -----------------------------------------------------------/
@@ -650,7 +661,7 @@ function FilterPieces(code_sous_famille, id_piece_to_select) {
         }
       }
     };
-    xhttp.open("GET", "../module/LigneDeviModule.php?functionname=GetFilteredPieces&codeFamille=" + selectedPiece.code_famille + "&codeSs=" + code_sous_famille, true);
+    xhttp.open("GET", "../module/LigneDeviModule.php?functionname=GetFilteredPieces&codeFamille=" + selectedPiece.code_famille + "&codeSs=" + code_sous_famille + "&format=" + format, true);
     xhttp.send();
   }
 }

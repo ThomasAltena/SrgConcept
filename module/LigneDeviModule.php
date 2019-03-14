@@ -117,8 +117,16 @@ function GetFilteredPieces(){
   $data = '';
   $code_famille = str_replace(' ', '', $_GET['codeFamille']);
   $code_ss = str_replace(' ', '', $_GET['codeSs']);
+  $format = str_replace(' ', '', $_GET['format']);
+  if($format == 'simple'){
+    $formatCode = 'S';
+  } else {
+    $formatCode = 'D';
+  }
 
-  $query = 'SELECT * FROM pieces WHERE CodeFamille_piece = "'.$code_famille.'" && CodeSs_piece = "'.$code_ss.'" ORDER BY Libelle_piece ASC';
+
+  $query = 'SELECT * FROM pieces WHERE CodeFamille_piece = "'.$code_famille.'" && CodeSs_piece = "'.$code_ss.'" && Code_piece REGEXP "^['.$formatCode.'].*$" ORDER BY Libelle_piece ASC ';
+
   $reponse = $bdd->query($query);
   $selectFirst = true;
 
