@@ -1,47 +1,41 @@
 <?php
 
-Class Option
+class Option
 {
+	public $_IdOption;
+	private $_LibelleOption;
+	private $_CodeOption;
+	private $_PrixOption;
 
-	private $_Id;
-	private $_Libelle;
-  private $_Code;
-	private $_Prix;
-
-	//constructeur
 	public function __construct(array $donnees)
-    {
-        $this->hydrate($donnees);
-    }
+	{
+		$this->hydrate($donnees);
+	}
 
-    //*Hydratation de l'objet *//
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $key => $value)
-        {
+	public function hydrate(array $donnees)
+	{
+		if(isset($donnees)){
+			foreach ($donnees as $key => $value)
+			{
+				$method = 'Set'.ucfirst($key);
+				if (method_exists($this, $method))
+				{
+					$this->$method($value);
+				}
+			}
+		}
+	}
 
-            // Setter
-            $method = 'Set'.ucfirst($key);
-            $method = substr($method, 0, -7);
+	/**GET**/
+	public function GetIdOption(){return $this->_IdOption;}
+	public function GetLibelleOption(){return $this->_LibelleOption;}
+	public function GetCodeOption(){return $this->_CodeOption;}
+	public function GetPrixOption(){return $this->_PrixOption;}
 
-            // Si le setter correspondant existe.
-            if (method_exists($this, $method))
-            {
-                // On appelle le setter.
-                $this->$method($value);
-            }
-        }
-    }
+	/**SET**/
+	public function SetIdOption($IdOption){$this -> _IdOption = $IdOption;}
+	public function SetLibelleOption($LibelleOption){$this -> _LibelleOption = $LibelleOption;}
+	public function SetCodeOption($CodeOption){$this -> _CodeOption = $CodeOption;}
+	public function SetPrixOption($PrixOption){$this -> _PrixOption = $PrixOption;}
 
-    //*GET*//
-    public function GetId(){return $this->_Id;}
-    public function GetLibelle(){return $this->_Libelle;}
-    public function GetCode(){return $this -> _Code;}
-    public function GetPrix(){return $this->_Prix;}
-
-    //*SET*//
-    public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetLibelle($libelle){$this -> _Libelle = $libelle;}
-    public function SetCode($code){$this -> _Code = $code;}
-    public function SetPrix($prix){$this -> _Prix = $prix;}
 }

@@ -111,7 +111,7 @@ Class DevisManager
     {
     	//Preparation
         $lignedevis = [];
-    	$q = $this->_Db->prepare('SELECT * FROM lignes_devis WHERE lignes_devis.Id_devis = :iddevis');
+    	$q = $this->_Db->prepare('SELECT * FROM lignesDevis WHERE lignes.Id_devis = :iddevis');
     	$q->bindValue(':iddevis', $iddevis);
 
       if(!$q->execute()) {

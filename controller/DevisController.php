@@ -272,7 +272,7 @@ function GetAllDevisInfo($deviId){
   if( !isset($result['error']) ) {
     $devi['lignes'] = array();
 
-    $syntax = 'SELECT * FROM lignes_devis WHERE IdDevis_ligne = :iddevis';
+    $syntax = 'SELECT * FROM lignesDevis WHERE IdDevis_ligne = :iddevis';
     $query = $bdd->prepare($syntax);
     $query->bindValue(':iddevis', $deviId);
 

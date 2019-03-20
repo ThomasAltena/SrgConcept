@@ -22,7 +22,7 @@ Class LigneDevisManager
     {
 
     	//Préparation
-    	$q = $this->_Db->prepare("INSERT INTO lignes_devis VALUES (:id,:remise,:poids,:hauteur,:largeur,:profondeur,:iddevis,:idpiece,:Pos_x_piece,:Pos_y_piece,:Ratio_piece,:Pos_z_piece)");
+    	$q = $this->_Db->prepare("INSERT INTO lignesDevis VALUES (:id,:remise,:poids,:hauteur,:largeur,:profondeur,:iddevis,:idpiece,:Pos_x_piece,:Pos_y_piece,:Ratio_piece,:Pos_z_piece)");
 
     	//Assignation des valeurs
     	$q->bindValue(':id', "");

@@ -2,53 +2,49 @@
 
 class Piece
 {
-	private $_Id;
-	private $_Libelle;
-  private $_Code;
-	private $_CodeSs;
+	public $_IdPiece;
+	private $_LibellePiece;
+	private $_CodePiece;
+	private $_CheminPiece;
 	private $_CodeFamille;
-  private $_Chemin;
+	private $_CodeSsFamille;
+	private $_CodeGroupeCube;
 
-	//constructeur
-    public function __construct(array $donnees)
-    {
-        $this->hydrate($donnees);
-    }
+	public function __construct(array $donnees)
+	{
+		$this->hydrate($donnees);
+	}
 
+	public function hydrate(array $donnees)
+	{
+		if(isset($donnees)){
+			foreach ($donnees as $key => $value)
+			{
+				$method = 'Set'.ucfirst($key);
+				if (method_exists($this, $method))
+				{
+					$this->$method($value);
+				}
+			}
+		}
+	}
 
-    //*Hydratation de l'objet *//
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $key => $value)
-        {
+	/**GET**/
+	public function GetIdPiece(){return $this->_IdPiece;}
+	public function GetLibellePiece(){return $this->_LibellePiece;}
+	public function GetCodePiece(){return $this->_CodePiece;}
+	public function GetCheminPiece(){return $this->_CheminPiece;}
+	public function GetCodeFamille(){return $this->_CodeFamille;}
+	public function GetCodeSsFamille(){return $this->_CodeSsFamille;}
+	public function GetCodeGroupeCube(){return $this->_CodeGroupeCube;}
 
-            // Setter
-            $method = 'Set'.ucfirst($key);
-            $method = substr($method, 0, -6);
+	/**SET**/
+	public function SetIdPiece($IdPiece){$this -> _IdPiece = $IdPiece;}
+	public function SetLibellePiece($LibellePiece){$this -> _LibellePiece = $LibellePiece;}
+	public function SetCodePiece($CodePiece){$this -> _CodePiece = $CodePiece;}
+	public function SetCheminPiece($CheminPiece){$this -> _CheminPiece = $CheminPiece;}
+	public function SetCodeFamille($CodeFamille){$this -> _CodeFamille = $CodeFamille;}
+	public function SetCodeSsFamille($CodeSsFamille){$this -> _CodeSsFamille = $CodeSsFamille;}
+	public function SetCodeGroupeCube($CodeGroupeCube){$this -> _CodeGroupeCube = $CodeGroupeCube;}
 
-            // Si le setter correspondant existe.
-            if (method_exists($this, $method))
-            {
-             	// On appelle le setter.
-                $this->$method($value);
-            }
-        }
-
-    }
-
-    //*get//
-    public function GetId(){return $this->_Id;}
-    public function GetLibelle(){return $this->_Libelle;}
-		public function GetCode(){return $this->_Code;}
-		public function GetCodeSs(){return $this->_CodeSs;}
-		public function GetCodeFamille(){return $this->_CodeFamille;}
-    public function GetChemin(){return $this->_Chemin;}
-
-    //*set*//
-    public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetLibelle($libelle){$this -> _Libelle = $libelle;}
-		public function SetCode($code){$this -> _Code = $code;}
-		public function SetCodeSs($codeSs){$this -> _CodeSs = $codeSs;}
-		public function SetCodeFamille($codeFamille){$this -> _CodeFamille = $codeFamille;}
-    public function SetChemin($chemin){$this -> _Chemin = $chemin;}
 }

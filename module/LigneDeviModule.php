@@ -118,14 +118,15 @@ function GetFilteredPieces(){
   $code_famille = str_replace(' ', '', $_GET['codeFamille']);
   $code_ss = str_replace(' ', '', $_GET['codeSs']);
   $format = str_replace(' ', '', $_GET['format']);
+  //$query = 'SELECT * FROM pieces WHERE CodeFamille_piece = "'.$code_famille.'" && CodeSs_piece = "'.$code_ss.'" && Code_piece REGEXP "^['.$formatCode.'].*$" ORDER BY Libelle_piece ASC ';
+
+  $query = 'SELECT * FROM pieces WHERE CodeFamille_piece = "'.$code_famille.'" && CodeSs_piece = "'.$code_ss.'"';
   if($format == 'simple'){
-    $formatCode = 'S';
+    $query .= ' && Code_piece REGEXP "^S"';
   } else {
-    $formatCode = 'D';
+    $query .= ' && (Code_piece REGEXP "^D" || Code_piece REGEXP "^SD" )';
   }
-
-
-  $query = 'SELECT * FROM pieces WHERE CodeFamille_piece = "'.$code_famille.'" && CodeSs_piece = "'.$code_ss.'" && Code_piece REGEXP "^['.$formatCode.'].*$" ORDER BY Libelle_piece ASC ';
+  $query .= ' ORDER BY Libelle_piece ASC ';
 
   $reponse = $bdd->query($query);
   $selectFirst = true;

@@ -1,61 +1,53 @@
 <?php
 
-Class Devis
+class Devis
 {
-	private $_Id;
-	//private $_Code;
-	private $_Date;
+	public $_IdDevis;
+	private $_DateDevis;
 	private $_IdClient;
 	private $_IdUser;
-	private $_CheminImage;
-	private $_CheminFicheFab;
-  private $_IdMatiere;
-	private $_Archive;
+	private $_CheminSchemaDevis;
+	private $_ArchiveDevis;
+	private $_CheminFicheFabDevis;
+	private $_RemiseDevis;
 
+	public function __construct(array $donnees)
+	{
+		$this->hydrate($donnees);
+	}
 
-	  //constructeur
-    public function __construct(array $donnees)
-    {
-        $this->hydrate($donnees);
-    }
+	public function hydrate(array $donnees)
+	{
+		if(isset($donnees)){
+			foreach ($donnees as $key => $value)
+			{
+				$method = 'Set'.ucfirst($key);
+				if (method_exists($this, $method))
+				{
+					$this->$method($value);
+				}
+			}
+		}
+	}
 
-      //*Hydratation de l'objet *//
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $key => $value)
-        {
+	/**GET**/
+	public function GetIdDevis(){return $this->_IdDevis;}
+	public function GetDateDevis(){return $this->_DateDevis;}
+	public function GetIdClient(){return $this->_IdClient;}
+	public function GetIdUser(){return $this->_IdUser;}
+	public function GetCheminSchemaDevis(){return $this->_CheminSchemaDevis;}
+	public function GetArchiveDevis(){return $this->_ArchiveDevis;}
+	public function GetCheminFicheFabDevis(){return $this->_CheminFicheFabDevis;}
+	public function GetRemiseDevis(){return $this->_RemiseDevis;}
 
-            // Setter
-            $method = 'Set'.ucfirst($key);
+	/**SET**/
+	public function SetIdDevis($IdDevis){$this -> _IdDevis = $IdDevis;}
+	public function SetDateDevis($DateDevis){$this -> _DateDevis = $DateDevis;}
+	public function SetIdClient($IdClient){$this -> _IdClient = $IdClient;}
+	public function SetIdUser($IdUser){$this -> _IdUser = $IdUser;}
+	public function SetCheminSchemaDevis($CheminSchemaDevis){$this -> _CheminSchemaDevis = $CheminSchemaDevis;}
+	public function SetArchiveDevis($ArchiveDevis){$this -> _ArchiveDevis = $ArchiveDevis;}
+	public function SetCheminFicheFabDevis($CheminFicheFabDevis){$this -> _CheminFicheFabDevis = $CheminFicheFabDevis;}
+	public function SetRemiseDevis($RemiseDevis){$this -> _RemiseDevis = $RemiseDevis;}
 
-            $method = substr($method, 0, -6);
-            // Si le setter correspondant existe.
-            if (method_exists($this, $method))
-            {
-                // On appelle le setter.
-                $this->$method($value);
-            }
-        }
-
-    }
-
-    //*get*//
-    public function GetId(){return $this->_Id;}
-    public function GetIdMatiere(){return $this->_IdMatiere;}
-    public function GetDate(){return $this->_Date;}
-    public function GetIdClient(){return $this->_IdClient;}
-    public function GetIdUser(){return $this->_IdUser;}
-		public function GetCheminImage(){return $this->_CheminImage;}
-		public function GetCheminFicheFab(){return $this->_CheminFicheFab;}
-		public function GetArchive(){return $this->_Archive;}
-
-    //*Set*//
-    public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetIdMatiere($idMatiere){$this -> _IdMatiere = (int) $idMatiere;}
-    public function SetDate($date){return $this -> _Date = $date;}
-    public function SetIdClient($idclient){return $this -> _IdClient = (int) $idclient;}
-    public function SetIdUser($iduser){return $this -> _IdUser = (int) $iduser;}
-		public function SetCheminImage($cheminImage){return $this-> _CheminImage = $cheminImage;}
-		public function SetCheminFicheFab($cheminFicheFab){return $this-> _CheminFicheFab = $cheminFicheFab;}
-		public function SetArchive($Archive){return $this-> _Archive = $Archive;}
 }

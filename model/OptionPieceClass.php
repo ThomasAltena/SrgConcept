@@ -1,10 +1,10 @@
 <?php
 
-class OptionLigne
+class OptionPiece
 {
-	public $_IdOptionsLignes;
-	private $_IdLigne;
+	public $_IdOptionsPieces;
 	private $_IdOption;
+	private $_IdPiece;
 
 	public function __construct(array $donnees)
 	{
@@ -26,13 +26,13 @@ class OptionLigne
 	}
 
 	/**GET**/
-	public function GetIdOptionsLignes(){return $this->_IdOptionsLignes;}
-	public function GetIdLigne(){return $this->_IdLigne;}
+	public function GetIdOptionsPieces(){return $this->_IdOptionsPieces;}
 	public function GetIdOption(){return $this->_IdOption;}
+	public function GetIdPiece(){return $this->_IdPiece;}
 
 	/**SET**/
-	public function SetIdOptionsLignes($IdOptionsLignes){$this -> _IdOptionsLignes = $IdOptionsLignes;}
-	public function SetIdLigne($IdLigne){$this -> _IdLigne = $IdLigne;}
+	public function SetIdOptionsPieces($IdOptionsPieces){$this -> _IdOptionsPieces = $IdOptionsPieces;}
 	public function SetIdOption($IdOption){$this -> _IdOption = $IdOption;}
+	public function SetIdPiece($IdPiece){$this -> _IdPiece = $IdPiece;}
 
 }

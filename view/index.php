@@ -65,9 +65,9 @@ if(isset($_POST['go'])){
 
         /* BDD*/
         $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-        $ManagerUser = new UserManager($db); //Connexion a la BDD
+        $ConnexionManager = new ConnexionManager($db); //Connexion a la BDD
 
-        $ManagerUser->ConnexionUser($psd,$pass);
+        $ConnexionManager->ConnexionUser($psd,$pass);
     }
     else{
         echo("<div class='alert alert-danger'><strong>Information :  </strong>Remplissez les deux champs.</div>");

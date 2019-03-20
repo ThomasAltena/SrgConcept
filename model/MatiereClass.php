@@ -2,48 +2,43 @@
 
 class Matiere
 {
-	private $_Id;
-	private $_Code;
-	private $_Libelle;
-    private $_Prix;
+	public $_IdMatiere;
+	private $_CodeMatiere;
+	private $_LibelleMatiere;
+	private $_PrixMatiere;
+	private $_CheminMatiere;
 
-	//constructeur
-    public function __construct(array $donnees)
-    {
-        $this->hydrate($donnees);
-    }
+	public function __construct(array $donnees)
+	{
+		$this->hydrate($donnees);
+	}
 
+	public function hydrate(array $donnees)
+	{
+		if(isset($donnees)){
+			foreach ($donnees as $key => $value)
+			{
+				$method = 'Set'.ucfirst($key);
+				if (method_exists($this, $method))
+				{
+					$this->$method($value);
+				}
+			}
+		}
+	}
 
-    //*Hydratation de l'objet *//
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $key => $value)
-        {
+	/**GET**/
+	public function GetIdMatiere(){return $this->_IdMatiere;}
+	public function GetCodeMatiere(){return $this->_CodeMatiere;}
+	public function GetLibelleMatiere(){return $this->_LibelleMatiere;}
+	public function GetPrixMatiere(){return $this->_PrixMatiere;}
+	public function GetCheminMatiere(){return $this->_CheminMatiere;}
 
-            // Setter
-            $method = 'Set'.ucfirst($key);
-            $method = substr($method, 0, -8);
-
-            // Si le setter correspondant existe.
-            if (method_exists($this, $method))
-            {
-                // On appelle le setter.
-                $this->$method($value);
-            }
-        }
-
-    }
-
-    //*get*//
-    public function GetId(){return $this->_Id;}
-    public function GetCode(){return $this->_Code;}
-    public function GetLibelle(){return $this->_Libelle;}
-    public function GetPrix(){return $this->_Prix;}
-
-    //*set*//
- 	public function SetId($id){$this -> _Id = (int) $id;}
- 	public function SetCode($code){$this -> _Code = $code;}
- 	public function SetLibelle($libelle){$this -> _Libelle = $libelle;}
-    public function SetPrix($prix){$this -> _Prix = (int) $prix;}
+	/**SET**/
+	public function SetIdMatiere($IdMatiere){$this -> _IdMatiere = $IdMatiere;}
+	public function SetCodeMatiere($CodeMatiere){$this -> _CodeMatiere = $CodeMatiere;}
+	public function SetLibelleMatiere($LibelleMatiere){$this -> _LibelleMatiere = $LibelleMatiere;}
+	public function SetPrixMatiere($PrixMatiere){$this -> _PrixMatiere = $PrixMatiere;}
+	public function SetCheminMatiere($CheminMatiere){$this -> _CheminMatiere = $CheminMatiere;}
 
 }

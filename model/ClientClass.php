@@ -2,67 +2,61 @@
 
 class Client
 {
-	public $_Id;
-	private $_Adresse;
-	private $_CodePostal;
-	private $_DateCrea;
-	private $_Mail;
-	private $_Nom;
-	private $_Prenom;
-	private $_Prospect;
-	private $_Tel;
-	private $_Ville;
+	public $_IdClient;
+	private $_NomClient;
+	private $_PrenomClient;
+	private $_AdresseClient;
+	private $_CodePostalClient;
+	private $_VilleClient;
+	private $_TelClient;
+	private $_MailClient;
+	private $_DateCreationClient;
+	private $_ProspectClient;
 	private $_IdUser;
 
-	//constructeur
 	public function __construct(array $donnees)
 	{
-		 $this->hydrate($donnees);
+		$this->hydrate($donnees);
 	}
 
-//*Hydratation de l'objet *//
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $key => $value)
-        {
+	public function hydrate(array $donnees)
+	{
+		if(isset($donnees)){
+			foreach ($donnees as $key => $value)
+			{
+				$method = 'Set'.ucfirst($key);
+				if (method_exists($this, $method))
+				{
+					$this->$method($value);
+				}
+			}
+		}
+	}
 
-            // Setter
-            $method = 'Set'.ucfirst($key);
-            $method = substr($method, 0, -7);
+	/**GET**/
+	public function GetIdClient(){return $this->_IdClient;}
+	public function GetNomClient(){return $this->_NomClient;}
+	public function GetPrenomClient(){return $this->_PrenomClient;}
+	public function GetAdresseClient(){return $this->_AdresseClient;}
+	public function GetCodePostalClient(){return $this->_CodePostalClient;}
+	public function GetVilleClient(){return $this->_VilleClient;}
+	public function GetTelClient(){return $this->_TelClient;}
+	public function GetMailClient(){return $this->_MailClient;}
+	public function GetDateCreationClient(){return $this->_DateCreationClient;}
+	public function GetProspectClient(){return $this->_ProspectClient;}
+	public function GetIdUser(){return $this->_IdUser;}
 
-            // Si le setter correspondant existe.
-            if (method_exists($this, $method))
-            {
-                // On appelle le setter.
-                $this->$method($value);
-            }
-        }
-    }
-
-    /**GET**/
-    public function GetId(){return $this->_Id;}
-    public function GetAdresse() {return $this->_Adresse;}
-    public function GetCodePostal() {return $this->_CodePostal;}
-    public function GetDateCrea() {return $this->_DateCrea;}
-    public function GetMail() {return $this->_Mail;}
-    public function GetNom() {return $this->_Nom;}
-    public function GetPrenom() {return $this->_Prenom;}
-    public function GetProspect() {return $this->_Prospect;}
-    public function GetTel() {return $this->_Tel;}
-    public function GetVille() {return $this->_Ville;}
-    public function GetIdUser() {return $this->_IdUser;}
-
-    /**SET**/
-    public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetAdresse($adresse){$this -> _Adresse = $adresse;}
-    public function SetCodePostal($codepostal){$this -> _CodePostal = $codepostal;}
-    public function SetDateCrea($datecreation){$this -> _DateCrea = $datecreation;}
-    public function SetMail($mail){$this -> _Mail = $mail;}
-    public function SetNom($nom){$this -> _Nom = $nom;}
-    public function SetPrenom($prenom){$this -> _Prenom = $prenom;}
-    public function SetProspect($prospect){$this -> _Prospect = $prospect;}
-    public function SetTel($tel){$this -> _Tel = $tel;}
-    public function SetVille($ville){$this -> _Ville = $ville;}
-    public function SetIdUser($iduser){$this -> _IdUser = $iduser;}
+	/**SET**/
+	public function SetIdClient($IdClient){$this -> _IdClient = $IdClient;}
+	public function SetNomClient($NomClient){$this -> _NomClient = $NomClient;}
+	public function SetPrenomClient($PrenomClient){$this -> _PrenomClient = $PrenomClient;}
+	public function SetAdresseClient($AdresseClient){$this -> _AdresseClient = $AdresseClient;}
+	public function SetCodePostalClient($CodePostalClient){$this -> _CodePostalClient = $CodePostalClient;}
+	public function SetVilleClient($VilleClient){$this -> _VilleClient = $VilleClient;}
+	public function SetTelClient($TelClient){$this -> _TelClient = $TelClient;}
+	public function SetMailClient($MailClient){$this -> _MailClient = $MailClient;}
+	public function SetDateCreationClient($DateCreationClient){$this -> _DateCreationClient = $DateCreationClient;}
+	public function SetProspectClient($ProspectClient){$this -> _ProspectClient = $ProspectClient;}
+	public function SetIdUser($IdUser){$this -> _IdUser = $IdUser;}
 
 }

@@ -8,7 +8,7 @@ header("Cache-Control:no-cache");
 
 spl_autoload_register(function ($class_name) {
   if(strpos($class_name, 'Manager')){
-    include '../model/'. $class_name . '.php';
+    include '../manager/'. $class_name . '.php';
   } else {
     include '../model/'. $class_name . 'Class.php';
   }

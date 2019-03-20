@@ -1,62 +1,56 @@
 <?php
 
-Class User
+class User
 {
-    private $_Id;
-    private $_Nom;
-    private $_Adresse;
-    private $_DateCo;
-    private $_Pseudo;
-    private $_Pass;
-    private $_Role;
-    private $_Siret;
+	public $_IdUser;
+	private $_NomUser;
+	private $_SiretUser;
+	private $_AdresseUser;
+	private $_DateCoUser;
+	private $_PseudoUser;
+	private $_PassUser;
+	private $_RoleUser;
+	private $_IdEntreprise;
 
-    //constructeur
-    public function __construct(array $donnees)
-    {
-        $this->hydrate($donnees);
-    }
+	public function __construct(array $donnees)
+	{
+		$this->hydrate($donnees);
+	}
 
+	public function hydrate(array $donnees)
+	{
+		if(isset($donnees)){
+			foreach ($donnees as $key => $value)
+			{
+				$method = 'Set'.ucfirst($key);
+				if (method_exists($this, $method))
+				{
+					$this->$method($value);
+				}
+			}
+		}
+	}
 
-    //*Hydratation de l'objet *//
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $key => $value)
-        {
+	/**GET**/
+	public function GetIdUser(){return $this->_IdUser;}
+	public function GetNomUser(){return $this->_NomUser;}
+	public function GetSiretUser(){return $this->_SiretUser;}
+	public function GetAdresseUser(){return $this->_AdresseUser;}
+	public function GetDateCoUser(){return $this->_DateCoUser;}
+	public function GetPseudoUser(){return $this->_PseudoUser;}
+	public function GetPassUser(){return $this->_PassUser;}
+	public function GetRoleUser(){return $this->_RoleUser;}
+	public function GetIdEntreprise(){return $this->_IdEntreprise;}
 
-            // Setter
-            $method = 'Set'.ucfirst($key);
-            $method = substr($method, 0, -5);
+	/**SET**/
+	public function SetIdUser($IdUser){$this -> _IdUser = $IdUser;}
+	public function SetNomUser($NomUser){$this -> _NomUser = $NomUser;}
+	public function SetSiretUser($SiretUser){$this -> _SiretUser = $SiretUser;}
+	public function SetAdresseUser($AdresseUser){$this -> _AdresseUser = $AdresseUser;}
+	public function SetDateCoUser($DateCoUser){$this -> _DateCoUser = $DateCoUser;}
+	public function SetPseudoUser($PseudoUser){$this -> _PseudoUser = $PseudoUser;}
+	public function SetPassUser($PassUser){$this -> _PassUser = $PassUser;}
+	public function SetRoleUser($RoleUser){$this -> _RoleUser = $RoleUser;}
+	public function SetIdEntreprise($IdEntreprise){$this -> _IdEntreprise = $IdEntreprise;}
 
-            // Si le setter correspondant existe.
-            if (method_exists($this, $method))
-            {
-                // On appelle le setter.
-                $this->$method($value);
-            }
-        }
-
-    }
-
-    //*get*//
-    public function GetId(){return $this->_Id;}
-    public function GetNom(){return $this->_Nom;}
-    public function GetAdresse(){return $this->_Adresse;}
-    public function GetDateCo(){return $this->_DateCo;}
-    public function GetSiret(){return $this->_Siret;}
-    public function GetPseudo(){return $this->_Pseudo;}
-    public function GetPass(){return $this->_Pass;}
-    public function GetRole(){return $this->_Role;}
-
-
-
-    //*Set*//
-    public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetNom($nom){$this -> _Nom = $nom;}
-    public function SetAdresse($addr){$this -> _Adresse = $addr;}
-    public function SetDateCo($co){$this -> _DateCo = $co;}
-    public function SetSiret($dev){$this -> _Siret = $dev;}
-    public function SetPseudo($ps){$this -> _Pseudo = $ps;}
-    public function SetPass($pass){$this -> _Pass = $pass;}
-    public function SetRole($rol){$this -> _Role = $rol;}
 }

@@ -1,39 +1,35 @@
 <?php
 
-Class Tva
+class Tva
 {
-	private $_Id;
-	private $_Taux;
+	public $_IdTva;
+	private $_TauxTva;
 
-		public function __construct(array $donnees)
+	public function __construct(array $donnees)
 	{
-		 $this->hydrate($donnees);
+		$this->hydrate($donnees);
 	}
 
-//*Hydratation de l'objet *//
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $key => $value)
-        {
+	public function hydrate(array $donnees)
+	{
+		if(isset($donnees)){
+			foreach ($donnees as $key => $value)
+			{
+				$method = 'Set'.ucfirst($key);
+				if (method_exists($this, $method))
+				{
+					$this->$method($value);
+				}
+			}
+		}
+	}
 
-            // Setter
-            $method = 'Set'.ucfirst($key);
-            $method = substr($method, 0, -4);
+	/**GET**/
+	public function GetIdTva(){return $this->_IdTva;}
+	public function GetTauxTva(){return $this->_TauxTva;}
 
-            // Si le setter correspondant existe.
-            if (method_exists($this, $method))
-            {
-                // On appelle le setter.
-                $this->$method($value);
-            }
-        }
+	/**SET**/
+	public function SetIdTva($IdTva){$this -> _IdTva = $IdTva;}
+	public function SetTauxTva($TauxTva){$this -> _TauxTva = $TauxTva;}
 
-    }
-    /**GET**/
-    public function GetId(){return $this->_Id;}
-    public function GetTaux(){return $this->_Taux;}
-
-    /**SET**/
-    public function SetId($id){$this -> _Id = (int) $id;}
-    public function SetTaux($taux){$this -> _Taux = $taux;}
 }
