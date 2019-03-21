@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include('../view/header.php');
+//include('../view/header.php');
 ?>
 
 
@@ -11,10 +11,20 @@ $tablesNonPluriel = ['tva', 'devis'];
 /* Mise en place de la base de donnée */
 $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 
-$querytables = 'SHOW TABLES';
-$reponsetables = $bdd->query($querytables);
-while ($tables = $reponsetables->fetch()) {
-  $tableNameParts = explode("_",$tables['Tables_in_srg']);
+if(isset($_GET['tableNom']) ) {
+  echo($_GET['tableNom']);
+  genererClassTable($_GET['tableNom']);
+} else {
+  $querytables = 'SHOW TABLES';
+  $reponsetables = $bdd->query($querytables);
+  while ($tables = $reponsetables->fetch()) {
+    genererClassTable($tables['Tables_in_srg']);
+  }
+}
+
+function genererClassTable($tableNom) {
+  global $tablesNonPluriel, $bdd;
+  $tableNameParts = explode("_",$tableNom);
   $className = '';
   foreach ($tableNameParts as $tableNamePart) {
     if(!in_array($tableNamePart, $tablesNonPluriel)){
@@ -26,7 +36,7 @@ while ($tables = $reponsetables->fetch()) {
   $filename = $className."Class.php";
 
   $collumNames = [];
-  $queryColumns = 'DESCRIBE `'.$tables['Tables_in_srg'].'`';
+  $queryColumns = 'DESCRIBE `'.$tableNom.'`';
   $reponseColumns = $bdd->query($queryColumns);
 
   while ($Columns = $reponseColumns->fetch()) {
@@ -78,6 +88,6 @@ while ($tables = $reponsetables->fetch()) {
   $content .= "\n\tpublic function SetOriginalObject($"."OriginalObject){"."$"."this -> _OriginalObject = $"."OriginalObject;}";
   $content .= "\n\n}";
 
-  file_put_contents('../'.$filename, $content);
+  file_put_contents('generated/class/'.$filename, $content);
 }
 ?>

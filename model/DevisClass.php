@@ -11,6 +11,12 @@ class Devis
 	private $_CheminFicheFabDevis;
 	private $_RemiseDevis;
 	private $_FormatDevis;
+	private $_TypeDevis;
+	private $_AquisDevis;
+	private $_DosPolisDevis;
+	private $_ArrondiDevis;
+	private $_PrixDevis;
+	private $_CommentairesDevis;
 	private $_OriginalObject;
 
 	public function __construct(array $donnees)
@@ -43,6 +49,12 @@ class Devis
 	public function GetCheminFicheFabDevis(){return $this->_CheminFicheFabDevis;}
 	public function GetRemiseDevis(){return $this->_RemiseDevis;}
 	public function GetFormatDevis(){return $this->_FormatDevis;}
+	public function GetTypeDevis(){return $this->_TypeDevis;}
+	public function GetAquisDevis(){return $this->_AquisDevis;}
+	public function GetDosPolisDevis(){return $this->_DosPolisDevis;}
+	public function GetArrondiDevis(){return $this->_ArrondiDevis;}
+	public function GetPrixDevis(){return $this->_PrixDevis;}
+	public function GetCommentairesDevis(){return $this->_CommentairesDevis;}
 	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
@@ -55,6 +67,12 @@ class Devis
 	public function SetCheminFicheFabDevis($CheminFicheFabDevis){$this -> _CheminFicheFabDevis = $CheminFicheFabDevis;}
 	public function SetRemiseDevis($RemiseDevis){$this -> _RemiseDevis = $RemiseDevis;}
 	public function SetFormatDevis($FormatDevis){$this -> _FormatDevis = $FormatDevis;}
+	public function SetTypeDevis($TypeDevis){$this -> _TypeDevis = $TypeDevis;}
+	public function SetAquisDevis($AquisDevis){$this -> _AquisDevis = $AquisDevis;}
+	public function SetDosPolisDevis($DosPolisDevis){$this -> _DosPolisDevis = $DosPolisDevis;}
+	public function SetArrondiDevis($ArrondiDevis){$this -> _ArrondiDevis = $ArrondiDevis;}
+	public function SetPrixDevis($PrixDevis){$this -> _PrixDevis = $PrixDevis;}
+	public function SetCommentairesDevis($CommentairesDevis){$this -> _CommentairesDevis = $CommentairesDevis;}
 	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

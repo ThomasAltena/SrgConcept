@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-include('../view/header.php');
 ?>
 
 
@@ -10,10 +9,20 @@ $tablesNonPluriel = ['tva', 'devis'];
 /* Mise en place de la base de donnée */
 $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
 
-$querytables = 'SHOW TABLES';
-$reponsetables = $bdd->query($querytables);
-while ($tables = $reponsetables->fetch()) {
-  $tableName = $tables['Tables_in_srg'];
+if(isset($_GET['tableNom']) ) {
+  echo($_GET['tableNom']);
+  genererManagerTable($_GET['tableNom']);
+} else {
+  $querytables = 'SHOW TABLES';
+  $reponsetables = $bdd->query($querytables);
+  while ($tables = $reponsetables->fetch()) {
+    genererManagerTable($tables['Tables_in_srg']);
+  }
+}
+
+
+function genererManagerTable($tableName) {
+  global $tablesNonPluriel, $bdd;
   $tableNameParts = explode("_",$tableName);
   $className = '';
   foreach ($tableNameParts as $tableNamePart) {
@@ -98,6 +107,6 @@ while ($tables = $reponsetables->fetch()) {
 
   $content .= "\n\n}";
 
-  file_put_contents('../'.$filename, $content);
+  file_put_contents('generated/manager/'.$filename, $content);
 }
 ?>

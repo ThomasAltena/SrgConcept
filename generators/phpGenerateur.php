@@ -20,7 +20,7 @@ $reponsetables = $bdd->query($querytables);
     <span class="input-group-text" style="width:100px"
     id="Id_client_label">Table :</span>
   </div>
-  <select name="Id_client" id="id_client" aria-describedby="Id_client_label" class="form-control">
+  <select name="Id_client" id="tableNom" aria-describedby="Id_client_label" class="form-control">
     <?php
     foreach($reponsetables as $table){
       ?>
@@ -30,29 +30,39 @@ $reponsetables = $bdd->query($querytables);
     ?>
   </select>
 </div>
-<button class='btn btn-default col-lg-2 mb-3' onclick='Allm' > Generer tout managers</button>
-<button class='btn btn-default col-lg-2 mb-3' onclick='Allc'> Generer tout classes</button>
-<button class='btn btn-default col-lg-2 mb-3' onclick='Selectedc'> Generer class selectionnee</button>
-<button class='btn btn-default col-lg-2 mb-3' onclick='SelectedM'> Generer managers selectionnee</button>
+<button class='btn btn-default col-lg-2 mb-3' onclick='Allm()' > Generer tout managers</button>
+<button class='btn btn-default col-lg-2 mb-3' onclick='Allc()'> Generer tout classes</button>
+<button class='btn btn-default col-lg-2 mb-3' onclick='Selectedc()'> Generer class selectionnee</button>
+<button class='btn btn-default col-lg-2 mb-3' onclick='SelectedM()'> Generer managers selectionnee</button>
 
 <script>
 function Allm(){
   let xhttp;
   xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "/SrgConcept/generators/phpManagerGenerateur.php" true);
+  xhttp.onreadystatechange = function () { console.log(this.responseText);  };
+  xhttp.open("GET", "/SrgConcept/generators/phpManagerGenerateur.php", true);
   xhttp.send();
 }
 
 function SelectedM(){
   let xhttp;
   xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "/SrgConcept/generators/phpManagerGenerateur.php" true);
+  xhttp.onreadystatechange = function () { console.log(this.responseText);  };
+  xhttp.open("GET", "/SrgConcept/generators/phpManagerGenerateur.php?tableNom=" + document.getElementById('tableNom').value, true);
   xhttp.send();
 }
-function Allm(){
-
+function Allc(){
+  let xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () { console.log(this.responseText);  };
+  xhttp.open("GET", "/SrgConcept/generators/phpClassGenerateur.php", true);
+  xhttp.send();
 }
-function Allm(){
-
+function Selectedc(){
+  let xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () { console.log(this.responseText);  };
+  xhttp.open("GET", "/SrgConcept/generators/phpClassGenerateur.php?tableNom=" + document.getElementById('tableNom').value, true);
+  xhttp.send();
 }
 </script>
