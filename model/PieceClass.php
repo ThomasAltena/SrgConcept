@@ -9,6 +9,7 @@ class Piece
 	private $_CodeFamille;
 	private $_CodeSsFamille;
 	private $_CodeGroupeCube;
+	private $_OriginalObject;
 
 	public function __construct(array $donnees)
 	{
@@ -18,6 +19,7 @@ class Piece
 	public function hydrate(array $donnees)
 	{
 		if(isset($donnees)){
+			$this->SetOriginalObject($donnees);
 			foreach ($donnees as $key => $value)
 			{
 				$method = 'Set'.ucfirst($key);
@@ -37,6 +39,7 @@ class Piece
 	public function GetCodeFamille(){return $this->_CodeFamille;}
 	public function GetCodeSsFamille(){return $this->_CodeSsFamille;}
 	public function GetCodeGroupeCube(){return $this->_CodeGroupeCube;}
+	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
 	public function SetIdPiece($IdPiece){$this -> _IdPiece = $IdPiece;}
@@ -46,5 +49,6 @@ class Piece
 	public function SetCodeFamille($CodeFamille){$this -> _CodeFamille = $CodeFamille;}
 	public function SetCodeSsFamille($CodeSsFamille){$this -> _CodeSsFamille = $CodeSsFamille;}
 	public function SetCodeGroupeCube($CodeGroupeCube){$this -> _CodeGroupeCube = $CodeGroupeCube;}
+	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

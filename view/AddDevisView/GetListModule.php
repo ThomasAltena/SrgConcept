@@ -10,9 +10,9 @@ use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
 spl_autoload_register(function ($class_name) {
   if(strpos($class_name, 'Manager')){
-    include '../model/'. $class_name . '.php';
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/manager/'. $class_name . '.php');
   } else {
-    include '../model/'. $class_name . 'Class.php';
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/'. $class_name . 'Class.php');
   }
 });
 
@@ -77,15 +77,16 @@ function GetFilteredSousFamille(){
 
   $data = '';
   $code_famille = str_replace(' ', '', $_GET['codeFamille']);
-  $query = 'SELECT * FROM ss_familles WHERE CodeFamille_ss = "' . $code_famille . '" ORDER BY Regroupement_ss ASC, Libelle_ss ASC';
-  $reponse = $bdd->query($query);
+  $sousFamilleManager = new SousfamilleManager($bdd);
+  $sousFamilles = $sousFamilleManager->GetSousfamilleByFamilleOrderByRegroupement($code_famille);
+
   $selectFirst = false;
 
   $data .= '<div class="input-group-prepend">';
   $data .= '<span class="input-group-text" style="width:100px" id="Id_ss_famille_label">Sous-fam :</span>';
   $data .= '</div>';
 
-  if(empty($reponse)){
+  if(empty($sousFamilles)){
     $selectFirst = false;
   } else {
     $data .= '<select name="Id_ss_famille" id="select_ss_famille" aria-describedby=Id_ss_famille_label" ';
@@ -93,17 +94,17 @@ function GetFilteredSousFamille(){
     $data .= '<option value="" disabled selected>Aucun</option>';
 
     $regroupement = '';
-    while ($donnees = $reponse->fetch()) {
-      if($regroupement != $donnees['Regroupement_ss']){
-        $regroupement = $donnees['Regroupement_ss'];
+    foreach ($sousFamilles as $sousFamille) {
+      if($regroupement != $sousFamille->GetRegroupementSsFamille()){
+        $regroupement = $sousFamille->GetRegroupementSsFamille();
         $data .= '<option disabled value="'.$regroupement.'"> --- '.$regroupement.' --- </option>';
       }
 
       if($selectFirst){
-        $data .= "<option value='".$donnees['Code_ss']."' selected>".$donnees['Libelle_ss']."</option>";
+        $data .= "<option value='".json_encode($sousFamille->GetOriginalObject())."' selected>".$sousFamille->GetLibelleSsFamille()."</option>";
 
       } else {
-        $data .= "<option value='".$donnees['Code_ss']."'>".$donnees['Libelle_ss']."</option>";
+        $data .= "<option value='".json_encode($sousFamille->GetOriginalObject())."'>".$sousFamille->GetLibelleSsFamille()."</option>";
       }
     }
   }
@@ -118,24 +119,16 @@ function GetFilteredPieces(){
   $code_famille = str_replace(' ', '', $_GET['codeFamille']);
   $code_ss = str_replace(' ', '', $_GET['codeSs']);
   $format = str_replace(' ', '', $_GET['format']);
-  //$query = 'SELECT * FROM pieces WHERE CodeFamille_piece = "'.$code_famille.'" && CodeSs_piece = "'.$code_ss.'" && Code_piece REGEXP "^['.$formatCode.'].*$" ORDER BY Libelle_piece ASC ';
+  $pieceManager = new PieceManager($bdd);
+  $pieces = $pieceManager->GetPiecesByFamilleSsFamilleFormat($code_famille, $code_ss, $format);
 
-  $query = 'SELECT * FROM pieces WHERE CodeFamille_piece = "'.$code_famille.'" && CodeSs_piece = "'.$code_ss.'"';
-  if($format == 'simple'){
-    $query .= ' && Code_piece REGEXP "^S"';
-  } else {
-    $query .= ' && (Code_piece REGEXP "^D" || Code_piece REGEXP "^SD" )';
-  }
-  $query .= ' ORDER BY Libelle_piece ASC ';
-
-  $reponse = $bdd->query($query);
   $selectFirst = true;
 
   $data .= '<div class="input-group-prepend">';
   $data .= '<span class="input-group-text" style="width:100px" id="Id_piece_label">Piece :</span>';
   $data .= '</div>';
 
-  if(empty($reponse)){
+  if(empty($pieces)){
     $data .= '<select name="Id_piece" id="select_piece" aria-describedby=Id_piece_label"';
     $data .= 'onchange="SelectPiece()" class="form-control" disabled>';
     $data .= '<option value="" disabled selected>Aucun sous famille</option>';
@@ -145,19 +138,18 @@ function GetFilteredPieces(){
     $data .= '<select name="Id_piece" id="select_piece" aria-describedby=Id_piece_label" ';
     $data .= 'onchange="SelectPiece()" class="form-control">';
 
-    while ($donnees = $reponse->fetch()) {
+    foreach ($pieces as $piece) {
       if($selectFirst){
-        $data .= '<option id="'.$donnees['Id_piece'].'"';
-        $data .= "value='".json_encode($donnees)."' selected>".$donnees['Libelle_piece']."</option>";
+        $data .= '<option id="'.$piece->GetIdPiece().'"';
+        $data .= "value='".json_encode($piece->GetOriginalObject())."' selected>".$piece->GetLibellePiece()."</option>";
 
       } else {
         $data .= '<option id="'.$donnees['Id_piece'].'"';
-        $data .= "value='".json_encode($donnees)."'>".$donnees['Libelle_piece']."</option>";
+        $data .= "value='".json_encode($piece->GetOriginalObject())."'>".$piece->GetLibellePiece()."</option>";
       }
     }
   }
   $data .= '</select>';
   echo $data;
 }
-
 ?>

@@ -46,5 +46,4 @@ class MatiereManager
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Matieres[] = new Matiere($donnees);}
 		return $Matieres;
 	}
-
 }

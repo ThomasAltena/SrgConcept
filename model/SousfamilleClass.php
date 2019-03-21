@@ -6,6 +6,7 @@ class Sousfamille
 	private $_LibelleSsFamille;
 	private $_CodeFamille;
 	private $_RegroupementSsFamille;
+	private $_OriginalObject;
 
 	public function __construct(array $donnees)
 	{
@@ -15,6 +16,7 @@ class Sousfamille
 	public function hydrate(array $donnees)
 	{
 		if(isset($donnees)){
+			$this->SetOriginalObject($donnees);
 			foreach ($donnees as $key => $value)
 			{
 				$method = 'Set'.ucfirst($key);
@@ -31,11 +33,13 @@ class Sousfamille
 	public function GetLibelleSsFamille(){return $this->_LibelleSsFamille;}
 	public function GetCodeFamille(){return $this->_CodeFamille;}
 	public function GetRegroupementSsFamille(){return $this->_RegroupementSsFamille;}
+	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
 	public function SetCodeSsFamille($CodeSsFamille){$this -> _CodeSsFamille = $CodeSsFamille;}
 	public function SetLibelleSsFamille($LibelleSsFamille){$this -> _LibelleSsFamille = $LibelleSsFamille;}
 	public function SetCodeFamille($CodeFamille){$this -> _CodeFamille = $CodeFamille;}
 	public function SetRegroupementSsFamille($RegroupementSsFamille){$this -> _RegroupementSsFamille = $RegroupementSsFamille;}
+	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

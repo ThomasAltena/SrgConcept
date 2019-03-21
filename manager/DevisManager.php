@@ -10,7 +10,7 @@ class DevisManager
 	public function SetDb(PDO $db){$this->_Db = $db;}
 
 	public function AddDevis(Devis $Devis){
-		$q = $this->_Db->prepare('INSERT INTO devis VALUES(:IdDevis, :DateDevis, :IdClient, :IdUser, :CheminSchemaDevis, :ArchiveDevis, :CheminFicheFabDevis, :RemiseDevis)');
+		$q = $this->_Db->prepare('INSERT INTO devis VALUES(:IdDevis, :DateDevis, :IdClient, :IdUser, :CheminSchemaDevis, :ArchiveDevis, :CheminFicheFabDevis, :RemiseDevis, :FormatDevis)');
 		$q->bindValue(':IdDevis', $Devis->GetIdDevis());
 		$q->bindValue(':DateDevis', $Devis->GetDateDevis());
 		$q->bindValue(':IdClient', $Devis->GetIdClient());
@@ -19,11 +19,12 @@ class DevisManager
 		$q->bindValue(':ArchiveDevis', $Devis->GetArchiveDevis());
 		$q->bindValue(':CheminFicheFabDevis', $Devis->GetCheminFicheFabDevis());
 		$q->bindValue(':RemiseDevis', $Devis->GetRemiseDevis());
+		$q->bindValue(':FormatDevis', $Devis->GetFormatDevis());
 		$q->execute();
 	}
 
 	public function UpdateDevis(Devis $Devis){
-		$q = $this->_Db->prepare('UPDATE devis SET `DateDevis` = :DateDevis, `IdClient` = :IdClient, `IdUser` = :IdUser, `CheminSchemaDevis` = :CheminSchemaDevis, `ArchiveDevis` = :ArchiveDevis, `CheminFicheFabDevis` = :CheminFicheFabDevis, `RemiseDevis` = :RemiseDevis WHERE IdDevis = :IdDevis ');
+		$q = $this->_Db->prepare('UPDATE devis SET `DateDevis` = :DateDevis, `IdClient` = :IdClient, `IdUser` = :IdUser, `CheminSchemaDevis` = :CheminSchemaDevis, `ArchiveDevis` = :ArchiveDevis, `CheminFicheFabDevis` = :CheminFicheFabDevis, `RemiseDevis` = :RemiseDevis, `FormatDevis` = :FormatDevis WHERE IdDevis = :IdDevis ');
 		$q->bindValue(':IdDevis', $Devis->GetIdDevis());
 		$q->bindValue(':DateDevis', $Devis->GetDateDevis());
 		$q->bindValue(':IdClient', $Devis->GetIdClient());
@@ -32,6 +33,7 @@ class DevisManager
 		$q->bindValue(':ArchiveDevis', $Devis->GetArchiveDevis());
 		$q->bindValue(':CheminFicheFabDevis', $Devis->GetCheminFicheFabDevis());
 		$q->bindValue(':RemiseDevis', $Devis->GetRemiseDevis());
+		$q->bindValue(':FormatDevis', $Devis->GetFormatDevis());
 		$q->execute();
 	}
 

@@ -13,6 +13,7 @@ class Client
 	private $_DateCreationClient;
 	private $_ProspectClient;
 	private $_IdUser;
+	private $_OriginalObject;
 
 	public function __construct(array $donnees)
 	{
@@ -22,6 +23,7 @@ class Client
 	public function hydrate(array $donnees)
 	{
 		if(isset($donnees)){
+			$this->SetOriginalObject($donnees);
 			foreach ($donnees as $key => $value)
 			{
 				$method = 'Set'.ucfirst($key);
@@ -45,6 +47,7 @@ class Client
 	public function GetDateCreationClient(){return $this->_DateCreationClient;}
 	public function GetProspectClient(){return $this->_ProspectClient;}
 	public function GetIdUser(){return $this->_IdUser;}
+	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
 	public function SetIdClient($IdClient){$this -> _IdClient = $IdClient;}
@@ -58,5 +61,6 @@ class Client
 	public function SetDateCreationClient($DateCreationClient){$this -> _DateCreationClient = $DateCreationClient;}
 	public function SetProspectClient($ProspectClient){$this -> _ProspectClient = $ProspectClient;}
 	public function SetIdUser($IdUser){$this -> _IdUser = $IdUser;}
+	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

@@ -27,11 +27,11 @@ class SousfamilleManager
 		$q->execute();
 	}
 
-	public function DeleteSousfamille( $id){
+	public function DeleteSousfamille($id){
 		$this->_Db->exec('DELETE FROM sousfamilles WHERE CodeSsFamille ='.$id);
 	}
 
-	public function GetSousfamille( $id){
+	public function GetSousfamille($id){
 		$q = $this->_Db->prepare('SELECT * FROM sousfamilles WHERE CodeSsFamille ='.$id);
 		$q->execute();
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Sousfamille = new Sousfamille($donnees);}
@@ -41,7 +41,20 @@ class SousfamilleManager
 	public function GetAllSousfamille(){
 		$Sousfamilles = [];
 		$q = $this->_Db->query('SELECT * FROM sousfamilles');
-		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Sousfamilles[] = new Sousfamille($donnees);}
+		if(!empty($q)){
+			while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Sousfamilles[] = new Sousfamille($donnees);}
+		}
+		return $Sousfamilles;
+	}
+
+	public function GetSousfamilleByFamilleOrderByRegroupement($codeFamille){
+		$Sousfamilles = [];
+		$q = $this->_Db->prepare('SELECT * FROM sousfamilles WHERE CodeFamille = :CodeFamille ORDER BY RegroupementSsFamille ASC, LibelleSsFamille ASC');
+		$q->bindValue(':CodeFamille', $codeFamille);
+		$q->execute();
+		if(!empty($q)){
+			while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Sousfamilles[] = new Sousfamille($donnees);}
+		}
 		return $Sousfamilles;
 	}
 

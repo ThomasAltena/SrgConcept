@@ -78,14 +78,14 @@ if(empty($_SESSION)){
 
     /* Construct */
     $user = new User([
-    "Id_user" => "" ,
-    "Nom_user" => $nom ,
-    "Adresse_user" => $adresse ,
-    "DateCo_user" => "" ,
-    "Siret_user" => $siret ,
-    "Pseudo_user" => $psd ,
-    "Pass_user" => $pass ,
-    "Role_user" => "0" ,
+    "IdUser" => "" ,
+    "NomUser" => $nom ,
+    "AdresseUser" => $adresse ,
+    "DateConnexionUser" => "" ,
+    "SiretUser" => $siret ,
+    "PseudoUser" => $psd ,
+    "PassUser" => $pass ,
+    "RoleUser" => "0" ,
     ]);
 
     /* BDD*/

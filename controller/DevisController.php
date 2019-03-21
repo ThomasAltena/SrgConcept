@@ -38,15 +38,10 @@ if( !isset($result['error']) ) {
       } else {
         $result['data'] = ArchiveDevis(($_GET['devisId']));
       }
-
       echo json_encode($result);
       break;
-    case 'AddLignesDevis':
-      AddLignesDevis();
-      echo json_encode($result);
-      break;
-    case 'SaveFicheFab':
-      SaveFicheFab();
+    case 'SauvegarderDevis':
+      SauvegarderDevis();
       echo json_encode($result);
       break;
     case 'GetAllDevisInfo':
@@ -77,46 +72,13 @@ if( !isset($result['error']) ) {
   }
 }
 
-function SaveFicheFab(){
-  global $_SESSION, $input, $result, $arguments, $bdd;
-  if( !isset($input) ) {
-    $result['error'] = 'No function arguments!';
-  } else {
-    $arguments = json_decode($input);
-    if( !is_array($arguments) || (count($arguments) < 2) ) {
-      $result['error'] = 'Erreur - manque donnees devis!';
-    }
-  }
-
-  if( !isset($result['error']) ) {
-    $devisId = $arguments[0];
-
-    //PREPARATION IMAGE
-    $img = $arguments[1];
-    $img = str_replace('data:image/png;base64,', '', $img);
-    $img = str_replace(' ', '+', $img);
-    $data = base64_decode($img);
-
-    //SAUVEGARDE IMAGE QUAND DEVIS INSERT REUSSI
-    $upload_dir = "../public/images/ficheFabs/";
-    $fichier_nom = "FICHEFAB_DEVIS" . $devisId . "_" . mktime() . ".png";
-    $fichier = $upload_dir . $fichier_nom;
-    $success = file_put_contents($fichier, $data);
-
-    $fichier_full_path = $upload_dir . $fichier_nom;
-    $devisManager = new DevisManager($bdd);
-    $devisUpdateResult = $devisManager->UpdateCheminFicheFab($devisId, $fichier_full_path);
-    $result['data'] = $fichier_full_path;
-  }
-}
-
 function ArchiveDevis($deviId){
   global $_SESSION, $input, $result, $arguments, $bdd;
   $devisManager = new DevisManager($bdd);
   return $devisManager->ArchiveDevis($deviId);
 }
 
-function AddLignesDevis() {
+function SauvegarderDevis() {
   global $_SESSION, $input, $result, $arguments, $bdd;
   if( !isset($input) ) {
     $result['error'] = 'No function arguments!';

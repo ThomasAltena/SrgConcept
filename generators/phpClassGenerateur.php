@@ -43,6 +43,7 @@ while ($tables = $reponsetables->fetch()) {
   for ($x = 1; $x < count($collumNames); $x++) {
     $content .= "\n\tprivate $"."_".$collumNames[$x].";";
   }
+  $content .= "\n\tprivate $"."_OriginalObject;";
 
   $content .= "\n\n\tpublic function __construct(array $"."donnees)";
   $content .= "\n\t{";
@@ -52,6 +53,7 @@ while ($tables = $reponsetables->fetch()) {
   $content .= "\n\n\tpublic function hydrate(array $"."donnees)";
   $content .= "\n\t{";
   $content .= "\n\t\tif(isset($"."donnees)){";
+  $content .= "\n\t\t\t$"."this->SetOriginalObject($"."donnees);";
   $content .= "\n\t\t\tforeach ($"."donnees as $"."key => $"."value)";
   $content .= "\n\t\t\t{";
   $content .= "\n\t\t\t\t$"."method = 'Set'.ucfirst($"."key);";
@@ -67,11 +69,13 @@ while ($tables = $reponsetables->fetch()) {
   foreach ($collumNames as $collumName) {
     $content .= "\n\tpublic function Get".$collumName."(){return $"."this->_".$collumName.";}";
   }
+  $content .= "\n\tpublic function GetOriginalObject(){return $"."this->_OriginalObject;}";
 
   $content .= "\n\n\t/**SET**/";
   foreach ($collumNames as $collumName) {
     $content .= "\n\tpublic function Set".$collumName."($".$collumName."){"."$"."this -> _".$collumName." = $".$collumName.";}";
   }
+  $content .= "\n\tpublic function SetOriginalObject($"."OriginalObject){"."$"."this -> _OriginalObject = $"."OriginalObject;}";
   $content .= "\n\n}";
 
   file_put_contents('../'.$filename, $content);

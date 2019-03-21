@@ -47,8 +47,30 @@ class PieceManager
 	public function GetAllPiece(){
 		$Pieces = [];
 		$q = $this->_Db->query('SELECT * FROM pieces');
-		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Pieces[] = new Piece($donnees);}
+		if(!empty($q)){
+			while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Pieces[] = new Piece($donnees);}
+		}
 		return $Pieces;
 	}
 
+	public function GetPiecesByFamilleSsFamilleFormat($codeFamille, $codeSsFamille, $format){
+		$Pieces = [];
+
+		$q = $this->_Db->prepare('SELECT * FROM pieces WHERE CodeFamille = :CodeFamille && CodeSsFamille = :CodeSsFamille && (CodePiece REGEXP :format || CodePiece REGEXP :dualFormat) ORDER BY LibellePiece ASC');
+		$q->bindValue(':CodeFamille', $codeFamille);
+		$q->bindValue(':CodeSsFamille', $codeSsFamille);
+		$q->bindValue(':dualFormat', "^SD");
+
+	  if($format == 'simple'){
+			$q->bindValue(':format', "^S");
+	  } else {
+			$q->bindValue(':format', "^D");
+	  }
+
+		$q->execute();
+		if(!empty($q)){
+			while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Pieces[] = new Piece($donnees);}
+		}
+		return $Pieces;
+	}
 }

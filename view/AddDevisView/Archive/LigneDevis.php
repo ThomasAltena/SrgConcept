@@ -40,7 +40,7 @@ $date = date("d-m-Y");
 ?>
 <script src="../jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="../public/css/form.css" type="text/css">
-<link rel="stylesheet" href="../public/css/ligneDevis.css" type="text/css">
+<link rel="stylesheet" href="../public/css/AddDevis.css" type="text/css">
 <link rel="stylesheet" href="../public/css/switch.css" type="text/css">
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
 <body style="overflow: scroll;">

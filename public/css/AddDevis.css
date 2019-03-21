@@ -13,8 +13,7 @@
 }
 
 #selectFamilleContainer, #selectSousFamilleContainer, #selectPieceContainer {
-    padding-left: 25px;
-    padding-right: 25px;
+
 }
 
 #pieceVueEtControlContainer {
@@ -94,7 +93,7 @@
     visibility: hidden;
 }
 
-#schemaPiecesEtSlidersContainer {
+/* #schemaPiecesEtSlidersContainer {
     margin-bottom: 1vw;
     height: 600px;
     max-width: 680px;
@@ -111,6 +110,17 @@
   width: 600px;
   max-width: 600px;
   min-width: 600px;
+  padding: 0;
+} */
+
+#schemaPiecesContainer{
+  margin-bottom: 1vw;
+  background-color: white;
+  overflow: hidden;
+  max-height: 680px;
+  min-height: 680px;
+  max-width: 680px;
+  min-width: 680px;
   padding: 0;
 }
 
@@ -145,9 +155,9 @@
     margin: 0px 15px 0px 0px;
     padding: 0;
     overflow: hidden;
-    max-width: 200px;
-    height: 100px;
-    max-height: 100px;
+    max-width: 680px;
+    height: 131px;
+    max-height: 131px;
 }
 
 #inputOptionsContainer {

@@ -21,6 +21,7 @@ class CubeDevis
 	private $_DessusScieeCube;
 	private $_DessousPolisCube;
 	private $_DessousScieeCube;
+	private $_OriginalObject;
 
 	public function __construct(array $donnees)
 	{
@@ -30,6 +31,7 @@ class CubeDevis
 	public function hydrate(array $donnees)
 	{
 		if(isset($donnees)){
+			$this->SetOriginalObject($donnees);
 			foreach ($donnees as $key => $value)
 			{
 				$method = 'Set'.ucfirst($key);
@@ -61,6 +63,7 @@ class CubeDevis
 	public function GetDessusScieeCube(){return $this->_DessusScieeCube;}
 	public function GetDessousPolisCube(){return $this->_DessousPolisCube;}
 	public function GetDessousScieeCube(){return $this->_DessousScieeCube;}
+	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
 	public function SetIdCubeDevis($IdCubeDevis){$this -> _IdCubeDevis = $IdCubeDevis;}
@@ -82,5 +85,6 @@ class CubeDevis
 	public function SetDessusScieeCube($DessusScieeCube){$this -> _DessusScieeCube = $DessusScieeCube;}
 	public function SetDessousPolisCube($DessousPolisCube){$this -> _DessousPolisCube = $DessousPolisCube;}
 	public function SetDessousScieeCube($DessousScieeCube){$this -> _DessousScieeCube = $DessousScieeCube;}
+	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

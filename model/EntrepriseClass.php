@@ -7,6 +7,7 @@ class Entreprise
 	private $_LibelleEntreprise;
 	private $_AdresseEntreprise;
 	private $_RoleEntreprise;
+	private $_OriginalObject;
 
 	public function __construct(array $donnees)
 	{
@@ -16,6 +17,7 @@ class Entreprise
 	public function hydrate(array $donnees)
 	{
 		if(isset($donnees)){
+			$this->SetOriginalObject($donnees);
 			foreach ($donnees as $key => $value)
 			{
 				$method = 'Set'.ucfirst($key);
@@ -33,6 +35,7 @@ class Entreprise
 	public function GetLibelleEntreprise(){return $this->_LibelleEntreprise;}
 	public function GetAdresseEntreprise(){return $this->_AdresseEntreprise;}
 	public function GetRoleEntreprise(){return $this->_RoleEntreprise;}
+	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
 	public function SetIdEntreprise($IdEntreprise){$this -> _IdEntreprise = $IdEntreprise;}
@@ -40,5 +43,6 @@ class Entreprise
 	public function SetLibelleEntreprise($LibelleEntreprise){$this -> _LibelleEntreprise = $LibelleEntreprise;}
 	public function SetAdresseEntreprise($AdresseEntreprise){$this -> _AdresseEntreprise = $AdresseEntreprise;}
 	public function SetRoleEntreprise($RoleEntreprise){$this -> _RoleEntreprise = $RoleEntreprise;}
+	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

@@ -43,4 +43,10 @@ class FamilleManager
 		return $Familles;
 	}
 
+	public function GetAllFamilleOrderByRegroupement(){
+		$Familles = [];
+		$q = $this->_Db->query('SELECT * FROM familles ORDER BY RegroupementFamille ASC, LibelleFamille ASC');
+		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Familles[] = new Famille($donnees);}
+		return $Familles;
+	}
 }

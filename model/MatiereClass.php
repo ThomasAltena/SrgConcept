@@ -7,6 +7,7 @@ class Matiere
 	private $_LibelleMatiere;
 	private $_PrixMatiere;
 	private $_CheminMatiere;
+	private $_OriginalObject;
 
 	public function __construct(array $donnees)
 	{
@@ -16,6 +17,7 @@ class Matiere
 	public function hydrate(array $donnees)
 	{
 		if(isset($donnees)){
+			$this->SetOriginalObject($donnees);
 			foreach ($donnees as $key => $value)
 			{
 				$method = 'Set'.ucfirst($key);
@@ -33,6 +35,7 @@ class Matiere
 	public function GetLibelleMatiere(){return $this->_LibelleMatiere;}
 	public function GetPrixMatiere(){return $this->_PrixMatiere;}
 	public function GetCheminMatiere(){return $this->_CheminMatiere;}
+	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
 	public function SetIdMatiere($IdMatiere){$this -> _IdMatiere = $IdMatiere;}
@@ -40,5 +43,6 @@ class Matiere
 	public function SetLibelleMatiere($LibelleMatiere){$this -> _LibelleMatiere = $LibelleMatiere;}
 	public function SetPrixMatiere($PrixMatiere){$this -> _PrixMatiere = $PrixMatiere;}
 	public function SetCheminMatiere($CheminMatiere){$this -> _CheminMatiere = $CheminMatiere;}
+	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

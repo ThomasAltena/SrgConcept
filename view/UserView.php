@@ -35,14 +35,14 @@ echo("
   </thead>
   <tbody>");
 
-$users = $ManagerUser->GetUsers();
+$users = $ManagerUser->GetAllUser();
 foreach ($users as $unUser){
     echo("<tr>");
-    echo("<td>" . $unUser->GetNom() . "</td>");
-    echo("<td>" .$unUser->GetAdresse(). "</td>");
-    echo("<td>" .$unUser->GetSiret(). "</td>");
-    echo("<td>" .$unUser->GetId(). "</td>");
-    echo ("<td><button  onclick='edit(".$unUser->GetId().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$unUser->GetId().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
+    echo("<td>" . $unUser->GetNomUser() . "</td>");
+    echo("<td>" .$unUser->GetAdresseUser(). "</td>");
+    echo("<td>" .$unUser->GetSiretUser(). "</td>");
+    echo("<td>" .$unUser->GetIdUser(). "</td>");
+    echo ("<td><button  onclick='edit(".$unUser->GetIdUser().")' class='btn btn-primary'><span class='fas fa-edit'></span></button> <button onclick='supp(".$unUser->GetIdUser().")' class='btn btn-danger'><span class='fas fa-times'></span></button></td>");
     echo ("</tr>");
 }
 

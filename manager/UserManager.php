@@ -10,12 +10,12 @@ class UserManager
 	public function SetDb(PDO $db){$this->_Db = $db;}
 
 	public function AddUser(User $User){
-		$q = $this->_Db->prepare('INSERT INTO users VALUES(:IdUser, :NomUser, :SiretUser, :AdresseUser, :DateCoUser, :PseudoUser, :PassUser, :RoleUser, :IdEntreprise)');
+		$q = $this->_Db->prepare('INSERT INTO users VALUES(:IdUser, :NomUser, :SiretUser, :AdresseUser, :DateConnexionUser, :PseudoUser, :PassUser, :RoleUser, :IdEntreprise)');
 		$q->bindValue(':IdUser', $User->GetIdUser());
 		$q->bindValue(':NomUser', $User->GetNomUser());
 		$q->bindValue(':SiretUser', $User->GetSiretUser());
 		$q->bindValue(':AdresseUser', $User->GetAdresseUser());
-		$q->bindValue(':DateCoUser', $User->GetDateCoUser());
+		$q->bindValue(':DateConnexionUser', $User->GetDateConnexionUser());
 		$q->bindValue(':PseudoUser', $User->GetPseudoUser());
 		$q->bindValue(':PassUser', $User->GetPassUser());
 		$q->bindValue(':RoleUser', $User->GetRoleUser());
@@ -24,12 +24,12 @@ class UserManager
 	}
 
 	public function UpdateUser(User $User){
-		$q = $this->_Db->prepare('UPDATE users SET `NomUser` = :NomUser, `SiretUser` = :SiretUser, `AdresseUser` = :AdresseUser, `DateCoUser` = :DateCoUser, `PseudoUser` = :PseudoUser, `PassUser` = :PassUser, `RoleUser` = :RoleUser, `IdEntreprise` = :IdEntreprise WHERE IdUser = :IdUser ');
+		$q = $this->_Db->prepare('UPDATE users SET `NomUser` = :NomUser, `SiretUser` = :SiretUser, `AdresseUser` = :AdresseUser, `DateConnexionUser` = :DateConnexionUser, `PseudoUser` = :PseudoUser, `PassUser` = :PassUser, `RoleUser` = :RoleUser, `IdEntreprise` = :IdEntreprise WHERE IdUser = :IdUser ');
 		$q->bindValue(':IdUser', $User->GetIdUser());
 		$q->bindValue(':NomUser', $User->GetNomUser());
 		$q->bindValue(':SiretUser', $User->GetSiretUser());
 		$q->bindValue(':AdresseUser', $User->GetAdresseUser());
-		$q->bindValue(':DateCoUser', $User->GetDateCoUser());
+		$q->bindValue(':DateConnexionUser', $User->GetDateConnexionUser());
 		$q->bindValue(':PseudoUser', $User->GetPseudoUser());
 		$q->bindValue(':PassUser', $User->GetPassUser());
 		$q->bindValue(':RoleUser', $User->GetRoleUser());

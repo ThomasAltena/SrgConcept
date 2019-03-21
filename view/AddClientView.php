@@ -95,17 +95,17 @@ if(empty($_SESSION)){
 
             /* Construct */
             $client = new Client([
-            "Id_client" => $id ,
-            "Nom_client" => $nom ,
-            "Prenom_client" => $prenom ,
-            "Prospect_client" => $prospect ,
-            "Adresse_client" => $adresse ,
-            "Ville_client" => $ville ,
-            "CodePostal_client" => $codepostal ,
-            "Mail_client" => $mail ,
-            "DateCrea_client" => $date,
-            "Tel_client" => $tel ,
-            "IdUser_client" => $idUser,
+            "IdClient" => $id ,
+            "NomClient" => $nom ,
+            "PrenomClient" => $prenom ,
+            "ProspectClient" => $prospect ,
+            "AdresseClient" => $adresse ,
+            "VilleClient" => $ville ,
+            "CodePostalClient" => $codepostal ,
+            "MailClient" => $mail ,
+            "DateCreationClient" => $date,
+            "TelClient" => $tel ,
+            "IdUser" => $idUser,
             ]);
 
 

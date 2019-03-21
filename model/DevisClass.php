@@ -10,6 +10,8 @@ class Devis
 	private $_ArchiveDevis;
 	private $_CheminFicheFabDevis;
 	private $_RemiseDevis;
+	private $_FormatDevis;
+	private $_OriginalObject;
 
 	public function __construct(array $donnees)
 	{
@@ -19,6 +21,7 @@ class Devis
 	public function hydrate(array $donnees)
 	{
 		if(isset($donnees)){
+			$this->SetOriginalObject($donnees);
 			foreach ($donnees as $key => $value)
 			{
 				$method = 'Set'.ucfirst($key);
@@ -39,6 +42,8 @@ class Devis
 	public function GetArchiveDevis(){return $this->_ArchiveDevis;}
 	public function GetCheminFicheFabDevis(){return $this->_CheminFicheFabDevis;}
 	public function GetRemiseDevis(){return $this->_RemiseDevis;}
+	public function GetFormatDevis(){return $this->_FormatDevis;}
+	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
 	public function SetIdDevis($IdDevis){$this -> _IdDevis = $IdDevis;}
@@ -49,5 +54,7 @@ class Devis
 	public function SetArchiveDevis($ArchiveDevis){$this -> _ArchiveDevis = $ArchiveDevis;}
 	public function SetCheminFicheFabDevis($CheminFicheFabDevis){$this -> _CheminFicheFabDevis = $CheminFicheFabDevis;}
 	public function SetRemiseDevis($RemiseDevis){$this -> _RemiseDevis = $RemiseDevis;}
+	public function SetFormatDevis($FormatDevis){$this -> _FormatDevis = $FormatDevis;}
+	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }
