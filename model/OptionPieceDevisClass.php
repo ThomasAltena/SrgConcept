@@ -1,10 +1,11 @@
 <?php
 
-class OptionLigne
+class OptionPieceDevis
 {
-	public $_IdOptionsLignes;
-	private $_IdLigne;
+	public $_IdOptionsPiecesDevis;
+	private $_IdDevis;
 	private $_IdOption;
+	private $_IdPiece;
 	private $_OriginalObject;
 
 	public function __construct(array $donnees)
@@ -28,15 +29,17 @@ class OptionLigne
 	}
 
 	/**GET**/
-	public function GetIdOptionsLignes(){return $this->_IdOptionsLignes;}
-	public function GetIdLigne(){return $this->_IdLigne;}
+	public function GetIdOptionsPiecesDevis(){return $this->_IdOptionsPiecesDevis;}
+	public function GetIdDevis(){return $this->_IdDevis;}
 	public function GetIdOption(){return $this->_IdOption;}
+	public function GetIdPiece(){return $this->_IdPiece;}
 	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
-	public function SetIdOptionsLignes($IdOptionsLignes){$this -> _IdOptionsLignes = $IdOptionsLignes;}
-	public function SetIdLigne($IdLigne){$this -> _IdLigne = $IdLigne;}
+	public function SetIdOptionsPiecesDevis($IdOptionsPiecesDevis){$this -> _IdOptionsPiecesDevis = $IdOptionsPiecesDevis;}
+	public function SetIdDevis($IdDevis){$this -> _IdDevis = $IdDevis;}
 	public function SetIdOption($IdOption){$this -> _IdOption = $IdOption;}
+	public function SetIdPiece($IdPiece){$this -> _IdPiece = $IdPiece;}
 	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

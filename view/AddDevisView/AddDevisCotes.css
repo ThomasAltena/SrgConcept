@@ -1,0 +1,39 @@
+#slider-container {
+    margin: 0;
+    padding: 7px 7px 0px 0px;
+    height: 38px;
+}
+
+#donneesDevisContainer {
+    margin: 0;
+    height: min-content%;
+    padding-right: 0;
+}
+
+#donneesColonneGaucheContainer {
+    max-width: 450px;
+    min-width: 450px;
+    margin-right: 1vw;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#pieceVueEtControlContainer {
+    padding: 0;
+    width: 100%;
+    min-height: 400px;
+    max-height: 400px;
+}
+
+#pieceVueContainerCount {
+    position: absolute;
+    left: 160px;
+}
+
+#listeCubesDevisContainer {
+    max-width: 450px;
+    min-width: 450px;
+    margin-right: 1vw;
+    padding-left: 0;
+    padding-right: 0;
+}

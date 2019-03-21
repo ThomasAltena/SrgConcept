@@ -61,7 +61,7 @@ class ClientManager
 
 	public function GetAllClientUser($id){
 		$Clients = [];
-		$q = $this->_Db->query('SELECT * FROM clients Id_user = ='.$id);
+		$q = $this->_Db->query('SELECT * FROM clients WHERE IdUser = '.$id);
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Clients[] = new Client($donnees);}
 		return $Clients;
 	}

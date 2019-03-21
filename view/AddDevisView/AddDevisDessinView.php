@@ -33,7 +33,7 @@ $date = date("d-m-Y");
 
 ?>
 <link rel="stylesheet" href="../../public/css/form.css" type="text/css">
-<link rel="stylesheet" href="../../public/css/AddDevis.css" type="text/css">
+<link rel="stylesheet" href="AddDevisDessin.css" type="text/css">
 <link rel="stylesheet" href="../../public/css/switch.css" type="text/css">
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
 <body style="overflow: scroll;">
@@ -149,111 +149,73 @@ $date = date("d-m-Y");
                   <span id="pieceVueContainerCount"></span>
                   <div class="col-sm"><img alt="" id="imagePieceSelectionnee" src="" style="max-width: inherit; max-height: inherit">
                   </div>
-                  <div class="col-sm"
-                  id="pieceSelectControlContainer">
-                  <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListGoTo(0)">
-                    <i class="fas fa-step-backward fa-rotate-90"></i>
-                  </div>
-                  <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListUp()">
-                    <i class="fas fa-chevron-left fa-rotate-90"></i>
-                  </div>
-                  <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListDown()">
-                    <i class="fas fa-chevron-right fa-rotate-90"></i>
-                  </div>
-                  <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListGoTo(-1)">
-                    <i class="fas fa-step-forward fa-rotate-90"></i>
+                  <div class="col-sm" id="pieceSelectControlContainer">
+                    <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListGoTo(0)">
+                      <i class="fas fa-step-backward fa-rotate-90"></i>
+                    </div>
+                    <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListUp()">
+                      <i class="fas fa-chevron-left fa-rotate-90"></i>
+                    </div>
+                    <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListDown()">
+                      <i class="fas fa-chevron-right fa-rotate-90"></i>
+                    </div>
+                    <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListGoTo(-1)">
+                      <i class="fas fa-step-forward fa-rotate-90"></i>
+                    </div>
+
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!--SCHEMA-->
-          <div class="col-sm" id="schemaOptionsContainer">
-            <div class="col-lg-12 formbox row mb-3" id="schemaPiecesContainer">
-              <img id="imagePieceSelectionneeSchema" src="" alt""  style="position:absolute;">
+            <!--SCHEMA-->
+            <div class="col-sm" id="schemaOptionsContainer">
+              <div class="col-lg-12 formbox row mb-3" id="schemaPiecesContainer">
+                <img id="imagePieceSelectionneeSchema" src="" alt""  style="position:absolute;">
 
-            </div>
-            <div class="col-sm formbox" id="matiereImageContainer">
-              <img id="matiereImagePreview" src="" alt="">
-            </div>
-          </div>
-
-
-          <!--PIECES SELECTIONNEES-->
-          <div class="col-sm" id="piecesSelectionneeEtOptionsDevisContainer">
-            <div class="formbox col-lg-12" id="piecesSelectionneeEtOptionsPiecesContainer">
-              <div class="row" id="piecesListContainer" style="height: 600px;margin: 0; padding: 0 0 0 20px;">
               </div>
-              <div class="row" style="height: 25px;margin: 0; padding: 0;">
-                <div class="col-sm" style="text-align: center;" id="pageNumberContainer">
-
-                </div>
-              </div>
-              <div class="row col-lg-12" style="height: 50px; margin: 0; padding: 0;" id="piecesListControls">
-                <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(0)">
-                  <i class="fas fa-step-backward"></i>
-                </div>
-                <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListPageLeft()">
-                  <i class="fas fa-chevron-left"></i>
-                </div>
-                <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListPageRight()">
-                  <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(-1)">
-                  <i class="fas fa-step-forward"></i>
-                </div>
+              <div class="col-sm formbox" id="matiereImageContainer">
+                <img id="matiereImagePreview" src="" alt="">
               </div>
             </div>
 
-            <div class="col-sm formbox col-lg-12" style="margin-top: 0;">
-              <button class="btn btn-success col-lg-12 hover-effect-a" onclick="RedirectAddDevisCotesView()">
-                Suite
-              </button>
 
+            <!--PIECES SELECTIONNEES-->
+            <div class="col-sm" id="piecesSelectionneeEtOptionsDevisContainer">
+              <div class="formbox col-lg-12" id="piecesSelectionneeEtOptionsPiecesContainer">
+                <div class="row" id="piecesListContainer" style="height: 600px;margin: 0; padding: 0 0 0 20px;">
+                </div>
+                <div class="row" style="height: 25px;margin: 0; padding: 0;">
+                  <div class="col-sm" style="text-align: center;" id="pageNumberContainer">
+
+                  </div>
+                </div>
+                <div class="row col-lg-12 mb-3" style="height: 50px; margin: 0; padding: 0;" id="piecesListControls">
+                  <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(0)">
+                    <i class="fas fa-step-backward"></i>
+                  </div>
+                  <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListPageLeft()">
+                    <i class="fas fa-chevron-left"></i>
+                  </div>
+                  <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListPageRight()">
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="col-sm btn hover-effect-a" style="padding-top: 12px;" onclick="PiecesListGoTo(-1)">
+                    <i class="fas fa-step-forward"></i>
+                  </div>
+                </div>
+                <button class="btn btn-danger hover-effect-a mb-3" style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectDevisListView()">
+                  Annuler
+                </button>
+                <button class="btn btn-success hover-effect-a" style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectAddDevisCotesView()">
+                  Suite
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="modal fade bd-example-modal-lg" id="optionSelectionModal" tabindex="-1" role="dialog" aria-labelledby="optionSelectionModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ajouterOptionsModal">Options</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="padding: 0">
-        <table class="table table-hover table-sm" style="margin: 0">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Code</th>
-              <th scope="col">Libelle</th>
-              <th scope="col">Prix</th>
-              <th scope="col">Durée</th>
-              <th scope="col">Quantité</th>
-              <th scope="col">Unité</th>
-              <th scope="col">Cote 1</th>
-              <th scope="col">Cote 2</th>
-            </tr>
-          </thead>
-          <tbody id="optionsTableInnerContents">
-
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 </body>
 <script type="text/javascript">
 let saved = false;
@@ -540,32 +502,23 @@ function SauvegarderNouvellePiece() {
   UpdatePiecesListView(-1);
 }
 
-function RedirectAddDevisCotesView(){
-  let arguments = [pieces, matiere, client];
+function RedirectDevisListView(){
+  window.location.replace("/SrgConcept/view/DevisView.php");
+}
 
-  let xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      responseText = JSON.parse(this.responseText);
-      if(responseText.error){
-        console.log(responseText);
-      } else {
-        saved = true;
-      }
-    }
-  };
-  xhttp.open("POST", "AddDevisCotesView.php", true);
-  xhttp.send(JSON.stringify(arguments));
+function RedirectAddDevisCotesView(){
+  //SauvegarderDevis();
+  window.location.replace("AddDevisCotesView.php");
 }
 
 function SauvegarderDevis() {
   html2canvas($("#schemaPiecesContainer"), {
     onrendered: function(canvas) {
+      let client = JSON.parse(document.getElementById('id_client').value);
       let dataURL = canvas.toDataURL("image/png");
       let idClient = document.getElementById('id_client').value;
       let idMatiere = JSON.parse(document.getElementById('id_matiere').value)['Id_matiere'];
-      let cheminImageDevis = 'unknown';
-      let arguments = [idClient, idMatiere, cheminImageDevis, dataURL, pieces];
+      let arguments = [matiere, client, dataURL, pieces];
 
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {

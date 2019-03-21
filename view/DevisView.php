@@ -15,11 +15,17 @@ if(empty($_SESSION)){
 $idUser = $_SESSION['Id_user'];
 
 /* Mise en place de la base de donnée */
-$db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
-$ManagerDevis = new DevisManager($db); //Connexion a la BDD
-$ManagerClient = new ClientManager($db); //Connexion a la BDD
 
-$clients = $ManagerClient->GetClientsAdmin();
+try {
+  $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
+} catch (Exception $e) {
+  die('Erreur : ' . $e->getMessage());
+}
+
+$ManagerDevis = new DevisManager($bdd); //Connexion a la BDD
+$ManagerClient = new ClientManager($bdd); //Connexion a la BDD
+
+$clients = $ManagerClient->GetAllClientUser($idUser);
 /** Get tout les devis d'un utilisateur **/
 
 ?>
@@ -40,7 +46,7 @@ $clients = $ManagerClient->GetClientsAdmin();
 <?php
 //$devis = $ManagerDevis->GetDevis($idUser);
 $query = 'SELECT * FROM devis WHERE IdUser_devis = '.$idUser.'';
-$reponse = $db->query($query);
+$reponse = $bdd->query($query);
 
 while ($devi = $reponse->fetch()){
     $clientId = $devi['IdClient_devis'];
