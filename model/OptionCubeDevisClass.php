@@ -1,8 +1,8 @@
 <?php
 
-class OptionPieceDevis
+class OptionCubeDevis
 {
-	public $_IdOptionsPiecesDevis;
+	public $_IdOptionsCubeDevis;
 	private $_IdDevis;
 	private $_IdOption;
 	private $_IdPiece;
@@ -29,14 +29,14 @@ class OptionPieceDevis
 	}
 
 	/**GET**/
-	public function GetIdOptionsPiecesDevis(){return $this->_IdOptionsPiecesDevis;}
+	public function GetIdOptionsCubeDevis(){return $this->_IdOptionsCubeDevis;}
 	public function GetIdDevis(){return $this->_IdDevis;}
 	public function GetIdOption(){return $this->_IdOption;}
 	public function GetIdPiece(){return $this->_IdPiece;}
 	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
-	public function SetIdOptionsPiecesDevis($IdOptionsPiecesDevis){$this -> _IdOptionsPiecesDevis = $IdOptionsPiecesDevis;}
+	public function SetIdOptionsCubeDevis($IdOptionsCubeDevis){$this -> _IdOptionsCubeDevis = $IdOptionsCubeDevis;}
 	public function SetIdDevis($IdDevis){$this -> _IdDevis = $IdDevis;}
 	public function SetIdOption($IdOption){$this -> _IdOption = $IdOption;}
 	public function SetIdPiece($IdPiece){$this -> _IdPiece = $IdPiece;}

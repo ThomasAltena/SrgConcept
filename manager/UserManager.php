@@ -20,7 +20,11 @@ class UserManager
 		$q->bindValue(':PassUser', $User->GetPassUser());
 		$q->bindValue(':RoleUser', $User->GetRoleUser());
 		$q->bindValue(':IdEntreprise', $User->GetIdEntreprise());
-		$q->execute();
+		if(!$q->execute()) {
+				return [false,$q->errorInfo()];
+		} else {
+			return [true,$this->_Db->lastInsertId()];
+		}
 	}
 
 	public function UpdateUser(User $User){

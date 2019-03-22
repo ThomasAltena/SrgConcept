@@ -65,7 +65,11 @@ function genererManagerTable($tableName) {
   foreach ($collumNames as $collumName) {
     $content .= "\n\t\t$"."q->bindValue(':".$collumName."', $".$className."->Get".$collumName."());";
   }
-  $content .= "\n\t\t$"."q->execute();";
+  $content .= "\n\t\tif(!$"."q->execute()) {";
+  $content .= "\n\t\t\treturn [false,$"."q->errorInfo()];";
+  $content .= "\n\t\t} else {";
+  $content .= "\n\t\t\treturn [true,$"."this->_Db->lastInsertId()];";
+  $content .= "\n\t\t}";
   $content .= "\n\t}";
 
   //UPDATE

@@ -3,6 +3,7 @@
 class CubeDevis
 {
 	public $_IdCubeDevis;
+	private $_LibelleCubeDevis;
 	private $_HauteurCubeDevis;
 	private $_LargeurCubeDevis;
 	private $_ProfondeurCubeDevis;
@@ -46,6 +47,7 @@ class CubeDevis
 
 	/**GET**/
 	public function GetIdCubeDevis(){return $this->_IdCubeDevis;}
+	public function GetLibelleCubeDevis(){return $this->_LibelleCubeDevis;}
 	public function GetHauteurCubeDevis(){return $this->_HauteurCubeDevis;}
 	public function GetLargeurCubeDevis(){return $this->_LargeurCubeDevis;}
 	public function GetProfondeurCubeDevis(){return $this->_ProfondeurCubeDevis;}
@@ -69,6 +71,7 @@ class CubeDevis
 
 	/**SET**/
 	public function SetIdCubeDevis($IdCubeDevis){$this -> _IdCubeDevis = $IdCubeDevis;}
+	public function SetLibelleCubeDevis($LibelleCubeDevis){$this -> _LibelleCubeDevis = $LibelleCubeDevis;}
 	public function SetHauteurCubeDevis($HauteurCubeDevis){$this -> _HauteurCubeDevis = $HauteurCubeDevis;}
 	public function SetLargeurCubeDevis($LargeurCubeDevis){$this -> _LargeurCubeDevis = $LargeurCubeDevis;}
 	public function SetProfondeurCubeDevis($ProfondeurCubeDevis){$this -> _ProfondeurCubeDevis = $ProfondeurCubeDevis;}

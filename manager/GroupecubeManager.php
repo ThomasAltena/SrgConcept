@@ -14,7 +14,11 @@ class GroupecubeManager
 		$q->bindValue(':CodeGroupeCube', $Groupecube->GetCodeGroupeCube());
 		$q->bindValue(':LibelleGroupeCube', $Groupecube->GetLibelleGroupeCube());
 		$q->bindValue(':NombreGroupeCube', $Groupecube->GetNombreGroupeCube());
-		$q->execute();
+		if(!$q->execute()) {
+				return [false,$q->errorInfo()];
+		} else {
+			return [true,$this->_Db->lastInsertId()];
+		}
 	}
 
 	public function UpdateGroupecube(Groupecube $Groupecube){

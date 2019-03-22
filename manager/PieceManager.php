@@ -18,7 +18,11 @@ class PieceManager
 		$q->bindValue(':CodeFamille', $Piece->GetCodeFamille());
 		$q->bindValue(':CodeSsFamille', $Piece->GetCodeSsFamille());
 		$q->bindValue(':CodeGroupeCube', $Piece->GetCodeGroupeCube());
-		$q->execute();
+		if(!$q->execute()) {
+				return [false,$q->errorInfo()];
+		} else {
+			return $this->_Db->lastInsertId();
+		}
 	}
 
 	public function UpdatePiece(Piece $Piece){

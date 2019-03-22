@@ -22,7 +22,11 @@ class ClientManager
 		$q->bindValue(':DateCreationClient', $Client->GetDateCreationClient());
 		$q->bindValue(':ProspectClient', $Client->GetProspectClient());
 		$q->bindValue(':IdUser', $Client->GetIdUser());
-		$q->execute();
+		if(!$q->execute()) {
+				return [false,$q->errorInfo()];
+		} else {
+			return [true,$this->_Db->lastInsertId()];
+		}
 	}
 
 	public function UpdateClient(Client $Client){

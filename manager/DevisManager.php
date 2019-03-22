@@ -26,7 +26,11 @@ class DevisManager
 		$q->bindValue(':ArrondiDevis', $Devis->GetArrondiDevis());
 		$q->bindValue(':PrixDevis', $Devis->GetPrixDevis());
 		$q->bindValue(':CommentairesDevis', $Devis->GetCommentairesDevis());
-		$q->execute();
+		if(!$q->execute()) {
+				return [false,$q->errorInfo()];
+		} else {
+			return [true,$this->_Db->lastInsertId()];
+		}
 	}
 
 	public function UpdateDevis(Devis $Devis){

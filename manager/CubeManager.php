@@ -27,7 +27,11 @@ class CubeManager
 		$q->bindValue(':DessusScieeCube', $Cube->GetDessusScieeCube());
 		$q->bindValue(':DessousPolisCube', $Cube->GetDessousPolisCube());
 		$q->bindValue(':DessousScieeCube', $Cube->GetDessousScieeCube());
-		$q->execute();
+		if(!$q->execute()) {
+				return [false,$q->errorInfo()];
+		} else {
+			return [true,$this->_Db->lastInsertId()];
+		}
 	}
 
 	public function UpdateCube(Cube $Cube){
