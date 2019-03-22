@@ -1,7 +1,8 @@
 <?php
 session_start();
 if (empty($_SESSION)) {
-  header('location:index.php');
+  header('location:/SrgConcept/view/index.php');
+
 }
 
 use Spipu\Html2Pdf\Html2Pdf;

@@ -8,7 +8,8 @@
 session_start();
 
 if (empty($_SESSION)) {
-  header('location:index.php');
+  header('location:/SrgConcept/view/index.php');
+
 } else {
   require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/view/header.php');
 }

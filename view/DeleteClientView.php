@@ -3,7 +3,8 @@ session_start();
 
 if(empty($_SESSION)){
 	//Session inexistant
-    header('location:index.php');
+    header('location:/SrgConcept/view/index.php');
+
 }else{
     include('header.php');
     require('../model/ClientManager.php');

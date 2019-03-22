@@ -4,6 +4,8 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
+
+
 header("Cache-Control:no-cache");
 
 spl_autoload_register(function ($class_name) {

@@ -67,7 +67,25 @@ if(isset($_POST['go'])){
         $db = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
         $ConnexionManager = new ConnexionManager($db); //Connexion a la BDD
 
-        $ConnexionManager->ConnexionUser($psd,$pass);
+        $result = $ConnexionManager->ConnexionUser($psd,$pass);
+        switch ($result) {
+          case 'WrongLogin':
+          echo("<div class='alert alert-danger'><strong>Inforamtion :  </strong>Mauvais identifiant ou mot de passe !</div>");
+            break;
+          case 'Success':
+?>
+<script type="text/javascript">
+  redirect();
+    function redirect(){
+      window.location.replace("/SrgConcept/view/ClientView.php");
+    }
+</script>
+  <?php
+            break;
+          default:
+            // code...
+            break;
+        }
     }
     else{
         echo("<div class='alert alert-danger'><strong>Information :  </strong>Remplissez les deux champs.</div>");

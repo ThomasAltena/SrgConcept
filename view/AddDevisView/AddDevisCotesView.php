@@ -6,13 +6,11 @@
 
 <?php
 session_start();
-
 if (empty($_SESSION)) {
-  header('location:index.php');
+  header('location:/SrgConcept/view/index.php');
 } else {
   require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/view/header.php');
 }
-
 
 try {
   $bdd = new PDO('mysql:host=localhost;dbname=srg', 'root', '');
@@ -20,6 +18,18 @@ try {
   die('Erreur : ' . $e->getMessage());
 }
 
+$cube = array(
+    "Libelle"=>'coffrets av arr',
+    "Matiere"=>'tclair',
+    "Largeur"=>96,
+    "Profodneur"=>93,
+    "Hauteur"=>98,
+    "Quantite"=>2,
+    "Cout"=>98
+  );
+
+
+$testCubes = array($cube,$cube,$cube,$cube);
 
 
 $date = date("d-m-Y");
@@ -35,7 +45,6 @@ $date = date("d-m-Y");
       <div class="form">
         <div class="row">
           <div class="col-sm row" id="donneesDevisContainer">
-            <!--OPTIONS-->
             <div class="col-sm" id="donneesColonneGaucheContainer">
               <div class="formbox" style="margin-bottom: 1vw;">
 

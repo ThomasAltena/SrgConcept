@@ -9,6 +9,7 @@ class CubeDevis
 	private $_IdDevis;
 	private $_IdPiece;
 	private $_IdCube;
+	private $_IdMatiere;
 	private $_AvantPolisCube;
 	private $_AvantScieeCube;
 	private $_ArrierePolisCube;
@@ -51,6 +52,7 @@ class CubeDevis
 	public function GetIdDevis(){return $this->_IdDevis;}
 	public function GetIdPiece(){return $this->_IdPiece;}
 	public function GetIdCube(){return $this->_IdCube;}
+	public function GetIdMatiere(){return $this->_IdMatiere;}
 	public function GetAvantPolisCube(){return $this->_AvantPolisCube;}
 	public function GetAvantScieeCube(){return $this->_AvantScieeCube;}
 	public function GetArrierePolisCube(){return $this->_ArrierePolisCube;}
@@ -73,6 +75,7 @@ class CubeDevis
 	public function SetIdDevis($IdDevis){$this -> _IdDevis = $IdDevis;}
 	public function SetIdPiece($IdPiece){$this -> _IdPiece = $IdPiece;}
 	public function SetIdCube($IdCube){$this -> _IdCube = $IdCube;}
+	public function SetIdMatiere($IdMatiere){$this -> _IdMatiere = $IdMatiere;}
 	public function SetAvantPolisCube($AvantPolisCube){$this -> _AvantPolisCube = $AvantPolisCube;}
 	public function SetAvantScieeCube($AvantScieeCube){$this -> _AvantScieeCube = $AvantScieeCube;}
 	public function SetArrierePolisCube($ArrierePolisCube){$this -> _ArrierePolisCube = $ArrierePolisCube;}

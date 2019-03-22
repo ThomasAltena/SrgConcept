@@ -8,7 +8,8 @@
 session_start();
 
 if (empty($_SESSION)) {
-  header('location:index.php');
+  header('location:/SrgConcept/view/index.php');
+
 } else {
   include('header.php');
 }
