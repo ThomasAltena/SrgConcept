@@ -11,9 +11,19 @@
 }
 
 #donneesColonneGaucheContainer {
-    max-width: 450px;
-    min-width: 450px;
-    min-height: 828px;
+    max-width: 400px;
+    min-width: 400px;
+    min-height: 800px;
+    margin-right: 1vw;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+#donneesColonneDroiteContainer {
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 800px;
     margin-right: 1vw;
     padding-left: 0;
     padding-right: 0;
@@ -32,9 +42,7 @@
 }
 
 #listeCubesDevisContainer {
-    max-width: 450px;
-    min-width: 450px;
-    min-height: 828px;
+    min-height: 800px;
     margin-right: 1vw;
     padding-left: 0;
     padding-right: 0;
