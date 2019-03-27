@@ -132,13 +132,13 @@ function GetFilteredPieces(){
   if(empty($pieces)){
     $data .= '<select name="Id_piece" id="select_piece" aria-describedby=Id_piece_label"';
     $data .= 'onchange="SelectPiece()" class="form-control" disabled>';
-    $data .= '<option value="" disabled selected>Aucun sous famille</option>';
+    $data .= '<option value="" disabled selected>Aucune piece dans categorie</option>';
     $selectFirst = false;
 
   } else {
     $data .= '<select name="Id_piece" id="select_piece" aria-describedby=Id_piece_label" ';
     $data .= 'onchange="SelectPiece()" class="form-control">';
-
+    $data .= '<option value="" disabled>Aucune</option>';
     foreach ($pieces as $piece) {
       if($selectFirst){
         $data .= '<option id="'.$piece->GetIdPiece().'"';

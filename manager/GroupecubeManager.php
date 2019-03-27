@@ -10,22 +10,24 @@ class GroupecubeManager
 	public function SetDb(PDO $db){$this->_Db = $db;}
 
 	public function AddGroupecube(Groupecube $Groupecube){
-		$q = $this->_Db->prepare('INSERT INTO groupecubes VALUES(:CodeGroupeCube, :LibelleGroupeCube, :NombreGroupeCube)');
+		$q = $this->_Db->prepare('INSERT INTO groupecubes VALUES(:CodeGroupeCube, :LibelleGroupeCube, :NombreGroupeCube, :Regroupement)');
 		$q->bindValue(':CodeGroupeCube', $Groupecube->GetCodeGroupeCube());
 		$q->bindValue(':LibelleGroupeCube', $Groupecube->GetLibelleGroupeCube());
 		$q->bindValue(':NombreGroupeCube', $Groupecube->GetNombreGroupeCube());
+		$q->bindValue(':Regroupement', $Groupecube->GetRegroupement());
 		if(!$q->execute()) {
-				return [false,$q->errorInfo()];
+			return [false,$q->errorInfo()];
 		} else {
 			return [true,$this->_Db->lastInsertId()];
 		}
 	}
 
 	public function UpdateGroupecube(Groupecube $Groupecube){
-		$q = $this->_Db->prepare('UPDATE groupecubes SET `LibelleGroupeCube` = :LibelleGroupeCube, `NombreGroupeCube` = :NombreGroupeCube WHERE CodeGroupeCube = :CodeGroupeCube ');
+		$q = $this->_Db->prepare('UPDATE groupecubes SET `LibelleGroupeCube` = :LibelleGroupeCube, `NombreGroupeCube` = :NombreGroupeCube, `Regroupement` = :Regroupement WHERE CodeGroupeCube = :CodeGroupeCube ');
 		$q->bindValue(':CodeGroupeCube', $Groupecube->GetCodeGroupeCube());
 		$q->bindValue(':LibelleGroupeCube', $Groupecube->GetLibelleGroupeCube());
 		$q->bindValue(':NombreGroupeCube', $Groupecube->GetNombreGroupeCube());
+		$q->bindValue(':Regroupement', $Groupecube->GetRegroupement());
 		$q->execute();
 	}
 

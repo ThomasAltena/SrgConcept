@@ -2,22 +2,22 @@
 
 class Devis
 {
-	public $_IdDevis;
-	private $_DateDevis;
-	private $_IdClient;
-	private $_IdUser;
-	private $_CheminSchemaDevis;
-	private $_ArchiveDevis;
-	private $_CheminFicheFabDevis;
-	private $_RemiseDevis;
-	private $_FormatDevis;
-	private $_TypeDevis;
-	private $_AquisDevis;
-	private $_DosPolisDevis;
-	private $_ArrondiDevis;
-	private $_PrixDevis;
-	private $_CommentairesDevis;
-	private $_OriginalObject;
+	public $_IdDevis = '';
+	private $_DateDevis = '';
+	private $_IdClient = '';
+	private $_IdUser = '';
+	private $_CheminSchemaDevis = '';
+	private $_ArchiveDevis = '';
+	private $_CheminFicheFabDevis = '';
+	private $_RemiseDevis = '';
+	private $_FormatDevis = '';
+	private $_TypeDevis = '';
+	private $_AquisDevis = '';
+	private $_DosPolisDevis = '';
+	private $_ArrondiDevis = '';
+	private $_PrixDevis = '';
+	private $_CommentairesDevis = '';
+	private $_OriginalObject = '';
 
 	public function __construct(array $donnees)
 	{

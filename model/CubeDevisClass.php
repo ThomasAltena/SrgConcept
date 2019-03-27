@@ -2,11 +2,11 @@
 
 class CubeDevis
 {
-	public $_IdCubeDevis;
+	public $_IdCubeDevis = '';
 	private $_LibelleCubeDevis;
-	private $_HauteurCubeDevis;
-	private $_LargeurCubeDevis;
-	private $_ProfondeurCubeDevis;
+	private $_HauteurCubeDevis = '';
+	private $_LargeurCubeDevis = '';
+	private $_ProfondeurCubeDevis = '';
 	private $_IdDevis;
 	private $_IdPiece;
 	private $_IdCube;

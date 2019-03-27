@@ -10,11 +10,10 @@ class CubeManager
 	public function SetDb(PDO $db){$this->_Db = $db;}
 
 	public function AddCube(Cube $Cube){
-		$q = $this->_Db->prepare('INSERT INTO cubes VALUES(:CodeCube, :NumeroCube, :LibelleCube, :CodeGroupeCube, :AvantPolisCube, :AvantScieeCube, :ArrierePolisCube, :ArriereScieeCube, :DroitePolisCube, :DroiteScieeCube, :GauchePolisCube, :GaucheScieeCube, :DessusPolisCube, :DessusScieeCube, :DessousPolisCube, :DessousScieeCube)');
-		$q->bindValue(':CodeCube', $Cube->GetCodeCube());
-		$q->bindValue(':NumeroCube', $Cube->GetNumeroCube());
+		$q = $this->_Db->prepare('INSERT INTO cubes VALUES(:IdCube, :RangCube, :LibelleCube, :AvantPolisCube, :AvantScieeCube, :ArrierePolisCube, :ArriereScieeCube, :DroitePolisCube, :DroiteScieeCube, :GauchePolisCube, :GaucheScieeCube, :DessusPolisCube, :DessusScieeCube, :DessousPolisCube, :DessousScieeCube)');
+		$q->bindValue(':IdCube', $Cube->GetIdCube());
+		$q->bindValue(':RangCube', $Cube->GetRangCube());
 		$q->bindValue(':LibelleCube', $Cube->GetLibelleCube());
-		$q->bindValue(':CodeGroupeCube', $Cube->GetCodeGroupeCube());
 		$q->bindValue(':AvantPolisCube', $Cube->GetAvantPolisCube());
 		$q->bindValue(':AvantScieeCube', $Cube->GetAvantScieeCube());
 		$q->bindValue(':ArrierePolisCube', $Cube->GetArrierePolisCube());
@@ -28,18 +27,17 @@ class CubeManager
 		$q->bindValue(':DessousPolisCube', $Cube->GetDessousPolisCube());
 		$q->bindValue(':DessousScieeCube', $Cube->GetDessousScieeCube());
 		if(!$q->execute()) {
-				return [false,$q->errorInfo()];
+			return [false,$q->errorInfo()];
 		} else {
 			return [true,$this->_Db->lastInsertId()];
 		}
 	}
 
 	public function UpdateCube(Cube $Cube){
-		$q = $this->_Db->prepare('UPDATE cubes SET `NumeroCube` = :NumeroCube, `LibelleCube` = :LibelleCube, `CodeGroupeCube` = :CodeGroupeCube, `AvantPolisCube` = :AvantPolisCube, `AvantScieeCube` = :AvantScieeCube, `ArrierePolisCube` = :ArrierePolisCube, `ArriereScieeCube` = :ArriereScieeCube, `DroitePolisCube` = :DroitePolisCube, `DroiteScieeCube` = :DroiteScieeCube, `GauchePolisCube` = :GauchePolisCube, `GaucheScieeCube` = :GaucheScieeCube, `DessusPolisCube` = :DessusPolisCube, `DessusScieeCube` = :DessusScieeCube, `DessousPolisCube` = :DessousPolisCube, `DessousScieeCube` = :DessousScieeCube WHERE CodeCube = :CodeCube ');
-		$q->bindValue(':CodeCube', $Cube->GetCodeCube());
-		$q->bindValue(':NumeroCube', $Cube->GetNumeroCube());
+		$q = $this->_Db->prepare('UPDATE cubes SET `RangCube` = :RangCube, `LibelleCube` = :LibelleCube, `AvantPolisCube` = :AvantPolisCube, `AvantScieeCube` = :AvantScieeCube, `ArrierePolisCube` = :ArrierePolisCube, `ArriereScieeCube` = :ArriereScieeCube, `DroitePolisCube` = :DroitePolisCube, `DroiteScieeCube` = :DroiteScieeCube, `GauchePolisCube` = :GauchePolisCube, `GaucheScieeCube` = :GaucheScieeCube, `DessusPolisCube` = :DessusPolisCube, `DessusScieeCube` = :DessusScieeCube, `DessousPolisCube` = :DessousPolisCube, `DessousScieeCube` = :DessousScieeCube WHERE IdCube = :IdCube ');
+		$q->bindValue(':IdCube', $Cube->GetIdCube());
+		$q->bindValue(':RangCube', $Cube->GetRangCube());
 		$q->bindValue(':LibelleCube', $Cube->GetLibelleCube());
-		$q->bindValue(':CodeGroupeCube', $Cube->GetCodeGroupeCube());
 		$q->bindValue(':AvantPolisCube', $Cube->GetAvantPolisCube());
 		$q->bindValue(':AvantScieeCube', $Cube->GetAvantScieeCube());
 		$q->bindValue(':ArrierePolisCube', $Cube->GetArrierePolisCube());
@@ -56,11 +54,11 @@ class CubeManager
 	}
 
 	public function DeleteCube( $id){
-		$this->_Db->exec('DELETE FROM cubes WHERE CodeCube ='.$id);
+		$this->_Db->exec('DELETE FROM cubes WHERE IdCube ='.$id);
 	}
 
 	public function GetCube( $id){
-		$q = $this->_Db->prepare('SELECT * FROM cubes WHERE CodeCube ='.$id);
+		$q = $this->_Db->prepare('SELECT * FROM cubes WHERE IdCube ='.$id);
 		$q->execute();
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Cube = new Cube($donnees);}
 		return $Cube;

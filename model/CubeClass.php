@@ -2,10 +2,9 @@
 
 class Cube
 {
-	public $_CodeCube;
-	private $_NumeroCube;
+	public $_IdCube;
+	private $_RangCube;
 	private $_LibelleCube;
-	private $_CodeGroupeCube;
 	private $_AvantPolisCube;
 	private $_AvantScieeCube;
 	private $_ArrierePolisCube;
@@ -41,10 +40,9 @@ class Cube
 	}
 
 	/**GET**/
-	public function GetCodeCube(){return $this->_CodeCube;}
-	public function GetNumeroCube(){return $this->_NumeroCube;}
+	public function GetIdCube(){return $this->_IdCube;}
+	public function GetRangCube(){return $this->_RangCube;}
 	public function GetLibelleCube(){return $this->_LibelleCube;}
-	public function GetCodeGroupeCube(){return $this->_CodeGroupeCube;}
 	public function GetAvantPolisCube(){return $this->_AvantPolisCube;}
 	public function GetAvantScieeCube(){return $this->_AvantScieeCube;}
 	public function GetArrierePolisCube(){return $this->_ArrierePolisCube;}
@@ -60,10 +58,9 @@ class Cube
 	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
-	public function SetCodeCube($CodeCube){$this -> _CodeCube = $CodeCube;}
-	public function SetNumeroCube($NumeroCube){$this -> _NumeroCube = $NumeroCube;}
+	public function SetIdCube($IdCube){$this -> _IdCube = $IdCube;}
+	public function SetRangCube($RangCube){$this -> _RangCube = $RangCube;}
 	public function SetLibelleCube($LibelleCube){$this -> _LibelleCube = $LibelleCube;}
-	public function SetCodeGroupeCube($CodeGroupeCube){$this -> _CodeGroupeCube = $CodeGroupeCube;}
 	public function SetAvantPolisCube($AvantPolisCube){$this -> _AvantPolisCube = $AvantPolisCube;}
 	public function SetAvantScieeCube($AvantScieeCube){$this -> _AvantScieeCube = $AvantScieeCube;}
 	public function SetArrierePolisCube($ArrierePolisCube){$this -> _ArrierePolisCube = $ArrierePolisCube;}

@@ -71,4 +71,9 @@ class DevisManager
 		return $Deviss;
 	}
 
+	public function UpdateCheminSchema($devisInsertId, $fichier_full_path){
+		$q = $this->_Db->query('UPDATE devis SET CheminSchemaDevis = "'.$fichier_full_path.'" WHERE IdDevis = '.$devisInsertId);
+		return $q->execute();
+	}
+
 }

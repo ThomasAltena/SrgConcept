@@ -1,11 +1,10 @@
 <?php
 
-class Groupecube
+class GroupecubeCube
 {
-	public $_CodeGroupeCube;
-	private $_LibelleGroupeCube;
-	private $_NombreGroupeCube;
-	private $_Regroupement;
+	public $_IdGroupCubeCubes;
+	private $_IdCube;
+	private $_CodeGroupeCube;
 	private $_OriginalObject;
 
 	public function __construct(array $donnees)
@@ -29,17 +28,15 @@ class Groupecube
 	}
 
 	/**GET**/
+	public function GetIdGroupCubeCubes(){return $this->_IdGroupCubeCubes;}
+	public function GetIdCube(){return $this->_IdCube;}
 	public function GetCodeGroupeCube(){return $this->_CodeGroupeCube;}
-	public function GetLibelleGroupeCube(){return $this->_LibelleGroupeCube;}
-	public function GetNombreGroupeCube(){return $this->_NombreGroupeCube;}
-	public function GetRegroupement(){return $this->_Regroupement;}
 	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
+	public function SetIdGroupCubeCubes($IdGroupCubeCubes){$this -> _IdGroupCubeCubes = $IdGroupCubeCubes;}
+	public function SetIdCube($IdCube){$this -> _IdCube = $IdCube;}
 	public function SetCodeGroupeCube($CodeGroupeCube){$this -> _CodeGroupeCube = $CodeGroupeCube;}
-	public function SetLibelleGroupeCube($LibelleGroupeCube){$this -> _LibelleGroupeCube = $LibelleGroupeCube;}
-	public function SetNombreGroupeCube($NombreGroupeCube){$this -> _NombreGroupeCube = $NombreGroupeCube;}
-	public function SetRegroupement($Regroupement){$this -> _Regroupement = $Regroupement;}
 	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

@@ -151,7 +151,7 @@ $date = date("d-m-Y");
                   <div class="col-sm"><img alt="" id="imagePieceSelectionnee" src="" style="max-width: inherit; max-height: inherit">
                   </div>
                   <div class="col-sm" id="pieceSelectControlContainer">
-                    <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListGoTo(0)">
+                    <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListGoTo(1)">
                       <i class="fas fa-step-backward fa-rotate-90"></i>
                     </div>
                     <div class="col-sm btn hover-effect-a" id="piece-select-controls" onclick="PiecesSelectListUp()">
@@ -178,7 +178,6 @@ $date = date("d-m-Y");
                 <img id="matiereImagePreview" src="" alt="">
               </div>
             </div>
-
 
             <!--PIECES SELECTIONNEES-->
             <div class="col-sm" id="piecesSelectionneeEtOptionsDevisContainer">
@@ -208,7 +207,7 @@ $date = date("d-m-Y");
                   Annuler
                 </button>
                 <button class="btn btn-success hover-effect-a" style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectAddDevisCotesView()">
-                  Suite
+                  Sauvegarder & Suite
                 </button>
               </div>
             </div>
@@ -219,7 +218,6 @@ $date = date("d-m-Y");
   </div>
 </body>
 <script type="text/javascript">
-let saved = false;
 let selectedPiece = [];
 let pieces = [];
 let piecesListCurrentPage = 0;
@@ -229,82 +227,75 @@ let matiere = '';
 let famille = [];
 let sousFamille = [];
 
+let imagePieceSelectionneeSchema = $('#imagePieceSelectionneeSchema');
+let imagePieceSelectionnee = $('#imagePieceSelectionnee');
+let matiereImagePreview = $('#matiereImagePreview');
+let pieceSelector = $('#select_piece');
+let schemaPiecesContainer = $('#schemaPiecesContainer');
+let piecesListContainer = $('#piecesListContainer');
+let pieceSelectControlContainer = $('#pieceSelectControlContainer');
 /*HIDE*/
 
 /*
 * Cache la <img> contenant la preview de l'image selectionnee dans schema quand celle ci est vide (au moment de sauvegarde ou selection de 'aucune' piece
 */
 function HideSelectedPieceSchema() {
-  document.getElementById('imagePieceSelectionneeSchema').setAttribute("src", "");
-  document.getElementById('imagePieceSelectionneeSchema').setAttribute('style', 'visibility: hidden');
+  imagePieceSelectionneeSchema.css({visibility: "hidden"});
 }
 
 /*
 * Cache la <img> contenant la preview de l'image selectionnee dans selection quand celle ci est vide (au moment de sauvegarde ou selection de 'aucune' piece
 */
 function HideSelectedPiecePreview() {
-  document.getElementById('imagePieceSelectionnee').setAttribute("src", "");
-  document.getElementById('imagePieceSelectionnee').setAttribute('style', 'visibility: hidden');
+  imagePieceSelectionnee.css({visibility: "hidden"});
 }
 
-/*SHOW*/
 function ShowSelectedPieceSchema() {
   if (selectedPiece.CheminPiece !== "") {
-    let imagePieceSelectionnee = document.getElementById('imagePieceSelectionnee');
-    imagePieceSelectionnee.setAttribute('style', 'visibility: visible');
-    imagePieceSelectionnee.setAttribute("src", '../' + selectedPiece.CheminPiece);
-    imagePieceSelectionnee.style.width = "inherit";
-    imagePieceSelectionnee.style.position = "relative";
+    imagePieceSelectionnee.prop("src", "../" + selectedPiece.CheminPiece);
+    imagePieceSelectionnee.css({position:'relative', width: "inherit", visibility: "visible"});
   }
 }
 
 function ShowSelectedPiecePreview() {
   if (selectedPiece.CheminPiece !== "") {
-    let imagePieceSelectionneeSchema = document.getElementById('imagePieceSelectionneeSchema');
-    imagePieceSelectionneeSchema.setAttribute('style', 'visibility: visible');
-    imagePieceSelectionneeSchema.setAttribute("src", '../' + selectedPiece.CheminPiece);
-    imagePieceSelectionneeSchema.style.position = "absolute";
-    imagePieceSelectionneeSchema.style.maxWidth = "680px";
-    imagePieceSelectionneeSchema.style.width = "680px";
-    imagePieceSelectionneeSchema.style.height = "100%";
-    imagePieceSelectionneeSchema.style.minWidth = "680px";
-    $('#imagePieceSelectionneeSchema').css({top: "100px", position:'absolute'});
-    //$('#imagePieceSelectionneeSchema').css({position:'absolute'});
+    imagePieceSelectionneeSchema.prop("src", "../" + selectedPiece.CheminPiece);
+    imagePieceSelectionneeSchema.css({top: "100px", position:'absolute', width: "680px", minWidth: "680px", maxWidth: "680px", height: "100%", visibility: "visible"});
   }
 }
 
 /*RESET*/
-
 function ResetFamilleSelector() {
-  document.getElementById("select_famille").value = "";
+  $("#select_famille").val("");
 }
 
 function ResetSousFamilleSelector() {
-  document.getElementById("selectSousFamilleContainer").innerHTML =
-  "<div class=\"input-group-prepend\">\n" +
-  "<span class=\"input-group-text\" style=\"width:100px\"\n" +
-  "id=\"Id_ss_famille_label\">Sous-fam :</span>\n" +
-  "</div>\n" +
-  "<select name=\"Id_ss_famille\" aria-describedby=Id_ss_famille_label\" id=\"select_ss_famille\" disabled\n" +
-  "class=\"form-control\" onchange=\"FilterPieces(value)\">\n" +
-  "</select>";
+  $("#selectSousFamilleContainer").html("<div class=\"input-group-prepend\">\n" +
+                                    "<span class=\"input-group-text\" style=\"width:100px\"\n" +
+                                    "id=\"Id_ss_famille_label\">Sous-fam :</span>\n" +
+                                    "</div>\n" +
+                                    "<select name=\"Id_ss_famille\" aria-describedby=Id_ss_famille_label\" id=\"select_ss_famille\" disabled\n" +
+                                    "class=\"form-control\" onchange=\"FilterPieces(value)\">\n" +
+                                    "</select>");
 }
 
 function ResetPieceSelector() {
-  document.getElementById("selectPieceContainer").innerHTML =
-  "<div class=\"input-group-prepend\">\n" +
-  "<span class=\"input-group-text\" style=\"width:100px\" id=\"Id_piece_label\">Piece :</span>\n" +
-  "</div>\n" +
-  "<select name=\"Id_piece\" id=\"select_piece\" aria-describedby=Id_piece_label\"\n" +
-  "onchange=\"SelectPiece()\" class=\"form-control\" disabled>\n" +
-  "\n" +
-  "</select>";
+  $("#selectPieceContainer").html("<div class=\"input-group-prepend\">\n" +
+                                    "<span class=\"input-group-text\" style=\"width:100px\" id=\"Id_piece_label\">Piece :</span>\n" +
+                                    "</div>\n" +
+                                    "<select name=\"Id_piece\" id=\"select_piece\" aria-describedby=Id_piece_label\"\n" +
+                                    "onchange=\"SelectPiece()\" class=\"form-control\" disabled>\n" +
+                                    "\n" +
+                                    "</select>");
+
+  pieceSelectControlContainer.css({visibility: "hidden"});
+  document.getElementById('pieceVueContainerCount').innerHTML = '';
 }
 
 /*TOGGLE*/
 
 function ToggleSubmitPieceButton(bool) {
-  $("#ajouter_piece_button").attr("disabled", !bool);
+  $("#ajouter_piece_button").prop("disabled", !bool);
 }
 
 function togglePieces(bool){
@@ -313,7 +304,7 @@ function togglePieces(bool){
   } else {
     format = 'simple';
   }
-  sousFamille = document.getElementById('select_ss_famille').value;
+  sousFamille = $("#select_ss_famille").val();
   if(sousFamille != null && sousFamille !== ''){
     FilterPieces(sousFamille);
   }
@@ -329,21 +320,16 @@ function SelectMatiere(m) {
 }
 
 function UpdateMatierePreview() {
-  let imageMatiereSelectionnee = document.getElementById('matiereImagePreview');
   if(matiere.CheminMatiere != ''){
+    chemin = matiere.CheminMatiere;
     if(matiere.CheminMatiere.includes("../")){
-      chemin = matiere.CheminMatiere.replace("../", "/SrgConcept/");
-    } else {
-      chemin = matiere.CheminMatiere;
+      chemin = chemin.replace("../", "/SrgConcept/");
     }
-    imageMatiereSelectionnee.setAttribute('style', 'visibility: visible');
-    imageMatiereSelectionnee.setAttribute("src", chemin);
-    imageMatiereSelectionnee.style.position = "absolute";
-    imageMatiereSelectionnee.style.maxWidth = "680px";
-    imageMatiereSelectionnee.style.width = "680px";
-    imageMatiereSelectionnee.style.height = "300";
+    matiereImagePreview.prop("src", chemin);
+    matiereImagePreview.css({position:'absolute', width: "680px", minWidth: "680px", maxWidth: "680px", visibility: "visible"});
   } else {
-    imageMatiereSelectionnee.setAttribute('style', 'visibility: hidden');
+    matiereImagePreview.prop("alt", "Aucune image matiere disponible");
+    matiereImagePreview.css({visibility: "visible"});
   }
 }
 
@@ -374,7 +360,7 @@ function FilterPieces(sousFamilleJson, id_piece_to_select) {
   let xhttp;
   if (sousFamille.CodeSsFamille === "" || famille.CodeFamille === "") {
     ResetPieceSelector();
-    UpdateImageCount();
+
     ToggleSubmitPieceButton(false);
     HideSelectedPieceSchema();
     HideSelectedPiecePreview();
@@ -383,6 +369,7 @@ function FilterPieces(sousFamilleJson, id_piece_to_select) {
     xhttp.onreadystatechange = function () {
       if (this.readyState === 4 && this.status === 200) {
         document.getElementById("selectPieceContainer").innerHTML = this.responseText;
+        UpdateImageCount();
         SelectPiece();
       }
     };
@@ -394,19 +381,21 @@ function FilterPieces(sousFamilleJson, id_piece_to_select) {
 function UpdateImageCount() {
   let piecesCount = document.getElementById('select_piece').options.length;
   let body = '';
-  if (piecesCount > 0) {
+  if (piecesCount > 1) {
+    pieceSelectControlContainer.css({visibility: "visible"});
     let selectedIndex = document.getElementById('select_piece').selectedIndex;
-    body = 'Piece ' + (selectedIndex + 1) + '/' + (piecesCount);
-
+    body = 'Piece ' + (selectedIndex) + '/' + (piecesCount-1);
+  } else {
+    pieceSelectControlContainer.css({visibility: "hidden"});
   }
   document.getElementById('pieceVueContainerCount').innerHTML = body;
 }
 
 function PiecesSelectListGoTo(page) {
   let optionsLength = document.getElementById("select_piece").options.length;
-  if (optionsLength > 0) {
-    if (page === 0) {
-      document.getElementById("select_piece").options.selectedIndex = 0;
+  if (optionsLength > 1) {
+    if (page === 1) {
+      document.getElementById("select_piece").options.selectedIndex = 1;
       SelectPiece();
     }
     if (page === -1) {
@@ -419,7 +408,7 @@ function PiecesSelectListGoTo(page) {
 function PiecesSelectListUp() {
   let currentSelected = document.getElementById("select_piece").options.selectedIndex;
   let newSelect = currentSelected - 1;
-  if (newSelect >= 0) {
+  if (newSelect >= 1) {
     document.getElementById("select_piece").options.selectedIndex = newSelect;
     SelectPiece();
   }
@@ -451,7 +440,7 @@ function ReloadSchema() {
     body += '" >\n'
   });
   body += '<img alt="La piece couramment selectionnee sur schema" id="imagePieceSelectionneeSchema" src="" style="visibility: hidden">\n';
-  document.getElementById("schemaPiecesContainer").innerHTML = body;
+  schemaPiecesContainer.html(body);
 }
 /*
 /--------------------------------------- ACTIONS PIECE -----------------------------------------------------------/
@@ -459,10 +448,9 @@ function ReloadSchema() {
 
 function SelectPiece() {
   let select = document.getElementById('select_piece');
-  selectedPiece = JSON.parse(select.value);
   // Si une  nouvelle piece est selectionnee par l'utilisateur et non rechargee depuis la selection dune piece existante
   if (select.value !== "") {
-    let imagePieceSelectionneeSchema = $('#imagePieceSelectionneeSchema');
+    selectedPiece = JSON.parse(select.value);
     ShowSelectedPieceSchema();
     ShowSelectedPiecePreview();
     ToggleSubmitPieceButton(true);
@@ -480,6 +468,9 @@ function DeletePiece(x) {
   pieces.splice(x, 1);
   UpdatePiecesListView(piecesListCurrentPage);
   ReloadSchema();
+  if(pieces.length == 0){
+    document.getElementById("simpleOuDouble").disabled = false;
+  }
 }
 
 function SelectExistingPiece(x){
@@ -495,11 +486,10 @@ function SelectExistingPiece(x){
 }
 
 function SauvegarderNouvellePiece() {
+  document.getElementById("simpleOuDouble").disabled = true;
   pieces.push(selectedPiece);
   ReloadSchema();
-  //ToggleSubmitPieceButton(false);
   HideSelectedPieceSchema();
-  //HideSelectedPiecePreview();
   UpdatePiecesListView(-1);
 }
 
@@ -508,8 +498,8 @@ function RedirectDevisListView(){
 }
 
 function RedirectAddDevisCotesView(){
-  //SauvegarderDevis();
-  window.location.replace("AddDevisCotesView.php");
+  SauvegarderDevis();
+  //window.location.replace("AddDevisCotesView.php");
 }
 
 function SauvegarderDevis() {
@@ -517,22 +507,20 @@ function SauvegarderDevis() {
     onrendered: function(canvas) {
       let client = JSON.parse(document.getElementById('id_client').value);
       let dataURL = canvas.toDataURL("image/png");
-      let idClient = document.getElementById('id_client').value;
-      let idMatiere = JSON.parse(document.getElementById('id_matiere').value)['Id_matiere'];
+      let matiere = JSON.parse(document.getElementById('id_matiere').value);
       let arguments = [matiere, client, dataURL, pieces];
+      console.log(arguments);
 
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-          responseText = JSON.parse(this.responseText);
-          if(responseText.error){
-            console.log(responseText);
-          } else {
-            saved = true;
-          }
+          //responseText = JSON.parse(this.responseText);
+          //if(responseText.error){
+            console.log(this.responseText);
+          //}
         }
       };
-      xhttp.open("POST", "../controller/DevisController.php?functionname=" + 'SauvegarderDevis' , true);
+      xhttp.open("POST", "/SrgConcept/controller/DevisController.php?functionname=" + 'SauvegarderDevis' , true);
       xhttp.send(JSON.stringify(arguments));
     }
   });
@@ -627,8 +615,7 @@ function UpdatePiecesListView(pageSetNumber) {
     }
   }
   body += '</div>';
-
-  document.getElementById("piecesListContainer").innerHTML = body;
+  piecesListContainer.html(body);
   SetPageNumberContainer();
 }
 

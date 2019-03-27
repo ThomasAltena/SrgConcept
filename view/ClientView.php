@@ -46,14 +46,14 @@
         <tbody>
           <?php foreach($clients as $client) { ?>
           <tr>
-            <td class="text-left"><?php echo $client->GetNomClient(); ?>"</td>
-            <td class="text-left"><?php echo $client->GetPrenomClient(); ?>"</td>
-            <td class="text-left"><?php echo $client->GetAdresseClient(); ?>"</td>
-            <td class="text-left"><?php echo $client->GetCodePostalClient(); ?>"</td>
-            <td class="text-left"><?php echo $client->GetVilleClient(); ?>"</td>
-            <td class="text-left"><?php echo $client->GetTelClient(); ?>"</td>
-            <td class="text-left"><?php echo $client->GetMailClient(); ?>"</td>
-            <td class="text-left"><?php echo $client->GetDateCreationClient(); ?>"</td>
+            <td class="text-left"><?php echo $client->GetNomClient(); ?></td>
+            <td class="text-left"><?php echo $client->GetPrenomClient(); ?></td>
+            <td class="text-left"><?php echo $client->GetAdresseClient(); ?></td>
+            <td class="text-left"><?php echo $client->GetCodePostalClient(); ?></td>
+            <td class="text-left"><?php echo $client->GetVilleClient(); ?></td>
+            <td class="text-left"><?php echo $client->GetTelClient(); ?></td>
+            <td class="text-left"><?php echo $client->GetMailClient(); ?></td>
+            <td class="text-left"><?php echo $client->GetDateCreationClient(); ?></td>
             <td class="text-left">
               <button  onclick='edit("<?php echo $client->GetIdClient(); ?>")' class='btn btn-primary'>
                 <span class='fas fa-edit'>

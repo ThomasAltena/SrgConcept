@@ -21,14 +21,15 @@
 .onoffswitch-inner:before {
     content: "SIMPLE";
     padding-left: 20px;
-    background-color: #D4D4D4; color: #666666;
+    background-color: #318bd6; color: #ffffff;
 }
 .onoffswitch-inner:after {
     content: "DOUBLE";
     padding-right: 20px;
-    background-color: #D4D4D4; color: #878787;
+    background-color: #4ca54d; color: #ffffff;
     text-align: right;
 }
+
 .onoffswitch-switch {
     display: block; width: 22px; margin: 4px;
     background: #FFFFFF;

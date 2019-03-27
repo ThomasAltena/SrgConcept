@@ -11,9 +11,9 @@ use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
 spl_autoload_register(function ($class_name) {
   if(strpos($class_name, 'Manager')){
-    include '../model/'. $class_name . '.php';
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/manager/'. $class_name . '.php');
   } else {
-    include '../model/'. $class_name . 'Class.php';
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/'. $class_name . 'Class.php');
   }
 });
 
@@ -80,40 +80,48 @@ function ArchiveDevis($deviId){
 }
 
 function SauvegarderDevis() {
+  //arguments = [matiere, client, dataURL, pieces];
   global $_SESSION, $input, $result, $arguments, $bdd;
+
   if( !isset($input) ) {
     $result['error'] = 'No function arguments!';
   } else {
     $arguments = json_decode($input);
-    if( !is_array($arguments) || (count($arguments) < 5) ) {
+    if( !is_array($arguments) || (count($arguments) < 4) ) {
       $result['error'] = 'Erreur - manque donnees devis!';
     }
   }
 
   if( !isset($result['error']) ) {
-    $lignes = $arguments[4];
+    $matiere = new Matiere(get_object_vars($arguments[0]));
 
-    if( !is_array($lignes) || (count($lignes) < 1) ) {
+    $client = new Client(get_object_vars($arguments[1]));
+    $img = $arguments[2];
+    $idUser = $_SESSION['Id_user'];
+    $date = date("Y-m-d");
+
+    if( !is_array($arguments[3]) || (count($arguments[3]) < 1) ) {
       $result['error'] = 'Erreur - manque données pieces!!';
     } else {
-      $idUser = $_SESSION['Id_user'];
-      $date = date("Y-m-d");
-      $idclient = $arguments[0];
-      $idMatiere = $arguments[1];
-      $chemin = $arguments[2];
 
-      $devis = ["Id_devis" => "",
-        "Date_devis" => $date,
-        "IdClient_devis" => $idclient,
-        "IdUser_devis" => $idUser,
-        "CheminImage_devis" => "",
-        "IdMatiere_devis" => $idMatiere,
-        "Archive_devis" => false,
-        "CheminFicheFab_devis" => ''
+      $devis = ["IdDevis" => "",
+        "DateDevis" => $date,
+        "IdClient" => $client->GetIdClient(),
+        "IdUser" => $idUser,
+        "CheminSchemaDevis" => "",
+        "Archive" => false,
+        "CheminFicheFabDevis" => '',
+        "RemiseDevis" => '',
+        "FormatDevis" => '',
+        "TypeDevis" => '',
+        "AquisDevis" => '',
+        "DosPolisDevis" => '',
+        "ArrondiDevis" => '',
+        "PrixDevis" => '',
+        "CommentairesDevis" => ''
       ];
 
       $devisModel = new Devis($devis);
-
       $DevisManager = new DevisManager($bdd); //Connexion a la BDD
       $devisInsertResult = $DevisManager->AddDevis($devisModel);
 
@@ -121,24 +129,21 @@ function SauvegarderDevis() {
         "insertResult" => $devisInsertResult,
         "updateResult" => [],
         "devis" => $devis,
-        "ligneResults" => []
+        "cubeResults" => []
       ];
 
       if(!$devisInsertResult[0]){
         $result['error'] = 'Erreur INSERT de DEVIS - '.$devisInsertResult[1][2];
       } else {
         $devisInsertId = $bdd->lastInsertId();
-        $LigneDevisManager = new LigneDevisManager($bdd); //Connexion a la BDD
-        $OptionLigneManager = new OptionLigneManager($bdd);
 
         //PREPARATION IMAGE
-        $img = $arguments[3];
         $img = str_replace('data:image/png;base64,', '', $img);
         $img = str_replace(' ', '+', $img);
         $data = base64_decode($img);
 
         //SAUVEGARDE IMAGE QUAND DEVIS INSERT REUSSI
-        $upload_dir = "../public/images/schemas/";
+        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/public/images/schemas/';
         $fichier_nom = "DEVIS_" . $devisInsertId . "_" . mktime() . ".png";
         $fichier = $upload_dir . $fichier_nom;
         $success = file_put_contents($fichier, $data);
@@ -148,65 +153,27 @@ function SauvegarderDevis() {
 
         $result['devisResults']['updateResult'] = $devisUpdateResult;
 
-        foreach ($lignes as $ligne){
-          $options = $ligne->options;
+        $CubeDevisManager = new CubeDevisManager($bdd); //Connexion a la BDD
+        $GroupecubeCubeManager = new GroupecubeCubeManager($bdd); //Connexion a la BDD
 
-          $formattedLigne = [
-            "Id_ligne" => '',
-            "Remise_ligne" => $ligne->remise,
-            "Poids_ligne" => '',
-            "Hauteur_ligne" => $ligne->hauteur,
-            "Largeur_ligne" => $ligne->largeur,
-            "Profondeur_ligne" => $ligne->profondeur,
-            "IdPiece_ligne" => $ligne->id_piece,
-            "IdDevis_ligne" => $devisInsertId,
-            "Pos_x_piece_ligne" => $ligne->pos_x,
-            "Pos_y_piece_ligne" => $ligne->pos_y,
-            "Ratio_piece_ligne" => $ligne->ratio,
-            "Pos_z_piece_ligne" => $ligne->pos_z
-          ];
+        foreach ($arguments[3] as $argument){
+          $piece = new Piece(get_object_vars($argument));
+          $cubes = $GroupecubeCubeManager->GetCubesByGroupe($piece->GetCodeGroupeCube());
 
-          $formattedLigneModel = new LigneDevis($formattedLigne);
+          foreach ($cubes as $cube) {
+            $cubeDevis = new CubeDevis($cube->GetOriginalObject());
+            $cubeDevis->SetLibelleCubeDevis($cube->GetLibelleCube());
+            $cubeDevis->SetIdDevis($devisInsertId);
+            $cubeDevis->SetIdMatiere($matiere->GetIdMatiere());
+            $cubeDevis->SetIdPiece($piece->GetIdPiece());
+            $cubeInsertResult = $CubeDevisManager->AddCubeDevis($cubeDevis);
+            $cubeResultObject = [
+              "insertResult" => $cubeInsertResult,
+              "cubeDevis" =>$cubeDevis,
+            ];
+            array_push($result['devisResults']['cubeResults'], $cubeResultObject);
 
-          $ligneInsertResult = $LigneDevisManager->AddLigne($formattedLigneModel);
-
-          $ligneResultObject = [
-            "insertResult" => $ligneInsertResult,
-            "ligne" =>$ligne,
-            "optionResults" => []
-          ];
-
-          if(!$ligneInsertResult[0]){
-            $result['error'] = 'Erreur INSERT de LIGNE - '.$ligneInsertResult[1][2];
-            break;
-          } else {
-            if( is_array($options) && (count($options) > 0) ) {
-              $ligneInsertId = $bdd->lastInsertId();
-
-              foreach ($options as $option) {
-                $formattedOption = [
-                  "Id_optionLigne" => '',
-                  "IdLigne_optionLigne" => $ligneInsertId,
-                  "IdOption_optionLigne" => $option->Id_option
-                ];
-                $formattedOptionModel = new OptionLigne($formattedOption);
-
-                $optionLigneInsertResult = $OptionLigneManager->AddOptionLigne($formattedOptionModel);
-
-                $optionResultObject = [
-                  "insertResult" => $optionLigneInsertResult,
-                  "option" =>$option
-                ];
-                array_push($ligneResultObject['optionResults'], $optionResultObject);
-
-                if(!$optionLigneInsertResult[0]){
-                  $result['error'] = 'Erreur INSERT de OPTION_LIGNE - '.$optionLigneInsertResult[1][2];
-                  break 2;
-                }
-              }
-            }
           }
-          array_push($result['devisResults']['ligneResults'], $ligneResultObject);
         }
       }
     }
