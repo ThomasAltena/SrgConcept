@@ -206,7 +206,7 @@ $date = date("d-m-Y");
                     <i class="fas fa-step-forward"></i>
                   </div>
                 </div>
-                <button class="btn btn-danger hover-effect-a mb-3" style="margin: 0 25px 0 25px; width: 276px;" onclick="GetSome()">
+                <button class="btn btn-danger hover-effect-a mb-3" style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectDevisListView()">
                   Annuler
                 </button>
                 <button class="btn btn-success hover-effect-a" id='SaveContinueButton' disabled style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectAddDevisCotesView()">
@@ -221,18 +221,6 @@ $date = date("d-m-Y");
   </div>
 </body>
 <script type="text/javascript">
-function GetSome() {
-  let xhttp;
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      console.log(this.responseText);
-    }
-  };
-  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=GetDevis", true);
-  xhttp.send(JSON.stringify(['26']));
-}
-
 let selectedPiece = [];
 let pieces = [];
 let piecesListCurrentPage = 0;

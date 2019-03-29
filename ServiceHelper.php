@@ -25,14 +25,19 @@ if( !isset($_GET['manager']) || !isset($_GET['route'])) {
     $args = [];
   }
   $data = call_user_func_array(array($manager, $_GET['route']), $args);
-  if(!is_array($data)){
-    echo(json_encode($data->GetOriginalObject()));
-  } else {
-    $newData = [];
-    foreach ($data as $dataPiece) {
-      array_push($newData, $dataPiece->GetOriginalObject());
+  if(isset($_GET['originalObject'])){
+    if(!is_array($data)){
+      echo(json_encode($data->GetOriginalObject()));
+    } else {
+      $newData = [];
+      foreach ($data as $dataPiece) {
+        array_push($newData, $dataPiece->GetOriginalObject());
+      }
+      echo(json_encode($newData));
     }
-    echo(json_encode($newData));
+  } else {
+    echo(json_encode($data));
   }
+
 }
 ?>
