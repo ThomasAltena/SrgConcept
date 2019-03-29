@@ -54,7 +54,8 @@ $date = date("d-m-Y");
                     <span class="input-group-text" style="width:100px"
                     id="Id_client_label">Client :</span>
                   </div>
-                  <select name="Id_client" id="id_client" aria-describedby="Id_client_label" class="form-control">
+                  <select name="Id_client" id="id_client" aria-describedby="Id_client_label" class="form-control" onchange="selectClient(value)">
+                    <option value="aucun" selected disabled>Aucun</option>
                     <?php
                     foreach($clients as $client){
                       ?>
@@ -71,7 +72,9 @@ $date = date("d-m-Y");
                     <span class="input-group-text" style="width:100px"
                     id="Id_matiere_label">Matière :</span>
                   </div>
-                  <select id="id_matiere"  onchange="SelectMatiere(value)" class="form-control" name="Id_matiere" aria-describedby="Id_matiere_label">
+                  <select id="id_matiere"  onchange="selectMatiere(value)" class="form-control" name="Id_matiere" aria-describedby="Id_matiere_label">
+                    <option value="aucun" selected disabled>Aucun</option>
+
                     <?php
                     foreach($matieres as $matiere){
                       ?>
@@ -203,10 +206,10 @@ $date = date("d-m-Y");
                     <i class="fas fa-step-forward"></i>
                   </div>
                 </div>
-                <button class="btn btn-danger hover-effect-a mb-3" style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectDevisListView()">
+                <button class="btn btn-danger hover-effect-a mb-3" style="margin: 0 25px 0 25px; width: 276px;" onclick="GetSome()">
                   Annuler
                 </button>
-                <button class="btn btn-success hover-effect-a" style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectAddDevisCotesView()">
+                <button class="btn btn-success hover-effect-a" id='SaveContinueButton' disabled style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectAddDevisCotesView()">
                   Sauvegarder & Suite
                 </button>
               </div>
@@ -218,11 +221,24 @@ $date = date("d-m-Y");
   </div>
 </body>
 <script type="text/javascript">
+function GetSome() {
+  let xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      console.log(this.responseText);
+    }
+  };
+  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=GetDevis", true);
+  xhttp.send(JSON.stringify(['26']));
+}
+
 let selectedPiece = [];
 let pieces = [];
 let piecesListCurrentPage = 0;
 let format = 'simple';
 let matiere = '';
+let client = '';
 
 let famille = [];
 let sousFamille = [];
@@ -234,6 +250,14 @@ let pieceSelector = $('#select_piece');
 let schemaPiecesContainer = $('#schemaPiecesContainer');
 let piecesListContainer = $('#piecesListContainer');
 let pieceSelectControlContainer = $('#pieceSelectControlContainer');
+
+function formValidCheck(){
+  if(matiere !== '' && client != '' && pieces.length > 0){
+    document.getElementById("SaveContinueButton").disabled = false;
+  } else {
+    document.getElementById("SaveContinueButton").disabled = true;
+  }
+}
 /*HIDE*/
 
 /*
@@ -314,9 +338,15 @@ function togglePieces(bool){
 /--------------------------------------- ACTIONS PIECE SELECTION PREVIEW -----------------------------------------------------------/
 */
 
-function SelectMatiere(m) {
+function selectClient(c) {
+  client = JSON.parse(c);
+  formValidCheck();
+}
+
+function selectMatiere(m) {
   matiere = JSON.parse(m);
   UpdateMatierePreview();
+  formValidCheck();
 }
 
 function UpdateMatierePreview() {
@@ -350,7 +380,7 @@ function FilterSousFamille(familleJson) {
         document.getElementById("selectSousFamilleContainer").innerHTML = this.responseText;
       }
     };
-    xhttp.open("GET", "/SrgConcept/view/AddDevisView/GetListModule.php?functionname=GetFilteredSousFamille&codeFamille=" + famille.CodeFamille, true);
+    xhttp.open("GET", "/SrgConcept/view/AddDevisView/AddDevisDessinGetListModule.php?functionname=GetFilteredSousFamille&codeFamille=" + famille.CodeFamille, true);
     xhttp.send();
   }
 }
@@ -373,7 +403,7 @@ function FilterPieces(sousFamilleJson, id_piece_to_select) {
         SelectPiece();
       }
     };
-    xhttp.open("GET", "/SrgConcept/view/AddDevisView/GetListModule.php?functionname=GetFilteredPieces&codeFamille=" + famille.CodeFamille + "&codeSs=" + sousFamille.CodeSsFamille + "&format=" + format, true);
+    xhttp.open("GET", "/SrgConcept/view/AddDevisView/AddDevisDessinGetListModule.php?functionname=GetFilteredPieces&codeFamille=" + famille.CodeFamille + "&codeSs=" + sousFamille.CodeSsFamille + "&format=" + format, true);
     xhttp.send();
   }
 }
@@ -471,6 +501,7 @@ function DeletePiece(x) {
   if(pieces.length == 0){
     document.getElementById("simpleOuDouble").disabled = false;
   }
+  formValidCheck();
 }
 
 function SelectExistingPiece(x){
@@ -487,10 +518,12 @@ function SelectExistingPiece(x){
 
 function SauvegarderNouvellePiece() {
   document.getElementById("simpleOuDouble").disabled = true;
+
   pieces.push(selectedPiece);
   ReloadSchema();
   HideSelectedPieceSchema();
   UpdatePiecesListView(-1);
+  formValidCheck();
 }
 
 function RedirectDevisListView(){
@@ -499,7 +532,6 @@ function RedirectDevisListView(){
 
 function RedirectAddDevisCotesView(){
   SauvegarderDevis();
-  //window.location.replace("AddDevisCotesView.php");
 }
 
 function SauvegarderDevis() {
@@ -509,15 +541,22 @@ function SauvegarderDevis() {
       let dataURL = canvas.toDataURL("image/png");
       let matiere = JSON.parse(document.getElementById('id_matiere').value);
       let arguments = [matiere, client, dataURL, pieces];
-      console.log(arguments);
 
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-          //responseText = JSON.parse(this.responseText);
-          //if(responseText.error){
-            console.log(this.responseText);
-          //}
+          try {
+            responseText = JSON.parse(this.responseText);
+            if(responseText.error){
+              console.log(responseText);
+            } else {
+              console.log(responseText);
+              window.location.replace("AddDevisCotesView.php?devisId=" + responseText.devisResults.devis.IdDevis);
+            }
+          }
+          catch (error){
+            console.log(error);
+          }
         }
       };
       xhttp.open("POST", "/SrgConcept/controller/DevisController.php?functionname=" + 'SauvegarderDevis' , true);

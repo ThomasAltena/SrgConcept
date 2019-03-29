@@ -51,7 +51,6 @@ class GroupecubeCubeManager
 		$GroupecubeCubes = [];
 		$q = $this->_Db->query('SELECT * FROM groupecubes_cubes WHERE CodeGroupeCube = "'.$groupe.'"');
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$GroupecubeCubes[] = new GroupecubeCube($donnees);}
-		print_r($groupe);
 		$CubeManager = new CubeManager($this->_Db);
 
 		$Cubes = [];

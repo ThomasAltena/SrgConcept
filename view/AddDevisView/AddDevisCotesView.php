@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -9,6 +12,8 @@
 session_start();
 if (empty($_SESSION)) {
   header('location:/SrgConcept/view/index.php');
+} else if(!isset($_GET['devisId'])){
+  header('location:/SrgConcept/view/DevisView.php');
 } else {
   require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/view/header.php');
 }
@@ -22,33 +27,6 @@ try {
 $ManagerMatiere = new MatiereManager($bdd); //Connexion a la BDD
 
 $matieres = $ManagerMatiere->GetAllMatiere();
-
-$cube = new CubeDevis(array(
-  'IdCubeDevis' => 1,
-  'HauteurCubeDevis' => 25,
-  'LargeurCubeDevis' => 25,
-  'ProfondeurCubeDevis' => 25,
-  'IdDevis' => 2,
-  'IdPiece' => 5,
-  'IdCube' => 5,
-  'IdMatiere' => 'A',
-  'AvantPolisCube' => 'A',
-  'AvantScieeCube' => 'A',
-  'ArrierePolisCube' => 'A',
-  'ArriereScieeCube' => 'A',
-  'DroitePolisCube' => 'A',
-  'DroiteScieeCube' => 'A',
-  'GauchePolisCube' => 'A',
-  'GaucheScieeCube' => 'A',
-  'DessusPolisCube' => 'A',
-  'DessusScieeCube' => 'A',
-  'DessousPolisCube' => 'A',
-  'DessousScieeCube' => 'A',
-  'OriginalObject' => 'A'
-));
-
-
-$testCubes = array($cube,$cube,$cube,$cube,$cube,$cube,$cube,$cube,$cube,$cube,$cube,$cube);
 
 
 $date = date("d-m-Y");

@@ -136,6 +136,7 @@ function SauvegarderDevis() {
         $result['error'] = 'Erreur INSERT de DEVIS - '.$devisInsertResult[1][2];
       } else {
         $devisInsertId = $bdd->lastInsertId();
+        $result['devisResults']['devis']['IdDevis'] = $devisInsertId;
 
         //PREPARATION IMAGE
         $img = str_replace('data:image/png;base64,', '', $img);
