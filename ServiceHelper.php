@@ -26,18 +26,30 @@ if( !isset($_GET['manager']) || !isset($_GET['route'])) {
   }
   $data = call_user_func_array(array($manager, $_GET['route']), $args);
   if(isset($_GET['originalObject'])){
+
+
     if(!is_array($data)){
-      echo(json_encode($data->GetOriginalObject()));
+      echo(json_encode(utf8ize($data->GetOriginalObject())));
     } else {
       $newData = [];
       foreach ($data as $dataPiece) {
         array_push($newData, $dataPiece->GetOriginalObject());
       }
-      echo(json_encode($newData));
+      echo(json_encode(utf8ize($newData)));
     }
   } else {
-    echo(json_encode($data));
+    echo(json_encode(utf8ize($data)));
   }
+}
 
+function utf8ize($d) {
+    if (is_array($d)) {
+        foreach ($d as $k => $v) {
+            $d[$k] = utf8ize($v);
+        }
+    } else if (is_string ($d)) {
+        return utf8_encode($d);
+    }
+    return $d;
 }
 ?>

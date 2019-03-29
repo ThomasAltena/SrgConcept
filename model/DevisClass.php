@@ -17,7 +17,11 @@ class Devis
 	private $_ArrondiDevis = '';
 	private $_PrixDevis = '';
 	private $_CommentairesDevis = '';
+	private $_LibelleDevis = '';
+	private $_TvaDevis = '';
+	private $_PUTransportDevis = '';
 	private $_OriginalObject = '';
+
 
 	public function __construct(array $donnees)
 	{
@@ -55,6 +59,9 @@ class Devis
 	public function GetArrondiDevis(){return $this->_ArrondiDevis;}
 	public function GetPrixDevis(){return $this->_PrixDevis;}
 	public function GetCommentairesDevis(){return $this->_CommentairesDevis;}
+	public function GetLibelleDevis(){return $this->_LibelleDevis;}
+	public function GetTvaDevis(){return $this->_TvaDevis;}
+	public function GetPUTransportDevis(){return $this->_PUTransportDevis;}
 	public function GetOriginalObject(){return $this->_OriginalObject;}
 
 	/**SET**/
@@ -73,6 +80,9 @@ class Devis
 	public function SetArrondiDevis($ArrondiDevis){$this -> _ArrondiDevis = $ArrondiDevis;}
 	public function SetPrixDevis($PrixDevis){$this -> _PrixDevis = $PrixDevis;}
 	public function SetCommentairesDevis($CommentairesDevis){$this -> _CommentairesDevis = $CommentairesDevis;}
+	public function SetLibelleDevis($LibelleDevis){$this -> _LibelleDevis = $LibelleDevis;}
+	public function SetTvaDevis($TvaDevis){$this -> _TvaDevis = $TvaDevis;}
+	public function SetPUTransportDevis($PUTransportDevis){$this -> _PUTransportDevis = $PUTransportDevis;}
 	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
 }

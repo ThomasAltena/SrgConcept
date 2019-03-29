@@ -136,7 +136,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/UploadCroquisClass.p
                 <a class='dropdown-item' href='/SrgConcept/view/DevisView.php'>
                   Liste
                 </a>
-                <a class='dropdown-item' href='/SrgConcept/view/AddDevisView/AddDevisDessinView.php'>
+                <a class='dropdown-item' href='/SrgConcept/view/AddDevisView/AddDevisDessinViewModel.php'>
                   Création
                 </a>
               </div>
