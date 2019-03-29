@@ -27,7 +27,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="LibelleDevisTitre">Libellé :</span>
                 </div>
-                <input type="text" class="form-control" aria-describedby="LibelleDevisTitre" id="LibelleDevis" value="" >
+                <input type="text" class="form-control" onchange="UpdateDevis()" aria-describedby="LibelleDevisTitre" id="LibelleDevis" value="" >
               </div>
 
               <div class="input-group mb-2">
@@ -46,7 +46,7 @@
                   </div>
                   <div class="input-group-append">
                     <span class="input-group-text">
-                      <input type="checkbox" id="AquisDevis">
+                      <input type="checkbox" onchange="UpdateDevis()" id="AquisDevis">
                     </span>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                   </div>
                   <div class="input-group-append">
                     <span class="input-group-text">
-                      <input type="checkbox" id="DosPolisDevis">
+                      <input type="checkbox" onchange="UpdateDevis()" id="DosPolisDevis">
                     </span>
                   </div>
                 </div>
@@ -67,7 +67,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="TypeDevisTitre">Type :</span>
                   </div>
-                  <select class="form-control" id="TypeDevis" aria-describedby="TypeDevisTitre">
+                  <select class="form-control" onchange="UpdateDevis()" id="TypeDevis" aria-describedby="TypeDevisTitre">
                     <option selected disabled></option>
                     <option value='Marbrier'>Marbrier</option>
                     <option value='Granitier'>Granitier</option>
@@ -88,7 +88,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="ArrondiDevisTitre">Arrondi :</span>
                   </div>
-                  <select class="form-control" id="ArrondiDevis">
+                  <select class="form-control" onchange="UpdateDevis()" id="ArrondiDevis">
                     <option selected disabled></option>
                     <option value='HT Net'>HT Net</option>
                     <option value='HT Net'>HT Arrondi</option>
@@ -100,7 +100,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="PrixDevisTitre">Prix :</span>
                   </div>
-                  <select class="form-control" id="PrixDevis">
+                  <select class="form-control" onchange="UpdateDevis()" id="PrixDevis">
                     <option selected disabled></option>
                     <option value='Prix Depart'>Prix Départ</option>
                     <option value='Prix Franco'>Prix Franco</option>
@@ -140,7 +140,7 @@
                   <span class="input-group-text">€</span>
                 </div>
               </div>
-              <span class="input-group-text mb-2">(la tonne) - Soit 0.00 € frais de port.</span>
+              <span class="input-group-text mb-2">(la tonne) - Soit &nbsp <span id="FraisDePortDevis"></span>€ frais de port.</span>
 
               <hr>
 
@@ -148,7 +148,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="SurfaceDevisTitre">Surface Totale :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' class="form-control" id="SurfaceDevis" disabled>
+                <input value='0.00'  placeholder='0.00' class="form-control" id="SurfaceDevis" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text" >m2</span>
                 </div>
@@ -229,7 +229,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="PrixMatiereDevisTitre">Prix Matiere :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' class="form-control" id="PrixMatiereDevis" disabled>
+                <input value='0.00'  placeholder='0.00' class="form-control" id="PrixMatiereDevis" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text" >€</span>
                 </div>
@@ -239,7 +239,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="PrixFaconnageDevisTitre">Prix Faconnage :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' id="PrixFaconnageDevis" class="form-control" disabled>
+                <input value='0.00'  placeholder='0.00' id="PrixFaconnageDevis" class="form-control" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text">€</span>
                 </div>
@@ -249,7 +249,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="PrixOptionsDevisTitre">Prix Options :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' id="PrixOptionsDevis" class="form-control" disabled>
+                <input value='0.00'  placeholder='0.00' id="PrixOptionsDevis" class="form-control" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text">€</span>
                 </div>
@@ -259,7 +259,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="MonumentHTDevisTitre">Monument HT :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' class="form-control" id="MonumentHTDevis" disabled>
+                <input value='0.00'  placeholder='0.00' class="form-control" id="MonumentHTDevis" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text">€</span>
                 </div>
@@ -269,7 +269,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="MonumentTTCDevisTitre">Monument TTC :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' class="form-control" id="MonumentTTCDevis" disabled>
+                <input value='0.00'  placeholder='0.00' class="form-control" id="MonumentTTCDevis" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text">€</span>
                 </div>
@@ -281,7 +281,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="ArticlesHTDevisTitre">Articles HT :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' class="form-control" id="ArticlesHTDevis" disabled>
+                <input value='0.00'  placeholder='0.00' class="form-control" id="ArticlesHTDevis" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text">€</span>
                 </div>
@@ -291,7 +291,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="ArticlesTTCDevisTitre">Articles TTC :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' class="form-control" id="ArticlesTTCDevis" disabled>
+                <input value='0.00'  placeholder='0.00' class="form-control" id="ArticlesTTCDevis" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text">€</span>
                 </div>
@@ -303,7 +303,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="NetsHTDevisTitre">Nets HT :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' class="form-control" id="NetsHTDevis" disabled>
+                <input value='0.00'  placeholder='0.00' class="form-control" id="NetsHTDevis" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text">€</span>
                 </div>
@@ -313,7 +313,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="NetsTTCDevisTitre">Nets TTC :</span>
                 </div>
-                <input type="number" step='0.01' value='0.00'  placeholder='0.00' class="form-control" id="NetsTTCDevis" disabled>
+                <input value='0.00'  placeholder='0.00' class="form-control" id="NetsTTCDevis" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text">€</span>
                 </div>

@@ -207,6 +207,7 @@ class DevisManager
 
 	  if( !isset($result['error']) ) {
 	    $devisModel = new Devis(get_object_vars($devis));
+
 			$this->UpdateDevis($devisModel);
 			$CubeDevisManager = new CubeDevisManager($this->_Db);
 
@@ -214,7 +215,6 @@ class DevisManager
 
 				$cubeModel = new CubeDevis(get_object_vars($cube));
 				if($cubeModel->GetIdCubeDevis() > 0){
-					echo('hey2');
 					$cubeInsertResult = $CubeDevisManager->UpdateCubeDevis($cubeModel);
 				} else {
 					$cubeInsertResult = $CubeDevisManager->AddCubeDevis($cubeModel);

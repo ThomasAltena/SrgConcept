@@ -30,8 +30,9 @@ if (empty($_SESSION)) {
 }
 </style>
 <script type="text/javascript">
-let RemiseDevis, CubesDevisTable, NumeroDevis, DateDevis, LibelleDevis, ClientDevis, AquisDevis, DosPolisDevis, TypeDevis, MatiereDevis, ArrondiDevis, PrixDevis, TvaDevis, PUTransportDevis, SurfaceDevis, VolumeDevis, PoidsDevis, NombrePiecesDevis, NombreCubesDevis,PrixMatiereDevis, PrixFaconnageDevis, PrixOptionsDevis, MonumentHTDevis, MonumentTTCDevis, ArticlesHTDevis, ArticlesTTCDevis, NetsHTDevis, NetsTTCDevis;
+let FraisDePortDevis, RemiseDevis, CubesDevisTable, NumeroDevis, DateDevis, LibelleDevis, ClientDevis, AquisDevis, DosPolisDevis, TypeDevis, MatiereDevis, ArrondiDevis, PrixDevis, TvaDevis, PUTransportDevis, SurfaceDevis, VolumeDevis, PoidsDevis, NombrePiecesDevis, NombreCubesDevis,PrixMatiereDevis, PrixFaconnageDevis, PrixOptionsDevis, MonumentHTDevis, MonumentTTCDevis, ArticlesHTDevis, ArticlesTTCDevis, NetsHTDevis, NetsTTCDevis;
 let devis;
+let PrixMatiere, PrixFaconnage, PrixOptions, MonumentHT, MonumentTTC, ArticlesHT, ArticlesTTC, NetsHT, NetsTTC, PoidsTotal, VolumeTotal, SurfaceTotal;
 let masseVolumique = 2700;
 let matieres;
 let matieresOptions;
@@ -80,7 +81,7 @@ function LoadView(){
       NetsHTDevis = $('#NetsHTDevis');
       NetsTTCDevis = $('#NetsTTCDevis');
       CubesDevisTable = $('#CubesDevisTable');
-
+      FraisDePortDevis = $('#FraisDePortDevis');
       GetDevisData();
     }
   };
@@ -109,6 +110,7 @@ function GetDevisData() {
       FillDevisInfo();
       FillTableDevis();
       GetMatieres();
+      UpdateDimensions();
     }
   };
   xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=GetDevisData", true);
@@ -120,8 +122,8 @@ function FillDevisInfo(){
   DateDevis.val(devis.DateDevis);
   LibelleDevis.val(devis.LibelleDevis);
   ClientDevis.val(devis.client.NomClient.toUpperCase() + ' ' + devis.client.PrenomClient);
-  AquisDevis.val(devis.AquisDevis);
-  DosPolisDevis.val(devis.DosPolisDevis);
+  AquisDevis.prop('checked', devis.AquisDevis == '1' ? true : false);
+  DosPolisDevis.prop('checked', devis.DosPolisDevis == '1' ? true : false);
   TypeDevis.val(devis.TypeDevis);
   ArrondiDevis.val(devis.ArrondiDevis);
   RemiseDevis.val(devis.RemiseDevis);
@@ -156,6 +158,7 @@ function GetMatieres(){
     if (this.readyState === 4 && this.status === 200) {
       matieres = JSON.parse(this.responseText);
       FillMatiereTableDevis();
+      UpdatePrix();
     }
   };
   xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=MatiereManager&route=GetAllMatiere&originalObject=true", true);
@@ -195,7 +198,7 @@ function UpdatePrixCube(cube){
   let volumeM3 = cube.LargeurCubeDevis * cube.ProfondeurCubeDevis * cube.HauteurCubeDevis * cube.QuantiteCubeDevis / 1000000;
   let masseTonne = masseVolumique * volumeM3 /1000;
   cube.prixCube = cube.matiere.PrixMatiere * masseTonne;
-  $('#CoutCube' + cube.IdCubeDevis).val(Math.round(cube.prixCube * 100) / 100);
+  $('#CoutCube' + cube.IdCubeDevis).val((Math.round(cube.prixCube * 100) / 100).toLocaleString());
 
   // $masseVolumique = 2700;
   // $volumeCM3 = $ligneModel->GetLargeur() * $ligneModel->GetHauteur() * $ligneModel->GetProfondeur();
@@ -217,27 +220,39 @@ function UpdateCube(IdCubeDevis){
 
   UpdatePrixCube(cube);
 
-  UpdatePrix();
   UpdateDimensions();
+  UpdatePrix();
+}
+
+function UpdateDevis(){
+  devis.LibelleDevis = LibelleDevis.val();
+  devis.AquisDevis = AquisDevis.is(':checked') ? '1' : '0';
+  devis.DosPolisDevis = DosPolisDevis.is(':checked') ? '1' : '0';
+  devis.TypeDevis = TypeDevis.val();
+  devis.ArrondiDevis = ArrondiDevis.val();
+  devis.PrixDevis = PrixDevis.val();
 }
 
 function UpdatePrix(){
+  devis.PUTransportDevis = PUTransportDevis.val();
+  UpdateFraisDePort();
+
   let prixToutCube = devis.cubes.map(x => x.prixCube);
   let prixTotalCubes = prixToutCube.reduce(add, 0);
-  let prixArrondiMatiere = Math.round(prixTotalCubes * 100) / 100;
-  PrixMatiereDevis.val(prixArrondiMatiere);
+  PrixMatiere = Math.round(prixTotalCubes * 100) / 100;
+  PrixMatiereDevis.val(PrixMatiere.toLocaleString());
 
-  let prixFaconnage = 0;
-  PrixFaconnageDevis.val(prixFaconnage);
+  PrixFaconnage = 0;
+  PrixFaconnageDevis.val(PrixFaconnage.toLocaleString());
 
-  let prixOptions = 0;
-  PrixOptionsDevis.val(prixOptions);
+  PrixOptions = 0;
+  PrixOptionsDevis.val(PrixOptions.toLocaleString());
 
-  let prixMonumentHT = prixFaconnage + prixOptions + prixArrondiMatiere;
-  MonumentHTDevis.val(prixMonumentHT);
+  MonumentHT = PrixFaconnage + PrixOptions + PrixMatiere;
+  MonumentHTDevis.val(MonumentHT.toLocaleString());
 
-  let prixArticlesHT = 0;
-  ArticlesHTDevis.val();
+  ArticlesHT = 0;
+  ArticlesHTDevis.val(ArticlesHT.toLocaleString());
 
   UpdateNets();
   UpdatePrixTTC();
@@ -255,16 +270,21 @@ function CheckVal(item){
 function UpdateNets(){
   CheckVal(RemiseDevis);
   devis.RemiseDevis = RemiseDevis.val();
-  NetsHTDevis.val(MonumentHTDevis.val() * (100 - devis.RemiseDevis) / 100);
-  NetsTTCDevis.val(NetsHTDevis.val() * (100 + parseFloat(devis.TvaDevis)) / 100);
+  NetsHT = MonumentHT * (100 - devis.RemiseDevis) / 100;
+  NetsHTDevis.val(NetsHT.toLocaleString());
+  NetsTTC = NetsHT * (100 + parseFloat(devis.TvaDevis)) / 100;
+  NetsTTCDevis.val(NetsTTC.toLocaleString());
 }
 
 function UpdatePrixTTC(){
   CheckVal(TvaDevis);
   devis.TvaDevis = TvaDevis.val();
-  MonumentTTCDevis.val(MonumentHTDevis.val() * (100 + parseFloat(devis.TvaDevis)) / 100);
-  ArticlesTTCDevis.val(ArticlesHTDevis.val() * (100 + parseFloat(devis.TvaDevis)) / 100);
-  NetsTTCDevis.val(NetsHTDevis.val() * (100 + parseFloat(devis.TvaDevis)) / 100);
+  MonumentTTC = MonumentHT * (100 + parseFloat(devis.TvaDevis)) / 100;
+  MonumentTTCDevis.val(MonumentTTC.toLocaleString());
+  ArticlesTTC = ArticlesHT * (100 + parseFloat(devis.TvaDevis)) / 100;
+  ArticlesTTCDevis.val(ArticlesTTC.toLocaleString());
+  NetsTTC = NetsHT * (100 + parseFloat(devis.TvaDevis)) / 100;
+  NetsTTCDevis.val(NetsTTC.toLocaleString());
 }
 
 function UpdateDimensions(){
@@ -282,9 +302,18 @@ function UpdateDimensions(){
   let masseKG = volumeTotalM3 * masseVolumique;
   let masseTonne = masseKG * 0.001;
 
-  SurfaceDevis.val(Math.round(surfaceTotalM3 * 100) / 100);
-  VolumeDevis.val(Math.round(volumeTotalM3 * 100) / 100);
-  PoidsDevis.val(Math.round(masseTonne * 100) / 100)
+  SurfaceTotal = Math.round(surfaceTotalM3 * 100) / 100;
+  SurfaceDevis.val(SurfaceTotal.toLocaleString());
+  VolumeTotal = Math.round(volumeTotalM3 * 100) / 100;
+  VolumeDevis.val(VolumeTotal.toLocaleString());
+  PoidsTotal = Math.round(masseTonne * 100) / 100;
+  PoidsDevis.val(PoidsTotal.toLocaleString());
+
+  UpdateFraisDePort();
+}
+
+function UpdateFraisDePort(){
+  FraisDePortDevis.html((Math.round(devis.PUTransportDevis * PoidsTotal * 100) / 100).toLocaleString());
 }
 
 function SaveChanges(){
