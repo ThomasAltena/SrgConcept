@@ -10,6 +10,7 @@ class CubeDevis
 	private $_QuantiteCubeDevis = '';
 	private $_IdDevis = '';
 	private $_IdPiece = '';
+	private $_IdPieceDevis = '';
 	private $_IdCube = '';
 	private $_IdMatiere = '';
 	private $_AvantPolisCube = '';
@@ -55,6 +56,7 @@ class CubeDevis
 	public function GetQuantiteCubeDevis(){return $this->_QuantiteCubeDevis;}
 	public function GetIdDevis(){return $this->_IdDevis;}
 	public function GetIdPiece(){return $this->_IdPiece;}
+	public function GetIdPieceDevis(){return $this->_IdPieceDevis;}
 	public function GetIdCube(){return $this->_IdCube;}
 	public function GetIdMatiere(){return $this->_IdMatiere;}
 	public function GetAvantPolisCube(){return $this->_AvantPolisCube;}
@@ -80,6 +82,7 @@ class CubeDevis
 	public function SetQuantiteCubeDevis($QuantiteCubeDevis){$this -> _QuantiteCubeDevis = $QuantiteCubeDevis;}
 	public function SetIdDevis($IdDevis){$this -> _IdDevis = $IdDevis;}
 	public function SetIdPiece($IdPiece){$this -> _IdPiece = $IdPiece;}
+	public function SetIdPieceDevis($IdPieceDevis){$this -> _IdPieceDevis = $IdPieceDevis;}
 	public function SetIdCube($IdCube){$this -> _IdCube = $IdCube;}
 	public function SetIdMatiere($IdMatiere){$this -> _IdMatiere = $IdMatiere;}
 	public function SetAvantPolisCube($AvantPolisCube){$this -> _AvantPolisCube = $AvantPolisCube;}

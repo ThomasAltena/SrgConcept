@@ -172,6 +172,8 @@ class DevisManager
 	            "IdPiece" => $piece->GetIdPiece(),
 	            "IdDevis" => $devisInsertId
 	          ]));
+						$PieceDevisInsertId = $this->_Db->lastInsertId();
+
 	          $cubes = $GroupecubeCubeManager->GetCubesByGroupe($piece->GetCodeGroupeCube());
 
 	          foreach ($cubes as $cube) {
@@ -181,6 +183,7 @@ class DevisManager
 	            $cubeDevis->SetIdMatiere($matiere->GetIdMatiere());
 							$cubeDevis->SetIdPiece($piece->GetIdPiece());
 							$cubeDevis->SetQuantiteCubeDevis(1);
+							$cubeDevis->SetIdPieceDevis($PieceDevisInsertId);
 	            $cubeInsertResult = $CubeDevisManager->AddCubeDevis($cubeDevis);
 	            $cubeResultObject = [
 	              "insertResult" => $cubeInsertResult,
@@ -192,6 +195,32 @@ class DevisManager
 	      }
 	    }
 	  }
+		return $result;
+	}
+
+	public function ReSaveDevis($devis, $cubes) {
+	  $result = [];
+
+    if( !$devis ) {
+      $result['error'] = 'Erreur - manque donnees devis!';
+    }
+
+	  if( !isset($result['error']) ) {
+	    $devisModel = new Devis(get_object_vars($devis));
+			$this->UpdateDevis($devisModel);
+			$CubeDevisManager = new CubeDevisManager($this->_Db);
+
+			foreach ($cubes as $cube) {
+
+				$cubeModel = new CubeDevis(get_object_vars($cube));
+				if($cubeModel->GetIdCubeDevis() > 0){
+					echo('hey2');
+					$cubeInsertResult = $CubeDevisManager->UpdateCubeDevis($cubeModel);
+				} else {
+					$cubeInsertResult = $CubeDevisManager->AddCubeDevis($cubeModel);
+				}
+			}
+		}
 		return $result;
 	}
 

@@ -38,6 +38,14 @@ let matieresOptions;
 let idDevis = findGetParameter('idDevis');
 LoadView();
 
+const unique = (value, index, self) => {
+    return self.indexOf(value) === index;
+};
+
+const add = (a,b) => {
+  return parseInt(a) + parseInt(b)
+};
+
 function LoadView(){
   let xhttp;
   xhttp = new XMLHttpRequest();
@@ -120,6 +128,9 @@ function FillDevisInfo(){
   PrixDevis.val(devis.PrixDevis);
   TvaDevis.val(devis.TvaDevis);
   PUTransportDevis.val(devis.PUTransportDevis);
+
+  NombrePiecesDevis.val(devis.cubes.map(x => x.IdPieceDevis).filter(unique).length);
+  NombreCubesDevis.val(devis.cubes.map(x => x.QuantiteCubeDevis).reduce(add, 0));
 }
 
 function FillTableDevis(){
@@ -149,6 +160,13 @@ function GetMatieres(){
   };
   xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=MatiereManager&route=GetAllMatiere&originalObject=true", true);
   xhttp.send();
+}
+
+function UpdateMatiereAll(value){
+  devis.cubes.forEach(function(cube){
+    cube.IdMatiere = value;
+    $('#MatiereSelectCube' + cube.IdCubeDevis).val(value);
+  });
 }
 
 function FillMatiereTableDevis(){
@@ -194,6 +212,9 @@ function UpdateCube(IdCubeDevis){
   cube.HauteurCubeDevis = $('#CoteHauteurCube' + cube.IdCubeDevis).val();
   cube.QuantiteCubeDevis = $('#QuantiteCube' + cube.IdCubeDevis).val();
   cube.IdMatiere = $('#MatiereSelectCube' + cube.IdCubeDevis).val();
+
+  NombreCubesDevis.val(devis.cubes.map(x => x.QuantiteCubeDevis).reduce(add, 0));
+
   UpdatePrixCube(cube);
 
   UpdatePrix();
@@ -202,9 +223,7 @@ function UpdateCube(IdCubeDevis){
 
 function UpdatePrix(){
   let prixToutCube = devis.cubes.map(x => x.prixCube);
-  let prixTotalCubes = prixToutCube.reduce(function(a,b){
-    return a + b
-  }, 0);
+  let prixTotalCubes = prixToutCube.reduce(add, 0);
   let prixArrondiMatiere = Math.round(prixTotalCubes * 100) / 100;
   PrixMatiereDevis.val(prixArrondiMatiere);
 
@@ -266,6 +285,17 @@ function UpdateDimensions(){
   SurfaceDevis.val(Math.round(surfaceTotalM3 * 100) / 100);
   VolumeDevis.val(Math.round(volumeTotalM3 * 100) / 100);
   PoidsDevis.val(Math.round(masseTonne * 100) / 100)
+}
+
+function SaveChanges(){
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      console.log(this.responseText);
+    }
+  };
+  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=ReSaveDevis", true);
+  xhttp.send(JSON.stringify([devis, devis.cubes]));
 }
 
 </script>

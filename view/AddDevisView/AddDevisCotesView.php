@@ -77,7 +77,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="MatiereDevisTitre">Matiere :</span>
                   </div>
-                  <select id="MatiereDevis" class="form-control" name="Id_matiere" aria-describedby="MatiereDevisTitre">
+                  <select id="MatiereDevis" class="form-control" name="Id_matiere" onchange="UpdateMatiereAll(value)" aria-describedby="MatiereDevisTitre">
                     //MATIERES
                   </select>
                 </div>
@@ -329,7 +329,7 @@
 
               <button class='btn btn-success form-control mb-2'>Suite
               </button>
-              <button class='btn btn-success form-control mb-2'>Sauvegarder
+              <button class='btn btn-success form-control mb-2' onclick="SaveChanges()">Sauvegarder
               </button>
               <button class='btn btn-danger form-control mb-2'>Annuler
               </button>
