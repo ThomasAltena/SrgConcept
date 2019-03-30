@@ -42,7 +42,6 @@ let allSousFamilles, allPieces;
 
 LoadView();
 let idDevis = findGetParameter('idDevis');
-idDevis = 47;
 if(idDevis){
   LoadDevis(idDevis);
 }
@@ -61,7 +60,7 @@ function LoadDevis(id){
       matiere = '';
       ReloadSchema();
       UpdatePiecesListView(-1);
-      console.log(devis);
+      formValidCheck();
     }
   };
   xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=GetDevisData", true);
@@ -108,7 +107,8 @@ function findGetParameter(parameterName) {
 }
 
 function formValidCheck(){
-  if(matiere !== '' && client != '' && pieces.length > 0){
+  // if(matiere !== '' && client != '' && pieces.length > 0){
+  if(client != '' && pieces.length > 0){
     document.getElementById("SaveContinueButton").disabled = false;
   } else {
     document.getElementById("SaveContinueButton").disabled = true;
@@ -421,7 +421,7 @@ function SauvegarderDevis() {
               console.log(responseText);
             } else {
               console.log(responseText);
-              //window.location.replace("AddDevisCotesViewModel.php?idDevis=" + responseText.devisResults.devis.IdDevis);
+              window.location.replace("AddDevisCotesViewModel.php?idDevis=" + responseText);
             }
           }
           catch (error){
@@ -438,8 +438,8 @@ function SauvegarderDevis() {
         route = "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=UpdateDevisDessin";
       } else {
         let client = JSON.parse(clientSelector.val());
-        let matiere = JSON.parse(document.getElementById('id_matiere').value);
-        arguments = [matiere, client, dataURL, pieces];
+        // let matiere = JSON.parse(document.getElementById('id_matiere').value);
+        arguments = [client, dataURL, pieces];
         route = "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=SaveDevisDessin";
       }
       xhttp.open("POST", route, true);

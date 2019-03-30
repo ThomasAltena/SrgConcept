@@ -75,7 +75,7 @@ $familles = $FamilleManager->GetAllFamilleOrderByRegroupement();
 
 
                 <!--CHOIX MATIERE-->
-                <div class="input-group mb-3">
+                <!-- <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" style="width:100px"
                     id="Id_matiere_label">Matière :</span>
@@ -91,7 +91,7 @@ $familles = $FamilleManager->GetAllFamilleOrderByRegroupement();
                     }
                     ?>
                   </select>
-                </div>
+                </div> -->
 
                 <!--SWITCH DOUBLE SIMPLE-->
                 <div class="row mb-3">

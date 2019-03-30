@@ -73,6 +73,10 @@ class CubeDevisManager
 		$this->_Db->exec('DELETE FROM cubes_devis WHERE IdCubeDevis ='.$id);
 	}
 
+	public function DeleteCubeDevisByPieceDevisId($id){
+		$this->_Db->exec('DELETE FROM cubes_devis WHERE IdPieceDevis ='.$id);
+	}
+
 	public function GetCubeDevis( $id){
 		$q = $this->_Db->prepare('SELECT * FROM cubes_devis WHERE IdCubeDevis ='.$id);
 		$q->execute();

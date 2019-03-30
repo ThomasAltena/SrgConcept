@@ -60,5 +60,4 @@ class GroupecubeCubeManager
 
 		return $Cubes;
 	}
-
 }

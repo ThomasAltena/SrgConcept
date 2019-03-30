@@ -197,7 +197,11 @@ function FillMatiereTableDevis(){
 function UpdatePrixCube(cube){
   let volumeM3 = cube.LargeurCubeDevis * cube.ProfondeurCubeDevis * cube.HauteurCubeDevis * cube.QuantiteCubeDevis / 1000000;
   let masseTonne = masseVolumique * volumeM3 /1000;
-  cube.prixCube = cube.matiere.PrixMatiere * masseTonne;
+  let prixMatiere = 0;
+  if(cube.matiere){
+    prixMatiere = cube.matiere.PrixMatiere;
+  }
+  cube.prixCube = prixMatiere * masseTonne;
   $('#CoutCube' + cube.IdCubeDevis).val((Math.round(cube.prixCube * 100) / 100).toLocaleString());
 
   // $masseVolumique = 2700;
@@ -215,6 +219,9 @@ function UpdateCube(IdCubeDevis){
   cube.HauteurCubeDevis = $('#CoteHauteurCube' + cube.IdCubeDevis).val();
   cube.QuantiteCubeDevis = $('#QuantiteCube' + cube.IdCubeDevis).val();
   cube.IdMatiere = $('#MatiereSelectCube' + cube.IdCubeDevis).val();
+  if(!cube.matiere || cube.matiere.IdMatiere != cube.IdMatiere){
+    cube.matiere = matieres.find(x => x.IdMatiere == cube.IdMatiere);
+  }
 
   NombreCubesDevis.val(devis.cubes.map(x => x.QuantiteCubeDevis).reduce(add, 0));
 
@@ -325,6 +332,14 @@ function SaveChanges(){
   };
   xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=SaveDevisCotes", true);
   xhttp.send(JSON.stringify([devis, devis.cubes]));
+}
+
+function RedirectDevisDessinView(){
+  window.location.replace("AddDevisDessinViewModel.php?idDevis=" + idDevis);
+}
+
+function RedirectDevisListView(){
+  window.location.replace("/SrgConcept/view/DevisView.php");
 }
 
 </script>

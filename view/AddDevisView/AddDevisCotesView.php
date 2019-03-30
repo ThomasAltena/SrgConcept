@@ -320,18 +320,18 @@
               </div>
               <hr>
 
-              <button class='btn btn-primary form-control mb-2'>Ajout cubes
+              <button class='btn btn-primary form-control mb-2' onclick="OpenModalAjouterCubes()">Ajout cubes
               </button>
-              <button class='btn btn-primary form-control mb-2'>Modifier Dessin
+              <button class='btn btn-primary form-control mb-2' onclick="RedirectDevisDessinView()">Modifier Dessin
               </button>
-              <button class='btn btn-primary form-control mb-2'>Commentaires
+              <button class='btn btn-primary form-control mb-2' onclick="OpenModalCommentaires()">Commentaires
               </button>
 
-              <button class='btn btn-success form-control mb-2'>Suite
+              <button class='btn btn-success form-control mb-2' onclick="OpenModalSuite()">Suite
               </button>
               <button class='btn btn-success form-control mb-2' onclick="SaveChanges()">Sauvegarder
               </button>
-              <button class='btn btn-danger form-control mb-2'>Annuler
+              <button class='btn btn-danger form-control mb-2' onclick="RedirectDevisListView()">Annuler
               </button>
 
               <!--VUE PIECE-->

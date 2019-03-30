@@ -78,6 +78,13 @@ class DevisManager
 		return $Deviss;
 	}
 
+	public function GetAllByUserId($id){
+		$Deviss = [];
+		$q = $this->_Db->query('SELECT * FROM devis WHERE IdUser ='.$id);
+		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Deviss[] = new Devis($donnees);}
+		return $Deviss;
+	}
+
 	public function UpdateCheminSchema($devisInsertId, $fichier_full_path){
 		$q = $this->_Db->query('UPDATE devis SET CheminSchemaDevis = "'.$fichier_full_path.'" WHERE IdDevis = '.$devisInsertId);
 		return $q->execute();
@@ -113,17 +120,16 @@ class DevisManager
 		return $originalObject;
 	}
 
-	public function SaveDevisDessin($Matiere, $Client, $DataUrl, $Pieces) {
+	public function SaveDevisDessin($Client, $DataUrl, $Pieces) {
 	  //arguments = [matiere, client, dataURL, pieces];
 	  $result = [];
 		$IdUser = $_SESSION['Id_user'];
 
-    if( !$IdUser || !$Matiere || !$Client || !$DataUrl || !$Pieces ) {
+    if( !$IdUser || !$Client || !$DataUrl || !$Pieces ) {
       $result['error'] = 'Erreur - manque donnees devis!';
     }
 
 	  if( !isset($result['error']) ) {
-	    $matiere = new Matiere(get_object_vars($Matiere));
 	    $client = new Client(get_object_vars($Client));
 	    $img = $DataUrl;
 	    $date = date("Y-m-d");
@@ -189,7 +195,6 @@ class DevisManager
 	            $cubeDevis = new CubeDevis($cube->GetOriginalObject());
 	            $cubeDevis->SetLibelleCubeDevis($cube->GetLibelleCube());
 	            $cubeDevis->SetIdDevis($devisInsertId);
-	            $cubeDevis->SetIdMatiere($matiere->GetIdMatiere());
 							$cubeDevis->SetIdPiece($piece->GetIdPiece());
 							$cubeDevis->SetQuantiteCubeDevis(1);
 							$cubeDevis->SetIdPieceDevis($PieceDevisInsertId);
@@ -204,7 +209,7 @@ class DevisManager
 	      }
 	    }
 	  }
-		return $result;
+		return $devisInsertId;
 	}
 
 	public function UpdateDevisDessin($Devis, $Pieces, $DataUrl) {
@@ -227,22 +232,37 @@ class DevisManager
 
 		$newPieceDevisToAdd = array_filter($Pieces, function ($piece) {return !isset(get_object_vars($piece)['IdPieceDevis']);});
 
-		print_r($newPieceDevisToAdd);
-		print_r($originalPieceDevisToDeleteIds);
-		print_r($originalPieceDevisToKeepIds);
+		$CubeDevisManager = new CubeDevisManager($this->_Db);
+		foreach ($originalPieceDevisToDeleteIds as $key => $id) {
+			$CubeDevisManager->DeleteCubeDevisByPieceDevisId($id);
+			$PieceDevisManager->DeletePieceDevis($id);
+		}
 
-		// Update devis
-		// retrieve all pieceDevis from server (OriginalPieceDevis)
-		// split pieces into those with pieceDevisIds and those without (OriginalPieceDevisToKeep, NewPieceDevisToAdd)
-		// get find piecedevis in OriginalPieceDevis and not in UpdateOriginalPieceDevis if any, name (OriginalPieceDevisToDelete)
-		// Retrieve all cubeDevis linked to OriginalPieceDevisToDelete, OriginalCubeDevisToDelete
-		// Delete all OriginalCubeDevisToDelete and OriginalCubeDevisToDelete
-		// For each piece in NewPieceDevisToAdd
-		// Retrieve piece, groupeCubeCube and cubes
-		// Add new PieceDevis, and new CubesDevis
+		$CubeManager = new CubeManager($this->_Db);
+		foreach ($newPieceDevisToAdd as $key => $piece) {
+			$piece = get_object_vars($piece);
+			$PieceDevisManager->AddPieceDevis(new PieceDevis([
+				"IdPieceDevis" => '',
+				"IdPiece" => $piece['IdPiece'],
+				"IdDevis" => $Devis['IdDevis']
+			]));
+			$PieceDevisInsertId = $this->_Db->lastInsertId();
 
+			$GroupecubeCubeManager = new GroupecubeCubeManager($this->_Db);
+			$cubes = $GroupecubeCubeManager->GetCubesByGroupe($piece['CodeGroupeCube']);
 
-		return $result;
+			foreach ($cubes as $cube) {
+				$cubeDevis = new CubeDevis($cube->GetOriginalObject());
+				$cubeDevis->SetLibelleCubeDevis($cube->GetLibelleCube());
+				$cubeDevis->SetIdDevis($Devis['IdDevis']);
+				$cubeDevis->SetIdPiece($piece['IdPiece']);
+				$cubeDevis->SetQuantiteCubeDevis(1);
+				$cubeDevis->SetIdPieceDevis($PieceDevisInsertId);
+				$cubeInsertResult = $CubeDevisManager->AddCubeDevis($cubeDevis);
+			}
+		}
+
+		return $Devis['IdDevis'];
 	}
 
 	public function SaveDevisCotes($devis, $cubes) {
