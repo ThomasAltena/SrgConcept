@@ -138,8 +138,10 @@ function FillDevisInfo(){
 function FillTableDevis(){
   let body = '';
   devis.cubes.forEach(function(cube){
-    body += '<tr><td class="text-left td"style="padding: 6px; font-size: 16px;">' + cube.LibelleCubeDevis + '</td>';
-    body += '<td class="text-left td"style="padding: 6px; font-size: 16px; width:150px" id="MatiereSelectContainerCube' + cube.IdCubeDevis + '"></td>';
+    body += '<tr>';
+    body += '<td class="text-left td"style="padding: 6px; font-size: 16px; width:180px"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" class="form-control" style="padding:6px;" value="' + cube.LibelleCubeDevis + '" id="LibelleCube' + cube.IdCubeDevis + '"></input></td>';
+
+    body += '<td class="text-left td"style="padding: 6px; font-size: 16px; width:120px" id="MatiereSelectContainerCube' + cube.IdCubeDevis + '"></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.LargeurCubeDevis + '" id="CoteLargeurCube' + cube.IdCubeDevis + '"></input></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.LargeurCubeDevis + '" id="CoteLargeurICube' + cube.IdCubeDevis + '"></input></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.ProfondeurCubeDevis + '" id="CoteProfondeurCube' + cube.IdCubeDevis + '"></input></td>';
@@ -214,10 +216,15 @@ function UpdatePrixCube(cube){
 
 function UpdateCube(IdCubeDevis){
   let cube = devis.cubes.find(x => x.IdCubeDevis == IdCubeDevis);
-  cube.LargeurCubeDevis = $('#CoteLargeurCube' + cube.IdCubeDevis).val();
-  cube.ProfondeurCubeDevis = $('#CoteProfondeurCube' + cube.IdCubeDevis).val();
-  cube.HauteurCubeDevis = $('#CoteHauteurCube' + cube.IdCubeDevis).val();
-  cube.QuantiteCubeDevis = $('#QuantiteCube' + cube.IdCubeDevis).val();
+  cube.LibelleCube = $('#LibelleCube' + cube.IdCubeDevis).val();
+  CheckVal($('#LibelleCube' + cube.IdCubeDevis), 0, null);
+
+
+
+  cube.LargeurCubeDevis = CheckVal($('#CoteLargeurCube' + cube.IdCubeDevis), 0, null);
+  cube.ProfondeurCubeDevis = CheckVal($('#CoteProfondeurCube' + cube.IdCubeDevis), 0, null);
+  cube.HauteurCubeDevis = CheckVal($('#CoteHauteurCube' + cube.IdCubeDevis), 0, null);
+  cube.QuantiteCubeDevis = CheckVal($('#QuantiteCube' + cube.IdCubeDevis), 0, null);
   cube.IdMatiere = $('#MatiereSelectCube' + cube.IdCubeDevis).val();
   if(!cube.matiere || cube.matiere.IdMatiere != cube.IdMatiere){
     cube.matiere = matieres.find(x => x.IdMatiere == cube.IdMatiere);
@@ -265,17 +272,18 @@ function UpdatePrix(){
   UpdatePrixTTC();
 }
 
-function CheckVal(item){
-  if(item.val() > 100){
-    item.val(100);
+function CheckVal(item, min, max){
+  if(max != null && item.val() > max){
+    item.val(max);
   }
-  if(item.val() < 0){
-    item.val(0);
+  if(min != null && item.val() < min){
+    item.val(min);
   }
+  return item.val();
 }
 
 function UpdateNets(){
-  CheckVal(RemiseDevis);
+  CheckVal(RemiseDevis, 0, 100);
   devis.RemiseDevis = RemiseDevis.val();
   NetsHT = MonumentHT * (100 - devis.RemiseDevis) / 100;
   NetsHTDevis.val(NetsHT.toLocaleString());
@@ -284,7 +292,7 @@ function UpdateNets(){
 }
 
 function UpdatePrixTTC(){
-  CheckVal(TvaDevis);
+  CheckVal(TvaDevis, 0, 100);
   devis.TvaDevis = TvaDevis.val();
   MonumentTTC = MonumentHT * (100 + parseFloat(devis.TvaDevis)) / 100;
   MonumentTTCDevis.val(MonumentTTC.toLocaleString());
