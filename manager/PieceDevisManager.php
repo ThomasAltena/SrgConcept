@@ -43,4 +43,11 @@ class PieceDevisManager
 		return $PieceDeviss;
 	}
 
+	public function GetPieceDevisByDevis($id){
+		$PieceDeviss = [];
+		$q = $this->_Db->query('SELECT * FROM pieces_devis WHERE IdDevis = '.$id);
+		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$PieceDeviss[] = new PieceDevis($donnees);}
+		return $PieceDeviss;
+	}
+
 }

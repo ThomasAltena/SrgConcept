@@ -40,7 +40,7 @@ $familles = $FamilleManager->GetAllFamilleOrderByRegroupement();
               <div class="formbox" style="margin-bottom: 1vw;">
 
                 <!--CHOIX CLIENT-->
-                <div class="input-group mb-3">
+                <div class="input-group mb-3" id="vueChoixClient">
                   <div class="input-group-prepend">
                     <span class="input-group-text" style="width:100px"
                     id="Id_client_label">Client :</span>
@@ -56,6 +56,23 @@ $familles = $FamilleManager->GetAllFamilleOrderByRegroupement();
                     ?>
                   </select>
                 </div>
+
+                <div class="row" id="vueClientDevisId" hidden>
+                  <div class="input-group mb-2 col-sm-5" style="padding-right:5px">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="NumeroDevisTitre">N˚ Devis</span>
+                    </div>
+                    <input type="text" class="form-control" disabled aria-describedby="NumeroDevisTitre" id="NumeroDevis" value="">
+                  </div>
+                  <div class="input-group mb-2 col-sm-7" style="padding-left:5px">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="DateDevisTitre">Client :</span>
+                    </div>
+                    <input type="text" class="form-control" disabled aria-describedby="DateDevisTitre" id="LibelleClient" value="">
+                  </div>
+                </div>
+
+
 
                 <!--CHOIX MATIERE-->
                 <div class="input-group mb-3">
@@ -200,7 +217,7 @@ $familles = $FamilleManager->GetAllFamilleOrderByRegroupement();
                 <button class="btn btn-danger hover-effect-a mb-3" style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectDevisListView()">
                   Annuler
                 </button>
-                <button class="btn btn-success hover-effect-a" id='SaveContinueButton' disabled style="margin: 0 25px 0 25px; width: 276px;" onclick="RedirectAddDevisCotesView()">
+                <button class="btn btn-success hover-effect-a" id='SaveContinueButton' disabled style="margin: 0 25px 0 25px; width: 276px;" onclick="SauvegarderDevis()">
                   Sauvegarder & Suite
                 </button>
               </div>

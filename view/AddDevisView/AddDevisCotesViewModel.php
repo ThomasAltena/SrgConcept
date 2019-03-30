@@ -323,7 +323,7 @@ function SaveChanges(){
       console.log(this.responseText);
     }
   };
-  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=ReSaveDevis", true);
+  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=SaveDevisCotes", true);
   xhttp.send(JSON.stringify([devis, devis.cubes]));
 }
 

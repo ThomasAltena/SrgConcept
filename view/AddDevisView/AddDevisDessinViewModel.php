@@ -24,25 +24,49 @@ if (empty($_SESSION)) {
   <div id='viewContainer'></div>
 </body>
 <script type="text/javascript">
+
 let selectedPiece = [];
 let pieces = [];
 let piecesListCurrentPage = 0;
 let format = 'simple';
 let matiere = '';
 let client = '';
+let devis;
 
 let famille = [];
 let sousFamille = [];
-
-let imagePieceSelectionneeSchema;
-let imagePieceSelectionnee;
-let matiereImagePreview;
-let pieceSelector;
-let schemaPiecesContainer;
-let piecesListContainer;
-let pieceSelectControlContainer;
+let vueChoixClient, vueClientDevisId, NumeroDevis, LibelleClient;
+let imagePieceSelectionneeSchema, imagePieceSelectionnee, matiereImagePreview, schemaPiecesContainer, piecesListContainer, pieceSelectControlContainer;
+let sousFamilleSelectContainer, pieceSelector, clientSelector;
+let allSousFamilles, allPieces;
 
 LoadView();
+let idDevis = findGetParameter('idDevis');
+idDevis = 47;
+if(idDevis){
+  LoadDevis(idDevis);
+}
+
+function LoadDevis(id){
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      devis = JSON.parse(this.responseText);
+      pieces = devis.pieces;
+      vueChoixClient.prop("hidden", true);
+      vueClientDevisId.prop("hidden", false);
+      NumeroDevis.val(id);
+      LibelleClient.val(devis.client.NomClient.toUpperCase() + ' ' + devis.client.PrenomClient);
+      client = devis.client;
+      matiere = '';
+      ReloadSchema();
+      UpdatePiecesListView(-1);
+      console.log(devis);
+    }
+  };
+  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=GetDevisData", true);
+  xhttp.send(JSON.stringify([id]));
+}
 
 function LoadView(){
   let xhttp;
@@ -57,13 +81,31 @@ function LoadView(){
       schemaPiecesContainer = $('#schemaPiecesContainer');
       piecesListContainer = $('#piecesListContainer');
       pieceSelectControlContainer = $('#pieceSelectControlContainer');
+      sousFamilleSelectContainer = $('#selectSousFamilleContainer');
+      clientSelector = $('#id_client');
+      vueChoixClient = $('#vueChoixClient');
+      vueClientDevisId = $('#vueClientDevisId');
+      NumeroDevis = $('#NumeroDevis');
+      LibelleClient = $('#LibelleClient');
     }
   };
   xhttp.open("POST", "AddDevisDessinView.php", true);
   xhttp.send();
 }
 
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
 
+    return result;
+}
 
 function formValidCheck(){
   if(matiere !== '' && client != '' && pieces.length > 0){
@@ -179,7 +221,6 @@ function UpdateMatierePreview() {
 
 function FilterSousFamille(familleJson) {
   famille = JSON.parse(familleJson);
-
   let xhttp;
   ResetPieceSelector();
   HideSelectedPieceSchema();
@@ -191,20 +232,45 @@ function FilterSousFamille(familleJson) {
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState === 4 && this.status === 200) {
-        document.getElementById("selectSousFamilleContainer").innerHTML = this.responseText;
+        GenerateSousFamillesOptions(this.responseText)
       }
     };
-    xhttp.open("GET", "/SrgConcept/view/AddDevisView/AddDevisDessinGetListModule.php?functionname=GetFilteredSousFamille&codeFamille=" + famille.CodeFamille, true);
-    xhttp.send();
+    xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=SousfamilleManager&route=GetSousfamilleByFamilleOrderByRegroupement&originalObject=true", true);
+    xhttp.send(JSON.stringify([famille.CodeFamille]));
   }
 }
 
-function FilterPieces(sousFamilleJson, id_piece_to_select) {
+function GenerateSousFamillesOptions(responseText){
+  let body = '<div class="input-group-prepend"><span class="input-group-text" style="width:100px" id="Id_ss_famille_label">Sous-fam :</span></div>';
+  if(responseText == undefined){
+    body += '<select name="Id_ss_famille" id="select_ss_famille" disabled aria-describedby=Id_ss_famille_label" onchange="FilterPieces(value)" class="form-control">'
+    body += '<option value="" disabled selected>Aucune piece dans categorie</option></select>';
+    sousFamilleSelectContainer.html(body);
+  } else {
+    body += '<select name="Id_ss_famille" id="select_ss_famille" aria-describedby=Id_ss_famille_label" onchange="FilterPieces(value)" class="form-control">'
+    body += '<option value="" disabled>Aucune</option>';
+    let regroupement = '';
+
+    allSousFamilles = JSON.parse(responseText);
+    allSousFamilles.forEach(function (sf){
+      if(regroupement != sf.RegroupementSsFamille){
+        regroupement = sf.RegroupementSsFamille;
+        body += '<option disabled value="' + regroupement + '"> --- ' + regroupement + ' --- </option>';
+      }
+      body += "<option value='" + JSON.stringify(sf) + "'>" + sf.LibelleSsFamille + "</option>";
+    });
+    body += '</select>'
+    $('#Id_ss_famille :nth-child(2)').prop('selected', true);
+    sousFamilleSelectContainer.html(body);
+    FilterPieces(JSON.stringify(allSousFamilles[0]));
+  }
+}
+
+function FilterPieces(sousFamilleJson) {
   sousFamille = JSON.parse(sousFamilleJson);
   let xhttp;
   if (sousFamille.CodeSsFamille === "" || famille.CodeFamille === "") {
     ResetPieceSelector();
-
     ToggleSubmitPieceButton(false);
     HideSelectedPieceSchema();
     HideSelectedPiecePreview();
@@ -303,7 +369,6 @@ function SelectPiece() {
     ToggleSubmitPieceButton(false);
     HideSelectedPieceSchema();
     HideSelectedPiecePreview();
-
   }
   UpdateImageCount();
 }
@@ -344,20 +409,9 @@ function RedirectDevisListView(){
   window.location.replace("/SrgConcept/view/DevisView.php");
 }
 
-function RedirectAddDevisCotesView(){
-  SauvegarderDevis();
-}
-
 function SauvegarderDevis() {
   html2canvas($("#schemaPiecesContainer"), {
     onrendered: function(canvas) {
-      let client = JSON.parse(document.getElementById('id_client').value);
-      let dataURL = canvas.toDataURL("image/png");
-      let matiere = JSON.parse(document.getElementById('id_matiere').value);
-      let arguments = [matiere, client, dataURL, pieces];
-      console.log(arguments);
-
-
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -367,15 +421,28 @@ function SauvegarderDevis() {
               console.log(responseText);
             } else {
               console.log(responseText);
-              window.location.replace("AddDevisCotesViewModel.php?idDevis=" + responseText.devisResults.devis.IdDevis);
+              //window.location.replace("AddDevisCotesViewModel.php?idDevis=" + responseText.devisResults.devis.IdDevis);
             }
           }
           catch (error){
-            console.log(error);
+            console.log(error, this.responseText);
           }
         }
       };
-      xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=SaveDevis", true);
+      let route = '';
+      let arguments = [];
+      let dataURL = canvas.toDataURL("image/png");
+      if(idDevis){
+        arguments = [devis, pieces, dataURL];
+        console.log(arguments);
+        route = "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=UpdateDevisDessin";
+      } else {
+        let client = JSON.parse(clientSelector.val());
+        let matiere = JSON.parse(document.getElementById('id_matiere').value);
+        arguments = [matiere, client, dataURL, pieces];
+        route = "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=SaveDevisDessin";
+      }
+      xhttp.open("POST", route, true);
       xhttp.send(JSON.stringify(arguments));
     }
   });

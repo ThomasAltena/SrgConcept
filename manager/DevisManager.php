@@ -96,6 +96,15 @@ class DevisManager
 		foreach ($Cubes as $cube) {
 			array_push($originalObject['cubes'], $cube->GetOriginalObject());
 		}
+		$PieceManager = new PieceManager($this->_Db);
+		$PieceDevisManager = new PieceDevisManager($this->_Db);
+		$PieceDevis = $PieceDevisManager->GetPieceDevisByDevis($id);
+		$originalObject['pieces'] = [];
+		foreach ($PieceDevis as $PieceDevi) {
+			$Piece = $PieceManager->GetPiece($PieceDevi->GetIdPiece())->GetOriginalObject();
+			$Piece['IdPieceDevis'] = $PieceDevi->GetIdPieceDevis();
+			array_push($originalObject['pieces'], $Piece);
+		}
 
 		$ClientManager = new ClientManager($this->_Db);
 		$Client = $ClientManager->GetClient($Devis->GetIdClient());
@@ -104,7 +113,7 @@ class DevisManager
 		return $originalObject;
 	}
 
-	public function SaveDevis($Matiere, $Client, $DataUrl, $Pieces) {
+	public function SaveDevisDessin($Matiere, $Client, $DataUrl, $Pieces) {
 	  //arguments = [matiere, client, dataURL, pieces];
 	  $result = [];
 		$IdUser = $_SESSION['Id_user'];
@@ -198,7 +207,45 @@ class DevisManager
 		return $result;
 	}
 
-	public function ReSaveDevis($devis, $cubes) {
+	public function UpdateDevisDessin($Devis, $Pieces, $DataUrl) {
+	  //arguments = devis, pieces, dataURL
+	  $result = [];
+		$IdUser = $_SESSION['Id_user'];
+		$Devis = get_object_vars($Devis);
+
+		$this->UpdateDevis(new Devis($Devis));
+
+		$PieceManager = new PieceManager($this->_Db);
+		$PieceDevisManager = new PieceDevisManager($this->_Db);
+		$originalPiecesDevis = $PieceDevisManager->GetPieceDevisByDevis($Devis['IdDevis']);
+		$originalPiecesDevisIds = array_map(function ($pieceDevis) {return $pieceDevis->GetIdPieceDevis();}, $originalPiecesDevis);
+
+		$originalPieceDevisToKeep = array_filter($Pieces, function ($piece) {return isset(get_object_vars($piece)['IdPieceDevis']);});
+		$originalPieceDevisToKeepIds = array_map(function ($piece) {return get_object_vars($piece)['IdPieceDevis'];}, $originalPieceDevisToKeep);
+
+		$originalPieceDevisToDeleteIds = array_diff($originalPiecesDevisIds, $originalPieceDevisToKeepIds);
+
+		$newPieceDevisToAdd = array_filter($Pieces, function ($piece) {return !isset(get_object_vars($piece)['IdPieceDevis']);});
+
+		print_r($newPieceDevisToAdd);
+		print_r($originalPieceDevisToDeleteIds);
+		print_r($originalPieceDevisToKeepIds);
+
+		// Update devis
+		// retrieve all pieceDevis from server (OriginalPieceDevis)
+		// split pieces into those with pieceDevisIds and those without (OriginalPieceDevisToKeep, NewPieceDevisToAdd)
+		// get find piecedevis in OriginalPieceDevis and not in UpdateOriginalPieceDevis if any, name (OriginalPieceDevisToDelete)
+		// Retrieve all cubeDevis linked to OriginalPieceDevisToDelete, OriginalCubeDevisToDelete
+		// Delete all OriginalCubeDevisToDelete and OriginalCubeDevisToDelete
+		// For each piece in NewPieceDevisToAdd
+		// Retrieve piece, groupeCubeCube and cubes
+		// Add new PieceDevis, and new CubesDevis
+
+
+		return $result;
+	}
+
+	public function SaveDevisCotes($devis, $cubes) {
 	  $result = [];
 
     if( !$devis ) {
