@@ -27,6 +27,7 @@ if (empty($_SESSION)) {
 
 let selectedPiece = [];
 let pieces = [];
+let piecesToDelete = [];
 let piecesListCurrentPage = 0;
 let format = 'simple';
 let matiere = '';
@@ -41,10 +42,7 @@ let sousFamilleSelectContainer, pieceSelector, clientSelector;
 let allSousFamilles, allPieces;
 
 LoadView();
-let idDevis = findGetParameter('idDevis');
-if(idDevis){
-  LoadDevis(idDevis);
-}
+let idDevis;
 
 function LoadDevis(id){
   let xhttp = new XMLHttpRequest();
@@ -86,6 +84,10 @@ function LoadView(){
       vueClientDevisId = $('#vueClientDevisId');
       NumeroDevis = $('#NumeroDevis');
       LibelleClient = $('#LibelleClient');
+      idDevis = findGetParameter('idDevis');
+      if(idDevis){
+        LoadDevis(idDevis);
+      }
     }
   };
   xhttp.open("POST", "AddDevisDessinView.php", true);
@@ -374,7 +376,12 @@ function SelectPiece() {
 }
 
 function DeletePiece(x) {
+  if(!pieces[x].ToInsert){
+    pieces[x].ToDelete = true;
+    piecesToDelete.push(pieces[x]);
+  }
   pieces.splice(x, 1);
+
   UpdatePiecesListView(piecesListCurrentPage);
   ReloadSchema();
   if(pieces.length == 0){
@@ -395,9 +402,9 @@ function SelectExistingPiece(x){
   UpdatePiecesListView(piecesListCurrentPage);
 }
 
-function SauvegarderNouvellePiece() {
+function AddPiece() {
   document.getElementById("simpleOuDouble").disabled = true;
-
+  selectedPiece.ToInsert = true;
   pieces.push(selectedPiece);
   ReloadSchema();
   HideSelectedPieceSchema();
@@ -433,12 +440,10 @@ function SauvegarderDevis() {
       let arguments = [];
       let dataURL = canvas.toDataURL("image/png");
       if(idDevis){
-        arguments = [devis, pieces, dataURL];
-        console.log(arguments);
+        arguments = [devis, pieces.concat(piecesToDelete), dataURL];
         route = "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=UpdateDevisDessin";
       } else {
         let client = JSON.parse(clientSelector.val());
-        // let matiere = JSON.parse(document.getElementById('id_matiere').value);
         arguments = [client, dataURL, pieces];
         route = "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=SaveDevisDessin";
       }

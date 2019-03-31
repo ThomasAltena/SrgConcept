@@ -48,7 +48,7 @@ try {
         $clients = $ManagerClient->GetAllClientUser($idUser);
         $devis = $ManagerDevis->GetAllByUserId($idUser);
 
-        foreach ($devis as $devi) {
+        foreach (array_reverse($devis,true) as $devi) {
 
           $idClient = $devi->GetIdClient();
           $client = array_filter($clients, function ($c)use($idClient){return $c->GetIdClient() == $idClient;});

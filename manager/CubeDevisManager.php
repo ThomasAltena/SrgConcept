@@ -10,8 +10,9 @@ class CubeDevisManager
 	public function SetDb(PDO $db){$this->_Db = $db;}
 
 	public function AddCubeDevis(CubeDevis $CubeDevis){
-		$q = $this->_Db->prepare('INSERT INTO cubes_devis VALUES(:IdCubeDevis, :LibelleCubeDevis, :HauteurCubeDevis, :LargeurCubeDevis, :ProfondeurCubeDevis, :QuantiteCubeDevis, :IdDevis, :IdPiece, :IdPieceDevis, :IdCube, :IdMatiere, :AvantPolisCube, :AvantScieeCube, :ArrierePolisCube, :ArriereScieeCube, :DroitePolisCube, :DroiteScieeCube, :GauchePolisCube, :GaucheScieeCube, :DessusPolisCube, :DessusScieeCube, :DessousPolisCube, :DessousScieeCube)');
+		$q = $this->_Db->prepare('INSERT INTO cubes_devis VALUES(:IdCubeDevis, :LibelleCubeDevis, :CodeGroupCube, :HauteurCubeDevis, :LargeurCubeDevis, :ProfondeurCubeDevis, :QuantiteCubeDevis, :IdDevis, :IdPiece, :IdPieceDevis, :IdCube, :IdMatiere, :AvantPolisCube, :AvantScieeCube, :ArrierePolisCube, :ArriereScieeCube, :DroitePolisCube, :DroiteScieeCube, :GauchePolisCube, :GaucheScieeCube, :DessusPolisCube, :DessusScieeCube, :DessousPolisCube, :DessousScieeCube)');
 		$q->bindValue(':IdCubeDevis', $CubeDevis->GetIdCubeDevis());
+		$q->bindValue(':CodeGroupCube', $CubeDevis->GetCodeGroupCube());
 		$q->bindValue(':LibelleCubeDevis', $CubeDevis->GetLibelleCubeDevis());
 		$q->bindValue(':HauteurCubeDevis', $CubeDevis->GetHauteurCubeDevis());
 		$q->bindValue(':LargeurCubeDevis', $CubeDevis->GetLargeurCubeDevis());
@@ -42,9 +43,10 @@ class CubeDevisManager
 	}
 
 	public function UpdateCubeDevis(CubeDevis $CubeDevis){
-		$q = $this->_Db->prepare('UPDATE cubes_devis SET `LibelleCubeDevis` = :LibelleCubeDevis, `HauteurCubeDevis` = :HauteurCubeDevis, `LargeurCubeDevis` = :LargeurCubeDevis, `ProfondeurCubeDevis` = :ProfondeurCubeDevis, `QuantiteCubeDevis` = :QuantiteCubeDevis, `IdDevis` = :IdDevis, `IdPiece` = :IdPiece, `IdPieceDevis` = :IdPieceDevis, `IdCube` = :IdCube, `IdMatiere` = :IdMatiere, `AvantPolisCube` = :AvantPolisCube, `AvantScieeCube` = :AvantScieeCube, `ArrierePolisCube` = :ArrierePolisCube, `ArriereScieeCube` = :ArriereScieeCube, `DroitePolisCube` = :DroitePolisCube, `DroiteScieeCube` = :DroiteScieeCube, `GauchePolisCube` = :GauchePolisCube, `GaucheScieeCube` = :GaucheScieeCube, `DessusPolisCube` = :DessusPolisCube, `DessusScieeCube` = :DessusScieeCube, `DessousPolisCube` = :DessousPolisCube, `DessousScieeCube` = :DessousScieeCube WHERE IdCubeDevis = :IdCubeDevis ');
+		$q = $this->_Db->prepare('UPDATE cubes_devis SET `LibelleCubeDevis` = :LibelleCubeDevis, `CodeGroupCube` = :CodeGroupCube, `HauteurCubeDevis` = :HauteurCubeDevis, `LargeurCubeDevis` = :LargeurCubeDevis, `ProfondeurCubeDevis` = :ProfondeurCubeDevis, `QuantiteCubeDevis` = :QuantiteCubeDevis, `IdDevis` = :IdDevis, `IdPiece` = :IdPiece, `IdPieceDevis` = :IdPieceDevis, `IdCube` = :IdCube, `IdMatiere` = :IdMatiere, `AvantPolisCube` = :AvantPolisCube, `AvantScieeCube` = :AvantScieeCube, `ArrierePolisCube` = :ArrierePolisCube, `ArriereScieeCube` = :ArriereScieeCube, `DroitePolisCube` = :DroitePolisCube, `DroiteScieeCube` = :DroiteScieeCube, `GauchePolisCube` = :GauchePolisCube, `GaucheScieeCube` = :GaucheScieeCube, `DessusPolisCube` = :DessusPolisCube, `DessusScieeCube` = :DessusScieeCube, `DessousPolisCube` = :DessousPolisCube, `DessousScieeCube` = :DessousScieeCube WHERE IdCubeDevis = :IdCubeDevis ');
 		$q->bindValue(':IdCubeDevis', $CubeDevis->GetIdCubeDevis());
 		$q->bindValue(':LibelleCubeDevis', $CubeDevis->GetLibelleCubeDevis());
+		$q->bindValue(':CodeGroupCube', $CubeDevis->GetCodeGroupCube());
 		$q->bindValue(':HauteurCubeDevis', $CubeDevis->GetHauteurCubeDevis());
 		$q->bindValue(':LargeurCubeDevis', $CubeDevis->GetLargeurCubeDevis());
 		$q->bindValue(':ProfondeurCubeDevis', $CubeDevis->GetProfondeurCubeDevis());
@@ -96,6 +98,14 @@ class CubeDevisManager
 		$q = $this->_Db->query('SELECT * FROM cubes_devis');
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$CubeDeviss[] = new CubeDevis($donnees);}
 		return $CubeDeviss;
+	}
+
+	public function GetCubeDevisByPieceDevisId($id){
+		$q = $this->_Db->prepare('SELECT * FROM cubes_devis WHERE IdPieceDevis ='.$id);
+		$q->execute();
+		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$CubeDevis[] = new CubeDevis($donnees);}
+		//print_r($CubeDevis);
+		return $CubeDevis;
 	}
 
 }

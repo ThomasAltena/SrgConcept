@@ -193,6 +193,7 @@ class DevisManager
 
 	          foreach ($cubes as $cube) {
 	            $cubeDevis = new CubeDevis($cube->GetOriginalObject());
+							$cubeDevis->SetCodeGroupCube($piece->GetCodeGroupeCube());
 	            $cubeDevis->SetLibelleCubeDevis($cube->GetLibelleCube());
 	            $cubeDevis->SetIdDevis($devisInsertId);
 							$cubeDevis->SetIdPiece($piece->GetIdPiece());
@@ -220,45 +221,34 @@ class DevisManager
 
 		$this->UpdateDevis(new Devis($Devis));
 
-		$PieceManager = new PieceManager($this->_Db);
 		$PieceDevisManager = new PieceDevisManager($this->_Db);
-		$originalPiecesDevis = $PieceDevisManager->GetPieceDevisByDevis($Devis['IdDevis']);
-		$originalPiecesDevisIds = array_map(function ($pieceDevis) {return $pieceDevis->GetIdPieceDevis();}, $originalPiecesDevis);
-
-		$originalPieceDevisToKeep = array_filter($Pieces, function ($piece) {return isset(get_object_vars($piece)['IdPieceDevis']);});
-		$originalPieceDevisToKeepIds = array_map(function ($piece) {return get_object_vars($piece)['IdPieceDevis'];}, $originalPieceDevisToKeep);
-
-		$originalPieceDevisToDeleteIds = array_diff($originalPiecesDevisIds, $originalPieceDevisToKeepIds);
-
-		$newPieceDevisToAdd = array_filter($Pieces, function ($piece) {return !isset(get_object_vars($piece)['IdPieceDevis']);});
-
 		$CubeDevisManager = new CubeDevisManager($this->_Db);
-		foreach ($originalPieceDevisToDeleteIds as $key => $id) {
-			$CubeDevisManager->DeleteCubeDevisByPieceDevisId($id);
-			$PieceDevisManager->DeletePieceDevis($id);
-		}
+		$GroupecubeCubeManager = new GroupecubeCubeManager($this->_Db);
 
-		$CubeManager = new CubeManager($this->_Db);
-		foreach ($newPieceDevisToAdd as $key => $piece) {
+		foreach ($Pieces as $key => $piece) {
 			$piece = get_object_vars($piece);
-			$PieceDevisManager->AddPieceDevis(new PieceDevis([
-				"IdPieceDevis" => '',
-				"IdPiece" => $piece['IdPiece'],
-				"IdDevis" => $Devis['IdDevis']
-			]));
-			$PieceDevisInsertId = $this->_Db->lastInsertId();
+			if(isset($piece['ToDelete'])){
+				$CubeDevisManager->DeleteCubeDevisByPieceDevisId($piece['IdPieceDevis']);
+				$PieceDevisManager->DeletePieceDevis($piece['IdPieceDevis']);
+			}
+			if(isset($piece['ToInsert'])){
+				$PieceDevisManager->AddPieceDevis(new PieceDevis([
+					"IdPieceDevis" => '',
+					"IdPiece" => $piece['IdPiece'],
+					"IdDevis" => $Devis['IdDevis']
+				]));
+				$PieceDevisInsertId = $this->_Db->lastInsertId();
+				$cubes = $GroupecubeCubeManager->GetCubesByGroupe($piece['CodeGroupeCube']);
 
-			$GroupecubeCubeManager = new GroupecubeCubeManager($this->_Db);
-			$cubes = $GroupecubeCubeManager->GetCubesByGroupe($piece['CodeGroupeCube']);
-
-			foreach ($cubes as $cube) {
-				$cubeDevis = new CubeDevis($cube->GetOriginalObject());
-				$cubeDevis->SetLibelleCubeDevis($cube->GetLibelleCube());
-				$cubeDevis->SetIdDevis($Devis['IdDevis']);
-				$cubeDevis->SetIdPiece($piece['IdPiece']);
-				$cubeDevis->SetQuantiteCubeDevis(1);
-				$cubeDevis->SetIdPieceDevis($PieceDevisInsertId);
-				$cubeInsertResult = $CubeDevisManager->AddCubeDevis($cubeDevis);
+				foreach ($cubes as $cube) {
+					$cubeDevis = new CubeDevis($cube->GetOriginalObject());
+					$cubeDevis->SetLibelleCubeDevis($cube->GetLibelleCube());
+					$cubeDevis->SetIdDevis($Devis['IdDevis']);
+					$cubeDevis->SetIdPiece($piece['IdPiece']);
+					$cubeDevis->SetQuantiteCubeDevis(1);
+					$cubeDevis->SetIdPieceDevis($PieceDevisInsertId);
+					$cubeInsertResult = $CubeDevisManager->AddCubeDevis($cubeDevis);
+				}
 			}
 		}
 
@@ -279,14 +269,22 @@ class DevisManager
 			$CubeDevisManager = new CubeDevisManager($this->_Db);
 
 			foreach ($cubes as $cube) {
+				$cube = get_object_vars($cube);
+				$cubeModel = new CubeDevis($cube);
+				if(isset($cube['ToDelete'])){
+					$cubeInsertResult = $CubeDevisManager->DeleteCubeDevis($cubeModel);
+				}
 
-				$cubeModel = new CubeDevis(get_object_vars($cube));
-				if($cubeModel->GetIdCubeDevis() > 0){
-					$cubeInsertResult = $CubeDevisManager->UpdateCubeDevis($cubeModel);
-				} else {
+				if(isset($cube['ToInsert'])){
 					$cubeInsertResult = $CubeDevisManager->AddCubeDevis($cubeModel);
 				}
+
+				if(isset($cube['ToUpdate'])){
+					$cubeInsertResult = $CubeDevisManager->UpdateCubeDevis($cubeModel);
+				}
 			}
+			$PieceDevisManager = new PieceDevisManager($this->_Db);
+			$PieceDevisManager->DeleteEmptyPieceDevis($devisModel->GetIdDevis());
 		}
 		return $result;
 	}

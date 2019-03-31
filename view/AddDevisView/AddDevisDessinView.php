@@ -152,7 +152,7 @@ $familles = $FamilleManager->GetAllFamilleOrderByRegroupement();
                   </select>
                 </div>
 
-                <button class="btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button" disabled onclick="SauvegarderNouvellePiece()">
+                <button class="btn btn-success col-lg-12 hover-effect-a" id="ajouter_piece_button" disabled onclick="AddPiece()">
                   Ajouter Piece
                 </button>
 

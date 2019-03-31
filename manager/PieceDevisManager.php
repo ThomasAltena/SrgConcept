@@ -50,4 +50,18 @@ class PieceDevisManager
 		return $PieceDeviss;
 	}
 
+	public function DeleteEmptyPieceDevis($id){
+		$PieceDeviss = [];
+		$q = $this->_Db->query('SELECT * FROM pieces_devis WHERE IdDevis = '.$id);
+		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$PieceDeviss[] = new PieceDevis($donnees);}
+
+		$CubeDevisManager = new CubeDevisManager($this->_Db);
+		foreach($PieceDeviss as $PieceDevis){
+			if(empty($CubeDevisManager->GetCubeDevisByPieceDevisId($PieceDevis->GetIdPieceDevis()))){
+				echo("FUCK YOU");
+				$this->DeletePieceDevis($PieceDevis->GetIdPieceDevis());
+			}
+		}
+	}
+
 }

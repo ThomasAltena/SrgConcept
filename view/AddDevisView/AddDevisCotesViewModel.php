@@ -20,7 +20,7 @@ if (empty($_SESSION)) {
 <link rel="stylesheet" href="AddDevisCotes.css" type="text/css">
 <link rel="stylesheet" href="/SrgConcept/public/css/switch.css" type="text/css">
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
-<body style="overflow: scroll;">
+<body style="overflow: auto;">
   <div  id='viewContainer'></div>
 </body>
 <style>
@@ -33,14 +33,25 @@ if (empty($_SESSION)) {
 let FraisDePortDevis, RemiseDevis, CubesDevisTable, NumeroDevis, DateDevis, LibelleDevis, ClientDevis, AquisDevis, DosPolisDevis, TypeDevis, MatiereDevis, ArrondiDevis, PrixDevis, TvaDevis, PUTransportDevis, SurfaceDevis, VolumeDevis, PoidsDevis, NombrePiecesDevis, NombreCubesDevis,PrixMatiereDevis, PrixFaconnageDevis, PrixOptionsDevis, MonumentHTDevis, MonumentTTCDevis, ArticlesHTDevis, ArticlesTTCDevis, NetsHTDevis, NetsTTCDevis;
 let devis;
 let PrixMatiere, PrixFaconnage, PrixOptions, MonumentHT, MonumentTTC, ArticlesHT, ArticlesTTC, NetsHT, NetsTTC, PoidsTotal, VolumeTotal, SurfaceTotal;
+
+let CubeModalContainer, CodeCubeModal, LibelleCubeModal, LargeurCubeModal, HauteurCubeModal, ProfondeurCubeModal, QuantiteCubeModal;
+let MatiereCubeModal, SurfaceCubeModal, VolumeCubeModal, PoidsCubeModal, PrixMatiereCubeModal, PrixFaconnadeCubeModal;
+let SurfaceAvantCubeModal, SurfaceAvantPolieCubeModal, SurfaceAvantScieeCubeModal;
+let SurfaceArriereCubeModal, SurfaceArrierePolieCubeModal, SurfaceArriereScieeCubeModal;
+let SurfaceDroiteCubeModal, SurfaceDroitePolieCubeModal, SurfaceDroiteScieeCubeModal;
+let SurfaceGaucheCubeModal, SurfaceGauchePolieCubeModal, SurfaceGaucheScieeCubeModal;
+let SurfaceDessusCubeModal, SurfaceDessusPolieCubeModal, SurfaceDessusScieeCubeModal;
+let SurfaceDessousCubeModal, SurfaceDessousPolieCubeModal, SurfaceDessousScieeCubeModal;
+
 let masseVolumique = 2700;
 let matieres;
+let selectedCube;
 let matieresOptions;
 let idDevis = findGetParameter('idDevis');
 LoadView();
 
 const unique = (value, index, self) => {
-    return self.indexOf(value) === index;
+  return self.indexOf(value) === index;
 };
 
 const add = (a,b) => {
@@ -82,24 +93,77 @@ function LoadView(){
       NetsTTCDevis = $('#NetsTTCDevis');
       CubesDevisTable = $('#CubesDevisTable');
       FraisDePortDevis = $('#FraisDePortDevis');
-      GetDevisData();
+      CubeModalContainer = $('#CubeModalContainer');
+      LoadCubeModal();
     }
   };
   xhttp.open("POST", "AddDevisCotesView.php", true);
   xhttp.send();
 }
 
+function LoadCubeModal(){
+  let xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      CubeModalContainer.html(this.responseText);
+      CubeModalContainer = $('#CubeModalContainer');
+      CodeCubeModal = $('#CodeCubeModal');
+      LibelleCubeModal = $('#LibelleCubeModal');
+      LargeurCubeModal = $('#LargeurCubeModal');
+      HauteurCubeModal = $('#HauteurCubeModal');
+      ProfondeurCubeModal = $('#ProfondeurCubeModal');
+      QuantiteCubeModal = $('#QuantiteCubeModal');
+
+      MatiereCubeModal = $('#MatiereCubeModal');
+      SurfaceCubeModal = $('#SurfaceCubeModal');
+      VolumeCubeModal = $('#VolumeCubeModal');
+      PoidsCubeModal = $('#PoidsCubeModal');
+      PrixMatiereCubeModal = $('#PrixMatiereCubeModal');
+      PrixFaconnadeCubeModal = $('#PrixFaconnadeCubeModal');
+
+      SurfaceAvantCubeModal = $('#SurfaceAvantCubeModal');
+      SurfaceAvantPolieCubeModal = $('#SurfaceAvantPolieCubeModal');
+      SurfaceAvantScieeCubeModal = $('#SurfaceAvantScieeCubeModal');
+
+      SurfaceArriereCubeModal = $('#SurfaceArriereCubeModal');
+      SurfaceArrierePolieCubeModal = $('#SurfaceArrierePolieCubeModal');
+      SurfaceArriereScieeCubeModal = $('#SurfaceArriereScieeCubeModal');
+
+      SurfaceDroiteCubeModal = $('#SurfaceDroiteCubeModal');
+      SurfaceDroitePolieCubeModal = $('#SurfaceDroitePolieCubeModal');
+      SurfaceDroiteScieeCubeModal = $('#SurfaceDroiteScieeCubeModal');
+
+      SurfaceGaucheCubeModal = $('#SurfaceGaucheCubeModal');
+      SurfaceGauchePolieCubeModal = $('#SurfaceGauchePolieCubeModal');
+      SurfaceGaucheScieeCubeModal = $('#SurfaceGaucheScieeCubeModal');
+
+      SurfaceDessusCubeModal = $('#SurfaceDessusCubeModal');
+      SurfaceDessusPolieCubeModal = $('#SurfaceDessusPolieCubeModal');
+      SurfaceDessusScieeCubeModal = $('#SurfaceDessusScieeCubeModal');
+
+      SurfaceDessousCubeModal = $('#SurfaceDessousCubeModal');
+      SurfaceDessousPolieCubeModal = $('#SurfaceDessousPolieCubeModal');
+      SurfaceDessousScieeCubeModal = $('#SurfaceDessousScieeCubeModal');
+
+      GetDevisData();
+    }
+  };
+  xhttp.open("POST", "AddDevisCotesCubeModalView.php", true);
+  xhttp.send();
+}
+
 function findGetParameter(parameterName) {
-    var result = null,
-        tmp = [];
-    location.search
-        .substr(1)
-        .split("&")
-        .forEach(function (item) {
-          tmp = item.split("=");
-          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-        });
-    return result;
+  var result = null,
+  tmp = [];
+  location.search
+  .substr(1)
+  .split("&")
+  .forEach(function (item) {
+    tmp = item.split("=");
+    if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+  });
+  return result;
 }
 
 function GetDevisData() {
@@ -139,8 +203,8 @@ function FillTableDevis(){
   let body = '';
   devis.cubes.forEach(function(cube){
     body += '<tr>';
+    body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><button class="btn btn-primary form-control" style="padding:6px" data-toggle="modal" data-target="#CubeDevisModal" onclick="OpenModal(' + cube.IdCubeDevis + ')"><i class="far fa-edit"></i></button></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px; width:180px"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" class="form-control" style="padding:6px;" value="' + cube.LibelleCubeDevis + '" id="LibelleCube' + cube.IdCubeDevis + '"></input></td>';
-
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px; width:120px" id="MatiereSelectContainerCube' + cube.IdCubeDevis + '"></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.LargeurCubeDevis + '" id="CoteLargeurCube' + cube.IdCubeDevis + '"></input></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.LargeurCubeDevis + '" id="CoteLargeurICube' + cube.IdCubeDevis + '"></input></td>';
@@ -153,6 +217,67 @@ function FillTableDevis(){
   });
   CubesDevisTable.html(body);
 }
+
+function OpenModal(id){
+  let cube = devis.cubes.find(x => x.IdCubeDevis == id);
+  selectedCube = cube;
+
+  CodeCubeModal.val(cube.CodeGroupCube);
+  LibelleCubeModal.val(cube.LibelleCubeDevis);
+  LargeurCubeModal.val(cube.LargeurCubeDevis);
+  HauteurCubeModal.val(cube.HauteurCubeDevis);
+  ProfondeurCubeModal.val(cube.ProfondeurCubeDevis);
+  QuantiteCubeModal.val(cube.QuantiteCubeDevis);
+  MatiereCubeModal.val(cube.IdMatiere);
+
+  UpdateCubeModalDimensionsPrix(cube);
+
+  SurfaceAvantPolieCubeModal.prop('checked', cube.AvantPolisCube == '1' ? true : false);
+  SurfaceAvantScieeCubeModal.prop('checked', cube.AvantScieeCube == '1' ? true : false);
+
+  SurfaceArrierePolieCubeModal.prop('checked', cube.ArrierePolisCube == '1' ? true : false);
+  SurfaceArriereScieeCubeModal.prop('checked', cube.ArriereScieeCube == '1' ? true : false);
+
+  SurfaceDroitePolieCubeModal.prop('checked', cube.DroitePolisCube == '1' ? true : false);
+  SurfaceDroiteScieeCubeModal.prop('checked', cube.DroiteScieeCube == '1' ? true : false);
+
+  SurfaceGauchePolieCubeModal.prop('checked', cube.GauchePolisCube == '1' ? true : false);
+  SurfaceGaucheScieeCubeModal.prop('checked', cube.GaucheScieeCube == '1' ? true : false);
+
+  SurfaceDessusPolieCubeModal.prop('checked', cube.DessusPolisCube == '1' ? true : false);
+  SurfaceDessusScieeCubeModal.prop('checked', cube.DessusScieeCube == '1' ? true : false);
+
+  SurfaceDessousPolieCubeModal.prop('checked', cube.DessousPolisCube == '1' ? true : false);
+  SurfaceDessousScieeCubeModal.prop('checked', cube.DessousScieeCube == '1' ? true : false);
+}
+
+function UpdateCubeModalDimensionsPrix(cube){
+  let devantArriere = (cube.HauteurCubeDevis * cube.LargeurCubeDevis)*2;
+  let dessusDessous = (cube.LargeurCubeDevis * cube.ProfondeurCubeDevis)*2;
+  let droiteGauche = (cube.HauteurCubeDevis * cube.ProfondeurCubeDevis)*2;
+  let surfaceTotalM3 = (devantArriere + dessusDessous + droiteGauche) * cube.QuantiteCubeDevis * 0.01;
+  let volumeTotalM3 = (cube.HauteurCubeDevis * cube.LargeurCubeDevis * cube.ProfondeurCubeDevis * cube.QuantiteCubeDevis) * 0.000001;
+  let masseTonne = volumeTotalM3 * masseVolumique * 0.001;
+
+  SurfaceCubeModal.val(surfaceTotalM3);
+  VolumeCubeModal.val(volumeTotalM3);
+  PoidsCubeModal.val(masseTonne);
+  let prixMatiere = 0;
+  if(cube.matiere){
+      prixMatiere = cube.matiere.PrixMatiere;
+  }
+
+  SurfaceAvantCubeModal.val(devantArriere * 0.01);
+  SurfaceArriereCubeModal.val(devantArriere * 0.01);
+  SurfaceDroiteCubeModal.val(droiteGauche * 0.01);
+  SurfaceGaucheCubeModal.val(droiteGauche * 0.01);
+  SurfaceDessusCubeModal.val(dessusDessous * 0.01);
+  SurfaceDessousCubeModal.val(dessusDessous * 0.01);
+
+  PrixMatiereCubeModal.val(masseTonne * prixMatiere);
+  PrixFaconnadeCubeModal.val(0);
+}
+
 
 function GetMatieres(){
   let xhttp = new XMLHttpRequest();
@@ -171,6 +296,9 @@ function UpdateMatiereAll(value){
   devis.cubes.forEach(function(cube){
     cube.IdMatiere = value;
     $('#MatiereSelectCube' + cube.IdCubeDevis).val(value);
+    if(!cube.ToInsert){
+      cube.ToUpdate = true;
+    };
   });
 }
 
@@ -193,6 +321,7 @@ function FillMatiereTableDevis(){
     $('#MatiereSelectCube' + cube.IdCubeDevis).val(cube.IdMatiere);
   });
 
+  MatiereCubeModal.html(matieresOptions);
   MatiereDevis.html(matieresOptions);
 }
 
@@ -214,12 +343,60 @@ function UpdatePrixCube(cube){
   // $prix = $masseTonne * $prixMatiereTonne;
 }
 
+function UpdateCubeModal(){
+  selectedCube.LibelleCubeDevis = LibelleCubeModal.val();
+  selectedCube.LargeurCubeDevis = CheckVal(LargeurCubeModal, 0, null);
+  selectedCube.HauteurCubeDevis = CheckVal(HauteurCubeModal, 0, null);
+  selectedCube.ProfondeurCubeDevis = CheckVal(ProfondeurCubeModal, 0, null);
+  selectedCube.QuantiteCubeDevis = CheckVal(QuantiteCubeModal, 0, null);
+  selectedCube.IdMatiere = MatiereCubeModal.val();
+
+  if(!selectedCube.matiere || selectedCube.matiere.IdMatiere != selectedCube.IdMatiere){
+    selectedCube.matiere = matieres.find(x => x.IdMatiere == selectedCube.IdMatiere);
+  }
+
+  UpdateCubeModalDimensionsPrix(selectedCube);
+
+  selectedCube.AvantPolisCube = SurfaceAvantPolieCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.AvantScieeCube = SurfaceAvantScieeCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.ArrierePolisCube = SurfaceArrierePolieCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.ArriereScieeCube = SurfaceArriereScieeCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.DroitePolisCube = SurfaceDroitePolieCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.DroiteScieeCube = SurfaceDroiteScieeCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.GauchePolisCube = SurfaceGauchePolieCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.GaucheScieeCube = SurfaceGaucheScieeCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.DessusPolisCube = SurfaceDessusPolieCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.DessusScieeCube = SurfaceDessusScieeCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.DessousPolisCube = SurfaceDessousPolieCubeModal.is(':checked') ? '1' : '0';
+  selectedCube.DessousScieeCube = SurfaceDessousScieeCubeModal.is(':checked') ? '1' : '0';
+
+  ReverseUpdateCube(selectedCube);
+}
+
+function ReverseUpdateCube(cube){
+  if(!cube.ToInsert){
+    cube.ToUpdate = true;
+  };
+  $('#LibelleCube' + cube.IdCubeDevis).val(cube.LibelleCube);
+  $('#CoteLargeurCube' + cube.IdCubeDevis).val(cube.LargeurCubeDevis);
+  $('#CoteProfondeurCube' + cube.IdCubeDevis).val(cube.ProfondeurCubeDevis);
+  $('#CoteHauteurCube' + cube.IdCubeDevis).val(cube.HauteurCubeDevis);
+  $('#QuantiteCube' + cube.IdCubeDevis).val(cube.QuantiteCubeDevis);
+  $('#MatiereSelectCube' + cube.IdCubeDevis).val(cube.IdMatiere);
+
+  NombreCubesDevis.val(devis.cubes.map(x => x.QuantiteCubeDevis).reduce(add, 0));
+
+  UpdatePrixCube(cube);
+  UpdateDimensions();
+  UpdatePrix();
+}
+
 function UpdateCube(IdCubeDevis){
   let cube = devis.cubes.find(x => x.IdCubeDevis == IdCubeDevis);
+  if(!cube.ToInsert){
+    cube.ToUpdate = true;
+  };
   cube.LibelleCube = $('#LibelleCube' + cube.IdCubeDevis).val();
-  CheckVal($('#LibelleCube' + cube.IdCubeDevis), 0, null);
-
-
 
   cube.LargeurCubeDevis = CheckVal($('#CoteLargeurCube' + cube.IdCubeDevis), 0, null);
   cube.ProfondeurCubeDevis = CheckVal($('#CoteProfondeurCube' + cube.IdCubeDevis), 0, null);

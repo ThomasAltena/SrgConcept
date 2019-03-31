@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <div id="content-wrapper">
-  <div class='container' style="max-width: 1800px; min-width: 1800px">
+  <div class='container' style="max-width: 1800px; min-width: 1850px">
     <div class="form">
       <div class="row">
         <div class="col-sm row" id="donneesDevisContainer">
@@ -205,6 +205,7 @@
               <table class='table table-striped'>
                 <thead>
                   <tr>
+                    <th style='padding: 2px; border-top: 0px; font-size: 18px;' class="text-left" scope='col'></th>
                     <th style='padding: 2px; border-top: 0px; font-size: 18px;' class="text-left" scope='col'>Cubes Monument</th>
                     <th style='padding: 2px; border-top: 0px; font-size: 18px;' class="text-left" scope='col'>Matiere</th>
                     <th style='padding: 2px; border-top: 0px; font-size: 18px;' class="text-left" scope='col'>Larg.</th>
@@ -331,7 +332,7 @@
               </button>
               <button class='btn btn-success form-control mb-2' onclick="SaveChanges()">Sauvegarder
               </button>
-              <button class='btn btn-danger form-control mb-2' onclick="RedirectDevisListView()">Annuler
+              <button class='btn btn-danger form-control mb-2' onclick="RedirectDevisListView()">Quitter
               </button>
 
               <!--VUE PIECE-->
@@ -346,4 +347,6 @@
       </div>
     </div>
   </div>
+</div>
+<div id="CubeModalContainer">
 </div>
