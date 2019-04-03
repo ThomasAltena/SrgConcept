@@ -104,17 +104,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/UploadCroquisClass.p
           </li>
           <li class='nav-item'>
             <div class='dropdown'>
-              <a class='dropdown-toggle nav-link' href='/SrgConcept/view/PieceView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>
+              <a class='nav-link' href='/SrgConcept/view/PieceView/PieceMainViewModel.php'>
                 Piéces
               </a>
-              <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
-                <a class='dropdown-item' href='/SrgConcept/view/PieceView.php'>
-                  Liste
-                </a>
-                <a class='dropdown-item' href='/SrgConcept/view/AddPieceView.php'>
-                  Création
-                </a>
-              </div>
             </div>
           </li>
           <li class='nav-item'>

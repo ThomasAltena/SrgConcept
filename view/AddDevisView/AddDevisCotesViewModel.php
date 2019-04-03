@@ -149,7 +149,7 @@ function LoadCubeModal(){
       GetDevisData();
     }
   };
-  xhttp.open("POST", "AddDevisCotesCubeModalView.php", true);
+  xhttp.open("POST", "CubeCotesModalView.php", true);
   xhttp.send();
 }
 

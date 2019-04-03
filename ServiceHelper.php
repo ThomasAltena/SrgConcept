@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(session_status() == PHP_SESSION_NONE){
+    //session has not started
+    session_start();
+}
 if (empty($_SESSION)) {
   header('location:/SrgConcept/view/index.php');
 }

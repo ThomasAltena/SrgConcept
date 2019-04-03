@@ -38,7 +38,7 @@ let famille = [];
 let sousFamille = [];
 let vueChoixClient, vueClientDevisId, NumeroDevis, LibelleClient;
 let imagePieceSelectionneeSchema, imagePieceSelectionnee, matiereImagePreview, schemaPiecesContainer, piecesListContainer, pieceSelectControlContainer;
-let sousFamilleSelectContainer, pieceSelector, clientSelector;
+let sousFamilleSelector, pieceSelector, clientSelector;
 let allSousFamilles, allPieces;
 
 LoadView();
@@ -78,7 +78,7 @@ function LoadView(){
       schemaPiecesContainer = $('#schemaPiecesContainer');
       piecesListContainer = $('#piecesListContainer');
       pieceSelectControlContainer = $('#pieceSelectControlContainer');
-      sousFamilleSelectContainer = $('#selectSousFamilleContainer');
+      sousFamilleSelector = $('#select_ss_famille');
       clientSelector = $('#id_client');
       vueChoixClient = $('#vueChoixClient');
       vueClientDevisId = $('#vueClientDevisId');
@@ -152,24 +152,13 @@ function ResetFamilleSelector() {
 }
 
 function ResetSousFamilleSelector() {
-  $("#selectSousFamilleContainer").html("<div class=\"input-group-prepend\">\n" +
-                                    "<span class=\"input-group-text\" style=\"width:100px\"\n" +
-                                    "id=\"Id_ss_famille_label\">Sous-fam :</span>\n" +
-                                    "</div>\n" +
-                                    "<select name=\"Id_ss_famille\" aria-describedby=Id_ss_famille_label\" id=\"select_ss_famille\" disabled\n" +
-                                    "class=\"form-control\" onchange=\"FilterPieces(value)\">\n" +
-                                    "</select>");
+  sousFamilleSelector.html('');
+  sousFamilleSelector.prop('disabled', true);
 }
 
 function ResetPieceSelector() {
-  $("#selectPieceContainer").html("<div class=\"input-group-prepend\">\n" +
-                                    "<span class=\"input-group-text\" style=\"width:100px\" id=\"Id_piece_label\">Piece :</span>\n" +
-                                    "</div>\n" +
-                                    "<select name=\"Id_piece\" id=\"select_piece\" aria-describedby=Id_piece_label\"\n" +
-                                    "onchange=\"SelectPiece()\" class=\"form-control\" disabled>\n" +
-                                    "\n" +
-                                    "</select>");
-
+  pieceSelector.html('');
+  pieceSelector.prop('disabled', true);
   pieceSelectControlContainer.css({visibility: "hidden"});
   document.getElementById('pieceVueContainerCount').innerHTML = '';
 }
@@ -231,40 +220,28 @@ function FilterSousFamille(familleJson) {
     ResetSousFamilleSelector();
     ToggleSubmitPieceButton(false);
   } else {
-    xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      if (this.readyState === 4 && this.status === 200) {
-        GenerateSousFamillesOptions(this.responseText)
+    Request('SousfamilleManager', 'GetSousfamilleByFamilleOrderByRegroupement', true, [famille.CodeFamille] ).then(function (result){
+      let body = "<option value='' disabled selected>Aucune sous famille dans categorie</option>";
+      sousFamilleSelector.html(body);
+      if(result.responseText != '[]'){
+        let regroupement = '';
+        let body = '<option value="" disabled>Aucune</option>';
+        allSousFamilles = JSON.parse(result.responseText);
+        allSousFamilles.forEach(function (sf){
+          if(regroupement != sf.RegroupementSsFamille){
+            regroupement = sf.RegroupementSsFamille;
+            body += '<option disabled value="' + regroupement + '"> --- ' + regroupement + ' --- </option>';
+          }
+          body += "<option value='" + JSON.stringify(sf) + "'>" + sf.LibelleSsFamille + "</option>";
+        });
+        sousFamilleSelector.prop('disabled', false);
+        FilterPieces(JSON.stringify(allSousFamilles[0]));
+        sousFamilleSelector.html(body);
+        $('#select_ss_famille :nth-child(2)').prop('selected', true);
       }
-    };
-    xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=SousfamilleManager&route=GetSousfamilleByFamilleOrderByRegroupement&originalObject=true", true);
-    xhttp.send(JSON.stringify([famille.CodeFamille]));
-  }
-}
+    }).catch(function(error){
 
-function GenerateSousFamillesOptions(responseText){
-  let body = '<div class="input-group-prepend"><span class="input-group-text" style="width:100px" id="Id_ss_famille_label">Sous-fam :</span></div>';
-  if(responseText == undefined){
-    body += '<select name="Id_ss_famille" id="select_ss_famille" disabled aria-describedby=Id_ss_famille_label" onchange="FilterPieces(value)" class="form-control">'
-    body += '<option value="" disabled selected>Aucune piece dans categorie</option></select>';
-    sousFamilleSelectContainer.html(body);
-  } else {
-    body += '<select name="Id_ss_famille" id="select_ss_famille" aria-describedby=Id_ss_famille_label" onchange="FilterPieces(value)" class="form-control">'
-    body += '<option value="" disabled>Aucune</option>';
-    let regroupement = '';
-
-    allSousFamilles = JSON.parse(responseText);
-    allSousFamilles.forEach(function (sf){
-      if(regroupement != sf.RegroupementSsFamille){
-        regroupement = sf.RegroupementSsFamille;
-        body += '<option disabled value="' + regroupement + '"> --- ' + regroupement + ' --- </option>';
-      }
-      body += "<option value='" + JSON.stringify(sf) + "'>" + sf.LibelleSsFamille + "</option>";
     });
-    body += '</select>'
-    $('#Id_ss_famille :nth-child(2)').prop('selected', true);
-    sousFamilleSelectContainer.html(body);
-    FilterPieces(JSON.stringify(allSousFamilles[0]));
   }
 }
 
@@ -277,16 +254,23 @@ function FilterPieces(sousFamilleJson) {
     HideSelectedPieceSchema();
     HideSelectedPiecePreview();
   } else {
-    xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      if (this.readyState === 4 && this.status === 200) {
-        document.getElementById("selectPieceContainer").innerHTML = this.responseText;
+    Request('PieceManager', 'GetPiecesByFamilleSsFamilleFormat', true, [famille.CodeFamille, sousFamille.CodeSsFamille, format] ).then(function (result){
+      let body = "<option value='' disabled selected>Aucune piece dans categorie</option>";
+      pieceSelector.html(body);
+      if(result.responseText != '[]'){
+        let allPieces = JSON.parse(result.responseText);
+        let body = '<option value="" disabled>Aucune</option>';
+        allPieces.forEach(function (piece){
+          body += "<option id='" + piece.IdPiece + "' value='" + JSON.stringify(piece) + "'>" + piece.LibellePiece + "</option>";
+        })
+        pieceSelector.prop('disabled', false);
+        pieceSelector.html(body);
         UpdateImageCount();
         SelectPiece();
       }
-    };
-    xhttp.open("GET", "/SrgConcept/view/AddDevisView/AddDevisDessinGetListModule.php?functionname=GetFilteredPieces&codeFamille=" + famille.CodeFamille + "&codeSs=" + sousFamille.CodeSsFamille + "&format=" + format, true);
-    xhttp.send();
+    }).catch(function(error){
+
+    });
   }
 }
 
@@ -425,14 +409,12 @@ function SauvegarderDevis() {
           try {
             responseText = JSON.parse(this.responseText);
             if(responseText.error){
-              console.log(responseText);
             } else {
-              console.log(responseText);
               window.location.replace("AddDevisCotesViewModel.php?idDevis=" + responseText);
             }
           }
           catch (error){
-            console.log(error, this.responseText);
+
           }
         }
       };
@@ -562,6 +544,27 @@ function SetPageNumberContainer() {
 function getDevis(devisId)
 {
   window.open('../controller/DevisController.php?functionname=GenerateDevisPDF' + "&devisId=" + devisId, '_blank');
+}
+
+function Request(manager, method, originalObject, args) {
+  var request = new XMLHttpRequest();
+  return new Promise(function (resolve, reject) {
+    request.onreadystatechange = function () {
+      if (request.readyState !== 4) return;
+      if (request.status >= 200 && request.status < 300) {
+        //return this.responseText;
+        resolve(request);
+      } else {
+        reject({
+          status: request.status,
+          statusText: request.statusText
+        });
+      }
+    };
+    let getoriginalObject = originalObject ? "&originalObject=true" : "";
+    request.open("POST", "/SrgConcept/ServiceHelper.php?manager=" + manager + "&route=" + method + getoriginalObject, true);
+    request.send(args != undefined ? JSON.stringify(args) : null);
+  });
 }
 
 </script>
