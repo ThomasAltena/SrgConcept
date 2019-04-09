@@ -9,6 +9,14 @@ class PieceManager
 
 	public function SetDb(PDO $db){$this->_Db = $db;}
 
+	public function AddPieceArray($Piece){
+		if(!is_array($Piece)){
+			$Piece = get_object_vars($Piece);
+		}
+		$piece = new Piece($Piece);
+		return $this->AddPiece($piece);
+	}
+
 	public function AddPiece(Piece $Piece){
 		$q = $this->_Db->prepare('INSERT INTO pieces VALUES(:IdPiece, :LibellePiece, :CodePiece, :CheminPiece, :CodeFamille, :CodeSsFamille, :CodeGroupeCube)');
 		$q->bindValue(':IdPiece', $Piece->GetIdPiece());
@@ -23,6 +31,14 @@ class PieceManager
 		} else {
 			return $this->_Db->lastInsertId();
 		}
+	}
+
+	public function UpdatePieceArray($Piece){
+		if(!is_array($Piece)){
+			$Piece = get_object_vars($Piece);
+		}
+		$piece = new Piece($Piece);
+		$this->UpdatePiece($piece);
 	}
 
 	public function UpdatePiece(Piece $Piece){

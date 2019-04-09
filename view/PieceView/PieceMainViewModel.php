@@ -18,8 +18,8 @@ if (empty($_SESSION)) {
 <link rel="stylesheet" href="/SrgConcept/public/css/table.css" type="text/css">
 <link rel="stylesheet" href="/SrgConcept/public/css/switch.css" type="text/css">
 <!-------------------------- Il faut mettre le chemin dans les value -------------------------->
-<body style="overflow: auto; min-width:1920px;">
-  <div  id='viewContainer' class="container" style="max-width:1400px; "></div>
+<body style="overflow: hidden; min-width:1920px;">
+  <div  id='viewContainer' class="container col-lg-12 row" style="min-width:1920px; "></div>
 </body>
 <style>
 .td {
@@ -28,12 +28,63 @@ if (empty($_SESSION)) {
 }
 </style>
 <script type="text/javascript">
+let MainAucunOption = '<option value="" disabled selected> Aucun</option>';
+let pieces;
+let familles;
+let sousFamilles;
+let groupeCubes;
+let MainFamilleSelectOptions;
 
-ViewRequest('PieceMainView.php').then(function (result){
-    $('#viewContainer').html(result.responseText);
-}).catch(function(error){
+let PieceListView = [];
 
+let MainGroupeCubesSelectOptions;
+
+let promises = [];
+
+promises.push(DataRequest("PieceManager", "GetAllPiece", "true", []));
+promises.push(DataRequest("FamilleManager", "GetAllFamille", "true", []));
+promises.push(DataRequest("SousFamilleManager", "GetAllSousfamille", "true", []));
+promises.push(DataRequest("GroupecubeManager", "GetAllGroupecube", "true", []));
+promises.push(ViewRequest('PieceMainView.php'));
+
+Promise.all(promises).then((results) => {
+  pieces = JSON.parse(results[0].responseText);
+  familles = JSON.parse(results[1].responseText);
+  sousFamilles = JSON.parse(results[2].responseText);
+  groupeCubes = JSON.parse(results[3].responseText);
+
+  GenerateFamilleSelectOptions();
+  GenerateGroupeCubeSelectOptions();
+
+  $('#viewContainer').html(results[4].responseText);
+}).catch((e) => {
+             // Handle errors here
 });
+
+
+function GenerateFamilleSelectOptions(){
+  MainFamilleSelectOptions = MainAucunOption;
+  familles.forEach(function(famille){
+    MainFamilleSelectOptions += '<option value="' + famille.CodeFamille + '">' + famille.CodeFamille + '&nbsp' + famille.LibelleFamille + '</option>';
+  });
+};
+
+function GenerateSousFamilleSelectOptions(CodeFamille){
+  let MainSsFamilleSelectOptions = MainAucunOption;
+  sousFamilles.forEach(function(sousFamille){
+    if(sousFamille.CodeFamille == CodeFamille){
+      MainSsFamilleSelectOptions += '<option value="' + sousFamille.CodeSsFamille + '">' + sousFamille.CodeSsFamille + '&nbsp' + sousFamille.LibelleSsFamille + '</option>';
+    }
+  });
+  return MainSsFamilleSelectOptions;
+};
+
+function GenerateGroupeCubeSelectOptions(){
+  MainGroupeCubesSelectOptions = MainAucunOption;
+  groupeCubes.forEach(function(groupeCube){
+    MainGroupeCubesSelectOptions += '<option value="' + groupeCube.CodeGroupeCube + '">' + groupeCube.CodeGroupeCube + '&nbsp' + groupeCube.LibelleGroupeCube + '</option>';
+  });
+};
 
 
 const unique = (value, index, self) => {

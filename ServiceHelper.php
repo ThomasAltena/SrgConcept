@@ -29,10 +29,10 @@ if( !isset($_GET['manager']) || !isset($_GET['route'])) {
   }
   $data = call_user_func_array(array($manager, $_GET['route']), $args);
   if(isset($_GET['originalObject'])){
-
-
     if(!is_array($data)){
-      echo(json_encode(utf8ize($data->GetOriginalObject())));
+      if(isset($data)){
+        echo(json_encode(utf8ize($data->GetOriginalObject())));
+      }
     } else {
       $newData = [];
       foreach ($data as $dataPiece) {
