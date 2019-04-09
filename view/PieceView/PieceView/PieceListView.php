@@ -359,6 +359,12 @@ function GoToPage(pagenumber){
       PieceListView.pieceslistright.prop('disabled', false);
       PieceListView.pieceslistfullright.prop('disabled', false);
     }
+    if((PieceListView.currentPage == 1 || PieceListView.currentPage == PieceListView.totalPages) && (pagenumber > 1 || pagenumber < PieceListView.totalPages)){
+      PieceListView.pieceslistfullleft.prop('disabled', false);
+      PieceListView.pieceslistleft.prop('disabled', false);
+      PieceListView.pieceslistright.prop('disabled', false);
+      PieceListView.pieceslistfullright.prop('disabled', false);
+    }
     if(pagenumber == PieceListView.totalPages){
       PieceListView.pieceslistfullleft.prop('disabled', false);
       PieceListView.pieceslistleft.prop('disabled', false);
