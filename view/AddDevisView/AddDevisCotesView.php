@@ -40,7 +40,7 @@
               <hr>
 
               <div class="row">
-                <div class="input-group mb-2 col-sm-6" style="padding-right:5px">
+                <div class="input-group mb-2 col-sm-6" style="padding-right:5px" hidden>
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="AquisDevisTitre">Aquis :</span>
                   </div>
@@ -50,15 +50,17 @@
                     </span>
                   </div>
                 </div>
-                <div class="input-group mb-2 col-sm-6" style="padding-left:5px">
+                <div class="input-group mb-2 col-sm-6" style="padding-left:5px" hidden>
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="DosPolisDevisTitre">Dos Poli :</span>
+                    <span class="input-group-text" id="ArrondiDevisTitre">Arrondi :</span>
                   </div>
-                  <div class="input-group-append">
-                    <span class="input-group-text">
-                      <input type="checkbox" onchange="UpdateDevis()" id="DosPolisDevis">
-                    </span>
-                  </div>
+                  <select class="form-control" onchange="UpdateDevis()" id="ArrondiDevis">
+                    <option selected disabled></option>
+                    <option value='HT Net'>HT Net</option>
+                    <option value='HT Net'>HT Arrondi</option>
+                    <option value='HT Net'>TTC Net</option>
+                    <option value='HT Net'>TTC Net</option>
+                  </select>
                 </div>
               </div>
 
@@ -70,7 +72,7 @@
                   <select class="form-control" onchange="UpdateDevis()" id="TypeDevis" aria-describedby="TypeDevisTitre">
                     <option selected disabled></option>
                     <option value='Marbrier'>Marbrier</option>
-                    <option value='Granitier'>Granitier</option>
+                    <option value='PF'>Pompes funèbres</option>
                   </select>
                 </div>
                 <div class="input-group mb-2 col-sm-6" style="padding-left:5px">
@@ -86,18 +88,6 @@
               <div class="row">
                 <div class="input-group mb-2 col-sm-6" style="padding-right:5px">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="ArrondiDevisTitre">Arrondi :</span>
-                  </div>
-                  <select class="form-control" onchange="UpdateDevis()" id="ArrondiDevis">
-                    <option selected disabled></option>
-                    <option value='HT Net'>HT Net</option>
-                    <option value='HT Net'>HT Arrondi</option>
-                    <option value='HT Net'>TTC Net</option>
-                    <option value='HT Net'>TTC Net</option>
-                  </select>
-                </div>
-                <div class="input-group mb-2 col-sm-6" style="padding-left:5px">
-                  <div class="input-group-prepend">
                     <span class="input-group-text" id="PrixDevisTitre">Prix :</span>
                   </div>
                   <select class="form-control" onchange="UpdateDevis()" id="PrixDevis">
@@ -106,6 +96,16 @@
                     <option value='Prix Franco'>Prix Franco</option>
                     <option value='Prix Pose'>Prix Posé</option>
                   </select>
+                </div>
+                <div class="input-group mb-2 col-sm-6" style="padding-left:5px">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="DosPolisDevisTitre">Dos Poli :</span>
+                  </div>
+                  <div class="input-group-append">
+                    <span class="input-group-text">
+                      <input type="checkbox" onchange="UpdateDevis()" id="DosPolisDevis">
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -131,7 +131,7 @@
 
               <hr>
 
-              <div class="input-group">
+              <div class="input-group" hidden>
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="PUTransportDevisTitre">PU Transport :</span>
                 </div>
@@ -142,7 +142,7 @@
               </div>
               <span class="input-group-text mb-2">(la tonne) - Soit &nbsp <span id="FraisDePortDevis"></span>€ frais de port.</span>
 
-              <hr>
+              <hr hidden>
 
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -193,11 +193,9 @@
 
               <hr>
 
-              <button class='btn btn-primary form-control mb-2'>Affinage calculs
+              <button class='btn btn-primary form-control mb-2' hidden>Affinage calculs
               </button>
-
             </div>
-
 
           </div>
           <div class="col-sm" id="listeCubesDevisContainer" style="margin-top:10px">
@@ -278,7 +276,7 @@
 
               <hr>
 
-              <div class="input-group mb-2">
+              <div class="input-group mb-2" hidden>
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="ArticlesHTDevisTitre">Articles HT :</span>
                 </div>
@@ -288,7 +286,7 @@
                 </div>
               </div>
 
-              <div class="input-group mb-2">
+              <div class="input-group mb-2" hidden>
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="ArticlesTTCDevisTitre">Articles TTC :</span>
                 </div>
@@ -298,7 +296,7 @@
                 </div>
               </div>
 
-              <hr>
+              <hr hidden>
 
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -328,7 +326,7 @@
               <button class='btn btn-primary form-control mb-2' onclick="OpenModalCommentaires()">Commentaires
               </button>
 
-              <button class='btn btn-success form-control mb-2' onclick="OpenModalSuite()">Suite
+              <button hidden class='btn btn-success form-control mb-2' onclick="OpenModalSuite()">Suite
               </button>
               <button class='btn btn-success form-control mb-2' onclick="SaveChanges()">Sauvegarder
               </button>

@@ -53,11 +53,11 @@ class PieceManager
 		$q->execute();
 	}
 
-	public function DeletePiece( $id){
+	public function DeletePiece($id){
 		$this->_Db->exec('DELETE FROM pieces WHERE IdPiece ='.$id);
 	}
 
-	public function GetPiece( $id){
+	public function GetPiece($id){
 		$q = $this->_Db->prepare('SELECT * FROM pieces WHERE IdPiece ='.$id);
 		$q->execute();
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Piece = new Piece($donnees);}

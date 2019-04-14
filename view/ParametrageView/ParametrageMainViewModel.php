@@ -31,11 +31,14 @@ if (empty($_SESSION)) {
 let MainAucunOption = '<option value="" disabled selected> Aucun</option>';
 let pieces;
 let familles;
+let regroupementFamilles;
 let sousFamilles;
 let groupeCubes;
 let MainFamilleSelectOptions;
+let MainRegroupementSelectOptions;
 
 let PieceListView = [];
+let FamilleListView = [];
 
 let MainGroupeCubesSelectOptions;
 
@@ -45,16 +48,19 @@ promises.push(DataRequest("PieceManager", "GetAllPiece", "true", []));
 promises.push(DataRequest("FamilleManager", "GetAllFamille", "true", []));
 promises.push(DataRequest("SousFamilleManager", "GetAllSousfamille", "true", []));
 promises.push(DataRequest("GroupecubeManager", "GetAllGroupecube", "true", []));
-promises.push(ViewRequest('PieceMainView.php'));
+promises.push(ViewRequest('ParametrageMainView.php'));
+promises.push(DataRequest("RegroupementfamilleManager", "GetAllRegroupementfamille", "true", []));
+
 
 Promise.all(promises).then((results) => {
   pieces = JSON.parse(results[0].responseText);
   familles = JSON.parse(results[1].responseText);
   sousFamilles = JSON.parse(results[2].responseText);
   groupeCubes = JSON.parse(results[3].responseText);
-
+  regroupementFamilles = JSON.parse(results[5].responseText);
   GenerateFamilleSelectOptions();
   GenerateGroupeCubeSelectOptions();
+  GenerateRegroupementSelectOptions();
 
   $('#viewContainer').html(results[4].responseText);
 }).catch((e) => {
@@ -66,6 +72,13 @@ function GenerateFamilleSelectOptions(){
   MainFamilleSelectOptions = MainAucunOption;
   familles.forEach(function(famille){
     MainFamilleSelectOptions += '<option value="' + famille.CodeFamille + '">' + famille.CodeFamille + '&nbsp' + famille.LibelleFamille + '</option>';
+  });
+};
+
+function GenerateRegroupementSelectOptions(){
+  MainRegroupementSelectOptions = MainAucunOption;
+  regroupementFamilles.forEach(function(regroupementFamille){
+    MainRegroupementSelectOptions += '<option value="' + regroupementFamille.IdRegroupementFamille + '">' + regroupementFamille.LibelleRegroupementFamille + '&nbsp' + regroupementFamille.PositionRegroupementFamille + '</option>';
   });
 };
 

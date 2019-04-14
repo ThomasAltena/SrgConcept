@@ -8,9 +8,6 @@ class CubeDevis
 	private $_HauteurCubeDevis = '';
 	private $_LargeurCubeDevis = '';
 	private $_ProfondeurCubeDevis = '';
-	private $_HauteurExacteCubeDevis = '';
-	private $_LargeurExacteCubeDevis = '';
-	private $_ProfondeurExacteCubeDevis = '';
 	private $_QuantiteCubeDevis = '';
 	private $_IdDevis = '';
 	private $_IdPiece = '';
@@ -29,7 +26,7 @@ class CubeDevis
 	private $_DessusScieeCube = '';
 	private $_DessousPolisCube = '';
 	private $_DessousScieeCube = '';
-	private $_OriginalObject;
+	private $_OriginalObject = '';
 
 	public function __construct(array $donnees)
 	{
@@ -58,9 +55,6 @@ class CubeDevis
 	public function GetHauteurCubeDevis(){return $this->_HauteurCubeDevis;}
 	public function GetLargeurCubeDevis(){return $this->_LargeurCubeDevis;}
 	public function GetProfondeurCubeDevis(){return $this->_ProfondeurCubeDevis;}
-	public function GetHauteurExacteCubeDevis(){return $this->_HauteurExacteCubeDevis;}
-	public function GetLargeurExacteCubeDevis(){return $this->_LargeurExacteCubeDevis;}
-	public function GetProfondeurExacteCubeDevis(){return $this->_ProfondeurExacteCubeDevis;}
 	public function GetQuantiteCubeDevis(){return $this->_QuantiteCubeDevis;}
 	public function GetIdDevis(){return $this->_IdDevis;}
 	public function GetIdPiece(){return $this->_IdPiece;}
@@ -88,9 +82,6 @@ class CubeDevis
 	public function SetHauteurCubeDevis($HauteurCubeDevis){$this -> _HauteurCubeDevis = $HauteurCubeDevis;}
 	public function SetLargeurCubeDevis($LargeurCubeDevis){$this -> _LargeurCubeDevis = $LargeurCubeDevis;}
 	public function SetProfondeurCubeDevis($ProfondeurCubeDevis){$this -> _ProfondeurCubeDevis = $ProfondeurCubeDevis;}
-	public function SetHauteurExacteCubeDevis($HauteurExacteCubeDevis){$this -> _HauteurExacteCubeDevis = $HauteurExacteCubeDevis;}
-	public function SetLargeurExacteCubeDevis($LargeurExacteCubeDevis){$this -> _LargeurExacteCubeDevis = $LargeurExacteCubeDevis;}
-	public function SetProfondeurExacteCubeDevis($ProfondeurExacteCubeDevis){$this -> _ProfondeurExacteCubeDevis = $ProfondeurExacteCubeDevis;}
 	public function SetQuantiteCubeDevis($QuantiteCubeDevis){$this -> _QuantiteCubeDevis = $QuantiteCubeDevis;}
 	public function SetIdDevis($IdDevis){$this -> _IdDevis = $IdDevis;}
 	public function SetIdPiece($IdPiece){$this -> _IdPiece = $IdPiece;}

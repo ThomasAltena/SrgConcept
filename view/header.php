@@ -4,8 +4,6 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
-
-
 header("Cache-Control:no-cache");
 
 spl_autoload_register(function ($class_name) {
@@ -53,100 +51,77 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/UploadCroquisClass.p
 
     <!-- Links -->
     <ul class="navbar-nav">
-      <?php
-      //var_dump($_SESSION);
-      /* Verif si la session est vide */
-      if(!empty($_SESSION)){
-        if($_SESSION['Role_user'] == 1)
-        {             //Si c'est un admin on ajoute les menus
-          ?>
-          <li class='nav-item'>
-            <div class='dropdown '>
-              <a class='dropdown-toggle nav-link' href='/SrgConcept/view/UserView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>
+      <li class='nav-item'>
+          <a class='nav-link' href='/SrgConcept/view/TableauDebordsViewModel.php' role='button' >
+            Tableau de bords
+          </a>
+      </li>
+      <li class='nav-item'>
+          <a class='nav-link' href='/SrgConcept/view/ClientView.php' role='button' href='/SrgConcept/view/ClientView.php'>
+            Clients
+          </a>
+      </li>
+      <li class='nav-item' hidden id="Parametrage">
+          <div class='dropdown'>
+            <a class='dropdown-toggle nav-link' role='button' id='dropdownMenuLink' data-toggle='dropdown'>
+              Parametrage
+            </a>
+            <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
+              <a class='dropdown-item' href='/SrgConcept/view/PieceView/PieceViewModel.php'>
+                Pieces
+              </a>
+              <a class='dropdown-item' href='/SrgConcept/view/FamilleView/FamilleViewModel.php'>
+                Familles
+              </a>
+              <a class='dropdown-item' href=''>
+                Regroupement familles
+              </a>
+              <a class='dropdown-item' href=''>
+                Sous-familles
+              </a>
+              <a class='dropdown-item' href=''>
+                Regroupement Sous-familles
+              </a>
+              <a class='dropdown-item' href=''>
+                Cubes
+              </a>
+              <a class='dropdown-item' href=''>
+                Groupe cubes
+              </a>
+              <a class='dropdown-item' href=''>
+                Entreprises
+              </a>
+              <a class='dropdown-item' href=''>
                 Utilisateurs
               </a>
-              <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
-                <a class='dropdown-item' href='/SrgConcept/view/UserView.php'>
-                  Liste
-                </a>
-                <a class='dropdown-item' href='/SrgConcept/view/AddUserView.php'>
-                  Création
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class='nav-item'>
-            <div class='dropdown'>
-              <a class='dropdown-toggle nav-link' href='/SrgConcept/view/ClientView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>
-                Clients
+              <a class='dropdown-item' href=''>
+                Particuliers
               </a>
-              <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
-                <a class='dropdown-item' href='/SrgConcept/view/ClientView.php'>
-                  Liste
-                </a>
-                <a class='dropdown-item' href='/SrgConcept/view/AddClientView.php'>
-                  Création
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class='nav-item'>
-            <div class='dropdown'>
-              <a class='dropdown-toggle nav-link' href='/SrgConcept/view/UserView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>
-                Matiéres
+              <a class='dropdown-item' href=''>
+                Matieres
               </a>
-              <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
-                <a class='dropdown-item' href='/SrgConcept/view/MatiereView.php'>
-                  Liste
-                </a>
-                <a class='dropdown-item' href='/SrgConcept/view/AddMatiereView.php'>
-                  Création
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class='nav-item'>
-            <div class='dropdown'>
-              <a class='nav-link' href='/SrgConcept/view/PieceView/PieceMainViewModel.php'>
-                Piéces
+              <a class='dropdown-item' href=''>
+                Options
               </a>
             </div>
-          </li>
-          <li class='nav-item'>
-            <a class='nav-link' href='/SrgConcept/view/OptionView.php'>
-              Option
+          </div>
+      </li>
+      <li class='nav-item'>
+        <div class='dropdown'>
+          <a class='dropdown-toggle nav-link' href='/SrgConcept/view/DevisView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>
+            Devis
+          </a>
+          <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
+            <a class='dropdown-item' href='/SrgConcept/view/DevisView.php'>
+              Liste
             </a>
-          </li>
-          <li class='nav-item'>
-            <a class='nav-link' href='/SrgConcept/view/TVAView.php'>
-              TVA
+            <a class='dropdown-item' href='/SrgConcept/view/AddDevisView/AddDevisDessinViewModel.php'>
+              Création
             </a>
-          </li>
-          <li class='nav-item'>
-            <div class='dropdown'>
-              <a class='dropdown-toggle nav-link' href='/SrgConcept/view/DevisView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>
-                Devis
-              </a>
-              <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
-                <a class='dropdown-item' href='/SrgConcept/view/DevisView.php'>
-                  Liste
-                </a>
-                <a class='dropdown-item' href='/SrgConcept/view/AddDevisView/AddDevisDessinViewModel.php'>
-                  Création
-                </a>
-              </div>
-            </div>
-          </li>
-
-          <?php
-
-        } else{ //C'est pas des admin afficher
-          ?>
-
-          <?php
-        }
-      }
-
+          </div>
+        </div>
+      </li>
+      <?php
       //Si la connexion est bonne ou pas
       if(isset($_SESSION['Id_user'])){
         ?>

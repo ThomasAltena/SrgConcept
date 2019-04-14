@@ -32,6 +32,10 @@ class ConnexionManager
 			$role = $user->GetRoleUser();
 			$psdbdd = $user->GetPseudoUser();
 			$siret = $user->GetSiretUser();
+			$idEntreprise = $user->GetIdEntreprise();
+
+			$EntrepriseManager = new EntrepriseManager($this->_Db);
+			$entreprise = $EntrepriseManager->GetEntreprise($idEntreprise);
 
 			if(!empty($passbdd)) {
 				if (password_verify($password, $passbdd))
@@ -40,6 +44,9 @@ class ConnexionManager
 					$_SESSION['Pseudo_user'] = $psdbdd;
 					$_SESSION['Role_user'] = $role;
 					$_SESSION['Siret_role'] = $siret;
+					$_SESSION['Id_Entreprise'] = $idEntreprise;
+					$_SESSION['Type_Entreprise'] = $entreprise->GetRoleEntreprise();
+					$_SESSION['Type_User'] = $entreprise->GetRoleEntreprise();
 					$result = "Success";
 				}	else {
 					$result = "WrongLogin";

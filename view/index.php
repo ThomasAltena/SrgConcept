@@ -77,7 +77,7 @@ if(isset($_POST['go'])){
 <script type="text/javascript">
   redirect();
     function redirect(){
-      window.location.replace("/SrgConcept/view/ClientView.php");
+      window.location.replace("/SrgConcept/view/TableauDeBordsView/TableauDeBordsViewModel.php");
     }
 </script>
   <?php

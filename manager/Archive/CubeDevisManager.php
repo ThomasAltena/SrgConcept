@@ -10,16 +10,13 @@ class CubeDevisManager
 	public function SetDb(PDO $db){$this->_Db = $db;}
 
 	public function AddCubeDevis(CubeDevis $CubeDevis){
-		$q = $this->_Db->prepare('INSERT INTO cubes_devis VALUES(:IdCubeDevis, :LibelleCubeDevis, :CodeGroupCube, :HauteurCubeDevis, :LargeurCubeDevis, :ProfondeurCubeDevis, :HauteurExacteCubeDevis, :LargeurExacteCubeDevis, :ProfondeurExacteCubeDevis, :QuantiteCubeDevis, :IdDevis, :IdPiece, :IdPieceDevis, :IdCube, :IdMatiere, :AvantPolisCube, :AvantScieeCube, :ArrierePolisCube, :ArriereScieeCube, :DroitePolisCube, :DroiteScieeCube, :GauchePolisCube, :GaucheScieeCube, :DessusPolisCube, :DessusScieeCube, :DessousPolisCube, :DessousScieeCube)');
+		$q = $this->_Db->prepare('INSERT INTO cubes_devis VALUES(:IdCubeDevis, :LibelleCubeDevis, :CodeGroupCube, :HauteurCubeDevis, :LargeurCubeDevis, :ProfondeurCubeDevis, :QuantiteCubeDevis, :IdDevis, :IdPiece, :IdPieceDevis, :IdCube, :IdMatiere, :AvantPolisCube, :AvantScieeCube, :ArrierePolisCube, :ArriereScieeCube, :DroitePolisCube, :DroiteScieeCube, :GauchePolisCube, :GaucheScieeCube, :DessusPolisCube, :DessusScieeCube, :DessousPolisCube, :DessousScieeCube)');
 		$q->bindValue(':IdCubeDevis', $CubeDevis->GetIdCubeDevis());
-		$q->bindValue(':LibelleCubeDevis', $CubeDevis->GetLibelleCubeDevis());
 		$q->bindValue(':CodeGroupCube', $CubeDevis->GetCodeGroupCube());
+		$q->bindValue(':LibelleCubeDevis', $CubeDevis->GetLibelleCubeDevis());
 		$q->bindValue(':HauteurCubeDevis', $CubeDevis->GetHauteurCubeDevis());
 		$q->bindValue(':LargeurCubeDevis', $CubeDevis->GetLargeurCubeDevis());
 		$q->bindValue(':ProfondeurCubeDevis', $CubeDevis->GetProfondeurCubeDevis());
-		$q->bindValue(':HauteurExacteCubeDevis', $CubeDevis->GetHauteurExacteCubeDevis());
-		$q->bindValue(':LargeurExacteCubeDevis', $CubeDevis->GetLargeurExacteCubeDevis());
-		$q->bindValue(':ProfondeurExacteCubeDevis', $CubeDevis->GetProfondeurExacteCubeDevis());
 		$q->bindValue(':QuantiteCubeDevis', $CubeDevis->GetQuantiteCubeDevis());
 		$q->bindValue(':IdDevis', $CubeDevis->GetIdDevis());
 		$q->bindValue(':IdPiece', $CubeDevis->GetIdPiece());
@@ -39,23 +36,20 @@ class CubeDevisManager
 		$q->bindValue(':DessousPolisCube', $CubeDevis->GetDessousPolisCube());
 		$q->bindValue(':DessousScieeCube', $CubeDevis->GetDessousScieeCube());
 		if(!$q->execute()) {
-			return [false,$q->errorInfo()];
+				return [false,$q->errorInfo()];
 		} else {
 			return [true,$this->_Db->lastInsertId()];
 		}
 	}
 
 	public function UpdateCubeDevis(CubeDevis $CubeDevis){
-		$q = $this->_Db->prepare('UPDATE cubes_devis SET `LibelleCubeDevis` = :LibelleCubeDevis, `CodeGroupCube` = :CodeGroupCube, `HauteurCubeDevis` = :HauteurCubeDevis, `LargeurCubeDevis` = :LargeurCubeDevis, `ProfondeurCubeDevis` = :ProfondeurCubeDevis, `HauteurExacteCubeDevis` = :HauteurExacteCubeDevis, `LargeurExacteCubeDevis` = :LargeurExacteCubeDevis, `ProfondeurExacteCubeDevis` = :ProfondeurExacteCubeDevis, `QuantiteCubeDevis` = :QuantiteCubeDevis, `IdDevis` = :IdDevis, `IdPiece` = :IdPiece, `IdPieceDevis` = :IdPieceDevis, `IdCube` = :IdCube, `IdMatiere` = :IdMatiere, `AvantPolisCube` = :AvantPolisCube, `AvantScieeCube` = :AvantScieeCube, `ArrierePolisCube` = :ArrierePolisCube, `ArriereScieeCube` = :ArriereScieeCube, `DroitePolisCube` = :DroitePolisCube, `DroiteScieeCube` = :DroiteScieeCube, `GauchePolisCube` = :GauchePolisCube, `GaucheScieeCube` = :GaucheScieeCube, `DessusPolisCube` = :DessusPolisCube, `DessusScieeCube` = :DessusScieeCube, `DessousPolisCube` = :DessousPolisCube, `DessousScieeCube` = :DessousScieeCube WHERE IdCubeDevis = :IdCubeDevis ');
+		$q = $this->_Db->prepare('UPDATE cubes_devis SET `LibelleCubeDevis` = :LibelleCubeDevis, `CodeGroupCube` = :CodeGroupCube, `HauteurCubeDevis` = :HauteurCubeDevis, `LargeurCubeDevis` = :LargeurCubeDevis, `ProfondeurCubeDevis` = :ProfondeurCubeDevis, `QuantiteCubeDevis` = :QuantiteCubeDevis, `IdDevis` = :IdDevis, `IdPiece` = :IdPiece, `IdPieceDevis` = :IdPieceDevis, `IdCube` = :IdCube, `IdMatiere` = :IdMatiere, `AvantPolisCube` = :AvantPolisCube, `AvantScieeCube` = :AvantScieeCube, `ArrierePolisCube` = :ArrierePolisCube, `ArriereScieeCube` = :ArriereScieeCube, `DroitePolisCube` = :DroitePolisCube, `DroiteScieeCube` = :DroiteScieeCube, `GauchePolisCube` = :GauchePolisCube, `GaucheScieeCube` = :GaucheScieeCube, `DessusPolisCube` = :DessusPolisCube, `DessusScieeCube` = :DessusScieeCube, `DessousPolisCube` = :DessousPolisCube, `DessousScieeCube` = :DessousScieeCube WHERE IdCubeDevis = :IdCubeDevis ');
 		$q->bindValue(':IdCubeDevis', $CubeDevis->GetIdCubeDevis());
 		$q->bindValue(':LibelleCubeDevis', $CubeDevis->GetLibelleCubeDevis());
 		$q->bindValue(':CodeGroupCube', $CubeDevis->GetCodeGroupCube());
 		$q->bindValue(':HauteurCubeDevis', $CubeDevis->GetHauteurCubeDevis());
 		$q->bindValue(':LargeurCubeDevis', $CubeDevis->GetLargeurCubeDevis());
 		$q->bindValue(':ProfondeurCubeDevis', $CubeDevis->GetProfondeurCubeDevis());
-		$q->bindValue(':HauteurExacteCubeDevis', $CubeDevis->GetHauteurExacteCubeDevis());
-		$q->bindValue(':LargeurExacteCubeDevis', $CubeDevis->GetLargeurExacteCubeDevis());
-		$q->bindValue(':ProfondeurExacteCubeDevis', $CubeDevis->GetProfondeurExacteCubeDevis());
 		$q->bindValue(':QuantiteCubeDevis', $CubeDevis->GetQuantiteCubeDevis());
 		$q->bindValue(':IdDevis', $CubeDevis->GetIdDevis());
 		$q->bindValue(':IdPiece', $CubeDevis->GetIdPiece());
@@ -76,7 +70,6 @@ class CubeDevisManager
 		$q->bindValue(':DessousScieeCube', $CubeDevis->GetDessousScieeCube());
 		$q->execute();
 	}
-
 
 	public function DeleteCubeDevis( $id){
 		$this->_Db->exec('DELETE FROM cubes_devis WHERE IdCubeDevis ='.$id);
@@ -114,6 +107,5 @@ class CubeDevisManager
 		//print_r($CubeDevis);
 		return $CubeDevis;
 	}
-
 
 }

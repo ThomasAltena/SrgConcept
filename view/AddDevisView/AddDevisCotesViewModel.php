@@ -207,11 +207,11 @@ function FillTableDevis(){
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px; width:180px"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" class="form-control" style="padding:6px;" value="' + cube.LibelleCubeDevis + '" id="LibelleCube' + cube.IdCubeDevis + '"></input></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px; width:120px" id="MatiereSelectContainerCube' + cube.IdCubeDevis + '"></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.LargeurCubeDevis + '" id="CoteLargeurCube' + cube.IdCubeDevis + '"></input></td>';
-    body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.LargeurCubeDevis + '" id="CoteLargeurICube' + cube.IdCubeDevis + '"></input></td>';
+    body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.LargeurExacteCubeDevis + '" id="CoteLargeurExacteCube' + cube.IdCubeDevis + '"></input></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.ProfondeurCubeDevis + '" id="CoteProfondeurCube' + cube.IdCubeDevis + '"></input></td>';
-    body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.ProfondeurCubeDevis + '" id="CoteProfondeurICube' + cube.IdCubeDevis + '"></input></td>';
+    body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.ProfondeurExacteCubeDevis + '" id="CoteProfondeurExacteCube' + cube.IdCubeDevis + '"></input></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.HauteurCubeDevis + '" id="CoteHauteurCube' + cube.IdCubeDevis + '"></input></td>';
-    body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.HauteurCubeDevis + '" id="CoteHauteurICube' + cube.IdCubeDevis + '"></input></td>';
+    body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.HauteurExacteCubeDevis + '" id="CoteHauteurExacteCube' + cube.IdCubeDevis + '"></input></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input onchange="UpdateCube(' + cube.IdCubeDevis + ')" type="number" class="form-control" style="padding:6px;" value="' + cube.QuantiteCubeDevis + '" id="QuantiteCube' + cube.IdCubeDevis + '"></input></td>';
     body += '<td class="text-left td"style="padding: 6px; font-size: 16px;"><input class="form-control" style="padding:6px;" disabled value="" id="CoutCube' + cube.IdCubeDevis + '"></input></td></tr>';
   });
@@ -262,10 +262,7 @@ function UpdateCubeModalDimensionsPrix(cube){
   SurfaceCubeModal.val(surfaceTotalM3);
   VolumeCubeModal.val(volumeTotalM3);
   PoidsCubeModal.val(masseTonne);
-  let prixMatiere = 0;
-  if(cube.matiere){
-      prixMatiere = cube.matiere.PrixMatiere;
-  }
+
 
   SurfaceAvantCubeModal.val(devantArriere * 0.01);
   SurfaceArriereCubeModal.val(devantArriere * 0.01);
@@ -274,8 +271,8 @@ function UpdateCubeModalDimensionsPrix(cube){
   SurfaceDessusCubeModal.val(dessusDessous * 0.01);
   SurfaceDessousCubeModal.val(dessusDessous * 0.01);
 
-  PrixMatiereCubeModal.val(masseTonne * prixMatiere);
-  PrixFaconnadeCubeModal.val(0);
+  PrixMatiereCubeModal.val(cube.prixMatiere);
+  PrixFaconnadeCubeModal.val(cube.prixFaconnage);
 }
 
 
@@ -329,10 +326,39 @@ function UpdatePrixCube(cube){
   let volumeM3 = cube.LargeurCubeDevis * cube.ProfondeurCubeDevis * cube.HauteurCubeDevis * cube.QuantiteCubeDevis / 1000000;
   let masseTonne = masseVolumique * volumeM3 /1000;
   let prixMatiere = 0;
+  let prixPolissage = 0;
+  let prixScieage = 0;
   if(cube.matiere){
     prixMatiere = cube.matiere.PrixMatiere;
+    prixPolissage = cube.matiere.PrixPolissage ? cube.matiere.PrixPolissage : 1;
+    prixScieage = cube.matiere.PrixScieage ? cube.matiere.PrixScieage : 1;
   }
-  cube.prixCube = prixMatiere * masseTonne;
+  cube.prixMatiere = prixMatiere * masseTonne;
+
+  let surfaceAvantArriereM3 = cube.HauteurCubeDevis * cube.LargeurCubeDevis * 0.01;
+  let surfaceDroiteGaucheM3 = cube.ProfondeurCubeDevis * cube.HauteurCubeDevis * 0.01;
+  let surfaceDessusDessousM3 = cube.ProfondeurCubeDevis * cube.LargeurCubeDevis * 0.01;
+
+  let surfacePolissage = 0;
+  surfacePolissage += cube.AvantPolisCube == 1 ? surfaceAvantArriereM3 : 0;
+  surfacePolissage += cube.ArrierePolisCube == 1 ? surfaceAvantArriereM3 : 0;
+  surfacePolissage += cube.DroitePolisCube == 1 ? surfaceDroiteGaucheM3 : 0;
+  surfacePolissage += cube.GauchePolisCube == 1 ? surfaceDroiteGaucheM3 : 0;
+  surfacePolissage += cube.DessusPolisCube == 1 ? surfaceDessusDessousM3 : 0;
+  surfacePolissage += cube.DessousPolisCube == 1 ? surfaceDessusDessousM3 : 0;
+  cube.prixPolissage = prixPolissage * surfacePolissage;
+
+  let surfaceSciage = 0;
+  surfaceSciage += cube.AvantScieeCube == 1 ? surfaceAvantArriereM3 : 0;
+  surfaceSciage += cube.ArriereScieeCube == 1 ? surfaceAvantArriereM3 : 0;
+  surfaceSciage += cube.DroiteScieeCube == 1 ? surfaceDroiteGaucheM3 : 0;
+  surfaceSciage += cube.GaucheScieeCube == 1 ? surfaceDroiteGaucheM3 : 0;
+  surfaceSciage += cube.DessusScieeCube == 1 ? surfaceDessusDessousM3 : 0;
+  surfaceSciage += cube.DessousScieeCube == 1 ? surfaceDessusDessousM3 : 0;
+  cube.prixScieage = prixScieage * surfaceSciage;
+
+  cube.prixFaconnage = cube.prixPolissage + cube.prixScieage;
+  cube.prixCube = cube.prixMatiere + cube.prixFaconnage + cube.prixScieage;
   $('#CoutCube' + cube.IdCubeDevis).val((Math.round(cube.prixCube * 100) / 100).toLocaleString());
 
   // $masseVolumique = 2700;
@@ -355,8 +381,6 @@ function UpdateCubeModal(){
     selectedCube.matiere = matieres.find(x => x.IdMatiere == selectedCube.IdMatiere);
   }
 
-  UpdateCubeModalDimensionsPrix(selectedCube);
-
   selectedCube.AvantPolisCube = SurfaceAvantPolieCubeModal.is(':checked') ? '1' : '0';
   selectedCube.AvantScieeCube = SurfaceAvantScieeCubeModal.is(':checked') ? '1' : '0';
   selectedCube.ArrierePolisCube = SurfaceArrierePolieCubeModal.is(':checked') ? '1' : '0';
@@ -371,6 +395,7 @@ function UpdateCubeModal(){
   selectedCube.DessousScieeCube = SurfaceDessousScieeCubeModal.is(':checked') ? '1' : '0';
 
   ReverseUpdateCube(selectedCube);
+  UpdateCubeModalDimensionsPrix(selectedCube);
 }
 
 function ReverseUpdateCube(cube){
@@ -401,6 +426,10 @@ function UpdateCube(IdCubeDevis){
   cube.LargeurCubeDevis = CheckVal($('#CoteLargeurCube' + cube.IdCubeDevis), 0, null);
   cube.ProfondeurCubeDevis = CheckVal($('#CoteProfondeurCube' + cube.IdCubeDevis), 0, null);
   cube.HauteurCubeDevis = CheckVal($('#CoteHauteurCube' + cube.IdCubeDevis), 0, null);
+  cube.LargeurExacteCubeDevis = CheckVal($('#CoteLargeurExacteCube' + cube.IdCubeDevis), 0, null);
+  cube.ProfondeurExacteCubeDevis = CheckVal($('#CoteProfondeurExacteCube' + cube.IdCubeDevis), 0, null);
+  cube.HauteurExacteCubeDevis = CheckVal($('#CoteHauteurExacteCube' + cube.IdCubeDevis), 0, null);
+
   cube.QuantiteCubeDevis = CheckVal($('#QuantiteCube' + cube.IdCubeDevis), 0, null);
   cube.IdMatiere = $('#MatiereSelectCube' + cube.IdCubeDevis).val();
   if(!cube.matiere || cube.matiere.IdMatiere != cube.IdMatiere){
@@ -428,12 +457,14 @@ function UpdatePrix(){
   devis.PUTransportDevis = PUTransportDevis.val();
   UpdateFraisDePort();
 
-  let prixToutCube = devis.cubes.map(x => x.prixCube);
-  let prixTotalCubes = prixToutCube.reduce(add, 0);
-  PrixMatiere = Math.round(prixTotalCubes * 100) / 100;
+  let prixMatiereToutCube = devis.cubes.map(x => x.prixMatiere);
+  let prixMatiereTotalCubes = prixMatiereToutCube.reduce(add, 0);
+  PrixMatiere = Math.round(prixMatiereTotalCubes * 100) / 100;
   PrixMatiereDevis.val(PrixMatiere.toLocaleString());
 
-  PrixFaconnage = 0;
+  let prixFaconnageToutCube = devis.cubes.map(x => x.prixFaconnage);
+  let prixFaconnageTotalCubes = prixFaconnageToutCube.reduce(add, 0);
+  PrixFaconnage = Math.round(prixFaconnageTotalCubes * 100) / 100;
   PrixFaconnageDevis.val(PrixFaconnage.toLocaleString());
 
   PrixOptions = 0;
