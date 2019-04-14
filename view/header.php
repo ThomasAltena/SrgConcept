@@ -43,7 +43,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/UploadCroquisClass.p
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </head>
+<?php
+if(isset($_SESSION['Id_user'])){
 
+  ?>
 <header style="min-width: 1250px">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="min-width: 1250px">
     <!-- Brand -->
@@ -61,7 +64,11 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/UploadCroquisClass.p
             Clients
           </a>
       </li>
-      <li class='nav-item' hidden id="Parametrage">
+      <?php
+      if($_SESSION['Type_Entreprise'] == 'ADMIN'){
+
+        ?>
+      <li class='nav-item' id="Parametrage">
           <div class='dropdown'>
             <a class='dropdown-toggle nav-link' role='button' id='dropdownMenuLink' data-toggle='dropdown'>
               Parametrage
@@ -106,6 +113,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/UploadCroquisClass.p
             </div>
           </div>
       </li>
+      <?php
+    }
+        ?>
       <li class='nav-item'>
         <div class='dropdown'>
           <a class='dropdown-toggle nav-link' href='/SrgConcept/view/DevisView.php' role='button' id='dropdownMenuLink' data-toggle='dropdown'>
@@ -144,3 +154,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/UploadCroquisClass.p
     </ul>
   </nav>
 </header>
+<?php
+}
+  ?>
