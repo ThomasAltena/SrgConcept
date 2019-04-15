@@ -95,15 +95,21 @@ class DevisManager
 		$q->execute();
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Devis = new Devis($donnees);}
 
+		$PieceManager = new PieceManager($this->_Db);
+		$OptionCubeDevisManager = new OptionCubeDevisManager($this->_Db);
 		$CubeDevisManager = new CubeDevisManager($this->_Db);
 		$Cubes = $CubeDevisManager->GetCubeDevisByDevis($id);
 
 		$originalObject = $Devis->GetOriginalObject();
 		$originalObject['cubes'] = [];
 		foreach ($Cubes as $cube) {
-			array_push($originalObject['cubes'], $cube->GetOriginalObject());
+			$originalCube = $cube->GetOriginalObject();
+			$originalCube['piece'] = $PieceManager->GetPiece($cube->GetIdPiece())->GetOriginalObject();
+			$originalCube['options'] = $OptionCubeDevisManager->GetAllOptionOriginalObjectByCubeDevisId($cube->GetIdCubeDevis());
+
+			array_push($originalObject['cubes'], $originalCube);
 		}
-		$PieceManager = new PieceManager($this->_Db);
+
 		$PieceDevisManager = new PieceDevisManager($this->_Db);
 		$PieceDevis = $PieceDevisManager->GetPieceDevisByDevis($id);
 		$originalObject['pieces'] = [];
@@ -116,6 +122,10 @@ class DevisManager
 		$ClientManager = new ClientManager($this->_Db);
 		$Client = $ClientManager->GetClient($Devis->GetIdClient());
 		$originalObject['client'] = $Client->GetOriginalObject();
+
+		$UserManager = new UserManager($this->_Db);
+		$User = $UserManager->GetUserAndEntrepriseOriginalObject($Devis->GetIdUser());
+		$originalObject['user'] = $User;
 
 		return $originalObject;
 	}

@@ -1,5 +1,5 @@
 <script>
-function DataRequest (manager, method, originalObject, args) {
+function DataRequest (manager, method, originalObject, args, doNotJSONReturn) {
   var request = new XMLHttpRequest();
   return new Promise(function (resolve, reject) {
     request.onreadystatechange = function () {
@@ -15,7 +15,8 @@ function DataRequest (manager, method, originalObject, args) {
       }
     };
     let getoriginalObject = originalObject ? "&originalObject=true" : "";
-    request.open("POST", "/SrgConcept/ServiceHelper.php?manager=" + manager + "&route=" + method + getoriginalObject, true);
+    let DoNotJSON = doNotJSONReturn ? "&DoNotJSON=true" : "";
+    request.open("POST", "/SrgConcept/ServiceHelper.php?manager=" + manager + "&route=" + method + getoriginalObject + DoNotJSON, true);
     request.send(args != undefined ? JSON.stringify(args) : null);
   });
 }

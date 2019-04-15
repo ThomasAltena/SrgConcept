@@ -135,7 +135,14 @@ function supp(id)
 
   function getDevis(devisId)
   {
-    window.open('../controller/DevisController.php?functionname=GenerateDevisPDF' + "&devisId=" + devisId, '_blank');
+    ViewRequest('PieceView.php')
+    DataRequest("PdfManager", "GenerateDevisPDF", undefined, [devisId], true).then(function(result){
+      console.log(result.responseText);
+      window.open(result.responseText, '_blank');
+
+    });
+    // window.open('../controller/DevisController.php?functionname=GenerateDevisPDF' + "&devisId=" + devisId, '_blank');
+
   }
 
   function loadModalData(devis, clientLibelle, type){

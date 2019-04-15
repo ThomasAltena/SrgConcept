@@ -10,21 +10,29 @@ class MatiereManager
 	public function SetDb(PDO $db){$this->_Db = $db;}
 
 	public function AddMatiere(Matiere $Matiere){
-		$q = $this->_Db->prepare('INSERT INTO matieres VALUES(:IdMatiere, :CodeMatiere, :LibelleMatiere, :PrixMatiere, :CheminMatiere)');
+		$q = $this->_Db->prepare('INSERT INTO matieres VALUES(:IdMatiere, :CodeMatiere, :LibelleMatiere, :PrixMatiere, :PrixScieage, :PrixPolissage, :CheminMatiere)');
 		$q->bindValue(':IdMatiere', $Matiere->GetIdMatiere());
 		$q->bindValue(':CodeMatiere', $Matiere->GetCodeMatiere());
 		$q->bindValue(':LibelleMatiere', $Matiere->GetLibelleMatiere());
 		$q->bindValue(':PrixMatiere', $Matiere->GetPrixMatiere());
+		$q->bindValue(':PrixScieage', $Matiere->GetPrixScieage());
+		$q->bindValue(':PrixPolissage', $Matiere->GetPrixPolissage());
 		$q->bindValue(':CheminMatiere', $Matiere->GetCheminMatiere());
-		$q->execute();
+		if(!$q->execute()) {
+			return [false,$q->errorInfo()];
+		} else {
+			return [true,$this->_Db->lastInsertId()];
+		}
 	}
 
 	public function UpdateMatiere(Matiere $Matiere){
-		$q = $this->_Db->prepare('UPDATE matieres SET `CodeMatiere` = :CodeMatiere, `LibelleMatiere` = :LibelleMatiere, `PrixMatiere` = :PrixMatiere, `CheminMatiere` = :CheminMatiere WHERE IdMatiere = :IdMatiere ');
+		$q = $this->_Db->prepare('UPDATE matieres SET `CodeMatiere` = :CodeMatiere, `LibelleMatiere` = :LibelleMatiere, `PrixMatiere` = :PrixMatiere, `PrixScieage` = :PrixScieage, `PrixPolissage` = :PrixPolissage, `CheminMatiere` = :CheminMatiere WHERE IdMatiere = :IdMatiere ');
 		$q->bindValue(':IdMatiere', $Matiere->GetIdMatiere());
 		$q->bindValue(':CodeMatiere', $Matiere->GetCodeMatiere());
 		$q->bindValue(':LibelleMatiere', $Matiere->GetLibelleMatiere());
 		$q->bindValue(':PrixMatiere', $Matiere->GetPrixMatiere());
+		$q->bindValue(':PrixScieage', $Matiere->GetPrixScieage());
+		$q->bindValue(':PrixPolissage', $Matiere->GetPrixPolissage());
 		$q->bindValue(':CheminMatiere', $Matiere->GetCheminMatiere());
 		$q->execute();
 	}
@@ -46,4 +54,5 @@ class MatiereManager
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$Matieres[] = new Matiere($donnees);}
 		return $Matieres;
 	}
+
 }

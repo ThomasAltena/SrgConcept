@@ -7,10 +7,12 @@ if (empty($_SESSION)) {
   header('location:/SrgConcept/view/index.php');
 }
 spl_autoload_register(function ($class_name) {
-  if(strpos($class_name, 'Manager')){
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/manager/'. $class_name . '.php');
-  } else {
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/'. $class_name . 'Class.php');
+  if(!strpos($class_name, 'Html2Pdf')){
+    if(strpos($class_name, 'Manager')){
+      require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/manager/'. $class_name . '.php');
+    } else {
+      require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/'. $class_name . 'Class.php');
+    }
   }
 });
 
@@ -41,7 +43,11 @@ if( !isset($_GET['manager']) || !isset($_GET['route'])) {
       echo(json_encode(utf8ize($newData)));
     }
   } else {
-    echo(json_encode(utf8ize($data)));
+    if(isset($_GET['DoNotJSON'])){
+      echo($data);
+    } else {
+      echo(json_encode(utf8ize($data)));
+    }
   }
 }
 

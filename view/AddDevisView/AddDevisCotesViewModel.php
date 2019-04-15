@@ -170,7 +170,9 @@ function GetDevisData() {
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
+      console.log(this.responseText);
       devis = JSON.parse(this.responseText);
+      console.log(devis);
       FillDevisInfo();
       FillTableDevis();
       GetMatieres();
@@ -330,8 +332,8 @@ function UpdatePrixCube(cube){
   let prixScieage = 0;
   if(cube.matiere){
     prixMatiere = cube.matiere.PrixMatiere;
-    prixPolissage = cube.matiere.PrixPolissage ? cube.matiere.PrixPolissage : 1;
-    prixScieage = cube.matiere.PrixScieage ? cube.matiere.PrixScieage : 1;
+    prixPolissage = cube.matiere.PrixPolissage;
+    prixScieage = cube.matiere.PrixScieage;
   }
   cube.prixMatiere = prixMatiere * masseTonne;
 
@@ -360,13 +362,6 @@ function UpdatePrixCube(cube){
   cube.prixFaconnage = cube.prixPolissage + cube.prixScieage;
   cube.prixCube = cube.prixMatiere + cube.prixFaconnage + cube.prixScieage;
   $('#CoutCube' + cube.IdCubeDevis).val((Math.round(cube.prixCube * 100) / 100).toLocaleString());
-
-  // $masseVolumique = 2700;
-  // $volumeCM3 = $ligneModel->GetLargeur() * $ligneModel->GetHauteur() * $ligneModel->GetProfondeur();
-  // $volumeM3 = $volumeCM3 /1000000;
-  // $masseKG = $volumeM3 * $masseVolumique;
-  // $masseTonne = $masseKG/1000;
-  // $prix = $masseTonne * $prixMatiereTonne;
 }
 
 function UpdateCubeModal(){

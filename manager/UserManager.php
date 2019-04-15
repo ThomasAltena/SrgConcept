@@ -41,14 +41,25 @@ class UserManager
 		$q->execute();
 	}
 
-	public function DeleteUser( $id){
+	public function DeleteUser($id){
 		$this->_Db->exec('DELETE FROM users WHERE IdUser ='.$id);
 	}
 
-	public function GetUser( $id){
+	public function GetUser($id){
 		$q = $this->_Db->prepare('SELECT * FROM users WHERE IdUser ='.$id);
 		$q->execute();
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){$User = new User($donnees);}
+		return $User;
+	}
+
+	public function GetUserAndEntrepriseOriginalObject($id){
+		$EntrepriseManager = new EntrepriseManager($this->_Db);
+		$q = $this->_Db->prepare('SELECT * FROM users WHERE IdUser ='.$id);
+		$q->execute();
+		while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){
+			$User = $donnees;
+			$User['entreprise'] = $EntrepriseManager->GetEntreprise($User['IdEntreprise'])->GetOriginalObject();
+		}
 		return $User;
 	}
 

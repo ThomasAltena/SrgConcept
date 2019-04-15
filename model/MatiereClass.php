@@ -6,6 +6,8 @@ class Matiere
 	private $_CodeMatiere;
 	private $_LibelleMatiere;
 	private $_PrixMatiere;
+	private $_PrixScieage;
+	private $_PrixPolissage;
 	private $_CheminMatiere;
 	private $_OriginalObject;
 
@@ -34,6 +36,8 @@ class Matiere
 	public function GetCodeMatiere(){return $this->_CodeMatiere;}
 	public function GetLibelleMatiere(){return $this->_LibelleMatiere;}
 	public function GetPrixMatiere(){return $this->_PrixMatiere;}
+	public function GetPrixScieage(){return $this->_PrixScieage;}
+	public function GetPrixPolissage(){return $this->_PrixPolissage;}
 	public function GetCheminMatiere(){return $this->_CheminMatiere;}
 	public function GetOriginalObject(){return $this->_OriginalObject;}
 
@@ -42,6 +46,8 @@ class Matiere
 	public function SetCodeMatiere($CodeMatiere){$this -> _CodeMatiere = $CodeMatiere;}
 	public function SetLibelleMatiere($LibelleMatiere){$this -> _LibelleMatiere = $LibelleMatiere;}
 	public function SetPrixMatiere($PrixMatiere){$this -> _PrixMatiere = $PrixMatiere;}
+	public function SetPrixScieage($PrixScieage){$this -> _PrixScieage = $PrixScieage;}
+	public function SetPrixPolissage($PrixPolissage){$this -> _PrixPolissage = $PrixPolissage;}
 	public function SetCheminMatiere($CheminMatiere){$this -> _CheminMatiere = $CheminMatiere;}
 	public function SetOriginalObject($OriginalObject){$this -> _OriginalObject = $OriginalObject;}
 
