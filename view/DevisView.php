@@ -135,13 +135,11 @@ function supp(id)
 
   function getDevis(devisId)
   {
-    ViewRequest('PieceView.php')
-    DataRequest("PdfManager", "GenerateDevisPDF", undefined, [devisId], true).then(function(result){
-      console.log(result.responseText);
-      window.open(result.responseText, '_blank');
+    DataRequest("DevisManager", "GetDevisData", undefined, [devisId], undefined).then(function(result){
+      console.log(JSON.parse(result.responseText));
 
-    });
-    // window.open('../controller/DevisController.php?functionname=GenerateDevisPDF' + "&devisId=" + devisId, '_blank');
+    })
+    window.open('/SrgConcept/Helper/LaunchPdfHelper.php?idDevis=' + devisId, '_blank');
 
   }
 

@@ -61,7 +61,7 @@ function LoadDevis(id){
       formValidCheck();
     }
   };
-  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=GetDevisData", true);
+  xhttp.open("POST", "/SrgConcept/Helper/ServiceHelper.php?manager=DevisManager&route=GetDevisData", true);
   xhttp.send(JSON.stringify([id]));
 }
 
@@ -423,11 +423,11 @@ function SauvegarderDevis() {
       let dataURL = canvas.toDataURL("image/png");
       if(idDevis){
         arguments = [devis, pieces.concat(piecesToDelete), dataURL];
-        route = "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=UpdateDevisDessin";
+        route = "/SrgConcept/Helper/ServiceHelper.php?manager=DevisManager&route=UpdateDevisDessin";
       } else {
         let client = JSON.parse(clientSelector.val());
         arguments = [client, dataURL, pieces];
-        route = "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=SaveDevisDessin";
+        route = "/SrgConcept/Helper/ServiceHelper.php?manager=DevisManager&route=SaveDevisDessin";
       }
       xhttp.open("POST", route, true);
       xhttp.send(JSON.stringify(arguments));
@@ -562,7 +562,7 @@ function Request(manager, method, originalObject, args) {
       }
     };
     let getoriginalObject = originalObject ? "&originalObject=true" : "";
-    request.open("POST", "/SrgConcept/ServiceHelper.php?manager=" + manager + "&route=" + method + getoriginalObject, true);
+    request.open("POST", "/SrgConcept/Helper/ServiceHelper.php?manager=" + manager + "&route=" + method + getoriginalObject, true);
     request.send(args != undefined ? JSON.stringify(args) : null);
   });
 }

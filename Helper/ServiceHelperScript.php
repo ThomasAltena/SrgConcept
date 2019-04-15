@@ -16,7 +16,7 @@ function DataRequest (manager, method, originalObject, args, doNotJSONReturn) {
     };
     let getoriginalObject = originalObject ? "&originalObject=true" : "";
     let DoNotJSON = doNotJSONReturn ? "&DoNotJSON=true" : "";
-    request.open("POST", "/SrgConcept/ServiceHelper.php?manager=" + manager + "&route=" + method + getoriginalObject + DoNotJSON, true);
+    request.open("POST", "/SrgConcept/Helper/ServiceHelper.php?manager=" + manager + "&route=" + method + getoriginalObject + DoNotJSON, true);
     request.send(args != undefined ? JSON.stringify(args) : null);
   });
 }

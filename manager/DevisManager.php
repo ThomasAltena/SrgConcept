@@ -98,6 +98,7 @@ class DevisManager
 		$PieceManager = new PieceManager($this->_Db);
 		$OptionCubeDevisManager = new OptionCubeDevisManager($this->_Db);
 		$CubeDevisManager = new CubeDevisManager($this->_Db);
+		$MatiereManager = new MatiereManager($this->_Db);
 		$Cubes = $CubeDevisManager->GetCubeDevisByDevis($id);
 
 		$originalObject = $Devis->GetOriginalObject();
@@ -106,6 +107,10 @@ class DevisManager
 			$originalCube = $cube->GetOriginalObject();
 			$originalCube['piece'] = $PieceManager->GetPiece($cube->GetIdPiece())->GetOriginalObject();
 			$originalCube['options'] = $OptionCubeDevisManager->GetAllOptionOriginalObjectByCubeDevisId($cube->GetIdCubeDevis());
+			if(isset($originalCube['IdMatiere'])){
+				$originalCube['matiere'] = $MatiereManager->GetMatiere($cube->GetIdMatiere())->GetOriginalObject();
+			}
+
 
 			array_push($originalObject['cubes'], $originalCube);
 		}

@@ -16,7 +16,7 @@ spl_autoload_register(function ($class_name) {
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/UploadClass.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/model/UploadCroquisClass.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/ServiceHelperScript.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/Helper/ServiceHelperScript.php');
 
 ?>
 

@@ -179,7 +179,7 @@ function GetDevisData() {
       UpdateDimensions();
     }
   };
-  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=GetDevisData", true);
+  xhttp.open("POST", "/SrgConcept/Helper/ServiceHelper.php?manager=DevisManager&route=GetDevisData", true);
   xhttp.send(JSON.stringify([idDevis]));
 }
 
@@ -287,7 +287,7 @@ function GetMatieres(){
       UpdatePrix();
     }
   };
-  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=MatiereManager&route=GetAllMatiere&originalObject=true", true);
+  xhttp.open("POST", "/SrgConcept/Helper/ServiceHelper.php?manager=MatiereManager&route=GetAllMatiere&originalObject=true", true);
   xhttp.send();
 }
 
@@ -541,7 +541,7 @@ function SaveChanges(){
       console.log(this.responseText);
     }
   };
-  xhttp.open("POST", "/SrgConcept/ServiceHelper.php?manager=DevisManager&route=SaveDevisCotes", true);
+  xhttp.open("POST", "/SrgConcept/Helper/ServiceHelper.php?manager=DevisManager&route=SaveDevisCotes", true);
   xhttp.send(JSON.stringify([devis, devis.cubes]));
 }
 

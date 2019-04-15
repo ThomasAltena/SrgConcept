@@ -10,7 +10,6 @@ if (empty($_SESSION)) {
   header('location:/SrgConcept/view/index.php');
 } else {
   require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/view/header.php');
-  require_once($_SERVER['DOCUMENT_ROOT'] . '/SrgConcept/ServiceHelperScript.php');
 }
 
 ?>
